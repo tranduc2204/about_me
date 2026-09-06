@@ -319,14 +319,16 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
 
 /* Responsive */
 @media (max-width: 960px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-  .hero-content { max-width: 100%; margin: 0 auto; }
+  .hero { min-height: auto; padding-top: calc(var(--nav-height) + 32px); padding-bottom: 48px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+  .hero-content { max-width: 100%; margin: 0 auto; text-align: center; }
   .hero-actions { justify-content: center; }
   .hero-desc { margin-left: auto; margin-right: auto; }
   .hero-status { margin-left: auto; margin-right: auto; }
-  .hero-code-card { max-width: 480px; margin: 0 auto; }
-  .chip-top-left { top: -12px; left: 0; }
-  .chip-bottom-right { bottom: 48px; right: 0; }
+  .hero-visual { width: 100%; max-width: 480px; margin: 0 auto; }
+  .hero-code-card { max-width: 100%; width: 100%; margin: 0 auto; text-align: left; }
+  .chip-top-left { top: -10px; left: 12px; font-size: 0.72rem; padding: 5px 12px; }
+  .chip-bottom-right { bottom: 44px; right: 12px; font-size: 0.72rem; padding: 5px 12px; }
 }
 @media (max-width: 900px) {
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -341,19 +343,32 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
   .nav-links.open { transform: translateX(0); }
   .nav-links a { font-size: 1.2rem; }
   .nav-toggle { display: flex; }
-  .hero-name { font-size: clamp(2rem, 8vw, 3.2rem); }
+  .hero-name { font-size: clamp(1.85rem, 7.5vw, 2.7rem); }
   .hero-actions { flex-direction: column; width: 100%; max-width: 320px; margin: 0 auto; }
+  .hero-actions .btn { width: 100%; justify-content: center; padding: 12px 20px; }
   .cards-grid { grid-template-columns: 1fr; }
-  .section { padding: 60px 0; }
-  .page-header { padding: 110px 0 40px; }
+  .section { padding: 50px 0; }
+  .page-header { padding: 100px 0 36px; }
   .project-card { padding: 24px; }
 }
 @media (max-width: 480px) {
   .stats-grid { grid-template-columns: 1fr; }
   .skills-grid { grid-template-columns: 1fr; }
   .container { padding: 0 16px; }
-  .floating-chip { display: none; }
-  .code-card-body { font-size: 0.72rem; padding: 14px 16px; }
-  .code-profile-banner { padding: 14px 16px; }
-  .code-profile-avatar { width: 46px; height: 46px; }
+  .hero-code-card { border-radius: 16px; width: 100%; }
+  .code-card-header { padding: 9px 12px; }
+  .code-card-tab { font-size: 0.68rem; padding: 3px 8px; }
+  .code-card-lang { font-size: 0.62rem; }
+  .code-profile-banner { padding: 12px 14px; gap: 10px; }
+  .code-profile-avatar { width: 44px !important; height: 44px !important; }
+  .code-profile-name { font-size: 0.98rem; }
+  .code-profile-badge { font-size: 0.62rem; padding: 2px 6px; }
+  .code-profile-roles { font-size: 0.76rem; gap: 4px; }
+  .code-profile-email { font-size: 0.72rem; }
+  .code-card-body { font-size: clamp(0.66rem, 2.7vw, 0.74rem); padding: 12px 14px; line-height: 1.55; overflow-x: auto; }
+  .code-card-footer { padding: 10px 14px; font-size: 0.75rem; }
+  .code-card-status { font-size: 0.72rem; }
+  .code-card-action { font-size: 0.74rem; padding: 4px 8px; }
+  .chip-top-left { top: -10px; left: 6px; font-size: 0.66rem; padding: 3px 8px; }
+  .chip-bottom-right { bottom: 42px; right: 6px; font-size: 0.66rem; padding: 3px 8px; }
 }

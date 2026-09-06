@@ -12,7 +12,79 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-  <link rel="stylesheet" href="assets/css/main.css?v=3">
+  <link rel="stylesheet" href="assets/css/main.css?v=5">
+  <style id="hero-critical-css">
+    .hero-code-card {
+      position: relative;
+      z-index: 1;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(108, 99, 255, 0.18), 0 16px 48px rgba(0,0,0,0.12);
+      border: 1px solid rgba(108, 99, 255, 0.15);
+      background: var(--surface, #ffffff);
+      max-width: 530px;
+      width: 100%;
+      text-align: left;
+      animation: floatSlow 6s ease-in-out infinite;
+    }
+    .code-card-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: var(--bg-alt, #F0F2F8); border-bottom: 1px solid var(--border, rgba(108, 99, 255, 0.13)); }
+    .code-card-dots { display: flex; gap: 7px; }
+    .code-card-dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+    .code-card-dot.dot-red { background: #FF5F56; }
+    .code-card-dot.dot-yellow { background: #FFBD2E; }
+    .code-card-dot.dot-green { background: #27C93F; }
+    .code-card-tab { display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 500; color: var(--text-primary, #1A1A2E); background: var(--surface, #ffffff); padding: 4px 12px; border-radius: 6px; border: 1px solid var(--border, rgba(108, 99, 255, 0.13)); }
+    .code-card-lang { font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #6C63FF; text-transform: uppercase; }
+    .code-profile-banner { display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: linear-gradient(135deg, rgba(108, 99, 255, 0.08), rgba(0, 153, 122, 0.06)); border-bottom: 1px solid var(--border, rgba(108, 99, 255, 0.13)); text-align: left; }
+    .code-profile-avatar { width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2.5px solid #6C63FF; box-shadow: 0 0 16px rgba(108, 99, 255, 0.35); flex-shrink: 0; display: inline-block; }
+    .code-profile-info { flex: 1; min-width: 0; text-align: left; }
+    .code-profile-name { font-size: 1.15rem; font-weight: 700; color: var(--text-primary, #1A1A2E); display: flex; align-items: center; gap: 8px; margin-bottom: 2px; flex-wrap: wrap; }
+    .code-profile-badge { font-size: 0.68rem; padding: 2px 8px; border-radius: 20px; background: rgba(0, 153, 122, 0.15); color: #00997A; font-weight: 600; border: 1px solid rgba(0, 153, 122, 0.25); }
+    .code-profile-roles { font-size: 0.85rem; color: #00997A; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .code-profile-email { font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; color: #6C63FF; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; word-break: break-all; }
+    .code-card-body { padding: 16px 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.65; background: var(--surface, #ffffff); text-align: left; overflow-x: auto; }
+    .code-card-body pre { margin: 0; text-align: left; }
+    .code-card-footer { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: var(--bg-alt, #F0F2F8); border-top: 1px solid var(--border, rgba(108, 99, 255, 0.13)); font-size: 0.82rem; text-align: left; }
+    .code-card-status { display: inline-flex; align-items: center; gap: 8px; color: var(--text-secondary, #5A5A7A); font-size: 0.82rem; }
+    .code-card-status .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: #00E699; box-shadow: 0 0 10px #00E699; display: inline-block; }
+    .code-card-action { display: inline-flex; align-items: center; gap: 6px; color: #6C63FF; font-weight: 600; font-size: 0.84rem; text-decoration: none; padding: 5px 12px; border-radius: 6px; background: rgba(108, 99, 255, 0.08); }
+    .token-keyword { color: #cf222e; font-weight: 600; }
+    .token-class { color: #0550ae; font-weight: 600; }
+    .token-func { color: #8250df; font-weight: 600; }
+    .token-var { color: #1f2328; font-weight: 500; }
+    .token-str { color: #0a6c34; font-weight: 500; }
+    .token-comment { color: #6e7781; font-style: italic; }
+    [data-theme="dark"] .token-keyword { color: #ff7b72; }
+    [data-theme="dark"] .token-class { color: #79c0ff; }
+    [data-theme="dark"] .token-func { color: #d2a8ff; }
+    [data-theme="dark"] .token-var { color: #e6edf3; }
+    [data-theme="dark"] .token-str { color: #7ee787; }
+    [data-theme="dark"] .token-comment { color: #8b949e; }
+    @media (max-width: 960px) {
+      .hero { min-height: auto !important; padding-top: 100px !important; padding-bottom: 48px !important; }
+      .hero-grid { grid-template-columns: 1fr !important; gap: 32px !important; text-align: center !important; }
+      .hero-content { max-width: 100% !important; margin: 0 auto !important; text-align: center !important; }
+      .hero-visual { width: 100% !important; max-width: 460px !important; margin: 0 auto !important; }
+      .hero-code-card { max-width: 100% !important; margin: 0 auto !important; text-align: left !important; }
+      .chip-top-left { top: -10px !important; left: 10px !important; font-size: 0.72rem !important; padding: 4px 10px !important; }
+      .chip-bottom-right { bottom: 44px !important; right: 10px !important; font-size: 0.72rem !important; padding: 4px 10px !important; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding-top: 86px !important; padding-bottom: 32px !important; }
+      .hero-grid { gap: 24px !important; }
+      .hero-name { font-size: clamp(1.85rem, 7.5vw, 2.5rem) !important; }
+      .hero-code-card { border-radius: 16px !important; }
+      .code-card-header { padding: 9px 12px !important; }
+      .code-card-tab { font-size: 0.68rem !important; padding: 3px 8px !important; }
+      .code-profile-banner { padding: 12px 14px !important; gap: 10px !important; }
+      .code-profile-avatar { width: 44px !important; height: 44px !important; }
+      .code-profile-name { font-size: 0.98rem !important; }
+      .code-card-body { font-size: clamp(0.66rem, 2.7vw, 0.74rem) !important; padding: 12px 14px !important; }
+      .code-card-footer { padding: 10px 14px !important; font-size: 0.75rem !important; }
+      .chip-top-left { top: -10px !important; left: 6px !important; font-size: 0.66rem !important; padding: 3px 8px !important; }
+      .chip-bottom-right { bottom: 42px !important; right: 6px !important; font-size: 0.66rem !important; padding: 3px 8px !important; }
+    }
+  </style>
   <script>
     (function() {
       const savedTheme = localStorage.getItem('dustin_theme') || 'light';
@@ -93,7 +165,7 @@
 
             <!-- Profile Banner -->
             <div class="code-profile-banner">
-              <img src="images/avatar.png" alt="Trần Đức (Dustin)" class="code-profile-avatar">
+              <img src="images/avatar.png" alt="Trần Đức (Dustin)" class="code-profile-avatar" width="58" height="58" style="width: 58px; height: 58px; border-radius: 50%; object-fit: cover; flex-shrink: 0; display: inline-block;">
               <div class="code-profile-info">
                 <div class="code-profile-name">
                   <span>Trần Đức (Dustin)</span>
@@ -117,7 +189,10 @@
 <span class="token-keyword">class</span> <span class="token-class">AnalyticsEngineer</span>:
     <span class="token-keyword">def</span> <span class="token-func">__init__</span>(<span class="token-var">self</span>):
         <span class="token-var">self</span>.name  = <span class="token-str">"Trần Đức (Dustin)"</span>
-        <span class="token-var">self</span>.roles = [<span class="token-str">"Analytics Engineer"</span>, <span class="token-str">"Data Engineer"</span>]
+        <span class="token-var">self</span>.roles = [
+            <span class="token-str">"Analytics Engineer"</span>,
+            <span class="token-str">"Data Engineer"</span>
+        ]
         <span class="token-var">self</span>.email = <span class="token-str">"trandc3015@gmail.com"</span>
         <span class="token-var">self</span>.stack = [
             <span class="token-str">"Python"</span>, <span class="token-str">"SQL"</span>, <span class="token-str">"dbt"</span>,
