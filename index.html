@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-  <link rel="stylesheet" href="assets/css/main.css?v=2">
+  <link rel="stylesheet" href="assets/css/main.css?v=3">
   <script>
     (function() {
       const savedTheme = localStorage.getItem('dustin_theme') || 'light';
@@ -48,7 +48,7 @@
       <div class="hero-grid">
         <div class="hero-content">
           <p class="hero-greeting">Xin chào, tôi là</p>
-          <h1 class="hero-name"><span class="gradient-text">Trần Đức (Dustin)</span></h1>
+          <h1 class="hero-name"><span class="gradient-text">Trần Đức</span> <span class="hero-subname">(Dustin)</span></h1>
           <div class="hero-typing">
             <span class="text"></span><span class="cursor"></span>
           </div>
@@ -113,16 +113,20 @@
 
             <!-- Syntax Highlighted Code -->
             <div class="code-card-body">
-              <pre><code><span class="token-comment"># About Me</span>
-<span class="token-keyword">class</span> <span class="token-class">DataEngineer</span>:
+              <pre><code><span class="token-comment"># Developer Profile</span>
+<span class="token-keyword">class</span> <span class="token-class">AnalyticsEngineer</span>:
     <span class="token-keyword">def</span> <span class="token-func">__init__</span>(<span class="token-var">self</span>):
-        <span class="token-var">self</span>.name = <span class="token-str">"Trần Đức (Dustin)"</span>
+        <span class="token-var">self</span>.name  = <span class="token-str">"Trần Đức (Dustin)"</span>
         <span class="token-var">self</span>.roles = [<span class="token-str">"Analytics Engineer"</span>, <span class="token-str">"Data Engineer"</span>]
         <span class="token-var">self</span>.email = <span class="token-str">"trandc3015@gmail.com"</span>
-        <span class="token-var">self</span>.stack = [<span class="token-str">"Python"</span>, <span class="token-str">"SQL"</span>, <span class="token-str">"dbt"</span>, <span class="token-str">"Snowflake"</span>, <span class="token-str">"Airflow"</span>]
+        <span class="token-var">self</span>.stack = [
+            <span class="token-str">"Python"</span>, <span class="token-str">"SQL"</span>, <span class="token-str">"dbt"</span>,
+            <span class="token-str">"Snowflake"</span>, <span class="token-str">"Airflow"</span>
+        ]
 
     <span class="token-keyword">def</span> <span class="token-func">objective</span>(<span class="token-var">self</span>):
-        <span class="token-keyword">return</span> <span class="token-str">"🎯 Ra quân 2027 • Becoming an Analytics Engineer"</span></code></pre>
+        <span class="token-keyword">return</span> <span class="token-str">"🎯 Ra quân 2027 • "</span> \
+               <span class="token-str">"Becoming an Analytics Engineer"</span></code></pre>
             </div>
 
             <!-- Card Footer -->
