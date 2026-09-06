@@ -10,19 +10,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
   <link rel="stylesheet" href="../assets/css/main.css?v=2">
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('dustin_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
 </head>
 <body>
   <nav class="navbar" id="navbar">
     <div class="container">
       <a href="../index.html" class="nav-logo"><span class="gradient-text">Dustin</span> học data</a>
-      <div class="nav-links" id="navLinks">
-        <a href="../index.html">Home</a>
-        <a href="../about.html">About</a>
-        <a href="../journey.html">Journey</a>
-        <a href="../knowledge/index.html" class="active">Knowledge</a>
-        <a href="../blog/index.html">Blog</a>
+      <div class="nav-right-group">
+        <div class="nav-links" id="navLinks">
+          <a href="../index.html">Home</a>
+          <a href="../about.html">About</a>
+          <a href="../journey.html">Journey</a>
+          <a href="../knowledge/index.html" class="active">Knowledge</a>
+          <a href="../blog/index.html">Blog</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Chuyển chế độ giao diện" title="Chuyển chế độ sáng/tối">🌙</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
       </div>
-      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
   <header class="page-header">

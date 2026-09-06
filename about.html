@@ -10,6 +10,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <link rel="stylesheet" href="assets/css/main.css?v=2">
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('dustin_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
 </head>
 <body>
 
@@ -17,16 +23,19 @@
   <nav class="navbar" id="navbar">
     <div class="container">
       <a href="index.html" class="nav-logo"><span class="gradient-text">Dustin</span> học data</a>
-      <div class="nav-links" id="navLinks">
-        <a href="index.html">Home</a>
-        <a href="about.html" class="active">About</a>
-        <a href="journey.html">Journey</a>
-        <a href="knowledge/index.html">Knowledge</a>
-        <a href="blog/index.html">Blog</a>
+      <div class="nav-right-group">
+        <div class="nav-links" id="navLinks">
+          <a href="index.html">Home</a>
+          <a href="about.html" class="active">About</a>
+          <a href="journey.html">Journey</a>
+          <a href="knowledge/index.html">Knowledge</a>
+          <a href="blog/index.html">Blog</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Chuyển chế độ giao diện" title="Chuyển chế độ sáng/tối">🌙</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
-      <button class="nav-toggle" id="navToggle" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
     </div>
   </nav>
 
@@ -65,16 +74,161 @@
       <div class="section-header reveal">
         <span class="section-label">Kỹ năng</span>
         <h2>Tech <span class="gradient-text">Skills</span></h2>
+        <p>Hệ thống kỹ năng Data & Analytics được tích lũy qua các dự án thực tế và tự học liên tục.</p>
       </div>
-      <div class="skills-grid">
-        <div class="skill-card reveal"><span class="skill-icon">🗄️</span><span class="skill-name">SQL (PostgreSQL, Snowflake, DuckDB)</span></div>
-        <div class="skill-card reveal reveal-delay-1"><span class="skill-icon">🐍</span><span class="skill-name">Python (Pandas)</span></div>
-        <div class="skill-card reveal reveal-delay-1"><span class="skill-icon">🔧</span><span class="skill-name">dbt (Data Build Tool)</span></div>
-        <div class="skill-card reveal reveal-delay-2"><span class="skill-icon">🌊</span><span class="skill-name">Apache Airflow</span></div>
-        <div class="skill-card reveal reveal-delay-2"><span class="skill-icon">🐳</span><span class="skill-name">Docker</span></div>
-        <div class="skill-card reveal reveal-delay-3"><span class="skill-icon">📊</span><span class="skill-name">Metabase / BI Tools</span></div>
-        <div class="skill-card reveal reveal-delay-3"><span class="skill-icon">⚙️</span><span class="skill-name">ERP Implementation</span></div>
-        <div class="skill-card reveal"><span class="skill-icon">🛠️</span><span class="skill-name">IT Support</span></div>
+      <div class="skills-matrix">
+        <div class="skill-matrix-card reveal">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">🗄️</div>
+            <div>
+              <div class="skill-matrix-category">Storage</div>
+              <div class="skill-matrix-title">Database OLTP</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">SQL Server</span>
+            <span class="skill-pill">PostgreSQL</span>
+          </div>
+        </div>
+
+        <div class="skill-matrix-card reveal reveal-delay-1">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">❄️</div>
+            <div>
+              <div class="skill-matrix-category">Warehouse</div>
+              <div class="skill-matrix-title">OLAP & Modern DW</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">DuckDB</span>
+            <span class="skill-pill">Snowflake</span>
+            <span class="skill-pill">GCP (Google Cloud)</span>
+          </div>
+        </div>
+
+        <div class="skill-matrix-card reveal reveal-delay-2">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">🪣</div>
+            <div>
+              <div class="skill-matrix-category">Storage</div>
+              <div class="skill-matrix-title">Data Lake</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">Amazon S3</span>
+            <span class="skill-pill">MinIO</span>
+          </div>
+        </div>
+
+        <div class="skill-matrix-card reveal">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">⚡</div>
+            <div>
+              <div class="skill-matrix-category">Ingestion</div>
+              <div class="skill-matrix-title">Data Ingestion</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">dlt (Data Load Tool)</span>
+          </div>
+        </div>
+
+        <div class="skill-matrix-card reveal reveal-delay-1">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">💻</div>
+            <div>
+              <div class="skill-matrix-category">Core Stack</div>
+              <div class="skill-matrix-title">Languages & Frameworks</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">dbt</span>
+            <span class="skill-pill">SQL</span>
+          </div>
+        </div>
+
+        <div class="skill-matrix-card reveal reveal-delay-2">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">📐</div>
+            <div>
+              <div class="skill-matrix-category">Architecture</div>
+              <div class="skill-matrix-title">Data Modeling</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">Star Schema</span>
+            <span class="skill-pill">Kimball</span>
+            <span class="skill-pill">One Big Table (OBT)</span>
+          </div>
+        </div>
+
+        <div class="skill-matrix-card reveal">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">🐳</div>
+            <div>
+              <div class="skill-matrix-category">DevOps</div>
+              <div class="skill-matrix-title">Infrastructure</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">Docker</span>
+          </div>
+        </div>
+
+        <div class="skill-matrix-card reveal reveal-delay-1">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">🌪️</div>
+            <div>
+              <div class="skill-matrix-category">Workflow</div>
+              <div class="skill-matrix-title">Orchestration</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">Apache Airflow</span>
+          </div>
+        </div>
+
+        <div class="skill-matrix-card reveal reveal-delay-2">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">🔄</div>
+            <div>
+              <div class="skill-matrix-category">Processing</div>
+              <div class="skill-matrix-title">Data Transformation</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">dbt</span>
+            <span class="skill-pill">Apache Spark</span>
+          </div>
+        </div>
+
+        <div class="skill-matrix-card reveal">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">🛡️</div>
+            <div>
+              <div class="skill-matrix-category">Governance</div>
+              <div class="skill-matrix-title">Data Governance</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">dbt Testing & Docs</span>
+            <span class="skill-pill">Data Lineage</span>
+          </div>
+        </div>
+
+        <div class="skill-matrix-card reveal reveal-delay-1">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">📊</div>
+            <div>
+              <div class="skill-matrix-category">Analytics</div>
+              <div class="skill-matrix-title">BI Tools</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">Metabase</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -132,25 +286,25 @@
     <div class="container">
       <div class="section-header reveal">
         <span class="section-label">Kinh nghiệm</span>
-        <h2>Quá Trình <span class="gradient-text">Làm Việc</span></h2>
+        <h2>Quá Trình <span class="gradient-text">Làm Việc & Dự Án</span></h2>
       </div>
-      <div style="max-width: 700px; margin: 0 auto;">
+      <div style="max-width: 820px; margin: 0 auto 50px;">
         <div class="exp-card reveal">
           <div class="exp-dot current"></div>
           <div>
             <div class="exp-date">05/2025 — HIỆN TẠI</div>
             <h3 class="exp-title">IT Support (Trưng dụng)</h3>
             <p class="exp-company">Nghĩa vụ CAND — Đội PCCC Khu vực 15</p>
-            <p class="exp-desc">Phục vụ nghĩa vụ Công an Nhân dân, được trưng dụng vào vị trí IT Support. Song song tự học SQL và Analytics Engineering.</p>
+            <p class="exp-desc">Phục vụ nghĩa vụ Công an Nhân dân, được trưng dụng vào vị trí IT Support. Song song tự học SQL, Python và Analytics Engineering.</p>
           </div>
         </div>
         <div class="exp-card reveal reveal-delay-1">
           <div class="exp-dot"></div>
           <div>
             <div class="exp-date">01/2024 — 02/2025</div>
-            <h3 class="exp-title">ERP Software Implementation</h3>
-            <p class="exp-company">Triển khai phần mềm quản trị doanh nghiệp</p>
-            <p class="exp-desc">Triển khai giải pháp ERP cho doanh nghiệp — hiểu sâu business process, requirements gathering, và cách công nghệ phục vụ vận hành.</p>
+            <h3 class="exp-title">ERP Software Implementation Specialist</h3>
+            <p class="exp-company">Cổ phần Phần mềm BRAVO (BRAVO ERP)</p>
+            <p class="exp-desc">Triển khai giải pháp phần mềm quản trị doanh nghiệp (ERP) cho các doanh nghiệp lớn — làm việc chuyên sâu với SQL Server, Stored Procedures, tối ưu truy vấn báo cáo và quy trình nghiệp vụ mua hàng, kho bãi, máy móc thiết bị.</p>
           </div>
         </div>
         <div class="exp-card reveal reveal-delay-2">
@@ -160,6 +314,67 @@
             <h3 class="exp-title">Junior Data Engineer</h3>
             <p class="exp-company">Estuary Solution</p>
             <p class="exp-desc">Kinh nghiệm đầu tiên trong ngành Data — làm việc với data pipelines và bắt đầu hành trình trong thế giới dữ liệu.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enterprise Projects at BRAVO -->
+      <div class="section-header reveal" style="margin-bottom: 36px;">
+        <span class="section-label">Dự án tiêu biểu tại BRAVO</span>
+        <h3 style="font-size: 1.6rem;">Triển Khai <span class="gradient-text">ERP Doanh Nghiệp</span></h3>
+      </div>
+      <div class="projects-grid">
+        <!-- Project 1: THACO -->
+        <div class="project-card reveal">
+          <div class="project-header">
+            <div>
+              <span class="project-client-badge">🏢 Khách hàng: THACO Group</span>
+              <h3 class="project-title" style="margin-top: 10px;">Project 1 – THACO (Truong Hai Auto Corporation)</h3>
+              <p class="project-subtitle">Phân hệ: Purchasing Management Module (Quản lý Mua hàng)</p>
+            </div>
+            <span class="project-duration">Mar 2025 – Nov 2025</span>
+          </div>
+          <ul class="project-tasks">
+            <li>Implemented Purchasing Management module in ERP system.</li>
+            <li>Worked with SQL Server to query and update business data.</li>
+            <li>Customized reports and stored procedures based on client requirements.</li>
+            <li>Supported data migration and data validation across enterprise workflows.</li>
+            <li>Worked with users to analyze requirements and fix operational issues.</li>
+            <li>Tested system functions thoroughly before deployment.</li>
+          </ul>
+          <div class="project-tech">
+            <span class="project-tech-label">Công nghệ:</span>
+            <span class="skill-pill">SQL Server</span>
+            <span class="skill-pill">Bravo ERP Framework</span>
+            <span class="skill-pill">Stored Procedures</span>
+            <span class="skill-pill">Data Migration</span>
+          </div>
+        </div>
+
+        <!-- Project 2: Loc Phuc Fine Jewelry -->
+        <div class="project-card reveal reveal-delay-1">
+          <div class="project-header">
+            <div>
+              <span class="project-client-badge">💎 Khách hàng: Lộc Phúc Fine Jewelry</span>
+              <h3 class="project-title" style="margin-top: 10px;">Project 2 – Loc Phuc Fine Jewelry</h3>
+              <p class="project-subtitle">Dự án: ERP System – Purchasing, Warehouse & Equipment Management</p>
+            </div>
+            <span class="project-duration">May 2025 – Feb 2026</span>
+          </div>
+          <ul class="project-tasks">
+            <li>Implemented Purchasing, Warehouse, and Equipment Management modules (Quản lý mua hàng, kho và máy móc thiết bị).</li>
+            <li>Designed and optimized SQL queries for business reports and analytics.</li>
+            <li>Supported data import/export and data processing for daily operations.</li>
+            <li>Fixed bugs and modified functions based on user requests and feedback.</li>
+            <li>Worked with team to deploy ERP system on-site for client.</li>
+            <li>Wrote stored procedures and views for reporting and auditing.</li>
+          </ul>
+          <div class="project-tech">
+            <span class="project-tech-label">Công nghệ:</span>
+            <span class="skill-pill">SQL Server</span>
+            <span class="skill-pill">Bravo ERP Framework</span>
+            <span class="skill-pill">Equipment Management</span>
+            <span class="skill-pill">Views & Stored Procedures</span>
           </div>
         </div>
       </div>

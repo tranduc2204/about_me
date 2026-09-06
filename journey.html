@@ -10,6 +10,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <link rel="stylesheet" href="assets/css/main.css?v=2">
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('dustin_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
 </head>
 <body>
 
@@ -17,16 +23,19 @@
   <nav class="navbar" id="navbar">
     <div class="container">
       <a href="index.html" class="nav-logo"><span class="gradient-text">Dustin</span> học data</a>
-      <div class="nav-links" id="navLinks">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="journey.html" class="active">Journey</a>
-        <a href="knowledge/index.html">Knowledge</a>
-        <a href="blog/index.html">Blog</a>
+      <div class="nav-right-group">
+        <div class="nav-links" id="navLinks">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="journey.html" class="active">Journey</a>
+          <a href="knowledge/index.html">Knowledge</a>
+          <a href="blog/index.html">Blog</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Chuyển chế độ giao diện" title="Chuyển chế độ sáng/tối">🌙</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
-      <button class="nav-toggle" id="navToggle" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
     </div>
   </nav>
 
@@ -70,9 +79,14 @@
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <div class="timeline-date">01/2024 — 02/2025</div>
-            <h3 class="timeline-title">⚙️ ERP Software Implementation</h3>
-            <div class="timeline-subtitle">1 năm 2 tháng kinh nghiệm</div>
-            <p class="timeline-desc">Triển khai phần mềm quản trị doanh nghiệp. Hiểu sâu business process, requirement gathering, và cách công nghệ phục vụ vận hành doanh nghiệp.</p>
+        <!-- 4. ERP -->
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">01/2024 — 02/2025</div>
+            <h3 class="timeline-title">⚙️ ERP Implementation Specialist</h3>
+            <div class="timeline-subtitle">Cổ phần Phần mềm BRAVO (BRAVO ERP)</div>
+            <p class="timeline-desc">Triển khai thành công các phân hệ ERP lớn: <strong>Quản lý Mua hàng (Purchasing) cho THACO</strong> và <strong>Mua hàng, Kho & Quản lý Máy móc Thiết bị cho Lộc Phúc Jewelry</strong>. Làm việc sâu với SQL Server, tối ưu stored procedures và business data.</p>
           </div>
         </div>
 
@@ -111,39 +125,166 @@
     </div>
   </section>
 
-  <!-- Self-Improvement Tracker -->
+  <!-- Skills Section -->
   <section class="section" style="background: var(--bg-alt);">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label">Live Tracker</span>
-        <h2>Đang Tự <span class="gradient-text">Improve</span> Mỗi Ngày</h2>
+        <span class="section-label">Hành trang kỹ thuật</span>
+        <h2>Kỹ Năng <span class="gradient-text">Data & Analytics</span></h2>
         <p>Giai đoạn nghĩa vụ không phải là thời gian "nghỉ" — mà là thời gian chuẩn bị.</p>
       </div>
-      <div class="progress-list">
-        <div class="reveal">
-          <div class="progress-item-label"><span>SQL Advanced (Window Functions, CTEs)</span><span>70%</span></div>
-          <div class="progress-bar"><div class="progress-fill" data-width="70"></div></div>
-          <div class="progress-status learning">🟢 Đang học tích cực</div>
+      <div class="skills-matrix">
+        <div class="skill-matrix-card reveal">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">🗄️</div>
+            <div>
+              <div class="skill-matrix-category">Storage</div>
+              <div class="skill-matrix-title">Database OLTP</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">SQL Server</span>
+            <span class="skill-pill">PostgreSQL</span>
+          </div>
         </div>
-        <div class="reveal reveal-delay-1">
-          <div class="progress-item-label"><span>dbt + Snowflake</span><span>60%</span></div>
-          <div class="progress-bar"><div class="progress-fill" data-width="60"></div></div>
-          <div class="progress-status learning">🟢 Đang thực hành</div>
+
+        <div class="skill-matrix-card reveal reveal-delay-1">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">❄️</div>
+            <div>
+              <div class="skill-matrix-category">Warehouse</div>
+              <div class="skill-matrix-title">OLAP & Modern DW</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">DuckDB</span>
+            <span class="skill-pill">Snowflake</span>
+            <span class="skill-pill">GCP (Google Cloud)</span>
+          </div>
         </div>
-        <div class="reveal reveal-delay-2">
-          <div class="progress-item-label"><span>Analytics Engineering Fundamentals</span><span>30%</span></div>
-          <div class="progress-bar"><div class="progress-fill" data-width="30"></div></div>
-          <div class="progress-status starting">🟡 Đang bắt đầu</div>
+
+        <div class="skill-matrix-card reveal reveal-delay-2">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">🪣</div>
+            <div>
+              <div class="skill-matrix-category">Storage</div>
+              <div class="skill-matrix-title">Data Lake</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">Amazon S3</span>
+            <span class="skill-pill">MinIO</span>
+          </div>
         </div>
-        <div class="reveal reveal-delay-3">
-          <div class="progress-item-label"><span>Data Modeling (Kimball / OBT)</span><span>—</span></div>
-          <div class="progress-bar"><div class="progress-fill" data-width="0"></div></div>
-          <div class="progress-status planned">📋 Planned</div>
+
+        <div class="skill-matrix-card reveal">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">⚡</div>
+            <div>
+              <div class="skill-matrix-category">Ingestion</div>
+              <div class="skill-matrix-title">Data Ingestion</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">dlt (Data Load Tool)</span>
+          </div>
         </div>
-        <div class="reveal">
-          <div class="progress-item-label"><span>Looker / Metabase (BI Tools)</span><span>—</span></div>
-          <div class="progress-bar"><div class="progress-fill" data-width="0"></div></div>
-          <div class="progress-status planned">📋 Planned</div>
+
+        <div class="skill-matrix-card reveal reveal-delay-1">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">💻</div>
+            <div>
+              <div class="skill-matrix-category">Core Stack</div>
+              <div class="skill-matrix-title">Languages & Frameworks</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">dbt</span>
+            <span class="skill-pill">SQL</span>
+          </div>
+        </div>
+
+        <div class="skill-matrix-card reveal reveal-delay-2">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">📐</div>
+            <div>
+              <div class="skill-matrix-category">Architecture</div>
+              <div class="skill-matrix-title">Data Modeling</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">Star Schema</span>
+            <span class="skill-pill">Kimball</span>
+            <span class="skill-pill">One Big Table (OBT)</span>
+          </div>
+        </div>
+
+        <div class="skill-matrix-card reveal">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">🐳</div>
+            <div>
+              <div class="skill-matrix-category">DevOps</div>
+              <div class="skill-matrix-title">Infrastructure</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">Docker</span>
+          </div>
+        </div>
+
+        <div class="skill-matrix-card reveal reveal-delay-1">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">🌪️</div>
+            <div>
+              <div class="skill-matrix-category">Workflow</div>
+              <div class="skill-matrix-title">Orchestration</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">Apache Airflow</span>
+          </div>
+        </div>
+
+        <div class="skill-matrix-card reveal reveal-delay-2">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">🔄</div>
+            <div>
+              <div class="skill-matrix-category">Processing</div>
+              <div class="skill-matrix-title">Data Transformation</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">dbt</span>
+            <span class="skill-pill">Apache Spark</span>
+          </div>
+        </div>
+
+        <div class="skill-matrix-card reveal">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">🛡️</div>
+            <div>
+              <div class="skill-matrix-category">Governance</div>
+              <div class="skill-matrix-title">Data Governance</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">dbt Testing & Docs</span>
+            <span class="skill-pill">Data Lineage</span>
+          </div>
+        </div>
+
+        <div class="skill-matrix-card reveal reveal-delay-1">
+          <div class="skill-matrix-header">
+            <div class="skill-matrix-icon">📊</div>
+            <div>
+              <div class="skill-matrix-category">Analytics</div>
+              <div class="skill-matrix-title">BI Tools</div>
+            </div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">Metabase</span>
+          </div>
         </div>
       </div>
     </div>

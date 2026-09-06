@@ -3,6 +3,31 @@
    ============================================ */
 document.addEventListener('DOMContentLoaded', () => {
 
+  // --- Dark mode theme toggle ---
+  const themeToggle = document.getElementById('themeToggle');
+  const currentTheme = localStorage.getItem('dustin_theme') || 'light';
+  
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('dustin_theme', theme);
+    if (themeToggle) {
+      themeToggle.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+      themeToggle.setAttribute('title', theme === 'dark' ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối');
+      themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối');
+    }
+  }
+
+  // Initialize button icon to match current theme
+  applyTheme(currentTheme);
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const activeTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const nextTheme = activeTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(nextTheme);
+    });
+  }
+
   // --- Navbar scroll effect ---
   const navbar = document.querySelector('.navbar');
   if (navbar) {
