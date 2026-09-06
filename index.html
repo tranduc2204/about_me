@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dustin — Aspiring Analytics Engineer | SQL & Data Blog</title>
+  <meta name="description" content="Blog cá nhân của Dustin — chia sẻ hành trình từ sinh viên UFM đến Analytics Engineer. Tài liệu SQL, Data Engineering, và kinh nghiệm nghề nghiệp.">
+  <meta property="og:title" content="Dustin — Aspiring Analytics Engineer">
+  <meta property="og:description" content="Hành trình từ Thủ khoa UFM đến Analytics Engineer. Kiến thức SQL & Data Engineering.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo"><span class="gradient-text">Dustin</span>.dev</a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="journey.html">Journey</a>
+        <a href="knowledge/index.html">Knowledge</a>
+        <a href="blog/index.html">Blog</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <p class="hero-greeting">Xin chào, tôi là</p>
+        <h1 class="hero-name"><span class="gradient-text">Dustin</span></h1>
+        <div class="hero-typing">
+          <span class="text"></span><span class="cursor"></span>
+        </div>
+        <p class="hero-desc">Thủ khoa đầu ra UFM (GPA 3.7/4.0) — Đang phục vụ nghĩa vụ CAND. Chia sẻ kiến thức SQL & Data Engineering trên hành trình trở thành Analytics Engineer.</p>
+        <div class="hero-status">
+          <span class="pulse"></span>
+          🎯 Hành trình trở thành Analytics Engineer — Ra quân 2027
+        </div>
+        <div class="hero-actions">
+          <a href="knowledge/index.html" class="btn btn-primary">📚 Khám phá kiến thức →</a>
+          <a href="journey.html" class="btn btn-outline">🗺️ Xem hành trình</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="section" id="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card reveal">
+          <div class="stat-number gradient-text" data-count="3.7" data-suffix="/4.0">0</div>
+          <div class="stat-label">GPA — Thủ khoa đầu ra</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-1">
+          <div class="stat-number gradient-text" data-count="3.5" data-suffix=" năm">0</div>
+          <div class="stat-label">Học tập tại UFM</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-2">
+          <div class="stat-number gradient-text" data-count="1" data-suffix="+">0</div>
+          <div class="stat-label">Năm kinh nghiệm</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-3">
+          <div class="stat-number gradient-text">∞</div>
+          <div class="stat-label">Đam mê học hỏi</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Knowledge -->
+  <section class="section" id="featured">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Kiến thức nổi bật</span>
+        <h2>Khám Phá <span class="gradient-text">Knowledge Hub</span></h2>
+        <p>Tài liệu SQL và Data Engineering được biên soạn cẩn thận, từ cơ bản đến nâng cao.</p>
+      </div>
+      <div class="cards-grid">
+        <div class="card reveal">
+          <div class="card-icon">🪟</div>
+          <h3 class="card-title">SQL Window Functions</h3>
+          <p class="card-desc">Nắm vững OVER, PARTITION BY, ROW_NUMBER, RANK và các hàm cửa sổ nâng cao trong SQL.</p>
+          <div class="card-tags">
+            <span class="tag">SQL</span>
+            <span class="tag">Advanced</span>
+            <span class="tag">Analytics</span>
+          </div>
+          <a href="knowledge/index.html" class="card-link">Đọc thêm →</a>
+        </div>
+        <div class="card reveal reveal-delay-1">
+          <div class="card-icon">🔧</div>
+          <h3 class="card-title">dbt Fundamentals</h3>
+          <p class="card-desc">Xây dựng data pipeline hiện đại với dbt — từ models, tests đến documentation.</p>
+          <div class="card-tags">
+            <span class="tag">dbt</span>
+            <span class="tag">Snowflake</span>
+            <span class="tag">ELT</span>
+          </div>
+          <a href="knowledge/index.html" class="card-link">Đọc thêm →</a>
+        </div>
+        <div class="card reveal reveal-delay-2">
+          <div class="card-icon">📐</div>
+          <h3 class="card-title">Data Modeling</h3>
+          <p class="card-desc">Hiểu các mô hình dữ liệu phổ biến: Star Schema, OBT, và cách áp dụng thực tế.</p>
+          <div class="card-tags">
+            <span class="tag">Modeling</span>
+            <span class="tag">Kimball</span>
+            <span class="tag">Analytics Engineering</span>
+          </div>
+          <a href="knowledge/index.html" class="card-link">Đọc thêm →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Journey Snapshot -->
+  <section class="section" id="journey-snapshot" style="background: var(--bg-alt);">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Hành trình</span>
+        <h2>Các Cột Mốc <span class="gradient-text">Quan Trọng</span></h2>
+      </div>
+      <div class="mini-timeline reveal">
+        <div class="mini-item">
+          <div class="mini-item-date">10/2020 — 04/2024</div>
+          <div class="mini-item-title">🎓 Thủ khoa đầu ra UFM — GPA 3.7/4.0</div>
+          <div class="mini-item-desc">3.5 năm học tập tại Đại học Tài chính - Marketing</div>
+        </div>
+        <div class="mini-item">
+          <div class="mini-item-date">06/2023 — 02/2025</div>
+          <div class="mini-item-title">💼 Junior Data Engineer & ERP Implementation</div>
+          <div class="mini-item-desc">Data Engineer tại Estuary Solution (06-08/2023) → ERP Implementation (01/2024-02/2025)</div>
+        </div>
+        <div class="mini-item active">
+          <div class="mini-item-date">05/2025 — Hiện tại</div>
+          <div class="mini-item-title">🔥 Nghĩa vụ CAND — PCCC & IT Support</div>
+          <div class="mini-item-desc">Phục vụ tại đội PCCC Khu vực 15, trưng dụng IT Support. Tự học SQL & Analytics Engineering.</div>
+        </div>
+        <div class="mini-item">
+          <div class="mini-item-date">2027</div>
+          <div class="mini-item-title">🚀 Analytics Engineer</div>
+          <div class="mini-item-desc">Mục tiêu sau khi ra quân — kết hợp Data + Business</div>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 40px;" class="reveal">
+        <a href="journey.html" class="btn btn-outline">Xem chi tiết hành trình →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Self-Improvement Tracker -->
+  <section class="section" id="self-improvement">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Đang Improve</span>
+        <h2>Hành Trình <span class="gradient-text">Tự Phát Triển</span></h2>
+        <p>Dù đang trong thời gian nghĩa vụ, tôi vẫn không ngừng học hỏi mỗi ngày.</p>
+      </div>
+      <div class="progress-list">
+        <div class="reveal">
+          <div class="progress-item-label"><span>SQL Advanced (Window Functions, CTEs)</span><span>70%</span></div>
+          <div class="progress-bar"><div class="progress-fill" data-width="70"></div></div>
+          <div class="progress-status learning">🟢 Đang học</div>
+        </div>
+        <div class="reveal reveal-delay-1">
+          <div class="progress-item-label"><span>dbt + Snowflake</span><span>60%</span></div>
+          <div class="progress-bar"><div class="progress-fill" data-width="60"></div></div>
+          <div class="progress-status learning">🟢 Đang học</div>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <div class="progress-item-label"><span>Analytics Engineering Fundamentals</span><span>30%</span></div>
+          <div class="progress-bar"><div class="progress-fill" data-width="30"></div></div>
+          <div class="progress-status starting">🟡 Bắt đầu</div>
+        </div>
+        <div class="reveal reveal-delay-3">
+          <div class="progress-item-label"><span>Data Modeling (Kimball / OBT)</span><span>—</span></div>
+          <div class="progress-bar"><div class="progress-fill" data-width="0"></div></div>
+          <div class="progress-status planned">📋 Planned</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-section reveal">
+        <h2>Cùng Tôi Trên <span class="gradient-text">Hành Trình Này</span></h2>
+        <p>Mỗi ngày, tôi đều nỗ lực cải thiện bản thân. Hãy theo dõi và cùng nhau phát triển.</p>
+        <a href="blog/index.html" class="btn btn-primary">📝 Đọc Blog của tôi</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3><span class="gradient-text">Dustin</span>.dev</h3>
+          <p>From Data Engineer → Military Service → Analytics Engineer. Hành trình không ngừng phát triển.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Trang</h4>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="journey.html">Journey</a>
+        </div>
+        <div class="footer-links">
+          <h4>Kiến thức</h4>
+          <a href="knowledge/index.html">Knowledge Hub</a>
+          <a href="blog/index.html">Blog</a>
+        </div>
+        <div class="footer-links">
+          <h4>Liên kết</h4>
+          <a href="https://github.com/tranduc2204" target="_blank">GitHub</a>
+          <a href="https://www.linkedin.com/in/dustintd/" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Dustin. Built with 💜 on the road to Analytics Engineer.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
