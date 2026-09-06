@@ -48,7 +48,7 @@
       <div class="hero-grid">
         <div class="hero-content">
           <p class="hero-greeting">Xin chào, tôi là</p>
-          <h1 class="hero-name"><span class="gradient-text">Dustin</span></h1>
+          <h1 class="hero-name"><span class="gradient-text">Trần Đức</span></h1>
           <div class="hero-typing">
             <span class="text"></span><span class="cursor"></span>
           </div>
@@ -59,18 +59,82 @@
           </div>
           <div class="hero-actions">
             <a href="knowledge/index.html" class="btn btn-primary">📚 Khám phá kiến thức →</a>
-            <a href="journey.html" class="btn btn-outline">🗺️ Xem hành trình</a>
+            <a href="about.html" class="btn btn-outline">👤 Xem hồ sơ chi tiết</a>
           </div>
         </div>
         <div class="hero-visual reveal reveal-delay-1">
-          <div class="hero-visual-card">
-            <picture>
-              <source srcset="images/python_code_hero.webp" type="image/webp">
-              <img src="images/python_code_hero.png" alt="Python Data Engineering & Pipelines" class="hero-visual-img" width="900" height="900" loading="eager">
-            </picture>
-            <div class="hero-visual-badge">
-              <span class="dot"></span>
-              <span>Python & Data Pipelines</span>
+          <div class="hero-glow"></div>
+          
+          <!-- Floating Skill Chips -->
+          <div class="floating-chip chip-top-left">
+            <span>⚡</span>
+            <span>SQL & Analytics</span>
+          </div>
+          <div class="floating-chip chip-bottom-right">
+            <span>❄️</span>
+            <span>dbt + Snowflake</span>
+          </div>
+
+          <!-- Developer Profile Code Card -->
+          <div class="hero-code-card">
+            <!-- Window Header -->
+            <div class="code-card-header">
+              <div class="code-card-dots">
+                <span class="code-card-dot dot-red"></span>
+                <span class="code-card-dot dot-yellow"></span>
+                <span class="code-card-dot dot-green"></span>
+              </div>
+              <div class="code-card-tab">
+                <span>🐍</span>
+                <span>developer_profile.py</span>
+              </div>
+              <span class="code-card-lang">Python</span>
+            </div>
+
+            <!-- Profile Banner -->
+            <div class="code-profile-banner">
+              <img src="images/avatar.png" alt="Trần Đức" class="code-profile-avatar">
+              <div class="code-profile-info">
+                <div class="code-profile-name">
+                  <span>Trần Đức</span>
+                  <span class="code-profile-badge">Analytics & Data</span>
+                </div>
+                <div class="code-profile-roles">
+                  <span>Analytics Engineer</span>
+                  <span class="role-sep">•</span>
+                  <span>Data Engineer</span>
+                </div>
+                <a href="mailto:trandc3015@gmail.com" class="code-profile-email" title="Gửi email cho Trần Đức">
+                  <span>✉️</span>
+                  <span>trandc3015@gmail.com</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Syntax Highlighted Code -->
+            <div class="code-card-body">
+              <pre><code><span class="token-comment"># Khởi tạo profile & stack công nghệ</span>
+<span class="token-keyword">class</span> <span class="token-class">DataEngineer</span>:
+    <span class="token-keyword">def</span> <span class="token-func">__init__</span>(<span class="token-var">self</span>):
+        <span class="token-var">self</span>.name = <span class="token-str">"Trần Đức"</span>
+        <span class="token-var">self</span>.roles = [<span class="token-str">"Analytics Engineer"</span>, <span class="token-str">"Data Engineer"</span>]
+        <span class="token-var">self</span>.email = <span class="token-str">"trandc3015@gmail.com"</span>
+        <span class="token-var">self</span>.stack = [<span class="token-str">"Python"</span>, <span class="token-str">"SQL"</span>, <span class="token-str">"dbt"</span>, <span class="token-str">"Snowflake"</span>, <span class="token-str">"Airflow"</span>]
+
+    <span class="token-keyword">def</span> <span class="token-func">objective</span>(<span class="token-var">self</span>):
+        <span class="token-keyword">return</span> <span class="token-str">"🎯 Ra quân 2027 • Sẵn sàng tạo giá trị thực!"</span></code></pre>
+            </div>
+
+            <!-- Card Footer -->
+            <div class="code-card-footer">
+              <div class="code-card-status">
+                <span class="pulse-dot"></span>
+                <span>Open for Data Opportunities</span>
+              </div>
+              <a href="mailto:trandc3015@gmail.com" class="code-card-action">
+                <span>Gửi Email</span>
+                <span>→</span>
+              </a>
             </div>
           </div>
         </div>
