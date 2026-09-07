@@ -84,6 +84,7 @@ Chào mừng bạn đến với kho lưu trữ mã nguồn của **tranduc.site*
 | **Data Transformation** | dbt (Data Build Tool), Apache Spark |
 | **Orchestration** | Apache Airflow |
 | **Data Governance** | dbt Testing & Documentation, Data Lineage |
+| **Operating System** | Linux OS |
 | **DevOps & Infrastructure** | Docker, Docker Compose, Git / GitHub |
 | **BI & Visualization** | Metabase |
 
@@ -103,9 +104,12 @@ Chào mừng bạn đến với kho lưu trữ mã nguồn của **tranduc.site*
 - **Nhiệm vụ**: Triển khai giải pháp quản lý tài sản, kho bãi và thiết bị; xây dựng các báo cáo kiểm kê tự động; tối ưu hóa truy vấn SQL phục vụ phân tích dữ liệu vận hành hàng ngày.
 - **Tech stack**: SQL Server, Bravo ERP Framework, Views, Stored Procedures.
 
-### 🎖️ Nghĩa vụ CAND — Đội PCCC Khu Vực 15 (05/2025 — Hiện tại)
-- Được trưng dụng vào vị trí **IT Support**.
-- Duy trì kỷ luật tự học hàng ngày: dbt, Snowflake, DuckDB, Python, Data Architecture trên hành trình trở thành **Analytics Engineer**.
+### 🎖️ Nghĩa vụ CAND — Đội Cảnh sát PCCC & CNCH Khu Vực 15 (05/2025 — Hiện tại)
+- Được cấp trên tin tưởng trưng dụng phụ trách **IT Support & Quản trị hạ tầng mạng**.
+- **Nhiệm vụ trọng tâm**:
+  - **Quản trị hạ tầng hệ thống phần mềm nghiệp vụ**: Cơ sở dữ liệu Quốc gia về Dân cư, Hệ thống Quản lý Văn thư & Điều hành tác nghiệp, Hệ thống Tiếp nhận và Truyền tin Báo sự cố cháy thông minh của GTEL (Bộ Công an).
+  - **Triển khai & Quản trị hệ thống mạng nội bộ (LAN)**: Trực tiếp khảo sát, thi công, cấu hình thiết bị mạng và duy trì hạ tầng mạng LAN hoạt động ổn định, bảo mật cao, kết nối thông suốt 24/7 phục vụ công tác chỉ huy chiến đấu.
+- **Kỷ luật tự học**: Duy trì kỷ luật tự học bền bỉ mỗi ngày (dbt, Snowflake, DuckDB, Python, Data Modeling) trên hành trình chuẩn bị ra quân năm 2027 để trở thành **Analytics Engineer**.
 
 ### 🎓 Nền Tảng Học Thuật & Chứng Chỉ
 - 🏆 **Thủ khoa tốt nghiệp (Valedictorian)** — Trường Đại học Tài chính - Marketing (UFM) (GPA: 3.7/4.0).
@@ -180,3 +184,4 @@ npx serve .
 <div align="center">
   <sub>© 2026 Trần Đức (Dustin). Built with passion on the road to Becoming an Analytics Engineer.</sub>
 </div>
+
