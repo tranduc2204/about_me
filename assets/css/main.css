@@ -16,21 +16,21 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   --secondary-rgb: 0, 153, 122;
   --accent: #FF6B6B;
   --accent-rgb: 255, 107, 107;
-  --bg: #FAFBFF;
-  --bg-alt: #F0F2F8;
-  --surface: #FFFFFF;
-  --surface-hover: #F5F6FA;
-  --text-primary: #1A1A2E;
-  --text-secondary: #5A5A7A;
-  --text-muted: #8A8AAA;
-  --border: rgba(var(--primary-rgb), 0.13);
-  --glass-bg: rgba(255, 255, 255, 0.82);
-  --glass-border: rgba(var(--primary-rgb), 0.1);
+  --bg: #0B0E14;
+  --bg-alt: #131722;
+  --surface: #181D2B;
+  --surface-hover: #21283B;
+  --text-primary: #F0F3FA;
+  --text-secondary: #9DA7BE;
+  --text-muted: #6B748F;
+  --border: rgba(255, 255, 255, 0.12);
+  --glass-bg: rgba(11, 14, 20, 0.88);
+  --glass-border: rgba(255, 255, 255, 0.08);
   --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
   --gradient-accent: linear-gradient(135deg, var(--accent), var(--primary));
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
-  --shadow: 0 8px 32px rgba(0,0,0,0.08);
-  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --shadow: 0 8px 32px rgba(0,0,0,0.45);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.6);
   --radius: 16px;
   --radius-sm: 8px;
   --radius-xl: 24px;
@@ -52,6 +52,22 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
   --shadow: 0 8px 32px rgba(0,0,0,0.45);
   --shadow-lg: 0 16px 48px rgba(0,0,0,0.6);
+}
+
+[data-theme="light"] {
+  --bg: #FAFBFF;
+  --bg-alt: #F0F2F8;
+  --surface: #FFFFFF;
+  --surface-hover: #F5F6FA;
+  --text-primary: #1A1A2E;
+  --text-secondary: #5A5A7A;
+  --text-muted: #8A8AAA;
+  --border: rgba(var(--primary-rgb), 0.13);
+  --glass-bg: rgba(255, 255, 255, 0.82);
+  --glass-border: rgba(var(--primary-rgb), 0.1);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow: 0 8px 32px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
 }
 
 h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; line-height: 1.2; }
@@ -128,23 +144,23 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
 .code-card-body { padding: 18px 22px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.65; background: var(--surface); overflow-x: hidden; }
 .code-card-body pre { margin: 0; white-space: pre; word-wrap: normal; }
 
-/* Syntax Highlighting - Light Mode (High Contrast, Crisp GitHub Palette) */
-.token-keyword { color: #cf222e; font-weight: 600; }
-.token-class { color: #0550ae; font-weight: 600; }
-.token-func { color: #8250df; font-weight: 600; }
-.token-var { color: #1f2328; font-weight: 500; }
-.token-str { color: #0a6c34; font-weight: 500; }
-.token-comment { color: #6e7781; font-style: italic; }
-.token-arr { color: #953800; }
+/* Syntax Highlighting - Dark Mode (Default) */
+.token-keyword { color: #ff7b72; font-weight: 600; }
+.token-class { color: #79c0ff; font-weight: 600; }
+.token-func { color: #d2a8ff; font-weight: 600; }
+.token-var { color: #e6edf3; font-weight: 500; }
+.token-str { color: #7ee787; font-weight: 500; }
+.token-comment { color: #8b949e; font-style: italic; }
+.token-arr { color: #ffa657; }
 
-/* Syntax Highlighting - Dark Mode */
-[data-theme="dark"] .token-keyword { color: #ff7b72; font-weight: 600; }
-[data-theme="dark"] .token-class { color: #79c0ff; font-weight: 600; }
-[data-theme="dark"] .token-func { color: #d2a8ff; font-weight: 600; }
-[data-theme="dark"] .token-var { color: #e6edf3; font-weight: 500; }
-[data-theme="dark"] .token-str { color: #7ee787; font-weight: 500; }
-[data-theme="dark"] .token-comment { color: #8b949e; font-style: italic; }
-[data-theme="dark"] .token-arr { color: #ffa657; }
+/* Syntax Highlighting - Light Mode */
+[data-theme="light"] .token-keyword { color: #cf222e; font-weight: 600; }
+[data-theme="light"] .token-class { color: #0550ae; font-weight: 600; }
+[data-theme="light"] .token-func { color: #8250df; font-weight: 600; }
+[data-theme="light"] .token-var { color: #1f2328; font-weight: 500; }
+[data-theme="light"] .token-str { color: #0a6c34; font-weight: 500; }
+[data-theme="light"] .token-comment { color: #6e7781; font-style: italic; }
+[data-theme="light"] .token-arr { color: #953800; }
 
 /* Code Card Footer */
 .code-card-footer { display: flex; align-items: center; justify-content: space-between; padding: 13px 22px; background: var(--bg-alt); border-top: 1px solid var(--border); font-size: 0.82rem; position: relative; z-index: 2; }

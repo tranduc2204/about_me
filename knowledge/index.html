@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +9,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-  <link rel="stylesheet" href="../assets/css/main.css?v=5">
+  <link rel="stylesheet" href="../assets/css/main.css?v=6">
   <script>
     (function() {
-      const savedTheme = localStorage.getItem('dustin_theme') || 'light';
+      try { localStorage.removeItem('dustin_theme'); } catch(e) {}
+      const savedTheme = localStorage.getItem('dustin_theme_mode') || 'dark';
       document.documentElement.setAttribute('data-theme', savedTheme);
     })();
   </script>
@@ -29,7 +30,7 @@
           <a href="../knowledge/index.html" class="active">Knowledge</a>
           <a href="../blog/index.html">Blog</a>
         </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Chuyển chế độ giao diện" title="Chuyển chế độ sáng/tối">🌙</button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Chuyển sang chế độ sáng" title="Chuyển sang chế độ sáng">☀️</button>
         <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
       </div>
     </div>

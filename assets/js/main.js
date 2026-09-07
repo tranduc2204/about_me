@@ -5,11 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Dark mode theme toggle ---
   const themeToggle = document.getElementById('themeToggle');
-  const currentTheme = localStorage.getItem('dustin_theme') || 'light';
+  try { localStorage.removeItem('dustin_theme'); } catch(e) {}
+  const currentTheme = localStorage.getItem('dustin_theme_mode') || 'dark';
   
-  function applyTheme(theme) {
+  function applyTheme(theme, save = false) {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('dustin_theme', theme);
+    if (save) {
+      localStorage.setItem('dustin_theme_mode', theme);
+    }
     if (themeToggle) {
       themeToggle.innerHTML = theme === 'dark' ? '☀️' : '🌙';
       themeToggle.setAttribute('title', theme === 'dark' ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối');
@@ -18,13 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Initialize button icon to match current theme
-  applyTheme(currentTheme);
+  applyTheme(currentTheme, false);
 
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
-      const activeTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const activeTheme = document.documentElement.getAttribute('data-theme') || 'dark';
       const nextTheme = activeTheme === 'dark' ? 'light' : 'dark';
-      applyTheme(nextTheme);
+      applyTheme(nextTheme, true);
     });
   }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-  <link rel="stylesheet" href="assets/css/main.css?v=5">
+  <link rel="stylesheet" href="assets/css/main.css?v=6">
   <style id="hero-critical-css">
     .hero-code-card {
       position: relative;
@@ -21,45 +21,47 @@
       overflow: hidden;
       box-shadow: 0 20px 50px rgba(108, 99, 255, 0.18), 0 16px 48px rgba(0,0,0,0.12);
       border: 1px solid rgba(108, 99, 255, 0.15);
-      background: var(--surface, #ffffff);
+      background: var(--surface, #181D2B);
       max-width: 530px;
       width: 100%;
       text-align: left;
       animation: floatSlow 6s ease-in-out infinite;
     }
-    .code-card-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: var(--bg-alt, #F0F2F8); border-bottom: 1px solid var(--border, rgba(108, 99, 255, 0.13)); }
+    .code-card-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: var(--bg-alt, #131722); border-bottom: 1px solid var(--border, rgba(255, 255, 255, 0.12)); }
     .code-card-dots { display: flex; gap: 7px; }
     .code-card-dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
     .code-card-dot.dot-red { background: #FF5F56; }
     .code-card-dot.dot-yellow { background: #FFBD2E; }
     .code-card-dot.dot-green { background: #27C93F; }
-    .code-card-tab { display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 500; color: var(--text-primary, #1A1A2E); background: var(--surface, #ffffff); padding: 4px 12px; border-radius: 6px; border: 1px solid var(--border, rgba(108, 99, 255, 0.13)); }
+    .code-card-tab { display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 500; color: var(--text-primary, #F0F3FA); background: var(--surface, #181D2B); padding: 4px 12px; border-radius: 6px; border: 1px solid var(--border, rgba(255, 255, 255, 0.12)); }
     .code-card-lang { font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #6C63FF; text-transform: uppercase; }
-    .code-profile-banner { display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: linear-gradient(135deg, rgba(108, 99, 255, 0.08), rgba(0, 153, 122, 0.06)); border-bottom: 1px solid var(--border, rgba(108, 99, 255, 0.13)); text-align: left; }
+    .code-profile-banner { display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: linear-gradient(135deg, rgba(108, 99, 255, 0.12), rgba(0, 153, 122, 0.08)); border-bottom: 1px solid var(--border, rgba(255, 255, 255, 0.12)); text-align: left; }
     .code-profile-avatar { width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2.5px solid #6C63FF; box-shadow: 0 0 16px rgba(108, 99, 255, 0.35); flex-shrink: 0; display: inline-block; }
     .code-profile-info { flex: 1; min-width: 0; text-align: left; }
-    .code-profile-name { font-size: 1.15rem; font-weight: 700; color: var(--text-primary, #1A1A2E); display: flex; align-items: center; gap: 8px; margin-bottom: 2px; flex-wrap: wrap; }
-    .code-profile-badge { font-size: 0.68rem; padding: 2px 8px; border-radius: 20px; background: rgba(0, 153, 122, 0.15); color: #00997A; font-weight: 600; border: 1px solid rgba(0, 153, 122, 0.25); }
-    .code-profile-roles { font-size: 0.85rem; color: #00997A; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .code-profile-name { font-size: 1.15rem; font-weight: 700; color: var(--text-primary, #F0F3FA); display: flex; align-items: center; gap: 8px; margin-bottom: 2px; flex-wrap: wrap; }
+    .code-profile-badge { font-size: 0.68rem; padding: 2px 8px; border-radius: 20px; background: rgba(0, 153, 122, 0.2); color: #00E699; font-weight: 600; border: 1px solid rgba(0, 153, 122, 0.35); }
+    .code-profile-roles { font-size: 0.85rem; color: #00E699; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
     .code-profile-email { font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; color: #6C63FF; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; word-break: break-all; }
-    .code-card-body { padding: 16px 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.65; background: var(--surface, #ffffff); text-align: left; overflow-x: auto; }
+    .code-card-body { padding: 16px 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.65; background: var(--surface, #181D2B); text-align: left; overflow-x: auto; }
     .code-card-body pre { margin: 0; text-align: left; }
-    .code-card-footer { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: var(--bg-alt, #F0F2F8); border-top: 1px solid var(--border, rgba(108, 99, 255, 0.13)); font-size: 0.82rem; text-align: left; }
-    .code-card-status { display: inline-flex; align-items: center; gap: 8px; color: var(--text-secondary, #5A5A7A); font-size: 0.82rem; }
+    .code-card-footer { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: var(--bg-alt, #131722); border-top: 1px solid var(--border, rgba(255, 255, 255, 0.12)); font-size: 0.82rem; text-align: left; }
+    .code-card-status { display: inline-flex; align-items: center; gap: 8px; color: var(--text-secondary, #9DA7BE); font-size: 0.82rem; }
     .code-card-status .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: #00E699; box-shadow: 0 0 10px #00E699; display: inline-block; }
-    .code-card-action { display: inline-flex; align-items: center; gap: 6px; color: #6C63FF; font-weight: 600; font-size: 0.84rem; text-decoration: none; padding: 5px 12px; border-radius: 6px; background: rgba(108, 99, 255, 0.08); }
-    .token-keyword { color: #cf222e; font-weight: 600; }
-    .token-class { color: #0550ae; font-weight: 600; }
-    .token-func { color: #8250df; font-weight: 600; }
-    .token-var { color: #1f2328; font-weight: 500; }
-    .token-str { color: #0a6c34; font-weight: 500; }
-    .token-comment { color: #6e7781; font-style: italic; }
-    [data-theme="dark"] .token-keyword { color: #ff7b72; }
-    [data-theme="dark"] .token-class { color: #79c0ff; }
-    [data-theme="dark"] .token-func { color: #d2a8ff; }
-    [data-theme="dark"] .token-var { color: #e6edf3; }
-    [data-theme="dark"] .token-str { color: #7ee787; }
-    [data-theme="dark"] .token-comment { color: #8b949e; }
+    .code-card-action { display: inline-flex; align-items: center; gap: 6px; color: #6C63FF; font-weight: 600; font-size: 0.84rem; text-decoration: none; padding: 5px 12px; border-radius: 6px; background: rgba(108, 99, 255, 0.15); }
+    /* Syntax Tokens - Dark Mode Default */
+    .token-keyword { color: #ff7b72; font-weight: 600; }
+    .token-class { color: #79c0ff; font-weight: 600; }
+    .token-func { color: #d2a8ff; font-weight: 600; }
+    .token-var { color: #e6edf3; font-weight: 500; }
+    .token-str { color: #7ee787; font-weight: 500; }
+    .token-comment { color: #8b949e; font-style: italic; }
+    /* Light Mode Tokens */
+    [data-theme="light"] .token-keyword { color: #cf222e; }
+    [data-theme="light"] .token-class { color: #0550ae; }
+    [data-theme="light"] .token-func { color: #8250df; }
+    [data-theme="light"] .token-var { color: #1f2328; }
+    [data-theme="light"] .token-str { color: #0a6c34; }
+    [data-theme="light"] .token-comment { color: #6e7781; }
     @media (max-width: 960px) {
       .hero { min-height: auto !important; padding-top: 100px !important; padding-bottom: 48px !important; }
       .hero-grid { grid-template-columns: 1fr !important; gap: 32px !important; text-align: center !important; }
@@ -87,7 +89,8 @@
   </style>
   <script>
     (function() {
-      const savedTheme = localStorage.getItem('dustin_theme') || 'light';
+      try { localStorage.removeItem('dustin_theme'); } catch(e) {}
+      const savedTheme = localStorage.getItem('dustin_theme_mode') || 'dark';
       document.documentElement.setAttribute('data-theme', savedTheme);
     })();
   </script>
@@ -106,7 +109,7 @@
           <a href="knowledge/index.html">Knowledge</a>
           <a href="blog/index.html">Blog</a>
         </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Chuyển chế độ giao diện" title="Chuyển chế độ sáng/tối">🌙</button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Chuyển sang chế độ sáng" title="Chuyển sang chế độ sáng">☀️</button>
         <button class="nav-toggle" id="navToggle" aria-label="Menu">
           <span></span><span></span><span></span>
         </button>
