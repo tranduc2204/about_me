@@ -81,10 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const typingEl = document.querySelector('.hero-typing .text');
   if (typingEl) {
     const phrases = [
-      'Analytics Engineer',
+      'Aspiring Analytics Engineer',
       'Data Engineer',
-      'SQL & dbt Enthusiast',
-      'Thủ khoa đầu ra UFM (GPA 3.7)'
+      'SQL & DBT Enthusiast'
     ];
     let phraseIdx = 0, charIdx = 0, isDeleting = false;
     function typeLoop() {
