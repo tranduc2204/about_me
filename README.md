@@ -84,7 +84,7 @@ Chào mừng bạn đến với kho lưu trữ mã nguồn của **tranduc.site*
 | **Data Transformation** | dbt (Data Build Tool), Apache Spark |
 | **Orchestration** | Apache Airflow |
 | **Data Governance** | dbt Testing & Documentation, Data Lineage |
-| **Operating System** | Linux OS |
+| **Operating System** | Linux OS (Ubuntu) |
 | **DevOps & Infrastructure** | Docker, Docker Compose, Git / GitHub |
 | **BI & Visualization** | Metabase |
 
