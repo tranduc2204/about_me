@@ -9,7 +9,67 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-  <link rel="stylesheet" href="../assets/css/main.css?v=7">
+  <link rel="stylesheet" href="../assets/css/main.css?v=9">
+  <style>
+    .knowledge-filters {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin: 0 auto 36px auto;
+      flex-wrap: nowrap;
+      width: fit-content;
+      max-width: 100%;
+    }
+    .filter-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+      box-shadow: var(--shadow-sm);
+      user-select: none;
+    }
+    .filter-btn:hover {
+      border-color: var(--primary);
+      color: #ffffff;
+      background: var(--surface-hover);
+      transform: translateY(-2px);
+    }
+    .filter-btn.active {
+      background: var(--gradient-primary) !important;
+      color: #ffffff !important;
+      border-color: transparent !important;
+      box-shadow: 0 4px 18px rgba(var(--primary-rgb), 0.45) !important;
+    }
+    @media (max-width: 680px) {
+      .knowledge-filters {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        width: 100% !important;
+        max-width: 380px !important;
+        margin: 0 auto 32px auto !important;
+        padding: 0 8px;
+      }
+      .filter-btn {
+        width: 100% !important;
+        padding: 11px 8px !important;
+        font-size: 0.84rem !important;
+        justify-content: center !important;
+        text-align: center !important;
+      }
+    }
+  </style>
   <script>
     (function() {
       try { localStorage.removeItem('dustin_theme'); } catch(e) {}
@@ -171,7 +231,7 @@
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=8"></script>
+  <script src="../assets/js/main.js?v=9"></script>
   <script>
     // Knowledge category filter logic
     document.addEventListener('DOMContentLoaded', () => {
