@@ -96,8 +96,11 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
 .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
 .theme-toggle { width: 38px; height: 38px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--border); color: var(--text-primary); font-size: 1.1rem; cursor: pointer; transition: var(--transition); box-shadow: var(--shadow-sm); }
 .theme-toggle:hover { background: var(--surface-hover); transform: scale(1.08); border-color: var(--primary); }
-.nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-.nav-toggle span { width: 24px; height: 2px; background: var(--text-primary); transition: var(--transition); border-radius: 2px; }
+.nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; padding: 6px; background: transparent; border: none; z-index: 10001; }
+.nav-toggle span { width: 24px; height: 2px; background: var(--text-primary); transition: transform 0.3s ease, opacity 0.2s ease; border-radius: 2px; }
+.nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.active span:nth-child(2) { opacity: 0; }
+.nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* Hero */
 .hero { min-height: 100vh; display: flex; align-items: center; padding-top: var(--nav-height); position: relative; overflow: hidden; }
@@ -355,10 +358,58 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
   .profile-section { flex-direction: column; align-items: center; text-align: center; }
 }
 @media (max-width: 768px) {
-  .nav-links { position: fixed; top: var(--nav-height); left: 0; right: 0; bottom: 0; flex-direction: column; align-items: center; justify-content: center; gap: 28px; background: var(--surface); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); transform: translateX(100%); transition: var(--transition); border-top: 1px solid var(--border); }
-  .nav-links.open { transform: translateX(0); }
-  .nav-links a { font-size: 1.2rem; }
-  .nav-toggle { display: flex; }
+  /* Prevent background scrolling when mobile menu is active */
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  /* CRITICAL FIX: On mobile, scrolled navbar MUST NOT use backdrop-filter because
+     backdrop-filter creates a containing block that traps fixed elements (.nav-links) inside
+     the 72px navbar, causing .nav-links to collapse to 0 height when scrolled! */
+  .navbar.scrolled,
+  .navbar:has(.nav-links.open),
+  body.menu-open .navbar {
+    background: var(--surface) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .nav-links {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: calc(100vh - var(--nav-height));
+    height: calc(100dvh - var(--nav-height));
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    background: var(--surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-top: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+    z-index: 9999;
+    overflow-y: auto;
+    padding: 24px 0;
+  }
+  .nav-links.open {
+    transform: translateX(0);
+  }
+  .nav-links a {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  .nav-toggle {
+    display: flex;
+  }
   .hero-name { font-size: clamp(1.85rem, 7.5vw, 2.7rem); }
   .hero-actions { flex-direction: column; width: 100%; max-width: 320px; margin: 0 auto; }
   .hero-actions .btn { width: 100%; justify-content: center; padding: 12px 20px; }
