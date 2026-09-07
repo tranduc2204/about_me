@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bậc Thầy SQL Window Functions: Phân Tích Chuỗi Thời Gian & Deduplication — Dustin học data</title>
+  <meta name="description" content="Vũ khí tối thượng của Analytics Engineer. Phân biệt ROW_NUMBER, RANK, DENSE_RANK, kỹ thuật Deduplication (WHERE rn=1), tính tăng trưởng MoM/YoY bằng LAG/LEAD và tổng lũy kế Running Total.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="../../images/favicon.ico">
+  <link rel="stylesheet" href="../../assets/css/main.css?v=8">
+  <script>
+    (function() {
+      try { localStorage.removeItem('dustin_theme'); } catch(e) {}
+      const savedTheme = localStorage.getItem('dustin_theme_mode') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="../../index.html" class="nav-logo"><span class="gradient-text">Dustin</span> học data</a>
+      <div class="nav-right-group">
+        <div class="nav-links" id="navLinks">
+          <a href="../../index.html">Home</a>
+          <a href="../../about.html">About</a>
+          <a href="../../journey.html">Journey</a>
+          <a href="../index.html" class="active">Knowledge</a>
+          <a href="../../blog/index.html">Blog</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Chuyển sang chế độ sáng" title="Chuyển sang chế độ sáng">☀️</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Container -->
+  <main class="post-article-wrapper">
+    <!-- Breadcrumb -->
+    <nav class="post-breadcrumb" aria-label="Breadcrumb">
+      <a href="../../index.html">Home</a>
+      <span>/</span>
+      <a href="../index.html">Knowledge Hub</a>
+      <span>/</span>
+      <span>Advanced Analytics</span>
+    </nav>
+
+    <!-- Header -->
+    <header class="post-hero-header">
+      <span class="badge-advanced" style="display:inline-block; margin-bottom:12px; font-weight:700; padding:4px 12px; border-radius:50px; font-size:0.8rem;">🔴 SQL Nâng Cao</span>
+      <h1 class="post-hero-title">Bậc Thầy SQL Window Functions: Phân Tích Chuỗi Thời Gian &amp; Deduplication</h1>
+      <div class="post-author-bar">
+        <img src="../../images/avatar.png" alt="Trần Đức (Dustin)" class="post-author-avatar">
+        <div>
+          <div class="post-author-name">Trần Đức (Dustin)</div>
+          <div class="post-meta-details">
+            <span>📅 Tháng 9, 2026</span>
+            <span>•</span>
+            <span>⏱️ 15 phút đọc</span>
+            <span>•</span>
+            <span>Chủ đề: Window Functions &amp; Time Series</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Notebook Sketch Illustration -->
+    <figure class="notebook-figure">
+      <img src="../../images/knowledge/sql-window-functions.jpg" alt="Minh họa SQL Window Functions vẽ tay sổ tay">
+      <figcaption class="notebook-caption">
+        📒 Phác thảo sổ tay: Phân vùng PARTITION BY, so sánh ROW_NUMBER vs RANK vs DENSE_RANK, và kỹ thuật tính LAG / LEAD
+      </figcaption>
+    </figure>
+
+    <!-- Article Content -->
+    <article class="article-body">
+      <p>
+        Nếu được chọn một tính năng SQL có sức mạnh làm thay đổi toàn diện tư duy giải quyết vấn đề phân tích dữ liệu, thì đó chắc chắn phải là <strong>Window Functions</strong> (Các hàm cửa sổ, được ANSI SQL giới thiệu chính thức từ chuẩn SQL:2003).
+      </p>
+      <p>
+        Trước khi Window Functions xuất hiện, để thực hiện các bài toán như: xếp hạng doanh số nhân viên trong từng phòng ban, tính tổng doanh thu tích lũy từ đầu tháng đến ngày hôm nay (Running Total), hay so sánh tăng trưởng doanh thu so với tháng trước (Month-over-Month Growth), các lập trình viên phải viết hàng tá lệnh Self-JOIN vô cùng nặng nề và phức tạp. Window Functions đã giải quyết gọn gàng toàn bộ các thách thức đó chỉ trong một biểu thức <code>OVER(...)</code> thanh lịch.
+      </p>
+
+      <h2>1. Bản Chất: Điểm Khác Biệt Sống Còn Với GROUP BY</h2>
+      <p>
+        Hãy ghi nhớ một nguyên tắc căn bản:
+      </p>
+      <ul>
+        <li>
+          <strong>GROUP BY:</strong> Thu gọn (Collapse) nhiều dòng dữ liệu có cùng khóa thành <strong>một dòng duy nhất</strong> đại diện cho nhóm. Bạn sẽ bị mất đi thông tin chi tiết của từng bản ghi ban đầu.
+        </li>
+        <li>
+          <strong>WINDOW FUNCTION:</strong> Thực hiện tính toán trên một tập các dòng liên quan (gọi là "Window Frame"), nhưng <strong>KHÔNG LÀM THU GỌN DÒNG</strong>. Mỗi dòng dữ liệu ban đầu vẫn được bảo toàn nguyên vẹn, kèm theo một cột giá trị tính toán mới sinh ra bên cạnh.
+        </li>
+      </ul>
+
+      <div class="callout-box tip">
+        <div class="callout-title">💡 Ví dụ trực quan</div>
+        <p>
+          Nếu công ty bạn có 100 nhân viên thuộc 5 phòng ban:<br>
+          - Dùng <code>GROUP BY department_id</code>: Kết quả trả về đúng <strong>5 dòng</strong>.<br>
+          - Dùng <code>AVG(salary) OVER(PARTITION BY department_id)</code>: Kết quả trả về đủ <strong>100 dòng</strong>, mỗi nhân viên đều thấy được mức lương của bản thân VÀ mức lương trung bình của toàn bộ phòng ban mình đang làm việc!
+        </p>
+      </div>
+
+      <h2>2. Giải Phẫu Cú Pháp Đầy Đủ Của Window Function</h2>
+      <pre><code><span class="token-func">FUNCTION_NAME</span>() <span class="token-keyword">OVER</span> (
+    <span class="token-keyword">PARTITION BY</span> cot_phan_chia_nhom
+    <span class="token-keyword">ORDER BY</span> cot_sap_xep
+    <span class="token-keyword">ROWS BETWEEN</span> ... <span class="token-keyword">AND</span> ...  <span class="token-comment">-- (Window Frame - Khung cửa sổ)</span>
+)</code></pre>
+
+      <p>Trong đó:</p>
+      <ol>
+        <li><code>FUNCTION_NAME()</code>: Có thể là hàm xếp hạng (<code>ROW_NUMBER()</code>, <code>RANK()</code>), hàm điều hướng (<code>LAG()</code>, <code>LEAD()</code>), hoặc hàm tổng hợp (<code>SUM()</code>, <code>AVG()</code>, <code>MIN()</code>, <code>MAX()</code>).</li>
+        <li><code>PARTITION BY</code>: Tương tự như <code>GROUP BY</code>, chia toàn bộ dữ liệu thành từng cụm độc lập (Ví dụ: chia theo từng <code>category_id</code> hay <code>country</code>). Nếu bỏ qua, cả bảng dữ liệu được coi là một cửa sổ duy nhất.</li>
+        <li><code>ORDER BY</code>: Xác định thứ tự tính toán của các dòng bên trong mỗi Partition. Bắt buộc phải có đối với các hàm xếp hạng và chuỗi thời gian.</li>
+        <li><code>ROWS BETWEEN</code>: Xác định ranh giới tính toán vật lý (Ví dụ: <code>ROWS BETWEEN 6 PRECEDING AND CURRENT ROW</code> tức là tính trên 7 dòng liên tiếp: 6 dòng quá khứ + 1 dòng hiện tại).</li>
+      </ol>
+
+      <h2>3. So Sánh 3 Hàm Xếp Hạng: ROW_NUMBER vs RANK vs DENSE_RANK</h2>
+      <p>
+        Đây là câu hỏi kinh điển trong mọi bài phỏng vấn vị trí Data Analyst / Data Engineer. Hãy xem ví dụ khi bảng có 4 ứng viên, trong đó có 2 người có cùng mức điểm là 100:
+      </p>
+
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Họ tên</th>
+              <th>Điểm số</th>
+              <th>ROW_NUMBER()</th>
+              <th>RANK()</th>
+              <th>DENSE_RANK()</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Nguyễn Văn An</td>
+              <td>100</td>
+              <td><strong>1</strong></td>
+              <td><strong>1</strong></td>
+              <td><strong>1</strong></td>
+            </tr>
+            <tr>
+              <td>Trần Minh Bình</td>
+              <td>100</td>
+              <td><strong>2</strong></td>
+              <td><strong>1</strong></td>
+              <td><strong>1</strong></td>
+            </tr>
+            <tr>
+              <td>Lê Hoàng Cường</td>
+              <td>90</td>
+              <td><strong>3</strong></td>
+              <td><strong>3</strong> <em>(Nhảy cóc, bỏ mất số 2)</em></td>
+              <td><strong>2</strong> <em>(Liền mạch, không nhảy cóc)</em></td>
+            </tr>
+            <tr>
+              <td>Phạm Hồng Dũng</td>
+              <td>80</td>
+              <td><strong>4</strong></td>
+              <td><strong>4</strong></td>
+              <td><strong>3</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout-box">
+        <div class="callout-title">📌 Bí kíp chọn đúng hàm:</div>
+        <ul>
+          <li><strong>Dùng ROW_NUMBER():</strong> Khi bạn cần đánh số thứ tự duy nhất để khử trùng dữ liệu (Deduplication) hoặc phân trang (Pagination).</li>
+          <li><strong>Dùng RANK():</strong> Khi bạn muốn trao huy chương trong các cuộc thi thể thao: nếu có 2 người đồng hạng Nhất, người tiếp theo sẽ nhận giải Ba (không có giải Nhì).</li>
+          <li><strong>Dùng DENSE_RANK():</strong> Khi bạn muốn tìm ra top 3 mức lương cao nhất công ty (nếu có 5 người cùng nhận mức lương cao nhất $5,000, người nhận mức lương cao tiếp theo $4,000 vẫn được xếp hạng 2).</li>
+        </ul>
+      </div>
+
+      <h2>4. Ứng Dụng #1: Kỹ Thuật Deduplication (Lọc Bản Ghi Mới Nhất)</h2>
+      <p>
+        Trong các hệ thống Data Pipeline CDC (Change Data Capture) hoặc Event Logging, khi khách hàng cập nhật thông tin địa chỉ hoặc số điện thoại, hệ thống sẽ chèn thêm một bản ghi mới với dấu thời gian <code>updated_at</code>. Bảng dữ liệu sẽ chứa nhiều dòng của cùng một khách hàng.
+      </p>
+      <p>
+        <strong>Nhiệm vụ:</strong> Lọc ra chính xác bản ghi thông tin mới nhất của từng khách hàng.
+      </p>
+
+      <pre><code><span class="token-keyword">WITH</span> ranked_customers <span class="token-keyword">AS</span> (
+    <span class="token-keyword">SELECT</span> 
+        customer_id,
+        phone_number,
+        shipping_address,
+        updated_at,
+        <span class="token-comment">-- Đánh số thứ tự: dòng mới nhất trong mỗi customer_id luôn nhận số 1</span>
+        <span class="token-func">ROW_NUMBER</span>() <span class="token-keyword">OVER</span> (
+            <span class="token-keyword">PARTITION BY</span> customer_id 
+            <span class="token-keyword">ORDER BY</span> updated_at <span class="token-keyword">DESC</span>
+        ) <span class="token-keyword">AS</span> row_num
+    <span class="token-keyword">FROM</span> raw_customer_updates
+)
+<span class="token-keyword">SELECT</span> 
+    customer_id,
+    phone_number,
+    shipping_address,
+    updated_at
+<span class="token-keyword">FROM</span> ranked_customers
+<span class="token-keyword">WHERE</span> row_num = 1;  <span class="token-comment">-- Chỉ giữ lại bản ghi mới nhất!</span></code></pre>
+
+      <h2>5. Ứng Dụng #2: Phân Tích Chuỗi Thời Gian MoM/YoY Với LAG() &amp; LEAD()</h2>
+      <p>
+        Hai hàm điều hướng cực kỳ quyền năng:
+      </p>
+      <ul>
+        <li><code>LAG(cột, n)</code>: Lấy giá trị của dòng <strong>phía trước</strong> $n$ bước (Quá khứ).</li>
+        <li><code>LEAD(cột, n)</code>: Lấy giá trị của dòng <strong>phía sau</strong> $n$ bước (Tương lai).</li>
+      </ul>
+
+      <p>Hãy cùng tính phần trăm tăng trưởng doanh thu theo từng tháng (Month-over-Month Growth):</p>
+
+      <pre><code><span class="token-keyword">WITH</span> monthly_revenue <span class="token-keyword">AS</span> (
+    <span class="token-keyword">SELECT</span> 
+        <span class="token-func">DATE_TRUNC</span>(<span class="token-str">'month'</span>, order_date) <span class="token-keyword">AS</span> report_month,
+        <span class="token-func">SUM</span>(total_amount) <span class="token-keyword">AS</span> current_month_revenue
+    <span class="token-keyword">FROM</span> orders
+    <span class="token-keyword">GROUP BY</span> 1
+),
+revenue_lagged <span class="token-keyword">AS</span> (
+    <span class="token-keyword">SELECT</span> 
+        report_month,
+        current_month_revenue,
+        <span class="token-comment">-- Lấy doanh thu của tháng liền trước đó</span>
+        <span class="token-func">LAG</span>(current_month_revenue, 1) <span class="token-keyword">OVER</span> (
+            <span class="token-keyword">ORDER BY</span> report_month <span class="token-keyword">ASC</span>
+        ) <span class="token-keyword">AS</span> previous_month_revenue
+    <span class="token-keyword">FROM</span> monthly_revenue
+)
+<span class="token-keyword">SELECT</span> 
+    report_month,
+    current_month_revenue,
+    previous_month_revenue,
+    <span class="token-comment">-- Công thức tính tỷ lệ tăng trưởng: ((Doanh thu tháng này - Doanh thu tháng trước) / Doanh thu tháng trước) * 100</span>
+    <span class="token-func">ROUND</span>(
+        ((current_month_revenue - previous_month_revenue) / previous_month_revenue) * 100, 
+        2
+    ) <span class="token-keyword">AS</span> mom_growth_percent
+<span class="token-keyword">FROM</span> revenue_lagged
+<span class="token-keyword">ORDER BY</span> report_month;</code></pre>
+
+      <h2>6. Ứng Dụng #3: Tổng Lũy Kế (Running Total) &amp; Trung Bình Động 7 Ngày (7-Day Moving Average)</h2>
+
+      <h3>1. Tính tổng tích lũy (Running Total)</h3>
+      <p>
+        Khi bạn chỉ định <code>ORDER BY</code> bên trong hàm tổng hợp <code>SUM() OVER(...)</code>, hệ thống sẽ mặc định khung cửa sổ từ đầu đến dòng hiện tại (<code>ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW</code>):
+      </p>
+
+      <pre><code><span class="token-keyword">SELECT</span> 
+    order_date,
+    daily_revenue,
+    <span class="token-comment">-- Doanh thu cộng dồn tích lũy liên tục từ đầu năm đến ngày hiện tại</span>
+    <span class="token-func">SUM</span>(daily_revenue) <span class="token-keyword">OVER</span> (
+        <span class="token-keyword">ORDER BY</span> order_date <span class="token-keyword">ASC</span>
+    ) <span class="token-keyword">AS</span> cumulative_revenue_ytd
+<span class="token-keyword">FROM</span> daily_sales_summary;</code></pre>
+
+      <h3>2. Tính đường trung bình động 7 ngày (7-Day Moving Average)</h3>
+      <p>
+        Dữ liệu lượng truy cập hoặc đơn hàng hàng ngày thường bị răng cưa rất mạnh do cuối tuần thấp hơn ngày trong tuần. Đường trung bình động 7 ngày giúp loại bỏ yếu tố mùa vụ ngắn hạn để nhìn rõ xu hướng phát triển:
+      </p>
+
+      <pre><code><span class="token-keyword">SELECT</span> 
+    metric_date,
+    daily_active_users,
+    <span class="token-comment">-- Trung bình cộng của 6 ngày trước đó + ngày hiện tại = 7 ngày</span>
+    <span class="token-func">ROUND</span>(
+        <span class="token-func">AVG</span>(daily_active_users) <span class="token-keyword">OVER</span> (
+            <span class="token-keyword">ORDER BY</span> metric_date <span class="token-keyword">ASC</span>
+            <span class="token-keyword">ROWS BETWEEN</span> 6 <span class="token-keyword">PRECEDING AND CURRENT ROW</span>
+        ), 
+        0
+    ) <span class="token-keyword">AS</span> smoothed_7d_mau
+<span class="token-keyword">FROM</span> app_analytics_daily;</code></pre>
+
+      <h2>7. Tổng Kết: Kim Chỉ Nam Cho Analytics Engineer</h2>
+      <ol>
+        <li><strong>Không lạm dụng:</strong> Dù Window Functions rất mạnh, nhưng chúng bắt buộc máy chủ phải lưu trữ toàn bộ partition vào bộ nhớ đệm RAM để sắp xếp và tính toán. Nếu chỉ cần tổng hợp đơn thuần mà không cần giữ chi tiết dòng, hãy dùng <code>GROUP BY</code> để tiết kiệm chi phí tính toán.</li>
+        <li><strong>Luôn kiểm tra NULL:</strong> Khi dùng <code>LAG()</code> hoặc <code>LEAD()</code>, dòng đầu tiên hoặc dòng cuối cùng sẽ trả về <code>NULL</code>. Luôn chuẩn bị trước hàm <code>COALESCE</code> nếu bạn thực hiện phép tính chia để tránh lỗi <code>Division by zero</code>.</li>
+        <li><strong>Thực hành liên tục:</strong> Làm chủ Window Functions là tấm vé thông hành vững chắc nhất giúp bạn tự tin vượt qua mọi bài test SQL từ các tập đoàn công nghệ lớn.</li>
+      </ol>
+    </article>
+
+    <!-- Post Navigation Cards -->
+    <nav class="post-navigation">
+      <a href="03-sql-cte-modular-architecture.html" class="post-nav-card">
+        <div class="post-nav-label">← Bài trước (Trung Cấp)</div>
+        <div class="post-nav-title">Common Table Expressions (CTE): Nghệ Thuật Modular SQL</div>
+      </a>
+      <a href="../index.html" class="post-nav-card" style="text-align: right;">
+        <div class="post-nav-label">Hoàn tất lộ trình →</div>
+        <div class="post-nav-title">Quay lại Knowledge Hub</div>
+      </a>
+    </nav>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2026 Trần Đức (Dustin). Built with 💜 on the road to Analytics Engineer.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/main.js?v=8"></script>
+</body>
+</html>

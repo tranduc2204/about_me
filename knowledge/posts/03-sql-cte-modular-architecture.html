@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Common Table Expressions (CTE): Nghệ Thuật Viết Modular SQL Dễ Đọc, Dễ Bảo Trì — Dustin học data</title>
+  <meta name="description" content="Tạm biệt Nested Subqueries rối rắm khó debug. Xây dựng tư duy đường ống dữ liệu đa tầng tuần tự với CTE (WITH), kỹ thuật đệ quy Recursive CTE và so sánh hiệu năng thực tế.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="../../images/favicon.ico">
+  <link rel="stylesheet" href="../../assets/css/main.css?v=8">
+  <script>
+    (function() {
+      try { localStorage.removeItem('dustin_theme'); } catch(e) {}
+      const savedTheme = localStorage.getItem('dustin_theme_mode') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="../../index.html" class="nav-logo"><span class="gradient-text">Dustin</span> học data</a>
+      <div class="nav-right-group">
+        <div class="nav-links" id="navLinks">
+          <a href="../../index.html">Home</a>
+          <a href="../../about.html">About</a>
+          <a href="../../journey.html">Journey</a>
+          <a href="../index.html" class="active">Knowledge</a>
+          <a href="../../blog/index.html">Blog</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Chuyển sang chế độ sáng" title="Chuyển sang chế độ sáng">☀️</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Container -->
+  <main class="post-article-wrapper">
+    <!-- Breadcrumb -->
+    <nav class="post-breadcrumb" aria-label="Breadcrumb">
+      <a href="../../index.html">Home</a>
+      <span>/</span>
+      <a href="../index.html">Knowledge Hub</a>
+      <span>/</span>
+      <span>Modern SQL &amp; dbt</span>
+    </nav>
+
+    <!-- Header -->
+    <header class="post-hero-header">
+      <span class="badge-intermediate" style="display:inline-block; margin-bottom:12px; font-weight:700; padding:4px 12px; border-radius:50px; font-size:0.8rem;">🟡 SQL Trung Cấp</span>
+      <h1 class="post-hero-title">Common Table Expressions (CTE): Nghệ Thuật Viết Modular SQL Dễ Đọc, Dễ Bảo Trì</h1>
+      <div class="post-author-bar">
+        <img src="../../images/avatar.png" alt="Trần Đức (Dustin)" class="post-author-avatar">
+        <div>
+          <div class="post-author-name">Trần Đức (Dustin)</div>
+          <div class="post-meta-details">
+            <span>📅 Tháng 9, 2026</span>
+            <span>•</span>
+            <span>⏱️ 10 phút đọc</span>
+            <span>•</span>
+            <span>Chủ đề: Modular SQL &amp; dbt Architecture</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Notebook Sketch Illustration -->
+    <figure class="notebook-figure">
+      <img src="../../images/knowledge/sql-cte-pipeline.jpg" alt="So sánh Spaghetti Subquery và Modular CTEs vẽ tay sổ tay">
+      <figcaption class="notebook-caption">
+        📒 Phác thảo sổ tay: So sánh Spaghetti Nested Subqueries lồng nhau vs Cấu trúc đường ống tuần tự Modular CTEs (WITH)
+      </figcaption>
+    </figure>
+
+    <!-- Article Content -->
+    <article class="article-body">
+      <p>
+        Nếu có một kỹ năng duy nhất giúp phân biệt giữa một người "biết viết vài dòng SQL truy vấn đơn giản" với một <strong>Analytics Engineer chuyên nghiệp</strong> làm việc trong các dự án dữ liệu lớn (như dbt, Snowflake, BigQuery), thì đó chính là: <strong>Tư duy module hóa truy vấn với Common Table Expressions (CTE)</strong>.
+      </p>
+      <p>
+        Trong quá khứ, khi đối mặt với các yêu cầu phân tích kinh doanh phức tạp, các lập trình viên thường sử dụng các truy vấn con lồng nhau (Nested Subqueries). Hậu quả là những tệp script dài hàng trăm dòng trở thành một mê cung "Spaghetti SQL" vô cùng kinh hãi, không ai dám sửa đổi vì sợ làm hỏng toàn bộ logic ngầm bên trong.
+      </p>
+
+      <h2>1. Vấn Đề Của Mê Cung "Spaghetti Subqueries"</h2>
+      <p>
+        Hãy cùng nhìn lại cách viết truy vấn con lồng nhau truyền thống:
+      </p>
+
+      <pre><code><span class="token-comment">-- 🍝 Mê cung Spaghetti: Phải đọc từ TRONG RA NGOÀI, rất khó debug!</span>
+<span class="token-keyword">SELECT</span> 
+    tier,
+    <span class="token-func">COUNT</span>(customer_id) <span class="token-keyword">AS</span> total_users
+<span class="token-keyword">FROM</span> (
+    <span class="token-keyword">SELECT</span> 
+        customer_id,
+        <span class="token-keyword">CASE WHEN</span> total_spent > 1000 <span class="token-keyword">THEN</span> <span class="token-str">'VIP'</span> <span class="token-keyword">ELSE</span> <span class="token-str">'Standard'</span> <span class="token-keyword">END</span> <span class="token-keyword">AS</span> tier
+    <span class="token-keyword">FROM</span> (
+        <span class="token-keyword">SELECT</span> 
+            customer_id,
+            <span class="token-func">SUM</span>(order_amount) <span class="token-keyword">AS</span> total_spent
+        <span class="token-keyword">FROM</span> orders
+        <span class="token-keyword">WHERE</span> status = <span class="token-str">'COMPLETED'</span>
+        <span class="token-keyword">GROUP BY</span> customer_id
+    ) <span class="token-keyword">AS</span> customer_spend
+) <span class="token-keyword">AS</span> customer_tiers
+<span class="token-keyword">GROUP BY</span> tier;</code></pre>
+
+      <p>
+        Điểm yếu chí mạng của cách viết này:
+      </p>
+      <ul>
+        <li><strong>Ngược dòng tư duy tự nhiên:</strong> Bạn phải cuộn xuống tận tầng sâu nhất ở giữa tệp để đọc logic bảng con, sau đó mới lần mò ngược ra các lớp bọc ngoài cùng.</li>
+        <li><strong>Khó khăn khi gỡ lỗi (Debugging):</strong> Bạn không thể dễ dàng chạy thử kết quả của một bước ở giữa mà phải mất công cắt tỉa câu lệnh ra một cửa sổ mới.</li>
+        <li><strong>Không thể tái sử dụng (Reusability):</strong> Nếu hai bước phân tích khác nhau cùng cần dùng chung một tập dữ liệu trung gian, bạn buộc phải sao chép lại toàn bộ cụm subquery đó.</li>
+      </ul>
+
+      <h2>2. Cú Pháp WITH &amp; Tư Duy Đường Ống Modular Pipeline</h2>
+      <p>
+        <strong>CTE (Common Table Expression)</strong>, khởi đầu bằng từ khóa <code>WITH</code>, cho phép bạn định nghĩa các bảng tạm thời (Temporary Result Sets) tồn tại duy nhất trong phạm vi thực thi của câu lệnh.
+      </p>
+      <p>
+        Thay vì lồng nhau như búp bê Nga, CTE cho phép bạn viết câu lệnh theo thứ tự từ trên xuống dưới (Top-Down Execution Flow), như một <strong>dây chuyền sản xuất lắp ráp</strong>:
+      </p>
+
+      <div style="text-align: center; margin: 24px 0; font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; line-height: 2;">
+        <span style="color: var(--text-muted);">[Raw Sources]</span> ➔ 
+        <span style="color: var(--secondary);">[Staging / Clean]</span> ➔ 
+        <span style="color: var(--primary);">[Intermediate Agg]</span> ➔ 
+        <span style="color: #00E699; font-weight:700;">[Final Output]</span>
+      </div>
+
+      <p>Viết lại bài toán phân tầng khách hàng ở trên bằng CTE:</p>
+
+      <pre><code><span class="token-keyword">WITH</span> 
+<span class="token-comment">-- Bước 1: Tính tổng chi tiêu của mỗi khách hàng</span>
+customer_spend <span class="token-keyword">AS</span> (
+    <span class="token-keyword">SELECT</span> 
+        customer_id,
+        <span class="token-func">SUM</span>(order_amount) <span class="token-keyword">AS</span> total_spent
+    <span class="token-keyword">FROM</span> orders
+    <span class="token-keyword">WHERE</span> status = <span class="token-str">'COMPLETED'</span>
+    <span class="token-keyword">GROUP BY</span> customer_id
+),
+
+<span class="token-comment">-- Bước 2: Phân loại phân khúc dựa trên số tiền</span>
+customer_tiers <span class="token-keyword">AS</span> (
+    <span class="token-keyword">SELECT</span> 
+        customer_id,
+        <span class="token-keyword">CASE </span>
+            <span class="token-keyword">WHEN</span> total_spent > 1000 <span class="token-keyword">THEN</span> <span class="token-str">'VIP'</span> 
+            <span class="token-keyword">ELSE</span> <span class="token-str">'Standard'</span> 
+        <span class="token-keyword">END</span> <span class="token-keyword">AS</span> tier
+    <span class="token-keyword">FROM</span> customer_spend
+)
+
+<span class="token-comment">-- Bước 3: Tổng hợp báo cáo cuối cùng</span>
+<span class="token-keyword">SELECT</span> 
+    tier,
+    <span class="token-func">COUNT</span>(customer_id) <span class="token-keyword">AS</span> total_users
+<span class="token-keyword">FROM</span> customer_tiers
+<span class="token-keyword">GROUP BY</span> tier;</code></pre>
+
+      <div class="callout-box tip">
+        <div class="callout-title">💡 Lợi thế vượt trội khi Debug</div>
+        <p>
+          Nếu bạn muốn kiểm tra xem <code>Bước 1</code> đã tính đúng hay chưa, bạn chỉ cần tạm thời thay dòng cuối cùng thành <code>SELECT * FROM customer_spend LIMIT 10;</code>. Nhanh chóng, trực quan và không hề phá vỡ cấu trúc code!
+        </p>
+      </div>
+
+      <h2>3. Case Study Thực Chiến: Phân Khúc Khách Hàng Bằng Mô Hình RFM</h2>
+      <p>
+        <strong>Mô hình RFM</strong> (Recency, Frequency, Monetary) là bài toán kinh điển mà bất kỳ Data Analyst / Analytics Engineer nào cũng phải thực hiện:
+      </p>
+
+      <pre><code><span class="token-keyword">WITH</span> 
+<span class="token-comment">-- 1. Import và làm sạch dữ liệu đơn hàng</span>
+valid_orders <span class="token-keyword">AS</span> (
+    <span class="token-keyword">SELECT</span> 
+        customer_id,
+        order_date,
+        total_price
+    <span class="token-keyword">FROM</span> raw_sales.orders
+    <span class="token-keyword">WHERE</span> order_status = <span class="token-str">'DELIVERED'</span>
+      <span class="token-keyword">AND</span> order_date >= <span class="token-str">'2025-01-01'</span>
+),
+
+<span class="token-comment">-- 2. Tính toán 3 chỉ số R, F, M cho từng khách hàng</span>
+rfm_metrics <span class="token-keyword">AS</span> (
+    <span class="token-keyword">SELECT</span> 
+        customer_id,
+        <span class="token-func">CURRENT_DATE</span> - <span class="token-func">MAX</span>(order_date) <span class="token-keyword">AS</span> recency_days,
+        <span class="token-func">COUNT</span>(*) <span class="token-keyword">AS</span> frequency_orders,
+        <span class="token-func">SUM</span>(total_price) <span class="token-keyword">AS</span> monetary_value
+    <span class="token-keyword">FROM</span> valid_orders
+    <span class="token-keyword">GROUP BY</span> customer_id
+),
+
+<span class="token-comment">-- 3. Phân nhóm hành vi kinh doanh</span>
+customer_segments <span class="token-keyword">AS</span> (
+    <span class="token-keyword">SELECT</span> 
+        customer_id,
+        recency_days,
+        frequency_orders,
+        monetary_value,
+        <span class="token-keyword">CASE </span>
+            <span class="token-keyword">WHEN</span> recency_days <= 30 <span class="token-keyword">AND</span> frequency_orders >= 5 <span class="token-keyword">THEN</span> <span class="token-str">'Champions'</span>
+            <span class="token-keyword">WHEN</span> recency_days <= 60 <span class="token-keyword">AND</span> frequency_orders >= 2 <span class="token-keyword">THEN</span> <span class="token-str">'Loyal Customers'</span>
+            <span class="token-keyword">WHEN</span> recency_days > 90 <span class="token-keyword">AND</span> monetary_value > 2000 <span class="token-keyword">THEN</span> <span class="token-str">'At Risk VIPs'</span>
+            <span class="token-keyword">ELSE</span> <span class="token-str">'Occasional Buyers'</span>
+        <span class="token-keyword">END</span> <span class="token-keyword">AS</span> segment_name
+    <span class="token-keyword">FROM</span> rfm_metrics
+)
+
+<span class="token-comment">-- 4. Báo cáo phân bổ phân khúc cho Giám đốc Marketing</span>
+<span class="token-keyword">SELECT</span> 
+    segment_name,
+    <span class="token-func">COUNT</span>(*) <span class="token-keyword">AS</span> total_customers,
+    <span class="token-func">ROUND</span>(<span class="token-func">AVG</span>(monetary_value), 2) <span class="token-keyword">AS</span> avg_spend,
+    <span class="token-func">ROUND</span>(<span class="token-func">AVG</span>(recency_days), 1) <span class="token-keyword">AS</span> avg_days_since_last_order
+<span class="token-keyword">FROM</span> customer_segments
+<span class="token-keyword">GROUP BY</span> segment_name
+<span class="token-keyword">ORDER BY</span> total_customers <span class="token-keyword">DESC</span>;</code></pre>
+
+      <h2>4. Đệ Quy Với Recursive CTE: Xử Lý Cây Phân Cấp (Hierarchical Trees)</h2>
+      <p>
+        Một sức mạnh đặc biệt mà Subquery thông thường không thể làm được là <strong>Recursive CTE (CTE Đệ Quy)</strong>. Nó được sinh ra để xử lý các cấu trúc dữ liệu hình cây vô hạn cấp, tiêu biểu như:
+      </p>
+      <ul>
+        <li>Sơ đồ tổ chức nhân viên và cấp quản lý (Org Chart).</li>
+        <li>Cây danh mục hàng hóa đa tầng (Điện thoại ➔ Smartphone ➔ Phụ kiện ➔ Cáp sạc).</li>
+      </ul>
+
+      <h3>Cấu trúc gồm 2 phần được nối bằng UNION ALL:</h3>
+      <ol>
+        <li><strong>Anchor Member (Phần neo khởi tạo):</strong> Tìm phần tử gốc của cây (ví dụ: Tổng Giám đốc có <code>manager_id IS NULL</code>).</li>
+        <li><strong>Recursive Member (Phần đệ quy):</strong> JOIN ngược lại chính tên của CTE đó để duyệt xuống các nhánh con cho đến khi hết dữ liệu.</li>
+      </ol>
+
+      <pre><code><span class="token-keyword">WITH RECURSIVE</span> org_tree <span class="token-keyword">AS</span> (
+    <span class="token-comment">-- 1. Anchor: Tìm lãnh đạo cao nhất (Level 1)</span>
+    <span class="token-keyword">SELECT</span> 
+        employee_id, 
+        name, 
+        manager_id, 
+        1 <span class="token-keyword">AS</span> hierarchy_level
+    <span class="token-keyword">FROM</span> employees
+    <span class="token-keyword">WHERE</span> manager_id <span class="token-keyword">IS NULL</span>
+
+    <span class="token-keyword">UNION ALL</span>
+
+    <span class="token-comment">-- 2. Recursive: Ghép cấp dưới trực tiếp vào từng quản lý</span>
+    <span class="token-keyword">SELECT</span> 
+        e.employee_id, 
+        e.name, 
+        e.manager_id, 
+        ot.hierarchy_level + 1
+    <span class="token-keyword">FROM</span> employees e
+    <span class="token-keyword">INNER JOIN</span> org_tree ot <span class="token-keyword">ON</span> e.manager_id = ot.employee_id
+)
+<span class="token-keyword">SELECT</span> * <span class="token-keyword">FROM</span> org_tree <span class="token-keyword">ORDER BY</span> hierarchy_level;</code></pre>
+
+      <h2>5. Bàn Về Hiệu Năng: CTE vs Bảng Tạm (#Temp) vs Subquery</h2>
+      <p>
+        Liệu viết CTE có làm câu truy vấn chạy chậm hơn không? Hãy xem sự khác biệt giữa các hệ quản trị:
+      </p>
+
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Môi trường</th>
+              <th>Cơ chế tối ưu hóa CTE</th>
+              <th>Đánh giá hiệu năng</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>PostgreSQL (>= v12)</strong></td>
+              <td>Tự động Inlining (gộp thẳng vào execution plan chính) nếu CTE chỉ được gọi 1 lần.</td>
+              <td>Ngang bằng hoàn toàn với Subquery thông thường.</td>
+            </tr>
+            <tr>
+              <td><strong>Cloud DWH (Snowflake, BigQuery)</strong></td>
+              <td>Query Compiler tối ưu hóa biểu thức DAG, loại bỏ tính toán thừa.</td>
+              <td>Cực kỳ mạnh mẽ. Chuẩn mực thiết kế bắt buộc khi dựng model dbt.</td>
+            </tr>
+            <tr>
+              <td><strong>SQL Server / MySQL</strong></td>
+              <td>Được xem như Non-materialized View nội bộ.</td>
+              <td>Nếu CTE phức tạp được gọi lặp lại 3-4 lần, bảng tạm (<code>#temp</code>) có thể nhanh hơn.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout-box">
+        <div class="callout-title">📌 Khi nào NÊN cân nhắc dùng Temporary Table (#temp)?</div>
+        <p>
+          Nếu bạn có một tập dữ liệu hàng chục triệu dòng cần xử lý tính toán cực nặng, và tập dữ liệu đó phải được tái sử dụng để JOIN ở 4 đến 5 bước hoàn toàn độc lập phía sau trong một Stored Procedure dài, việc lưu tạm vào <code>#temp</code> có đánh Index sẽ mang lại hiệu năng cao hơn. Nhưng đối với 90% các tác vụ phân tích và chuyển đổi dữ liệu hằng ngày, <strong>CTE là lựa chọn số 1 về tính sạch sẽ và thanh lịch</strong>.
+        </p>
+      </div>
+
+      <h2>6. Triết Lý Thiết Kế Clean SQL Trong Các Dự Án dbt</h2>
+      <p>
+        Trong quy chuẩn của các kỹ sư dữ liệu làm việc với framework <strong>dbt (data build tool)</strong>, mỗi model SQL luôn tuân thủ nguyên tắc <em>"Single Responsibility Principle"</em>:
+      </p>
+      <ul>
+        <li><strong>Không bao giờ</strong> lồng subqueries lộn xộn.</li>
+        <li>Mỗi CTE chỉ làm đúng <strong>một nhiệm vụ</strong> (như đổi tên cột, hoặc gom nhóm, hoặc tính toán logic nghiệp vụ).</li>
+        <li>Tầng cuối cùng luôn là một câu lệnh <code>final AS (SELECT ... FROM ...)</code> để người duyệt code (Pull Request Reviewer) có thể hiểu toàn bộ bức tranh chỉ trong 30 giây!</li>
+      </ul>
+    </article>
+
+    <!-- Post Navigation Cards -->
+    <nav class="post-navigation">
+      <a href="02-sql-joins-fanout-trap.html" class="post-nav-card">
+        <div class="post-nav-label">← Bài trước (Trung Cấp)</div>
+        <div class="post-nav-title">Chinh Phục SQL JOINs & Hóa Giải Bẫy Fan-Out</div>
+      </a>
+      <a href="04-sql-advanced-window-functions.html" class="post-nav-card" style="text-align: right;">
+        <div class="post-nav-label">Bài tiếp theo (Nâng Cao) →</div>
+        <div class="post-nav-title">Bậc Thầy SQL Window Functions</div>
+      </a>
+    </nav>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2026 Trần Đức (Dustin). Built with 💜 on the road to Analytics Engineer.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/main.js?v=8"></script>
+</body>
+</html>

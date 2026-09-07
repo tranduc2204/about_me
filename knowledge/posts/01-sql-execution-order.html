@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tư Duy SQL Từ Gốc: Thứ Tự Thực Thi Truy Vấn & Các Bẫy Lọc Dữ Liệu — Dustin học data</title>
+  <meta name="description" content="Khám phá cách Database Engine thực sự xử lý câu lệnh SQL từ FROM tới LIMIT. Hiểu rõ nguyên nhân không dùng được alias ở WHERE, bẫy logic NULL và khác biệt sống còn giữa WHERE vs HAVING.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="../../images/favicon.ico">
+  <link rel="stylesheet" href="../../assets/css/main.css?v=8">
+  <script>
+    (function() {
+      try { localStorage.removeItem('dustin_theme'); } catch(e) {}
+      const savedTheme = localStorage.getItem('dustin_theme_mode') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="../../index.html" class="nav-logo"><span class="gradient-text">Dustin</span> học data</a>
+      <div class="nav-right-group">
+        <div class="nav-links" id="navLinks">
+          <a href="../../index.html">Home</a>
+          <a href="../../about.html">About</a>
+          <a href="../../journey.html">Journey</a>
+          <a href="../index.html" class="active">Knowledge</a>
+          <a href="../../blog/index.html">Blog</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Chuyển sang chế độ sáng" title="Chuyển sang chế độ sáng">☀️</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Container -->
+  <main class="post-article-wrapper">
+    <!-- Breadcrumb -->
+    <nav class="post-breadcrumb" aria-label="Breadcrumb">
+      <a href="../../index.html">Home</a>
+      <span>/</span>
+      <a href="../index.html">Knowledge Hub</a>
+      <span>/</span>
+      <span>SQL Fundamentals</span>
+    </nav>
+
+    <!-- Header -->
+    <header class="post-hero-header">
+      <span class="badge-basic" style="display:inline-block; margin-bottom:12px; font-weight:700; padding:4px 12px; border-radius:50px; font-size:0.8rem;">🟢 SQL Nền Tảng</span>
+      <h1 class="post-hero-title">Tư Duy SQL Từ Gốc: Thứ Tự Thực Thi Truy Vấn & Các Bẫy Lọc Dữ Liệu</h1>
+      <div class="post-author-bar">
+        <img src="../../images/avatar.png" alt="Trần Đức (Dustin)" class="post-author-avatar">
+        <div>
+          <div class="post-author-name">Trần Đức (Dustin)</div>
+          <div class="post-meta-details">
+            <span>📅 Tháng 9, 2026</span>
+            <span>•</span>
+            <span>⏱️ 8 phút đọc</span>
+            <span>•</span>
+            <span>Chủ đề: SQL Execution Order</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Notebook Sketch Illustration -->
+    <figure class="notebook-figure">
+      <img src="../../images/knowledge/sql-execution-order.jpg" alt="Sơ đồ thứ tự thực thi câu truy vấn SQL vẽ tay trên giấy kẻ ô">
+      <figcaption class="notebook-caption">
+        📒 Phác thảo sổ tay: So sánh thứ tự viết (Lexical Syntax) vs Thứ tự thực thi logic (Logical Execution) trong SQL Engine
+      </figcaption>
+    </figure>
+
+    <!-- Article Content -->
+    <article class="article-body">
+      <p>
+        Khi mới bắt đầu học SQL, hầu hết chúng ta đều viết câu lệnh theo thói quen: gõ từ <code>SELECT</code> đầu tiên, sau đó đến <code>FROM</code>, <code>WHERE</code>, <code>GROUP BY</code>... Cách viết này vô cùng tự nhiên vì nó tương tự như ngữ pháp tiếng Anh: <em>"Lấy ra cái gì (SELECT) từ bảng nào (FROM) thỏa mãn điều kiện gì (WHERE)..."</em>.
+      </p>
+      <p>
+        Thế nhưng, <strong>Database Query Engine không đọc và xử lý câu lệnh theo thứ tự bạn viết</strong>. Đó là lý do tại sao người mới học thường xuyên gặp những lỗi ngớ ngẩn như: <em>"Tại sao đặt tên alias ở SELECT rồi mà đem xuống WHERE lọc lại bị báo Column does not exist?"</em> hay <em>"Tại sao lọc điều kiện không bằng (!=) mà dữ liệu bỗng dưng biến mất cả những dòng NULL?"</em>.
+      </p>
+      <p>
+        Nắm vững <strong>Logical Query Processing Order</strong> (Thứ tự xử lý truy vấn logic) chính là bước ngoặt chuyển đổi tư duy từ người "học vẹt câu lệnh" sang một <strong>Analytics Engineer</strong> hiểu sâu về cách máy tính vận hành dữ liệu.
+      </p>
+
+      <h2>1. Ngữ Pháp Viết (Lexical) vs Thứ Tự Thực Thi (Logical Order)</h2>
+      <p>
+        Hãy cùng quan sát sự đối lập rõ nét giữa cách bạn gõ code và cách trình tối ưu hóa (Query Optimizer) thực sự tiến hành bóc tách:
+      </p>
+
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Thứ tự gõ code (Lexical Order)</th>
+              <th>Thứ tự thực thi thực tế (Logical Execution Order)</th>
+              <th>Nhiệm vụ của RDBMS Engine</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. SELECT</strong></td>
+              <td><strong>1. FROM &amp; JOIN</strong></td>
+              <td>Xác định nguồn dữ liệu, kết hợp các bảng và tạo quan hệ ban đầu.</td>
+            </tr>
+            <tr>
+              <td><strong>2. FROM</strong></td>
+              <td><strong>2. WHERE</strong></td>
+              <td>Lọc bỏ các dòng không thỏa mãn điều kiện cấp dòng (Row-level filter).</td>
+            </tr>
+            <tr>
+              <td><strong>3. WHERE</strong></td>
+              <td><strong>3. GROUP BY</strong></td>
+              <td>Gom các dòng có chung giá trị khóa thành từng nhóm duy nhất.</td>
+            </tr>
+            <tr>
+              <td><strong>4. GROUP BY</strong></td>
+              <td><strong>4. HAVING</strong></td>
+              <td>Lọc trên các nhóm dựa vào kết quả hàm tổng hợp (Aggregate filter).</td>
+            </tr>
+            <tr>
+              <td><strong>5. HAVING</strong></td>
+              <td><strong>5. SELECT</strong></td>
+              <td>Tính toán biểu thức, áp dụng Window Functions và gán bí danh (Aliases).</td>
+            </tr>
+            <tr>
+              <td><strong>6. ORDER BY</strong></td>
+              <td><strong>6. DISTINCT</strong></td>
+              <td>Loại bỏ các dòng trùng lặp hoàn toàn khỏi tập kết quả.</td>
+            </tr>
+            <tr>
+              <td><strong>7. LIMIT / OFFSET</strong></td>
+              <td><strong>7. ORDER BY</strong></td>
+              <td>Sắp xếp thứ tự hiển thị của tập dữ liệu cuối cùng (Tốn tài nguyên RAM).</td>
+            </tr>
+            <tr>
+              <td><em>(N/A)</em></td>
+              <td><strong>8. LIMIT / OFFSET</strong></td>
+              <td>Cắt lấy số lượng dòng theo yêu cầu hiển thị cuối cùng.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout-box tip">
+        <div class="callout-title">💡 Mẹo ghi nhớ thần chú SQL</div>
+        <p>
+          Hãy nhớ khẩu quyết: <strong>F - W - G - H - S - D - O - L</strong><br>
+          <em>(From → Where → Group By → Having → Select → Distinct → Order By → Limit)</em>.
+        </p>
+      </div>
+
+      <h2>2. Bẫy #1: Dùng Alias Của SELECT Trong Mệnh Đề WHERE</h2>
+      <p>
+        Đây là lỗi phổ biến số 1 ở các buổi phỏng vấn kỹ thuật hoặc khi mới bắt đầu làm việc với dữ liệu kinh doanh.
+      </p>
+      <p>
+        Giả sử bạn cần tính tổng tiền đơn hàng và muốn lọc ra các đơn hàng có giá trị trên 1,000 USD:
+      </p>
+
+      <pre><code><span class="token-comment">-- ❌ SAI: Database sẽ văng lỗi ngay lập tức!</span>
+<span class="token-keyword">SELECT</span> 
+    order_id,
+    quantity * unit_price <span class="token-keyword">AS</span> total_amount
+<span class="token-keyword">FROM</span> orders
+<span class="token-keyword">WHERE</span> total_amount > 1000;
+<span class="token-comment">-- ERROR: column "total_amount" does not exist</span></code></pre>
+
+      <p><strong>Tại sao câu lệnh này bị lỗi?</strong></p>
+      <p>
+        Nhìn lại sơ đồ thứ tự: Mệnh đề <code>WHERE</code> được thực thi ở <strong>Bước 2</strong>. Trong khi đó, biểu thức <code>quantity * unit_price AS total_amount</code> nằm ở <code>SELECT</code>, chỉ được máy tính ghé thăm ở <strong>Bước 5</strong>! Tại thời điểm kiểm tra điều kiện lọc ở bước 2, cái tên <code>total_amount</code> hoàn toàn chưa từng được sinh ra trong bộ nhớ.
+      </p>
+
+      <h3>Cách xử lý chuẩn xác:</h3>
+      <p><strong>Cách 1: Lặp lại biểu thức tính toán trong WHERE</strong></p>
+      <pre><code><span class="token-keyword">SELECT</span> 
+    order_id,
+    quantity * unit_price <span class="token-keyword">AS</span> total_amount
+<span class="token-keyword">FROM</span> orders
+<span class="token-keyword">WHERE</span> quantity * unit_price > 1000;</code></pre>
+
+      <p><strong>Cách 2: Sử dụng Common Table Expression (CTE) hoặc Subquery (Khuyên dùng khi công thức phức tạp)</strong></p>
+      <pre><code><span class="token-keyword">WITH</span> calculated_orders <span class="token-keyword">AS</span> (
+    <span class="token-keyword">SELECT</span> 
+        order_id,
+        quantity * unit_price <span class="token-keyword">AS</span> total_amount
+    <span class="token-keyword">FROM</span> orders
+)
+<span class="token-keyword">SELECT</span> *
+<span class="token-keyword">FROM</span> calculated_orders
+<span class="token-keyword">WHERE</span> total_amount > 1000;</code></pre>
+
+      <div class="callout-box">
+        <div class="callout-title">📌 Ngoại lệ thú vị</div>
+        <p>
+          Trong <code>ORDER BY</code> (Bước 7), bạn <strong>HOÀN TOÀN CÓ THỂ</strong> sử dụng alias được đặt từ <code>SELECT</code> (Bước 5), ví dụ: <code>ORDER BY total_amount DESC</code>. Lý do rất đơn giản: khi đến bước sắp xếp, <code>SELECT</code> đã chạy xong rồi!
+        </p>
+      </div>
+
+      <h2>3. Bẫy #2: Sự Khác Nhau Sống Còn Giữa WHERE và HAVING</h2>
+      <p>
+        Cả hai từ khóa đều mang ý nghĩa là "lọc dữ liệu", nhưng vị trí đứng và mục đích của chúng hoàn toàn khác nhau:
+      </p>
+      <ul>
+        <li><code>WHERE</code>: Lọc từng dòng bản ghi đơn lẻ <strong>trước khi</strong> gom nhóm (Row-level filter). Không được dùng các hàm tổng hợp như <code>SUM()</code>, <code>COUNT()</code>, <code>AVG()</code> trong <code>WHERE</code>.</li>
+        <li><code>HAVING</code>: Lọc trên các nhóm <strong>sau khi</strong> dữ liệu đã được gom bởi <code>GROUP BY</code> (Group-level filter). Chuyên dùng để lọc trên giá trị tổng hợp.</li>
+      </ul>
+
+      <pre><code><span class="token-comment">-- Ví dụ: Lấy các phòng ban có tổng lương trên 50,000 USD, </span>
+<span class="token-comment">-- nhưng CHỈ xét những nhân viên làm việc toàn thời gian (Full-time).</span>
+<span class="token-keyword">SELECT</span> 
+    department_id,
+    <span class="token-func">SUM</span>(salary) <span class="token-keyword">AS</span> total_dept_salary
+<span class="token-keyword">FROM</span> employees
+<span class="token-keyword">WHERE</span> employment_type = <span class="token-str">'Full-time'</span>   <span class="token-comment">-- Lọc dòng trước khi tính tổng</span>
+<span class="token-keyword">GROUP BY</span> department_id
+<span class="token-keyword">HAVING</span> <span class="token-func">SUM</span>(salary) > 50000;           <span class="token-comment">-- Lọc kết quả sau khi đã tổng hợp</span></code></pre>
+
+      <div class="callout-box warning">
+        <div class="callout-title">⚠️ Sai lầm tối kỵ làm sụp đổ hiệu năng (Performance Pitfall)</div>
+        <p>
+          Nhiều bạn có thói quen đưa cả điều kiện không chứa hàm tổng hợp vào <code>HAVING</code>:
+          <br>
+          <code>... GROUP BY department_id, employment_type HAVING employment_type = 'Full-time'</code>.
+          <br>
+          Điều này khiến Database phải gom nhóm toàn bộ dữ liệu khổng lồ trước, rồi mới tốn công lọc bỏ. Hãy luôn dùng <code>WHERE</code> để cắt giảm khối lượng dữ liệu sớm nhất có thể!
+        </p>
+      </div>
+
+      <h2>4. Bẫy #3: Logic 3 Trạng Thái (Three-Valued Logic) và Giá Trị NULL</h2>
+      <p>
+        Trong toán học đại số thông thường, một mệnh đề chỉ có thể là <strong>TRUE</strong> hoặc <strong>FALSE</strong> (Nhị phân). Tuy nhiên trong cơ sở dữ liệu SQL, chuẩn ANSI định nghĩa <strong>Three-Valued Logic (3VL)</strong>:
+      </p>
+      <div style="text-align: center; margin: 16px 0; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; color: var(--primary);">
+        TRUE &nbsp;|&nbsp; FALSE &nbsp;|&nbsp; UNKNOWN
+      </div>
+      <p>
+        <code>NULL</code> trong SQL không phải là số 0, cũng không phải là chuỗi rỗng <code>""</code>. <code>NULL</code> biểu thị cho <strong>"Sự vắng mặt của thông tin" (Missing / Unknown data)</strong>. Bất kỳ phép so sánh nào với NULL (kể cả <code>NULL = NULL</code> hay <code>NULL != 5</code>) đều trả về <code>UNKNOWN</code>.
+      </p>
+
+      <h3>Màn biến mất dữ liệu bí ẩn:</h3>
+      <p>
+        Xét bảng <code>users</code> có cột <code>status</code> nhận các giá trị: <code>'ACTIVE'</code>, <code>'INACTIVE'</code>, hoặc <code>NULL</code> (chưa kích hoạt email).
+      </p>
+      <pre><code><span class="token-comment">-- Bạn muốn tìm tất cả những người dùng KHÔNG PHẢI là 'INACTIVE'</span>
+<span class="token-keyword">SELECT</span> * 
+<span class="token-keyword">FROM</span> users 
+<span class="token-keyword">WHERE</span> status != <span class="token-str">'INACTIVE'</span>;</code></pre>
+
+      <p>
+        <strong>Hậu quả:</strong> Câu lệnh trên sẽ <em>loại bỏ sạch sẽ</em> tất cả các dòng có <code>status IS NULL</code>! Bởi vì đối với các dòng NULL: <code>NULL != 'INACTIVE'</code> cho kết quả là <code>UNKNOWN</code>. Mà mệnh đề <code>WHERE</code> chỉ giữ lại những dòng có điều kiện đánh giá là <code>TRUE</code>.
+      </p>
+
+      <h3>Giải pháp an toàn cho Analytics Engineer:</h3>
+      <pre><code><span class="token-comment">-- Cách 1: Bổ sung điều kiện OR IS NULL rõ ràng</span>
+<span class="token-keyword">SELECT</span> * 
+<span class="token-keyword">FROM</span> users 
+<span class="token-keyword">WHERE</span> status != <span class="token-str">'INACTIVE'</span> <span class="token-keyword">OR</span> status <span class="token-keyword">IS NULL</span>;
+
+<span class="token-comment">-- Cách 2: Dùng hàm COALESCE để gán giá trị mặc định khi gặp NULL</span>
+<span class="token-keyword">SELECT</span> * 
+<span class="token-keyword">FROM</span> users 
+<span class="token-keyword">WHERE</span> <span class="token-func">COALESCE</span>(status, <span class="token-str">'UNKNOWN'</span>) != <span class="token-str">'INACTIVE'</span>;</code></pre>
+
+      <h2>5. COUNT(*) vs COUNT(cột) vs COUNT(1): Cuộc Chiến Đếm Dòng</h2>
+      <p>
+        Khi cần đếm số lượng, đâu là sự khác biệt giữa ba cú pháp này?
+      </p>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Cú pháp</th>
+              <th>Cơ chế đếm</th>
+              <th>Xử lý giá trị NULL</th>
+              <th>Hiệu năng</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>COUNT(*)</code></td>
+              <td>Đếm tổng số dòng vật lý trong bảng thỏa mãn điều kiện.</td>
+              <td><strong>Bao gồm</strong> cả các dòng chứa toàn giá trị NULL.</td>
+              <td>Rất nhanh (Engine tối ưu hóa siêu dữ liệu).</td>
+            </tr>
+            <tr>
+              <td><code>COUNT(1)</code></td>
+              <td>Đếm số hằng số 1 sinh ra cho mỗi dòng.</td>
+              <td><strong>Bao gồm</strong> tất cả các dòng (Hằng số 1 không bao giờ NULL).</td>
+              <td>Tương đương 100% với <code>COUNT(*)</code> trong modern SQL.</td>
+            </tr>
+            <tr>
+              <td><code>COUNT(column_name)</code></td>
+              <td>Đếm số lượng giá trị hiện hữu tại cột chỉ định.</td>
+              <td><strong>Bỏ qua hoàn toàn</strong> những dòng có giá trị NULL tại cột đó.</td>
+              <td>Chậm hơn một chút vì phải kiểm tra NULL từng dòng.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout-box tip">
+        <div class="callout-title">🎯 Đúc kết kinh nghiệm</div>
+        <p>
+          Khi bạn muốn đếm <em>tổng số dòng</em>: hãy luôn luôn sử dụng <code>COUNT(*)</code> theo đúng tiêu chuẩn ANSI SQL. Chỉ dùng <code>COUNT(column_name)</code> khi bạn thực sự có chủ đích muốn biết số lượng khách hàng đã nhập số điện thoại hoặc đã điền địa chỉ email (tức là không NULL).
+        </p>
+      </div>
+
+      <h2>6. Tổng Kết: Checklist Khi Viết Mọi Câu Truy Vấn SQL</h2>
+      <ol>
+        <li><strong>Luôn tự hỏi:</strong> Engine sẽ tìm nguồn dữ liệu ở đâu đầu tiên? (<code>FROM</code> và <code>JOIN</code>).</li>
+        <li><strong>Lọc sớm nhất có thể:</strong> Đưa mọi điều kiện lọc mức độ bản ghi vào <code>WHERE</code>, không để trôi xuống <code>HAVING</code>.</li>
+        <li><strong>Cẩn trọng với NULL:</strong> Khi viết các phép so sánh <code>!=</code>, <code>NOT IN</code>, luôn tự vấn: <em>"Cột này có chứa NULL không? Nếu có, kết quả có bị mất dòng không?"</em>.</li>
+        <li><strong>Alias chỉ dùng an toàn ở:</strong> <code>ORDER BY</code>. Đừng bao giờ gọi alias của <code>SELECT</code> trong <code>WHERE</code> hoặc <code>GROUP BY</code> (trừ một số dialect đặc thù cho phép, nhưng không chuẩn hóa).</li>
+      </ol>
+    </article>
+
+    <!-- Post Navigation Cards -->
+    <nav class="post-navigation">
+      <a href="../index.html" class="post-nav-card">
+        <div class="post-nav-label">← Danh mục</div>
+        <div class="post-nav-title">Quay lại Knowledge Hub</div>
+      </a>
+      <a href="02-sql-joins-fanout-trap.html" class="post-nav-card" style="text-align: right;">
+        <div class="post-nav-label">Bài tiếp theo (Trung Cấp) →</div>
+        <div class="post-nav-title">Chinh Phục SQL JOINs & Hóa Giải Bẫy Fan-Out</div>
+      </a>
+    </nav>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2026 Trần Đức (Dustin). Built with 💜 on the road to Analytics Engineer.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/main.js?v=8"></script>
+</body>
+</html>

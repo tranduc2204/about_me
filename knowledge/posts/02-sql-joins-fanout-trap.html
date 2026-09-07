@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chinh Phục SQL JOINs: Kiểm Soát Quan Hệ & Hóa Giải Bẫy Nhân Đôi (Fan-Out Trap) — Dustin học data</title>
+  <meta name="description" content="Mổ xẻ 4 loại JOIN và nguyên nhân cốt lõi khiến báo cáo doanh thu bị phóng đại gấp nhiều lần do quan hệ 1-Nhiều. Cung cấp 3 kỹ thuật thực chiến dập tắt Fan-out triệt để.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="../../images/favicon.ico">
+  <link rel="stylesheet" href="../../assets/css/main.css?v=8">
+  <script>
+    (function() {
+      try { localStorage.removeItem('dustin_theme'); } catch(e) {}
+      const savedTheme = localStorage.getItem('dustin_theme_mode') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="../../index.html" class="nav-logo"><span class="gradient-text">Dustin</span> học data</a>
+      <div class="nav-right-group">
+        <div class="nav-links" id="navLinks">
+          <a href="../../index.html">Home</a>
+          <a href="../../about.html">About</a>
+          <a href="../../journey.html">Journey</a>
+          <a href="../index.html" class="active">Knowledge</a>
+          <a href="../../blog/index.html">Blog</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Chuyển sang chế độ sáng" title="Chuyển sang chế độ sáng">☀️</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Article Container -->
+  <main class="post-article-wrapper">
+    <!-- Breadcrumb -->
+    <nav class="post-breadcrumb" aria-label="Breadcrumb">
+      <a href="../../index.html">Home</a>
+      <span>/</span>
+      <a href="../index.html">Knowledge Hub</a>
+      <span>/</span>
+      <span>Relational Data</span>
+    </nav>
+
+    <!-- Header -->
+    <header class="post-hero-header">
+      <span class="badge-intermediate" style="display:inline-block; margin-bottom:12px; font-weight:700; padding:4px 12px; border-radius:50px; font-size:0.8rem;">🟡 SQL Trung Cấp</span>
+      <h1 class="post-hero-title">Chinh Phục SQL JOINs: Kiểm Soát Quan Hệ & Hóa Giải Bẫy Nhân Đôi (Fan-Out Trap)</h1>
+      <div class="post-author-bar">
+        <img src="../../images/avatar.png" alt="Trần Đức (Dustin)" class="post-author-avatar">
+        <div>
+          <div class="post-author-name">Trần Đức (Dustin)</div>
+          <div class="post-meta-details">
+            <span>📅 Tháng 9, 2026</span>
+            <span>•</span>
+            <span>⏱️ 12 phút đọc</span>
+            <span>•</span>
+            <span>Chủ đề: JOINs & Data Integrity</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Notebook Sketch Illustration -->
+    <figure class="notebook-figure">
+      <img src="../../images/knowledge/sql-joins-fanout.jpg" alt="Minh họa bản chất 4 loại JOIN và Fan-out trap vẽ tay sổ tay">
+      <figcaption class="notebook-caption">
+        📒 Phác thảo sổ tay: 4 phép JOIN cơ bản và Cơ chế gây bùng nổ dòng dữ liệu Fan-Out Trap trong quan hệ 1-Nhiều
+      </figcaption>
+    </figure>
+
+    <!-- Article Content -->
+    <article class="article-body">
+      <p>
+        Trong thế giới cơ sở dữ liệu quan hệ (RDBMS) và Data Warehouse hiện đại, dữ liệu hiếm khi nằm trọn vẹn trong một bảng duy nhất. Nó được phân tán và chuẩn hóa (Normalized) thành nhiều thực thể liên kết với nhau thông qua các khóa ngoại (Foreign Keys). Do đó, phép toán <strong>JOIN</strong> chính là cây cầu nối quan trọng nhất của mọi Data Practitioner.
+      </p>
+      <p>
+        Thế nhưng, JOIN cũng chính là nơi phát sinh thảm họa ngầm nguy hiểm bậc nhất trong ngành phân tích dữ liệu: <strong>Bẫy nhân đôi dòng dữ liệu (The Fan-Out Trap)</strong>. Đã có vô số báo cáo doanh thu gửi lên ban giám đốc bị đội lên gấp đôi, gấp ba so với thực tế chỉ vì một cú JOIN thiếu kiểm soát quan hệ hạt (Grain).
+      </p>
+
+      <h2>1. Bản Chất Toán Học Của 4 Phép JOIN Kinh Điển</h2>
+      <p>
+        Hãy cùng điểm lại bản chất tập hợp của các phép JOIN thông dụng nhất:
+      </p>
+
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Loại JOIN</th>
+              <th>Ý nghĩa tập hợp</th>
+              <th>Hành vi khi không khớp khóa</th>
+              <th>Ứng dụng thường gặp</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>INNER JOIN</strong></td>
+              <td>Phép giao ($A \cap B$)</td>
+              <td>Loại bỏ các dòng không tìm thấy cặp tương ứng ở cả hai bảng.</td>
+              <td>Lấy dữ liệu khi chắc chắn cả hai phía đều có quan hệ hợp lệ.</td>
+            </tr>
+            <tr>
+              <td><strong>LEFT JOIN</strong></td>
+              <td>Bảo toàn bảng bên Trái ($A$)</td>
+              <td>Giữ lại toàn bộ dòng của bảng A; nếu bảng B không có, điền <code>NULL</code>.</td>
+              <td>Giữ đầy đủ danh sách khách hàng kể cả người chưa phát sinh giao dịch.</td>
+            </tr>
+            <tr>
+              <td><strong>FULL OUTER JOIN</strong></td>
+              <td>Phép hợp ($A \cup B$)</td>
+              <td>Giữ lại tất cả dòng của cả A và B; chỗ nào không khớp thì điền <code>NULL</code>.</td>
+              <td>Đối soát dữ liệu giữa 2 hệ thống độc lập (Reconciliation).</td>
+            </tr>
+            <tr>
+              <td><strong>CROSS JOIN</strong></td>
+              <td>Tích Descartes ($A \times B$)</td>
+              <td>Mỗi dòng của A ghép với TOÀN BỘ dòng của B ($M \times N$ dòng).</td>
+              <td>Tạo bảng lưới tọa độ, ma trận ngày tháng x sản phẩm.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>2. Giải Phẫu Bẫy Nhân Đôi Dữ Liệu (The Fan-Out Trap)</h2>
+      <p>
+        <strong>Fan-Out Trap</strong> xảy ra khi bạn JOIN hai bảng có quan hệ <strong>1 - Nhiều (One-to-Many)</strong>, nhưng sau đó lại thực hiện hàm tổng hợp <code>SUM()</code> trên một cột thuộc về bảng <strong>1</strong>.
+      </p>
+      <p>
+        Hãy xét bài toán kinh điển trong thương mại điện tử:
+      </p>
+      <ul>
+        <li>Bảng <code>orders</code> (Mỗi đơn hàng có <code>order_id</code> và <code>total_amount</code>).</li>
+        <li>Bảng <code>order_items</code> (Mỗi đơn hàng có thể gồm nhiều mặt hàng con).</li>
+      </ul>
+
+      <p>Giả sử đơn hàng <code>#101</code> có tổng tiền là <strong>$1,500</strong>, và bao gồm 3 sản phẩm con:</p>
+
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>order_id</th>
+              <th>total_amount (Bảng orders)</th>
+              <th>item_id</th>
+              <th>product_name (Bảng order_items)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>101</td>
+              <td>$1,500</td>
+              <td>Item A</td>
+              <td>Bàn phím cơ</td>
+            </tr>
+            <tr>
+              <td>101</td>
+              <td>$1,500</td>
+              <td>Item B</td>
+              <td>Chuột không dây</td>
+            </tr>
+            <tr>
+              <td>101</td>
+              <td>$1,500</td>
+              <td>Item C</td>
+              <td>Tai nghe chụp tai</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Khi bạn thực hiện câu truy vấn thống kê doanh thu sau:</p>
+
+      <pre><code><span class="token-comment">-- ❌ SAI LẦM TAI HẠI: Doanh thu bị thổi phồng gấp 3 lần!</span>
+<span class="token-keyword">SELECT</span> 
+    <span class="token-func">SUM</span>(o.total_amount) <span class="token-keyword">AS</span> total_revenue
+<span class="token-keyword">FROM</span> orders o
+<span class="token-keyword">LEFT JOIN</span> order_items oi <span class="token-keyword">ON</span> o.order_id = oi.order_id;</code></pre>
+
+      <div class="callout-box warning">
+        <div class="callout-title">⚠️ Kết quả thảm họa</div>
+        <p>
+          Do đơn hàng #101 có 3 item con, phép JOIN đã nhân bản (fan-out) dòng của bảng <code>orders</code> lên thành 3 dòng. Kết quả: <code>$1,500 + $1,500 + $1,500 = $4,500</code>!<br>
+          Báo cáo doanh thu đã bị <strong>phóng đại 300%</strong> một cách âm thầm mà hệ thống không hề báo lỗi cú pháp.
+        </p>
+      </div>
+
+      <h2>3. Ba Kỹ Thuật Thực Chiến Hóa Giải Fan-Out</h2>
+
+      <h3>Kỹ Thuật 1: Pre-Aggregation Bằng CTE (Chuẩn Mực &amp; Dễ Hiểu Nhất)</h3>
+      <p>
+        <strong>Nguyên tắc vàng:</strong> <em>Hãy tổng hợp bảng con (Many) về đúng mức độ hạt (Grain 1 dòng / 1 order) TRƯỚC KHI thực hiện phép JOIN với bảng cha.</em>
+      </p>
+
+      <pre><code><span class="token-keyword">WITH</span> order_items_aggregated <span class="token-keyword">AS</span> (
+    <span class="token-comment">-- Gom nhóm bảng con trước: 1 dòng duy nhất cho mỗi order_id</span>
+    <span class="token-keyword">SELECT</span> 
+        order_id,
+        <span class="token-func">COUNT</span>(item_id) <span class="token-keyword">AS</span> total_items,
+        <span class="token-func">SUM</span>(item_price * quantity) <span class="token-keyword">AS</span> total_items_cost
+    <span class="token-keyword">FROM</span> order_items
+    <span class="token-keyword">GROUP BY</span> order_id
+)
+<span class="token-keyword">SELECT</span> 
+    <span class="token-func">SUM</span>(o.total_amount) <span class="token-keyword">AS</span> total_order_revenue,
+    <span class="token-func">SUM</span>(agg.total_items) <span class="token-keyword">AS</span> grand_total_items
+<span class="token-keyword">FROM</span> orders o
+<span class="token-keyword">LEFT JOIN</span> order_items_aggregated agg 
+    <span class="token-keyword">ON</span> o.order_id = agg.order_id;</code></pre>
+
+      <p>Vì bảng <code>order_items_aggregated</code> lúc này có <code>order_id</code> là duy nhất (Unique), phép JOIN trở thành quan hệ <strong>1 - 1</strong>, hoàn toàn triệt tiêu nguy cơ bùng nổ dòng.</p>
+
+      <h3>Kỹ Thuật 2: Đánh Dấu Bản Ghi Đầu Tiên Bằng Window Function</h3>
+      <p>
+        Nếu bạn bắt buộc phải giữ lại chi tiết từng item trong cùng một bảng kết quả, bạn có thể dùng <code>ROW_NUMBER()</code> để chỉ cộng tiền trên dòng đầu tiên của mỗi order:
+      </p>
+
+      <pre><code><span class="token-keyword">WITH</span> ranked_rows <span class="token-keyword">AS</span> (
+    <span class="token-keyword">SELECT</span> 
+        o.order_id,
+        o.total_amount,
+        oi.item_id,
+        <span class="token-func">ROW_NUMBER</span>() <span class="token-keyword">OVER</span> (
+            <span class="token-keyword">PARTITION BY</span> o.order_id 
+            <span class="token-keyword">ORDER BY</span> oi.item_id
+        ) <span class="token-keyword">AS</span> item_rank
+    <span class="token-keyword">FROM</span> orders o
+    <span class="token-keyword">LEFT JOIN</span> order_items oi <span class="token-keyword">ON</span> o.order_id = oi.order_id
+)
+<span class="token-keyword">SELECT</span> 
+    <span class="token-comment">-- Chỉ tính total_amount khi item_rank = 1</span>
+    <span class="token-func">SUM</span>(<span class="token-keyword">CASE WHEN</span> item_rank = 1 <span class="token-keyword">THEN</span> total_amount <span class="token-keyword">ELSE</span> 0 <span class="token-keyword">END</span>) <span class="token-keyword">AS</span> accurate_revenue
+<span class="token-keyword">FROM</span> ranked_rows;</code></pre>
+
+      <h3>Kỹ Thuật 3: Tách Biệt Theo Kiến Trúc Data Modeling (Kimball Fact Tables)</h3>
+      <p>
+        Trong kiến trúc Data Warehouse (Snowflake, BigQuery, Databricks), bạn không nên trộn lẫn hai độ đo có tầng hạt khác nhau (Header level vs Line-item level) vào cùng một Fact Table nếu không có nhu cầu phân tích đặc thù. Hãy xây dựng:
+      </p>
+      <ul>
+        <li><code>fct_orders</code>: Chứa các metric cấp đơn hàng (Total Revenue, Shipping Fee, Discount).</li>
+        <li><code>fct_order_items</code>: Chứa các metric chi tiết cấp mặt hàng (Item Quantity, Line Subtotal).</li>
+      </ul>
+
+      <h2>4. Bẫy Hiểm Hóc: Điều Kiện Trong ON vs Điều Kiện Trong WHERE Của LEFT JOIN</h2>
+      <p>
+        Một câu hỏi phỏng vấn Senior Data Engineer thường xuyên làm ứng viên lúng túng: <em>"Điều kiện lọc đặt ở mệnh đề <code>ON</code> khác gì khi đặt ở mệnh đề <code>WHERE</code> trong một câu lệnh <code>LEFT JOIN</code>?"</em>.
+      </p>
+
+      <h3>Trường Hợp 1: Đặt điều kiện lọc ở mệnh đề ON</h3>
+      <pre><code><span class="token-keyword">SELECT</span> c.customer_name, o.order_id, o.status
+<span class="token-keyword">FROM</span> customers c
+<span class="token-keyword">LEFT JOIN</span> orders o 
+    <span class="token-keyword">ON</span> c.customer_id = o.customer_id 
+    <span class="token-keyword">AND</span> o.status = <span class="token-str">'COMPLETED'</span>;</code></pre>
+      <p>
+        <strong>Hành vi:</strong> Giữ lại <em>tất cả</em> khách hàng của bảng <code>customers</code>. Nếu khách hàng có đơn trạng thái 'COMPLETED', thông tin đơn hàng được ghép vào. Nếu khách hàng không có đơn hoặc chỉ có đơn 'PENDING', các cột của <code>orders</code> sẽ hiển thị là <code>NULL</code>. Toàn bộ danh sách khách hàng vẫn được bảo toàn.
+      </p>
+
+      <h3>Trường Hợp 2: Đặt điều kiện lọc ở mệnh đề WHERE</h3>
+      <pre><code><span class="token-keyword">SELECT</span> c.customer_name, o.order_id, o.status
+<span class="token-keyword">FROM</span> customers c
+<span class="token-keyword">LEFT JOIN</span> orders o 
+    <span class="token-keyword">ON</span> c.customer_id = o.customer_id
+<span class="token-keyword">WHERE</span> o.status = <span class="token-str">'COMPLETED'</span>;</code></pre>
+      <p>
+        <strong>Hành vi:</strong> Đối với những khách hàng không có đơn, phép LEFT JOIN sinh ra giá trị <code>NULL</code> tại cột <code>o.status</code>. Sau đó, mệnh đề <code>WHERE</code> kiểm tra: <code>NULL = 'COMPLETED'</code> → trả về <code>UNKNOWN</code> và <strong>loại bỏ sạch sẽ các dòng này</strong>!
+      </p>
+      <div class="callout-box warning">
+        <div class="callout-title">⚠️ Bài học cảnh giác</div>
+        <p>
+          Viết điều kiện của bảng bên phải trong <code>WHERE</code> của một <code>LEFT JOIN</code> sẽ <strong>vô tình biến nó thành một phép INNER JOIN</strong>! Nếu bạn muốn giữ lại mọi dòng bảng trái, điều kiện lọc bảng phải bắt buộc phải nằm trong <code>ON</code>.
+        </p>
+      </div>
+
+      <h2>5. Checklist 3 Bước Đảm Bảo An Toàn Cho Mọi Phép JOIN</h2>
+      <ol>
+        <li>
+          <strong>Đếm số dòng trước và sau:</strong>
+          <pre><code><span class="token-keyword">SELECT</span> <span class="token-func">COUNT</span>(*) <span class="token-keyword">FROM</span> table_a;
+<span class="token-keyword">SELECT</span> <span class="token-func">COUNT</span>(*) <span class="token-keyword">FROM</span> ( <span class="token-comment">-- your join query --</span> );</code></pre>
+          Nếu số dòng sau khi LEFT JOIN tăng đột biến so với <code>table_a</code> ban đầu, bạn chắc chắn đã dính Fan-Out!
+        </li>
+        <li>
+          <strong>Kiểm tra khóa chính của bảng bên phải:</strong>
+          Đảm bảo cột dùng để JOIN ở bảng bên phải là Unique Key (Khóa duy nhất), không có giá trị trùng lặp.
+        </li>
+        <li>
+          <strong>Sử dụng dbt Tests (Trong môi trường Modern Data Stack):</strong>
+          Viết test <code>unique</code> và <code>not_null</code> cho khóa ngoại để chặn đứng dữ liệu bẩn ngay từ pipeline ETL/ELT.
+        </li>
+      </ol>
+    </article>
+
+    <!-- Post Navigation Cards -->
+    <nav class="post-navigation">
+      <a href="01-sql-execution-order.html" class="post-nav-card">
+        <div class="post-nav-label">← Bài trước (Cơ Bản)</div>
+        <div class="post-nav-title">Tư Duy SQL Từ Gốc: Thứ Tự Thực Thi & Bẫy Lọc</div>
+      </a>
+      <a href="03-sql-cte-modular-architecture.html" class="post-nav-card" style="text-align: right;">
+        <div class="post-nav-label">Bài tiếp theo (Trung Cấp) →</div>
+        <div class="post-nav-title">Common Table Expressions (CTE): Nghệ Thuật Modular SQL</div>
+      </a>
+    </nav>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2026 Trần Đức (Dustin). Built with 💜 on the road to Analytics Engineer.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/main.js?v=8"></script>
+</body>
+</html>

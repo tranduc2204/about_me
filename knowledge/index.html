@@ -37,22 +37,132 @@
   </nav>
   <header class="page-header">
     <div class="container" style="position:relative;">
-      <span class="section-label">Knowledge Hub</span>
-      <h1>📚 <span class="gradient-text">Knowledge Hub</span></h1>
-      <p>Tài liệu SQL, Analytics Engineering, và Data Engineering — đang được xây dựng.</p>
+      <span class="section-label">Lộ Trình Học Tập Thực Chiến</span>
+      <h1>SQL & Analytics <span class="gradient-text">Knowledge Hub</span></h1>
+      <p>Hệ thống kiến thức từ nền tảng đến nâng cao dành cho Analytics Engineer & Data Engineer — cô đọng, thực tế, kèm minh họa sổ tay trực quan.</p>
     </div>
   </header>
-  <section class="section">
+
+  <!-- Knowledge Roadmap Section -->
+  <section class="section" style="padding-top: 20px;">
     <div class="container">
-      <div class="coming-soon">
-        <div>
-          <h2 class="gradient-text">🚧 Đang xây dựng</h2>
-          <p>Knowledge Hub sẽ sớm có các bài viết chuyên sâu về SQL, dbt, Data Modeling và nhiều hơn nữa. Hãy quay lại sau nhé!</p>
-          <a href="../index.html" class="btn btn-primary">← Về trang chủ</a>
-        </div>
+      
+      <!-- Category Filter Pills -->
+      <div class="knowledge-filters reveal">
+        <button class="filter-btn active" data-filter="all">Tất cả (4)</button>
+        <button class="filter-btn" data-filter="basic">🟢 Cơ Bản (1)</button>
+        <button class="filter-btn" data-filter="intermediate">🟡 Trung Cấp (2)</button>
+        <button class="filter-btn" data-filter="advanced">🔴 Nâng Cao (1)</button>
+      </div>
+
+      <!-- Articles Grid -->
+      <div class="knowledge-grid" id="knowledgeGrid">
+        
+        <!-- Post 1: Basic -->
+        <article class="knowledge-card reveal" data-category="basic">
+          <div class="knowledge-thumb-wrapper">
+            <img src="../images/knowledge/sql-execution-order.jpg" alt="Sơ đồ thứ tự thực thi câu truy vấn SQL" class="knowledge-thumb" loading="lazy">
+            <span class="knowledge-badge-overlay badge-basic">🟢 Cơ Bản</span>
+          </div>
+          <div class="knowledge-body">
+            <div class="knowledge-meta">
+              <span>⏱️ 8 phút đọc</span>
+              <span>•</span>
+              <span>SQL Fundamentals</span>
+            </div>
+            <h2 class="knowledge-title">
+              <a href="posts/01-sql-execution-order.html">Tư Duy SQL Từ Gốc: Thứ Tự Thực Thi Truy Vấn & Các Bẫy Lọc Dữ Liệu</a>
+            </h2>
+            <p class="knowledge-desc">
+              Khám phá cách Database Engine thực sự xử lý câu lệnh từ FROM tới LIMIT. Hiểu rõ nguyên nhân không thể lọc alias ở WHERE, bẫy logic NULL và khác biệt sống còn giữa WHERE vs HAVING.
+            </p>
+            <div class="knowledge-footer">
+              <span class="tag">Execution Order</span>
+              <a href="posts/01-sql-execution-order.html" class="knowledge-read-btn">Đọc bài viết →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 2: Intermediate 1 -->
+        <article class="knowledge-card reveal reveal-delay-1" data-category="intermediate">
+          <div class="knowledge-thumb-wrapper">
+            <img src="../images/knowledge/sql-joins-fanout.jpg" alt="Minh họa SQL JOINs và bẫy nhân đôi doanh thu Fan-out trap" class="knowledge-thumb" loading="lazy">
+            <span class="knowledge-badge-overlay badge-intermediate">🟡 Trung Cấp</span>
+          </div>
+          <div class="knowledge-body">
+            <div class="knowledge-meta">
+              <span>⏱️ 12 phút đọc</span>
+              <span>•</span>
+              <span>Relational Data</span>
+            </div>
+            <h2 class="knowledge-title">
+              <a href="posts/02-sql-joins-fanout-trap.html">Chinh Phục SQL JOINs: Kiểm Soát Quan Hệ & Hóa Giải Bẫy Nhân Đôi (Fan-Out Trap)</a>
+            </h2>
+            <p class="knowledge-desc">
+              Mổ xẻ 4 loại JOIN và nguyên nhân cốt lõi khiến báo cáo doanh thu bị phóng đại gấp nhiều lần do quan hệ 1-Nhiều. Cung cấp 3 kỹ thuật thực chiến dập tắt Fan-out triệt để.
+            </p>
+            <div class="knowledge-footer">
+              <span class="tag">JOINs & Integrity</span>
+              <a href="posts/02-sql-joins-fanout-trap.html" class="knowledge-read-btn">Đọc bài viết →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 3: Intermediate 2 -->
+        <article class="knowledge-card reveal reveal-delay-2" data-category="intermediate">
+          <div class="knowledge-thumb-wrapper">
+            <img src="../images/knowledge/sql-cte-pipeline.jpg" alt="So sánh Nested Subqueries và đường ống Modular CTE" class="knowledge-thumb" loading="lazy">
+            <span class="knowledge-badge-overlay badge-intermediate">🟡 Trung Cấp</span>
+          </div>
+          <div class="knowledge-body">
+            <div class="knowledge-meta">
+              <span>⏱️ 10 phút đọc</span>
+              <span>•</span>
+              <span>Modern SQL & dbt</span>
+            </div>
+            <h2 class="knowledge-title">
+              <a href="posts/03-sql-cte-modular-architecture.html">Common Table Expressions (CTE): Nghệ Thuật Viết Modular SQL Dễ Đọc, Dễ Bảo Trì</a>
+            </h2>
+            <p class="knowledge-desc">
+              Tạm biệt Nested Subqueries rối rắm khó debug. Xây dựng tư duy đường ống dữ liệu đa tầng tuần tự với CTE (WITH), kỹ thuật đệ quy Recursive CTE và so sánh hiệu năng thực tế.
+            </p>
+            <div class="knowledge-footer">
+              <span class="tag">CTE & Modular SQL</span>
+              <a href="posts/03-sql-cte-modular-architecture.html" class="knowledge-read-btn">Đọc bài viết →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 4: Advanced -->
+        <article class="knowledge-card reveal" data-category="advanced">
+          <div class="knowledge-thumb-wrapper">
+            <img src="../images/knowledge/sql-window-functions.jpg" alt="Minh họa SQL Window Functions ROW_NUMBER RANK LAG LEAD" class="knowledge-thumb" loading="lazy">
+            <span class="knowledge-badge-overlay badge-advanced">🔴 Nâng Cao</span>
+          </div>
+          <div class="knowledge-body">
+            <div class="knowledge-meta">
+              <span>⏱️ 15 phút đọc</span>
+              <span>•</span>
+              <span>Advanced Analytics</span>
+            </div>
+            <h2 class="knowledge-title">
+              <a href="posts/04-sql-advanced-window-functions.html">Bậc Thầy SQL Window Functions: Phân Tích Chuỗi Thời Gian & Deduplication</a>
+            </h2>
+            <p class="knowledge-desc">
+              Vũ khí tối thượng của Analytics Engineer. Phân biệt ROW_NUMBER, RANK, DENSE_RANK, kỹ thuật Deduplication (WHERE rn=1), tính tăng trưởng MoM/YoY bằng LAG/LEAD và tổng lũy kế Running Total.
+            </p>
+            <div class="knowledge-footer">
+              <span class="tag">Window Functions</span>
+              <a href="posts/04-sql-advanced-window-functions.html" class="knowledge-read-btn">Đọc bài viết →</a>
+            </div>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
+
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer-bottom">
@@ -60,6 +170,31 @@
       </div>
     </div>
   </footer>
+
   <script src="../assets/js/main.js?v=8"></script>
+  <script>
+    // Knowledge category filter logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.knowledge-card');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filterValue = btn.getAttribute('data-filter');
+          cards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            if (filterValue === 'all' || category === filterValue) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
 </body>
 </html>
