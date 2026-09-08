@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="../../images/favicon.ico">
-  <link rel="stylesheet" href="../../assets/css/main.css?v=9">
+  <link rel="stylesheet" href="../../assets/css/main.css?v=10">
   <script>
     (function() {
       try { localStorage.removeItem('dustin_theme'); } catch(e) {}
@@ -290,6 +290,49 @@ revenue_lagged <span class="token-keyword">AS</span> (
       </ol>
     </article>
 
+    <!-- Anonymous Feedback & Question Box -->
+    <section class="feedback-card" aria-label="Gửi câu hỏi và góp ý ẩn danh">
+      <div class="feedback-header">
+        <span class="feedback-badge">📮 Q&amp;A &amp; Feedback</span>
+        <h3 class="feedback-title">Đặt Câu Hỏi Hoặc Góp Ý Cho Dustin</h3>
+        <p class="feedback-subtitle">
+          Bạn có thắc mắc kỹ thuật về bài viết này, muốn thảo luận thêm hay đóng góp góc nhìn? Bạn có thể gửi <strong>ẩn danh 100%</strong> hoặc để lại email nếu muốn nhận phản hồi.
+        </p>
+      </div>
+
+      <!-- Feedback Form -->
+      <form id="articleFeedbackForm" class="feedback-form">
+        <input type="hidden" name="article_title" value="Bậc Thầy SQL Window Functions: Phân Tích Chuỗi Thời Gian &amp; Deduplication">
+        
+        <div class="feedback-group">
+          <label for="feedbackMessage" class="feedback-label">Câu hỏi hoặc góp ý của bạn <span style="color: var(--accent); font-weight: 700;">*</span></label>
+          <textarea id="feedbackMessage" name="message" class="feedback-textarea" placeholder="Nhập thắc mắc, câu hỏi hoặc góc nhìn của bạn về bài viết này..." required></textarea>
+        </div>
+
+        <div class="feedback-row">
+          <div class="feedback-group">
+            <label for="feedbackName" class="feedback-label">Tên hiển thị <span class="feedback-label-opt">(Tùy chọn, để trống sẽ là 'Ẩn danh')</span></label>
+            <input type="text" id="feedbackName" name="name" class="feedback-input" placeholder="Ví dụ: Bạn đọc ẩn danh, Tuấn, Linh...">
+          </div>
+          <div class="feedback-group">
+            <label for="feedbackEmail" class="feedback-label">Email của bạn <span class="feedback-label-opt">(Tùy chọn, nếu muốn nhận phản hồi qua mail)</span></label>
+            <input type="email" id="feedbackEmail" name="email" class="feedback-input" placeholder="name@example.com">
+          </div>
+        </div>
+
+        <div class="feedback-footer">
+          <span class="feedback-privacy-note">🔒 Thông tin được gửi trực tiếp tới email của tác giả.</span>
+          <button type="submit" class="feedback-submit-btn">
+            <span>Gửi câu hỏi ẩn danh</span>
+            <span>✈️</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Status Result Box -->
+      <div id="feedbackStatusBox" class="feedback-status-box"></div>
+    </section>
+
     <!-- Post Navigation Cards -->
     <nav class="post-navigation">
       <a href="03-sql-cte-modular-architecture.html" class="post-nav-card">
@@ -312,7 +355,7 @@ revenue_lagged <span class="token-keyword">AS</span> (
     </div>
   </footer>
 
-  <script src="../../assets/js/main.js?v=9"></script>
+  <script src="../../assets/js/main.js?v=10"></script>
 </body>
 </html>
 

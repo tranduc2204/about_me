@@ -563,3 +563,188 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
 .post-nav-label { font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 4px; }
 .post-nav-title { font-weight: 600; font-size: 0.95rem; color: var(--text-primary); }
 
+/* ============================================
+   ANONYMOUS FEEDBACK & QUESTION FORM
+   ============================================ */
+.feedback-card {
+  margin: 50px 0 20px 0;
+  padding: 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.feedback-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+}
+.feedback-header {
+  margin-bottom: 22px;
+}
+.feedback-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 50px;
+  background: rgba(var(--primary-rgb), 0.12);
+  color: var(--primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.feedback-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.feedback-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.feedback-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.feedback-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.feedback-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.feedback-label-opt {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 0.78rem;
+  margin-left: 4px;
+}
+.feedback-input,
+.feedback-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  transition: var(--transition);
+}
+.feedback-input:focus,
+.feedback-textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.15);
+}
+.feedback-input::placeholder,
+.feedback-textarea::placeholder {
+  color: var(--text-muted);
+}
+.feedback-textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+.feedback-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.feedback-privacy-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.feedback-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 26px;
+  border-radius: 50px;
+  background: var(--gradient-primary);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 16px rgba(var(--primary-rgb), 0.35);
+  border: none;
+}
+.feedback-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.5);
+}
+.feedback-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+.feedback-status-box {
+  padding: 18px 22px;
+  border-radius: 12px;
+  font-size: 0.92rem;
+  display: none;
+  align-items: flex-start;
+  gap: 12px;
+}
+.feedback-status-box.success {
+  display: flex;
+  background: rgba(0, 230, 153, 0.1);
+  border: 1px solid rgba(0, 230, 153, 0.35);
+  color: #00E699;
+}
+.feedback-status-box.error {
+  display: flex;
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.35);
+  color: #FF6B6B;
+}
+
+@media (max-width: 640px) {
+  .feedback-card {
+    padding: 22px 18px;
+  }
+  .feedback-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .feedback-footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+  .feedback-submit-btn {
+    width: 100%;
+  }
+}
+
+

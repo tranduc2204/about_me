@@ -172,4 +172,97 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // --- Anonymous Feedback / Question Form ---
+  const feedbackForm = document.getElementById('articleFeedbackForm');
+  if (feedbackForm) {
+    feedbackForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const submitBtn = feedbackForm.querySelector('.feedback-submit-btn');
+      const statusBox = document.getElementById('feedbackStatusBox');
+      const btnOriginalText = submitBtn.innerHTML;
+
+      // Extract form values
+      const message = feedbackForm.querySelector('[name="message"]').value.trim();
+      const name = feedbackForm.querySelector('[name="name"]').value.trim() || 'Bạn đọc ẩn danh';
+      const email = feedbackForm.querySelector('[name="email"]').value.trim() || 'Không cung cấp email';
+      const articleTitleInput = feedbackForm.querySelector('[name="article_title"]');
+      const articleTitle = articleTitleInput ? articleTitleInput.value : document.title;
+      const articleUrl = window.location.href;
+
+      if (!message) {
+        alert('Vui lòng nhập câu hỏi hoặc góp ý của bạn.');
+        return;
+      }
+
+      // UI state: Sending
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>Đang gửi thư...</span>';
+      if (statusBox) {
+        statusBox.className = 'feedback-status-box';
+        statusBox.style.display = 'none';
+      }
+
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/trandc3015@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            '_subject': `[Dustin Data Hub] Câu hỏi & Góp ý từ bạn đọc: ${articleTitle}`,
+            'Bài viết': articleTitle,
+            'Link bài viết': articleUrl,
+            'Tên người gửi': name,
+            'Email liên hệ': email,
+            'Nội dung thắc mắc / góp ý': message,
+            '_template': 'table'
+          })
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          // Success
+          feedbackForm.reset();
+          feedbackForm.style.display = 'none';
+          if (statusBox) {
+            statusBox.className = 'feedback-status-box success';
+            statusBox.innerHTML = `
+              <div style="font-size: 1.5rem; line-height: 1;">✅</div>
+              <div>
+                <strong>Đã gửi thành công!</strong>
+                <p style="margin: 4px 0 0 0; font-size: 0.88rem; color: var(--text-secondary);">
+                  Cảm ơn bạn rất nhiều vì đã đặt câu hỏi / góp ý. Thông điệp đã được chuyển thẳng tới hòm thư cá nhân của Dustin (<code>trandc3015@gmail.com</code>).
+                </p>
+              </div>
+            `;
+            statusBox.style.display = 'flex';
+          }
+        } else {
+          throw new Error(result.message || 'Lỗi gửi tin');
+        }
+      } catch (err) {
+        console.error('Feedback submit error:', err);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = btnOriginalText;
+        if (statusBox) {
+          statusBox.className = 'feedback-status-box error';
+          statusBox.innerHTML = `
+            <div style="font-size: 1.5rem; line-height: 1;">⚠️</div>
+            <div>
+              <strong>Chưa thể gửi qua hệ thống tự động!</strong>
+              <p style="margin: 4px 0 0 0; font-size: 0.88rem; color: var(--text-secondary);">
+                Bạn có thể gửi trực tiếp câu hỏi này tới hòm thư: <a href="mailto:trandc3015@gmail.com?subject=Góp ý bài: ${encodeURIComponent(articleTitle)}" style="color: var(--primary); text-decoration: underline;">trandc3015@gmail.com</a>.
+              </p>
+            </div>
+          `;
+          statusBox.style.display = 'flex';
+        }
+      }
+    });
+  }
+
 });
+
