@@ -624,22 +624,27 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+  align-items: end;
 }
 .feedback-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+  justify-content: flex-end;
 }
 .feedback-label {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 22px;
 }
 .feedback-label-opt {
   color: var(--text-muted);
   font-weight: 400;
   font-size: 0.78rem;
-  margin-left: 4px;
 }
 .feedback-input,
 .feedback-textarea {
@@ -653,6 +658,10 @@ code, pre { font-family: 'JetBrains Mono', monospace; }
   font-size: 0.92rem;
   line-height: 1.6;
   transition: var(--transition);
+  box-sizing: border-box;
+}
+.feedback-input {
+  height: 48px;
 }
 .feedback-input:focus,
 .feedback-textarea:focus {
