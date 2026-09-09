@@ -88,15 +88,16 @@ document.addEventListener('DOMContentLoaded', () => {
           contactForm.style.display = 'none';
           if (statusBox) {
             statusBox.style.display = 'flex';
-            statusBox.style.background = 'rgba(0, 230, 153, 0.1)';
-            statusBox.style.border = '1px solid rgba(0, 230, 153, 0.35)';
-            statusBox.style.color = '#00E699';
+            statusBox.style.alignItems = 'flex-start';
+            statusBox.style.background = 'rgba(16, 185, 129, 0.08)';
+            statusBox.style.border = '1px solid rgba(16, 185, 129, 0.3)';
+            statusBox.style.color = 'var(--emerald)';
             statusBox.innerHTML = `
-              <div style="font-size: 1.1rem; line-height: 1; margin-right: 12px; font-family: var(--font-mono); font-weight: 700;">[200_OK]</div>
+              <div style="font-size: 1.25rem; line-height: 1; margin-right: 12px;">✓</div>
               <div>
-                <strong>DISPATCH_SUCCESS: Đã gửi thông điệp thành công!</strong>
-                <p style="margin: 4px 0 0 0; font-size: 0.86rem; color: var(--text-secondary);">
-                  Thông điệp đã được chuyển thẳng tới hòm thư cá nhân của Dustin (<code>trandc3015@gmail.com</code>). Cảm ơn bạn rất nhiều vì đã kết nối!
+                <strong style="color: var(--text-primary); font-size: 0.95rem;">Đã gửi lời nhắn thành công</strong>
+                <p style="margin: 4px 0 0 0; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;">
+                  Cảm ơn bạn đã kết nối. Thông điệp đã được chuyển thẳng tới hòm thư cá nhân của tôi (<code>trandc3015@gmail.com</code>). Tôi sẽ phản hồi sớm nhất có thể.
                 </p>
               </div>
             `;
@@ -110,15 +111,16 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.innerHTML = originalBtnText;
         if (statusBox) {
           statusBox.style.display = 'flex';
-          statusBox.style.background = 'rgba(244, 63, 94, 0.1)';
-          statusBox.style.border = '1px solid rgba(244, 63, 94, 0.35)';
-          statusBox.style.color = '#F43F5E';
+          statusBox.style.alignItems = 'flex-start';
+          statusBox.style.background = 'rgba(239, 68, 68, 0.08)';
+          statusBox.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+          statusBox.style.color = '#EF4444';
           statusBox.innerHTML = `
-            <div style="font-size: 1.1rem; line-height: 1; margin-right: 12px; font-family: var(--font-mono); font-weight: 700;">[ERR_DISPATCH]</div>
+            <div style="font-size: 1.25rem; line-height: 1; margin-right: 12px;">✕</div>
             <div>
-              <strong>Chưa thể gửi qua hệ thống tự động!</strong>
-              <p style="margin: 4px 0 0 0; font-size: 0.86rem; color: var(--text-secondary);">
-                Bạn có thể gửi thư trực tiếp cho tôi tại: <a href="mailto:trandc3015@gmail.com" style="color: var(--teal); text-decoration: underline;">trandc3015@gmail.com</a>.
+              <strong style="color: var(--text-primary); font-size: 0.95rem;">Chưa thể gửi qua biểu mẫu tự động</strong>
+              <p style="margin: 4px 0 0 0; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;">
+                Bạn có thể gửi thư trực tiếp cho tôi qua email: <a href="mailto:trandc3015@gmail.com" style="color: var(--accent); text-decoration: underline;">trandc3015@gmail.com</a>.
               </p>
             </div>
           `;
