@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trần Đức (Dustin) — Aspiring Analytics Engineer | Personal Brand</title>
-  <meta name="description" content="Thủ khoa UFM, cựu Data Engineer, kinh nghiệm ERP và trực chiến hạ tầng mạng CAND. Định vị Analytics Engineer kết hợp kỹ thuật đường ống với tư duy giải quyết bài toán kinh doanh.">
+  <title>Trần Đức (Dustin) — Aspiring Analytics Engineer | Technical Blueprint</title>
+  <meta name="description" content="Thủ khoa UFM, cựu Data Engineer, kinh nghiệm triển khai ERP và trực chiến hạ tầng IT CAND. Định vị Analytics Engineer kết hợp kỹ thuật đường ống với câu chuyện phía sau dữ liệu.">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   
   <!-- Favicon & Isolated Stylesheet -->
   <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-  <link rel="stylesheet" href="landing.css?v=1">
+  <link rel="stylesheet" href="landing.css?v=2">
   
   <!-- Immediate Theme Initialization (Zero Flicker) -->
   <script>
@@ -26,438 +26,508 @@
 </head>
 <body>
 
-  <!-- Standalone Navbar -->
+  <!-- ============================================
+       0. TOP SYSTEM STATUS TICKER
+       ============================================ -->
+  <aside class="system-ticker" aria-label="System status bar">
+    <div class="container ticker-inner">
+      <div class="ticker-item">
+        <span class="ticker-pulse"></span>
+        <span>SYS.ID: <strong>DUSTIN-AE-2027</strong></span>
+      </div>
+      <div class="ticker-item">
+        <span>DUTY: <strong>TRỰC CHIẾN HẠ TẦNG IT CAND (2025 - 2027)</strong></span>
+      </div>
+      <div class="ticker-item">
+        <span>TARGET: <strong style="color: var(--teal);">ANALYTICS ENGINEER</strong></span>
+      </div>
+      <div class="ticker-item">
+        <span>SECURITY: <strong>MISSION-CRITICAL STANDARD</strong></span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============================================
+       NAVIGATION BAR
+       ============================================ -->
   <header class="lp-navbar">
     <div class="container lp-nav-inner">
-      <a href="#hero" class="lp-logo">
-        <span class="gradient-text">Dustin</span>
-        <span style="color: var(--text-muted); font-size: 0.95rem; font-weight: 500;">/ Analytics Engineer</span>
+      <a href="#hero" class="lp-brand">
+        <span class="lp-brand-logo">[DUSTIN://AE]</span>
+        <span class="lp-brand-meta">/ Blueprint Edition</span>
       </a>
 
-      <nav class="lp-nav-links">
-        <a href="#intersection">Tại sao là AE?</a>
-        <a href="#story">5 Chương Chuyển Mình</a>
-        <a href="#stack">Vũ Khí Kỹ Thuật</a>
-        <a href="#proof">Sản Phẩm & Tri Thức</a>
-        <a href="#contact">Liên Hệ 2027</a>
+      <nav class="lp-nav-links" aria-label="Điều hướng chính">
+        <a href="#convergence">01. Hội Tụ</a>
+        <a href="#logbook">02. Nhật Ký 5 Chương</a>
+        <a href="#manifest">03. Vũ Khí Stack</a>
+        <a href="#whitepapers">04. Nghiên Cứu</a>
+        <a href="#dispatch">05. Trạm Liên Lạc</a>
       </nav>
 
       <div class="lp-nav-actions">
-        <button class="lp-theme-btn" id="lpThemeBtn" aria-label="Đổi giao diện" title="Đổi giao diện">☀️</button>
-        <a href="#contact" class="btn-primary" style="padding: 9px 20px; font-size: 0.86rem;">Kết nối ↗</a>
+        <button class="theme-toggle-btn" id="lpThemeBtn" aria-label="Đổi giao diện" title="Đổi giao diện">☀️</button>
+        <a href="#dispatch" class="btn-terminal">
+          <span>&gt; dispatch</span>
+        </a>
       </div>
     </div>
   </header>
 
   <main>
     <!-- ============================================
-         1. HERO SECTION
+         1. HERO SECTION — DATA COMMAND & PIPELINE SCHEMATIC
          ============================================ -->
     <section class="hero-section" id="hero">
-      <div class="hero-bg-glow"></div>
-      <div class="container hero-content">
+      <div class="container">
         
-        <div class="hero-mission-badge">
-          <span class="hero-pulse"></span>
-          <span>Mục Tiêu Ra Quân 2027 • Aspiring Analytics Engineer</span>
+        <div class="hero-manifesto">
+          <div class="hero-badge-live">
+            <span class="ticker-pulse" style="background: var(--amber); box-shadow: 0 0 8px var(--amber);"></span>
+            <span>MỤC TIÊU RA QUÂN 2027 • ASPIRING ANALYTICS ENGINEER</span>
+          </div>
+
+          <h1 class="hero-title">
+            Từ Data Pipeline đến <span class="highlight-teal">Business Insight</span>.<br>
+            Tôi không chỉ xây dữ liệu. Tôi đọc <span class="highlight-amber">câu chuyện</span> phía sau nó.
+          </h1>
+
+          <p class="hero-bio">
+            Tôi là <strong>Trần Đức (Dustin)</strong> — Thủ khoa UFM, từng xây pipeline thực tế, triển khai ERP cho doanh nghiệp, và đang trực chiến hạ tầng IT trong môi trường CAND. Càng tiếp xúc nhiều data, tôi càng tò mò về <strong>câu chuyện phía sau nó</strong>. Và đó là lý do tôi chọn trở thành <strong>Analytics Engineer</strong>.
+          </p>
+
+          <!-- System Specs Row -->
+          <div class="hero-specs-row">
+            <div class="spec-card">
+              <span class="spec-header">// SPEC 01: ACADEMIC</span>
+              <span class="spec-value">Thủ Khoa UFM (GPA 3.7/4.0)</span>
+              <span class="spec-sub">Tin Học Quản Lý • Tư Duy Hệ Thống</span>
+            </div>
+            <div class="spec-card">
+              <span class="spec-header">// SPEC 02: QUERY MASTERY</span>
+              <span class="spec-value">SQL Advanced Certified</span>
+              <span class="spec-sub">Pipeline, CTEs &amp; Window Functions</span>
+            </div>
+            <div class="spec-card">
+              <span class="spec-header">// SPEC 03: INFRASTRUCTURE</span>
+              <span class="spec-value">Trực Chiến Hạ Tầng CAND</span>
+              <span class="spec-sub">Linux, Mạng LAN &amp; Hệ Thống Dân Cư</span>
+            </div>
+          </div>
         </div>
 
-        <h1 class="hero-headline">
-          Xây dựng pipeline bằng đôi tay <span class="gradient-text">Kỹ Sư</span>.<br>
-          Giải quyết bài toán bằng tư duy <span class="gold-text">Quản Trị</span>.
-        </h1>
-
-        <p class="hero-subhead">
-          Tôi là <strong>Trần Đức (Dustin)</strong> — Thủ khoa Tin học quản lý UFM. Người hội tụ giữa năng lực <strong>Data Engineering, quản trị hạ tầng mạng CAND</strong> và chiều sâu <strong>Business Domain</strong> để giải quyết các bài toán Ad-hoc sống còn trong kỷ nguyên AI.
-        </p>
-
-        <!-- Quick Badges -->
-        <div class="hero-badges-row">
-          <div class="hero-badge-pill">
-            <span>🎓</span>
-            <span>Thủ khoa đầu ra UFM (GPA 3.7/4.0)</span>
+        <!-- Live Architecture Pipeline Schematic -->
+        <div class="hero-schematic tech-box">
+          <div class="schematic-header">
+            <span class="schematic-title">
+              <span class="ticker-pulse"></span>
+              <span>LIVE PIPELINE SCHEMATIC // END-TO-END DATA ARCHITECTURE</span>
+            </span>
+            <span class="tech-tag teal">STATUS: ACTIVE</span>
           </div>
-          <div class="hero-badge-pill">
-            <span>🛡️</span>
-            <span>Quản trị Hạ tầng & Hệ thống CAND</span>
-          </div>
-          <div class="hero-badge-pill">
-            <span>⚡</span>
-            <span>Mastery SQL & Pipeline Architecture</span>
-          </div>
-        </div>
 
-        <div class="hero-actions">
-          <a href="#story" class="btn-primary">
-            <span>Khám phá 5 chương chuyển mình</span>
-            <span>↓</span>
-          </a>
-          <a href="#contact" class="btn-secondary">
-            <span>Gửi lời nhắn trao đổi cơ hội</span>
-            <span>📮</span>
-          </a>
+          <div class="schematic-pipeline">
+            <!-- Node 1: Input -->
+            <div class="pipeline-node">
+              <span class="node-layer">INPUT LAYER</span>
+              <div class="node-title">Thực Tế Doanh Nghiệp</div>
+              <div class="node-detail">MIS UFM • ERP Logistics &amp; Kế Toán</div>
+            </div>
+
+            <!-- Arrow 1 -->
+            <div class="pipeline-arrow">&gt;&gt;&gt;</div>
+
+            <!-- Node 2: Processing Engine (Active) -->
+            <div class="pipeline-node active">
+              <span class="node-layer" style="color: var(--teal);">PROCESSING ENGINE</span>
+              <div class="node-title" style="color: var(--teal);">Pipeline &amp; Hạ Tầng</div>
+              <div class="node-detail">DE Pipeline • SQL Adv • Linux CAND IT</div>
+            </div>
+
+            <!-- Arrow 2 -->
+            <div class="pipeline-arrow">&gt;&gt;&gt;</div>
+
+            <!-- Node 3: Output Insight -->
+            <div class="pipeline-node">
+              <span class="node-layer">OUTPUT &amp; INSIGHT</span>
+              <div class="node-title">Analytics Engineer</div>
+              <div class="node-detail">Solve Ad-hoc • Semantic Layer • Data for AI</div>
+            </div>
+          </div>
         </div>
 
       </div>
     </section>
 
     <!-- ============================================
-         2. THE INTERSECTION SECTION
+         2. THE INTERSECTION — ARCHITECTURAL CONVERGENCE
          ============================================ -->
-    <section class="section" id="intersection">
+    <section class="section" id="convergence">
       <div class="container">
-        <div style="text-align: center; max-width: 740px; margin: 0 auto;">
-          <span class="section-tag">Điểm Giao Thoa Độc Bản</span>
-          <h2 class="section-title">Tại Sao Lại Là <span class="gradient-text">Analytics Engineer</span>?</h2>
-          <p class="section-desc" style="margin: 0 auto;">
-            Trong kỷ nguyên AI bùng nổ, thời của Analyst chỉ biết kéo thả chart hay Engineer chỉ biết nối ống dẫn nước thô đã qua. Doanh nghiệp cần những người hiểu bài toán kinh doanh, tự tay làm sạch hạ tầng và trực tiếp trả lời những câu hỏi Ad-hoc phục vụ chiến lược.
+        
+        <div class="section-header">
+          <div class="section-pretitle">THE ARCHITECTURAL CONVERGENCE</div>
+          <h2 class="section-title">Tại Sao Lại Là <span class="highlight-teal">Analytics Engineer</span>?</h2>
+          <p class="section-lead">
+            Tôi không chọn Analytics Engineer vì nó đang trending. Tôi chọn vì hành trình của tôi — từ xây pipeline, triển khai ERP, đến quản trị hạ tầng CAND — đã tự nhiên hội tụ vào đúng giao điểm này: người vừa build được hệ thống, vừa hiểu được bài toán kinh doanh.
           </p>
         </div>
 
-        <div class="intersection-grid">
+        <div class="convergence-grid">
           
           <!-- Pillar 1: Business Domain -->
-          <div class="intersect-card">
-            <div class="intersect-icon">📊</div>
-            <h3 class="intersect-title">Nền Tảng Quản Trị</h3>
-            <div class="intersect-sub">MIS UFM • Triển khai ERP</div>
-            <ul class="intersect-list">
-              <li>Thủ khoa Tin học quản lý UFM: Tư duy xem công nghệ phụng sự kinh doanh.</li>
-              <li>Hiểu tường tận bức tranh vận hành doanh nghiệp: Mua hàng, Kho, Kế toán, Dòng tiền.</li>
-              <li>Nắm bắt chính xác điều mà C-Level và các trưởng bộ phận thực sự quan tâm.</li>
+          <div class="conv-card">
+            <div class="conv-badge">
+              <span>01 // INPUT LAYER</span>
+            </div>
+            <h3 class="conv-title">Nền Tảng Quản Trị</h3>
+            <div class="conv-sub">MIS UFM • Triển Khai ERP</div>
+            <ul class="conv-list">
+              <li>Thủ khoa Tin học quản lý UFM — nền tảng cho tôi tư duy rằng công nghệ sinh ra để phụng sự kinh doanh, không phải ngược lại.</li>
+              <li>Hiểu tường tận bức tranh vận hành doanh nghiệp: Mua hàng, Kho bãi, Kế toán và Dòng tiền.</li>
+              <li>Nắm bắt chính xác điều mà C-Level và các trưởng bộ phận thực sự quan tâm để ra quyết định.</li>
             </ul>
           </div>
 
-          <!-- Pillar 2: Sweet Spot (Featured) -->
-          <div class="intersect-card featured">
-            <span class="featured-badge">Giao Điểm Tối Ưu (Sweet Spot)</span>
-            <div class="intersect-icon" style="background: rgba(0, 230, 153, 0.15); color: var(--secondary);">🎯</div>
-            <h3 class="intersect-title">The Analytics Engineer</h3>
-            <div class="intersect-sub" style="color: var(--secondary);">Tự Chủ End-to-End • Kỷ Nguyên AI</div>
-            <ul class="intersect-list">
-              <li><strong>Tự chủ toàn diện:</strong> Tự tay chuẩn bị dữ liệu sạch ➔ tự mình giải quyết bài toán Ad-hoc tức thì.</li>
-              <li><strong>Triệt tiêu độ trễ:</strong> Không còn cảnh Data Analyst phải chờ đợi Data Engineer chỉnh sửa từng đường ống.</li>
-              <li><strong>Dữ liệu sẵn sàng cho AI:</strong> Áp dụng chuẩn dbt, Semantic Layer và Data Modeling (Kimball) vững chắc.</li>
+          <!-- Pillar 2: The Sweet Spot (Featured) -->
+          <div class="conv-card featured">
+            <div class="conv-badge" style="color: var(--teal);">
+              <span>🎯 // CONVERGENCE SWEET SPOT</span>
+            </div>
+            <h3 class="conv-title" style="color: var(--teal);">The Analytics Engineer</h3>
+            <div class="conv-sub" style="color: var(--text-primary);">Tự Chủ End-to-End • Kỷ Nguyên AI</div>
+            <ul class="conv-list">
+              <li><strong>Tự chủ toàn diện:</strong> Chính tôi prepare mọi thứ nên tôi hiểu business domain sâu hơn — không còn cảnh DA chờ DE, DE không hiểu DA cần gì.</li>
+              <li><strong>Triệt tiêu độ trễ:</strong> Tự tay dựng luồng dữ liệu sạch ➔ tự mình giải quyết các câu hỏi Ad-hoc sống còn tức thì.</li>
+              <li><strong>Dữ liệu sẵn sàng cho AI:</strong> Áp dụng chuẩn mực dbt, Semantic Layer và Data Modeling (Kimball Star Schema) vững chắc.</li>
             </ul>
           </div>
 
-          <!-- Pillar 3: Infrastructure & Engineering -->
-          <div class="intersect-card">
-            <div class="intersect-icon">⚙️</div>
-            <h3 class="intersect-title">Kỹ Thuật & Hạ Tầng</h3>
-            <div class="intersect-sub">Data Engineer • IT Support CAND</div>
-            <ul class="intersect-list">
+          <!-- Pillar 3: Infrastructure & Pipeline -->
+          <div class="conv-card">
+            <div class="conv-badge">
+              <span>02 // INFRASTRUCTURE LAYER</span>
+            </div>
+            <h3 class="conv-title">Kỹ Thuật &amp; Hạ Tầng</h3>
+            <div class="conv-sub">Data Engineer • IT Support CAND</div>
+            <ul class="conv-list">
               <li>Tự tay thiết kế và dựng các Data Pipeline, làm chủ SQL ở cấp độ Advanced.</li>
               <li>Quản trị hạ tầng mạng LAN, hệ điều hành Linux (Ubuntu) và máy chủ vật lý.</li>
-              <li>Tư duy "Mission-Critical": Bảo mật khắt khe, tính sẵn sàng 24/7 từ hệ thống dân cư & báo cháy GTEL.</li>
+              <li>Tư duy "Mission-Critical": Bảo mật khắt khe, tính sẵn sàng 24/7 từ hệ thống dân cư &amp; báo cháy GTEL.</li>
             </ul>
           </div>
 
         </div>
+
       </div>
     </section>
 
     <!-- ============================================
-         3. THE 5-CHAPTER JOURNEY
+         3. THE 5-CHAPTER JOURNEY — FIELD LOGBOOK
          ============================================ -->
-    <section class="section" id="story" style="background: var(--bg-alt);">
-      <div class="container">
-        <div style="text-align: center; max-width: 740px; margin: 0 auto;">
-          <span class="section-tag">Hành Trình Chuyển Mình</span>
-          <h2 class="section-title">5 Chương Định Hình <span class="gradient-text">Năng Lực Thực Chiến</span></h2>
-          <p class="section-desc" style="margin: 0 auto;">
-            Mỗi trải nghiệm không phải là một lát cắt ngẫu nhiên, mà là từng mảnh ghép nối tiếp nhau tạo nên một kỹ sư có gốc rễ hạ tầng và tư duy kinh doanh nhạy bén.
-          </p>
-        </div>
-
-        <div class="timeline-wrapper">
-          
-          <!-- Chapter 1 -->
-          <div class="timeline-item">
-            <div class="timeline-node">01</div>
-            <div class="timeline-card">
-              <div class="timeline-header">
-                <span class="timeline-tag">Nền tảng học thuật</span>
-                <span style="font-size: 0.84rem; color: var(--text-muted); font-weight: 600;">UFM • 2020 - 2024</span>
-              </div>
-              <h3 class="timeline-title">Thủ Khoa Đầu Ra — Đại Học Tài Chính - Marketing (UFM)</h3>
-              <p class="timeline-body">
-                Tốt nghiệp Thủ khoa ngành Tin học quản lý với GPA 3.7/4.0. Môi trường tài chính – marketing đã sớm rèn luyện cho tôi góc nhìn: Công nghệ thông tin không sinh ra để tự ngắm nghía chính nó, mà sinh ra để tối ưu hóa chi phí, tăng trưởng doanh thu và hỗ trợ người lãnh đạo ra quyết định chính xác.
-              </p>
-              <div class="timeline-takeaway">
-                💡 <strong>Bài học rút ra:</strong> Muốn làm dữ liệu giỏi, trước hết phải hiểu bài toán kinh tế mà doanh nghiệp đang giải.
-              </div>
-            </div>
-          </div>
-
-          <!-- Chapter 2 -->
-          <div class="timeline-item">
-            <div class="timeline-node">02</div>
-            <div class="timeline-card">
-              <div class="timeline-header">
-                <span class="timeline-tag">Va chạm thực tế</span>
-                <span style="font-size: 0.84rem; color: var(--text-muted); font-weight: 600;">Data Engineer Experience</span>
-              </div>
-              <h3 class="timeline-title">Dấn Thân Làm Data Engineer & Bứt Phá Chứng Chỉ SQL Advanced</h3>
-              <p class="timeline-body">
-                Trực tiếp bắt tay vào việc "nắn dòng" dữ liệu thô: xây dựng các data pipeline thực tế, đối soát dữ liệu và thiết lập các báo cáo kinh doanh. Sau thời gian này, tôi chủ động dành thời gian cày cuốc chuyên sâu, chinh phục chứng chỉ SQL cấp độ Advanced để đạt mức độ làm chủ hoàn toàn ngôn ngữ truy vấn cốt lõi này.
-              </p>
-              <div class="timeline-takeaway">
-                💡 <strong>Bài học rút ra:</strong> Viết câu lệnh chạy được thì dễ, nhưng viết câu lệnh tối ưu chi phí và bẫy logic (Fan-out, NULL, Window) mới là bản lĩnh kỹ sư.
-              </div>
-            </div>
-          </div>
-
-          <!-- Chapter 3 -->
-          <div class="timeline-item">
-            <div class="timeline-node">03</div>
-            <div class="timeline-card">
-              <div class="timeline-header">
-                <span class="timeline-tag">Tư duy hệ thống</span>
-                <span style="font-size: 0.84rem; color: var(--text-muted); font-weight: 600;">ERP Implementation</span>
-              </div>
-              <h3 class="timeline-title">Triển Khai ERP — Thấu Hiểu Bức Tranh Vận Hành Toàn Diện</h3>
-              <p class="timeline-body">
-                Tham gia vào các dự án triển khai ERP thực tế. Tại đây, tôi được ngồi cùng các chủ doanh nghiệp, giám đốc tài chính và trưởng phòng ban. Tôi nhìn thấy một con số trên báo cáo thực chất là kết quả của một chuỗi liên hoàn: từ đặt hàng ➔ nhập kho ➔ đối soát công nợ ➔ hạch toán sổ cái.
-              </p>
-              <div class="timeline-takeaway">
-                💡 <strong>Bài học rút ra:</strong> Hiểu rõ Business Requirements và luồng vận hành giúp tôi không bao giờ tạo ra những bảng dữ liệu "vô hồn".
-              </div>
-            </div>
-          </div>
-
-          <!-- Chapter 4 -->
-          <div class="timeline-item">
-            <div class="timeline-node">04</div>
-            <div class="timeline-card">
-              <div class="timeline-header">
-                <span class="timeline-tag">Kỷ luật & Hạ tầng</span>
-                <span style="font-size: 0.84rem; color: var(--text-muted); font-weight: 600;">Nghĩa Vụ CAND • 2024 - 2027</span>
-              </div>
-              <h3 class="timeline-title">Trực Chiến Hạ Tầng & Hệ Thống Thông Tin Trọng Yếu CAND</h3>
-              <p class="timeline-body">
-                Trong môi trường nghĩa vụ Công an nhân dân, tôi được tin tưởng giao phó nhiệm vụ IT Support và quản trị hạ tầng: Quản lý mạng LAN nội bộ, hạ tầng phần mềm quản lý dân cư, văn thư và hệ thống truyền tin báo cháy GTEL.
-              </p>
-              <div class="timeline-takeaway">
-                💡 <strong>Bài học rút ra:</strong> Hạ tầng không còn là chiếc hộp đen. Làm việc với hệ thống dân cư và báo cháy đã rèn luyện cho tôi tính kỷ luật thép: dữ liệu phải tuyệt đối chính xác, bảo mật cao và luôn sẵn sàng 24/7.
-              </div>
-            </div>
-          </div>
-
-          <!-- Chapter 5 -->
-          <div class="timeline-item">
-            <div class="timeline-node">05</div>
-            <div class="timeline-card">
-              <div class="timeline-header">
-                <span class="timeline-tag">Tầm nhìn tương lai</span>
-                <span style="font-size: 0.84rem; color: var(--text-muted); font-weight: 600;">Kỷ Nguyên AI & Analytics Engineer</span>
-              </div>
-              <h3 class="timeline-title">Bước Ngoặt Định Vị: Trở Thành Analytics Engineer Toàn Năng</h3>
-              <p class="timeline-body">
-                Càng đi sâu, tôi càng tò mò về những câu chuyện ẩn sau con số. Tôi nhận ra trong thời đại AI, ranh giới giữa DA và DE độc lập đang dần bị thu hẹp. Analytics Engineer chính là mảnh ghép tôi theo đuổi: tự tay chuẩn bị hạ tầng đường ống và tự mình trực tiếp giải quyết các bài toán Ad-hoc chiến lược của doanh nghiệp.
-              </p>
-              <div class="timeline-takeaway">
-                💡 <strong>Bài học rút ra:</strong> Biến kiến thức thành hành động. Xây dựng dự án "Dustin học data" để chia sẻ lại toàn bộ hành trình cho cộng đồng.
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================
-         4. TECH STACK & ARSENAL
-         ============================================ -->
-    <section class="section" id="stack">
-      <div class="container">
-        <div style="text-align: center; max-width: 740px; margin: 0 auto;">
-          <span class="section-tag">Bộ Vũ Khí Kỹ Thuật</span>
-          <h2 class="section-title">Hạ Tầng Vững Vàng, <span class="gradient-text">Truy Vấn Sâu Sắc</span></h2>
-          <p class="section-desc" style="margin: 0 auto;">
-            Không chỉ biết dùng công cụ, mà là hiểu sâu cách thức vận hành từ tầng mạng vật lý đến các mô hình dữ liệu đa chiều.
-          </p>
-        </div>
-
-        <div class="stack-grid">
-          
-          <!-- Category 1 -->
-          <div class="stack-card">
-            <div class="stack-cat-title">
-              <span>🖥️</span>
-              <span>Hạ Tầng &amp; Hệ Điều Hành</span>
-            </div>
-            <p class="stack-cat-desc">Nền tảng tôi luyện từ môi trường trực chiến CAND</p>
-            <div class="stack-pills">
-              <span class="tech-pill">Linux OS (Ubuntu)</span>
-              <span class="tech-pill">Hạ tầng mạng LAN</span>
-              <span class="tech-pill">Cấu hình Switch & Router</span>
-              <span class="tech-pill">Hardware Management</span>
-              <span class="tech-pill">Bảo mật & Phân quyền</span>
-              <span class="tech-pill">High Availability</span>
-            </div>
-          </div>
-
-          <!-- Category 2 -->
-          <div class="stack-card">
-            <div class="stack-cat-title">
-              <span>⚡</span>
-              <span>Đường Ống &amp; Lưu Trữ</span>
-            </div>
-            <p class="stack-cat-desc">Kinh nghiệm thực chiến từ vị trí Data Engineer</p>
-            <div class="stack-pills">
-              <span class="tech-pill">Python (Data pipelines)</span>
-              <span class="tech-pill">Snowflake</span>
-              <span class="tech-pill">Apache Airflow</span>
-              <span class="tech-pill">PostgreSQL / MySQL</span>
-              <span class="tech-pill">ETL / ELT Architecture</span>
-              <span class="tech-pill">Data Ingestion</span>
-            </div>
-          </div>
-
-          <!-- Category 3 -->
-          <div class="stack-card">
-            <div class="stack-cat-title">
-              <span>📊</span>
-              <span>Analytics Engineering</span>
-            </div>
-            <p class="stack-cat-desc">Vũ khí cốt lõi giải quyết bài toán kinh doanh</p>
-            <div class="stack-pills">
-              <span class="tech-pill">SQL Advanced Mastery</span>
-              <span class="tech-pill">dbt (data build tool)</span>
-              <span class="tech-pill">Kimball Star Schema</span>
-              <span class="tech-pill">Ad-hoc Analytics</span>
-              <span class="tech-pill">Window Functions</span>
-              <span class="tech-pill">Data Testing & Governance</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================
-         5. PROOF OF WORK & KNOWLEDGE HUB
-         ============================================ -->
-    <section class="section" id="proof" style="background: var(--bg-alt);">
-      <div class="container">
-        <div style="text-align: center; max-width: 740px; margin: 0 auto;">
-          <span class="section-tag">Proof of Work</span>
-          <h2 class="section-title">Tri Thức Thực Chiến: <span class="gradient-text">SQL Knowledge Hub</span></h2>
-          <p class="section-desc" style="margin: 0 auto;">
-            Tôi tin rằng cách chứng minh năng lực tốt nhất là thông qua những sản phẩm thực tế và tri thức chia sẻ lại cho cộng đồng. Dưới đây là chuỗi bài viết chuyên sâu tôi tự tay biên soạn kèm sơ đồ phác thảo sổ tay trực quan:
-          </p>
-        </div>
-
-        <div class="proof-grid">
-          
-          <!-- Article 1 -->
-          <a href="../knowledge/posts/01-sql-execution-order.html" target="_blank" class="proof-article-card">
-            <div class="proof-thumb-box">
-              <img src="../images/knowledge/sql-execution-order.jpg" alt="Thứ tự thực thi SQL" loading="lazy">
-            </div>
-            <div class="proof-article-info">
-              <span class="proof-badge">🟢 Cơ Bản • 8 phút đọc</span>
-              <h3 class="proof-title">Tư Duy SQL Từ Gốc: Thứ Tự Thực Thi &amp; Bẫy Lọc Dữ Liệu</h3>
-              <p class="proof-desc">Cách Query Engine xử lý từ FROM tới LIMIT, giải phẫu vì sao không lọc alias ở WHERE và bẫy Three-Valued Logic với NULL.</p>
-            </div>
-          </a>
-
-          <!-- Article 2 -->
-          <a href="../knowledge/posts/02-sql-joins-fanout-trap.html" target="_blank" class="proof-article-card">
-            <div class="proof-thumb-box">
-              <img src="../images/knowledge/sql-joins-fanout.jpg" alt="SQL JOINs và Fan-out trap" loading="lazy">
-            </div>
-            <div class="proof-article-info">
-              <span class="proof-badge">🟡 Trung Cấp • 12 phút đọc</span>
-              <h3 class="proof-title">Chinh Phục SQL JOINs: Hóa Giải Bẫy Nhân Đôi Fan-Out Trap</h3>
-              <p class="proof-desc">Nguyên nhân khiến doanh thu bị đội lên gấp 3 lần khi JOIN 1-Nhiều và 3 kỹ thuật thực chiến dập tắt Fan-out triệt để.</p>
-            </div>
-          </a>
-
-          <!-- Article 3 -->
-          <a href="../knowledge/posts/03-sql-cte-modular-architecture.html" target="_blank" class="proof-article-card">
-            <div class="proof-thumb-box">
-              <img src="../images/knowledge/sql-cte-pipeline.jpg" alt="Modular CTEs" loading="lazy">
-            </div>
-            <div class="proof-article-info">
-              <span class="proof-badge">🟡 Trung Cấp • 10 phút đọc</span>
-              <h3 class="proof-title">Common Table Expressions (CTE): Nghệ Thuật Modular SQL</h3>
-              <p class="proof-desc">Xóa bỏ Spaghetti Subqueries, thiết kế đường ống 4 tầng chuẩn mực dbt, phân tích RFM và kỹ thuật Recursive CTE phân cấp.</p>
-            </div>
-          </a>
-
-          <!-- Article 4 -->
-          <a href="../knowledge/posts/04-sql-advanced-window-functions.html" target="_blank" class="proof-article-card">
-            <div class="proof-thumb-box">
-              <img src="../images/knowledge/sql-window-functions.jpg" alt="Window Functions" loading="lazy">
-            </div>
-            <div class="proof-article-info">
-              <span class="proof-badge">🔴 Nâng Cao • 15 phút đọc</span>
-              <h3 class="proof-title">Bậc Thầy SQL Window Functions: Chuỗi Thời Gian &amp; Deduplication</h3>
-              <p class="proof-desc">Phân biệt ROW_NUMBER vs RANK vs DENSE_RANK, khử trùng bản ghi mới nhất, tính MoM/YoY bằng LAG/LEAD và Running Total.</p>
-            </div>
-          </a>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================
-         6. MISSION 2027 & CONTACT
-         ============================================ -->
-    <section class="section" id="contact">
+    <section class="section" id="logbook">
       <div class="container">
         
-        <!-- Mission Callout -->
-        <div class="mission-card">
-          <span class="section-tag" style="background: rgba(255, 189, 46, 0.15); color: var(--gold); border-color: rgba(255, 189, 46, 0.3);">Lời Hiệu Triệu 2027</span>
-          <h2>Sẵn Sàng Cho Những Bài Toán Dữ Liệu <span class="gradient-text">Thách Thức Nhất</span></h2>
-          <p>
-            Hiện tại, tôi đang hoàn thành trách nhiệm với Tổ quốc trong môi trường CAND, đồng thời không ngừng mài sắc kỹ năng kỹ thuật và tư duy kinh doanh mỗi ngày. Nếu bạn hoặc doanh nghiệp của bạn đang tìm kiếm một <strong>Analytics Engineer thực chiến, kỷ luật thép và thấu hiểu bài toán vận hành</strong> cho cột mốc <strong>2027</strong>, tôi luôn sẵn sàng lắng nghe và kết nối.
+        <div class="section-header">
+          <div class="section-pretitle">FIELD LOGBOOK &amp; SYSTEM TRACE</div>
+          <h2 class="section-title">5 Chương Chuyển Mình: <span class="highlight-teal">Hành Trình Thực Chiến</span></h2>
+          <p class="section-lead">
+            Mỗi trải nghiệm không phải là một lát cắt ngẫu nhiên, mà là từng mắt xích nối tiếp nhau tạo nên một kỹ sư có gốc rễ hạ tầng và tư duy kinh doanh nhạy bén.
           </p>
-          <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
-            <a href="mailto:trandc3015@gmail.com" class="btn-primary">
-              <span>Gửi thư hợp tác: trandc3015@gmail.com</span>
-              <span>✉️</span>
+        </div>
+
+        <div class="logbook-entries">
+          
+          <!-- Entry 01 -->
+          <article class="log-entry tech-box">
+            <div class="log-entry-meta">
+              <span class="log-trace-id">[TRACE #01 // MODULE: ACADEMIC FOUNDATION]</span>
+              <span class="log-timeframe">UFM • 2020 - 2024</span>
+            </div>
+            <h3 class="log-title">Thủ Khoa Đầu Ra — Đại Học Tài Chính - Marketing (UFM)</h3>
+            <p class="log-body">
+              Tôi chọn ngành Hệ thống thông tin quản lý — chuyên ngành Tin học quản lý tại UFM. Không phải ngẫu nhiên. Tôi muốn hiểu cách công nghệ thông tin phục vụ bài toán kinh doanh thực tế, chứ không chỉ viết code trong phòng lab. Khi tốt nghiệp với danh hiệu Thủ khoa (GPA 3.7/4.0), tôi biết nền tảng này sẽ theo mình rất lâu.
+            </p>
+            <div class="log-terminal-takeaway">
+              <span class="prompt-prefix">&gt; takeaway:</span> Nền tảng cho tôi tư duy hệ thống — nhìn dữ liệu không chỉ là bảng và cột, mà là luồng thông tin chảy qua toàn bộ doanh nghiệp.
+            </div>
+          </article>
+
+          <!-- Entry 02 -->
+          <article class="log-entry tech-box">
+            <div class="log-entry-meta">
+              <span class="log-trace-id">[TRACE #02 // MODULE: DATA PIPELINE &amp; SQL MASTERY]</span>
+              <span class="log-timeframe">THỰC CHIẾN DATA ENGINEER • 2024</span>
+            </div>
+            <h3 class="log-title">Dấn Thân Làm Data Engineer &amp; Bứt Phá Chứng Chỉ SQL Advanced</h3>
+            <p class="log-body">
+              Ra trường, tôi dấn thân ngay vào vị trí Data Engineer. Đây là nơi tôi lần đầu chạm vào data thực tế — không còn là bài tập mẫu, mà là hàng triệu dòng dữ liệu cần được "nắn" thành pipeline, đối soát và biến thành báo cáo có ý nghĩa. Sau đó, tôi nghỉ việc để tập trung cày chứng chỉ SQL Advanced — vì tôi hiểu rằng SQL là xương sống, và muốn thành thạo nó ở mức cao nhất.
+            </p>
+            <div class="log-terminal-takeaway">
+              <span class="prompt-prefix">&gt; takeaway:</span> Lý thuyết khác xa thực tế. Viết query chạy được thì dễ, nhưng viết query tối ưu — tránh được Fan-out, xử lý NULL, tận dụng Window Functions — mới là bản lĩnh thực sự.
+            </div>
+          </article>
+
+          <!-- Entry 03 -->
+          <article class="log-entry tech-box">
+            <div class="log-entry-meta">
+              <span class="log-trace-id">[TRACE #03 // MODULE: ENTERPRISE OPERATIONS]</span>
+              <span class="log-timeframe">ERP IMPLEMENTATION • 2024 - 2025</span>
+            </div>
+            <h3 class="log-title">Triển Khai ERP — Thấu Hiểu Bức Tranh Vận Hành Toàn Diện</h3>
+            <p class="log-body">
+              Bước sang vai trò triển khai ERP, tôi được ngồi cùng các chủ doanh nghiệp, giám đốc tài chính và trưởng phòng ban. Đây là lúc tôi nhìn thấy bức tranh toàn cảnh: một con số trên báo cáo thực chất là kết quả của chuỗi liên hoàn từ đặt hàng ➔ nhập kho ➔ đối soát công nợ ➔ hạch toán sổ cái. Kinh nghiệm này cho tôi hiểu stakeholder thực sự quan tâm điều gì và biết cách dịch business requirements thành dữ liệu.
+            </p>
+            <div class="log-terminal-takeaway">
+              <span class="prompt-prefix">&gt; takeaway:</span> Hiểu rõ Business Requirements và luồng vận hành giúp tôi không bao giờ tạo ra những bảng dữ liệu "vô hồn".
+            </div>
+          </article>
+
+          <!-- Entry 04 -->
+          <article class="log-entry tech-box">
+            <div class="log-entry-meta">
+              <span class="log-trace-id" style="color: var(--amber);">[TRACE #04 // MODULE: MISSION-CRITICAL INFRA]</span>
+              <span class="log-timeframe">NGHĨA VỤ CAND • 2025 - 2027</span>
+            </div>
+            <h3 class="log-title">Trực Chiến Hạ Tầng &amp; Hệ Thống Thông Tin Trọng Yếu CAND</h3>
+            <p class="log-body">
+              Khi nhận lệnh nghĩa vụ Công an nhân dân, tôi nghĩ hành trình data của mình sẽ phải tạm dừng. Nhưng may mắn, tôi được trưng dụng làm IT Support — được tiếp xúc với data rất nhiều, kể cả hạ tầng mạng, máy chủ, hệ thống quản lý dân cư và truyền tin báo cháy GTEL. Nghĩa vụ tưởng là gián đoạn, hóa ra là bước ngoặt cho tôi hiểu thêm chiều sâu về hạ tầng — thứ mà một Data Engineer thuần túy ít khi có cơ hội chạm tới.
+            </p>
+            <div class="log-terminal-takeaway" style="border-left-color: var(--amber);">
+              <span class="prompt-prefix" style="color: var(--amber);">&gt; takeaway:</span> Hạ tầng không còn là chiếc hộp đen. Làm việc trong môi trường yêu cầu dữ liệu chính xác tuyệt đối, bảo mật cao và sẵn sàng 24/7 đã rèn cho tôi tính kỷ luật thép.
+            </div>
+          </article>
+
+          <!-- Entry 05 -->
+          <article class="log-entry tech-box">
+            <div class="log-entry-meta">
+              <span class="log-trace-id" style="color: var(--teal);">[TRACE #05 // MODULE: CONVERGENCE CORE]</span>
+              <span class="log-timeframe">KỶ NGUYÊN AI • ROAD TO 2027</span>
+            </div>
+            <h3 class="log-title">Bước Ngoặt Định Vị: Trở Thành Analytics Engineer Toàn Năng</h3>
+            <p class="log-body">
+              Càng tiếp xúc nhiều data, tôi càng quan tâm hơn về câu chuyện phía sau nó. Tôi bắt đầu tìm hiểu về ad-hoc — những bài toán phía sau bức tranh doanh nghiệp, thứ mà CEO cần để ra quyết định. Trong thời đại AI, ranh giới giữa Data Analyst và Data Engineer đang dần mờ đi. Analytics Engineer ra đời chính là để giải quyết điều này: tôi tự build pipeline cho riêng mình, tự prepare data, và vì chính tôi là người chuẩn bị mọi thứ — tôi hiểu business domain sâu hơn bất kỳ ai.
+            </p>
+            <div class="log-terminal-takeaway">
+              <span class="prompt-prefix">&gt; takeaway:</span> Tôi đã tự mày mò rất nhiều khóa học. Và tôi muốn chia sẻ hành trình này cho các bạn — vì tôi hiểu cảm giác không biết bắt đầu từ đâu.
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================
+         4. TECH STACK — TECHNICAL MANIFEST
+         ============================================ -->
+    <section class="section" id="manifest">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-pretitle">SYSTEM MANIFEST &amp; CAPABILITIES</div>
+          <h2 class="section-title">Hạ Tầng Vững Vàng, <span class="highlight-teal">Truy Vấn Sâu Sắc</span></h2>
+          <p class="section-lead">
+            Đây là những công cụ tôi dùng hàng ngày — không phải vì trending, mà vì mỗi thứ đều gắn với một kinh nghiệm thực tế cụ thể trong hành trình của tôi.
+          </p>
+        </div>
+
+        <div class="manifest-grid">
+          
+          <!-- Layer 01 -->
+          <div class="manifest-card">
+            <div class="manifest-header">
+              <span class="manifest-layer-tag">// LAYER 01: PHYSICAL &amp; OS</span>
+              <h3 class="manifest-title">Hạ Tầng &amp; Hệ Điều Hành</h3>
+              <p class="manifest-desc">Nền tảng tôi luyện từ môi trường trực chiến CAND</p>
+            </div>
+            <div class="manifest-pills">
+              <span class="manifest-pill"><span class="dot"></span>Linux OS (Ubuntu)</span>
+              <span class="manifest-pill"><span class="dot"></span>Hạ tầng mạng LAN</span>
+              <span class="manifest-pill"><span class="dot"></span>Cấu hình Switch &amp; Router</span>
+              <span class="manifest-pill"><span class="dot"></span>Hardware Management</span>
+              <span class="manifest-pill"><span class="dot"></span>Bảo mật &amp; Phân quyền</span>
+              <span class="manifest-pill"><span class="dot"></span>High Availability</span>
+            </div>
+          </div>
+
+          <!-- Layer 02 -->
+          <div class="manifest-card">
+            <div class="manifest-header">
+              <span class="manifest-layer-tag">// LAYER 02: INGESTION &amp; STORAGE</span>
+              <h3 class="manifest-title">Đường Ống &amp; Lưu Trữ</h3>
+              <p class="manifest-desc">Kinh nghiệm thực chiến từ vị trí Data Engineer</p>
+            </div>
+            <div class="manifest-pills">
+              <span class="manifest-pill"><span class="dot"></span>Python (Data pipelines)</span>
+              <span class="manifest-pill"><span class="dot"></span>PostgreSQL / MySQL</span>
+              <span class="manifest-pill"><span class="dot"></span>Snowflake</span>
+              <span class="manifest-pill"><span class="dot"></span>Apache Airflow</span>
+              <span class="manifest-pill"><span class="dot"></span>ETL / ELT Architecture</span>
+              <span class="manifest-pill"><span class="dot"></span>Data Ingestion</span>
+            </div>
+          </div>
+
+          <!-- Layer 03 -->
+          <div class="manifest-card">
+            <div class="manifest-header">
+              <span class="manifest-layer-tag" style="color: var(--teal);">// LAYER 03: ANALYTICS CORE</span>
+              <h3 class="manifest-title">Analytics Engineering</h3>
+              <p class="manifest-desc">Vũ khí cốt lõi giải quyết bài toán kinh doanh</p>
+            </div>
+            <div class="manifest-pills">
+              <span class="manifest-pill"><span class="dot"></span>SQL Advanced Mastery</span>
+              <span class="manifest-pill"><span class="dot"></span>dbt (data build tool)</span>
+              <span class="manifest-pill"><span class="dot"></span>Kimball Star Schema</span>
+              <span class="manifest-pill"><span class="dot"></span>Ad-hoc Analytics</span>
+              <span class="manifest-pill"><span class="dot"></span>Window Functions</span>
+              <span class="manifest-pill"><span class="dot"></span>Data Testing &amp; Governance</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================
+         5. PROOF OF WORK — TECHNICAL FIELD NOTES
+         ============================================ -->
+    <section class="section" id="whitepapers">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-pretitle">WHITEPAPERS &amp; KNOWLEDGE HUB</div>
+          <h2 class="section-title">Tri Thức Thực Chiến: <span class="highlight-teal">SQL Field Notes</span></h2>
+          <p class="section-lead">
+            Tôi tin rằng cách tốt nhất để chứng minh năng lực là qua sản phẩm thực tế. Dưới đây là chuỗi bài viết tôi tự tay biên soạn — mỗi bài đều đúc kết từ những lỗi tôi từng mắc, những bẫy tôi từng rơi vào khi làm việc thực tế với SQL.
+          </p>
+        </div>
+
+        <div class="whitepapers-grid">
+          
+          <!-- Article 01 -->
+          <a href="../knowledge/posts/01-sql-execution-order.html" target="_blank" class="whitepaper-card">
+            <div class="whitepaper-thumb">
+              <img src="../images/knowledge/sql-execution-order.jpg" alt="Thứ tự thực thi SQL" loading="lazy">
+            </div>
+            <div class="whitepaper-body">
+              <span class="whitepaper-doc-id">[DOC-01] • 🟢 CƠ BẢN</span>
+              <h3 class="whitepaper-title">Tư Duy SQL Từ Gốc: Thứ Tự Thực Thi &amp; Bẫy Lọc Dữ Liệu</h3>
+              <p class="whitepaper-desc">Cách Query Engine xử lý từ FROM tới LIMIT, giải phẫu vì sao không lọc alias ở WHERE và bẫy Three-Valued Logic với NULL.</p>
+            </div>
+          </a>
+
+          <!-- Article 02 -->
+          <a href="../knowledge/posts/02-sql-joins-fanout-trap.html" target="_blank" class="whitepaper-card">
+            <div class="whitepaper-thumb">
+              <img src="../images/knowledge/sql-joins-fanout.jpg" alt="SQL JOINs và Fan-out trap" loading="lazy">
+            </div>
+            <div class="whitepaper-body">
+              <span class="whitepaper-doc-id">[DOC-02] • 🟡 TRUNG CẤP</span>
+              <h3 class="whitepaper-title">Chinh Phục SQL JOINs: Hóa Giải Bẫy Nhân Đôi Fan-Out Trap</h3>
+              <p class="whitepaper-desc">Nguyên nhân khiến doanh thu bị đội lên gấp 3 lần khi JOIN 1-Nhiều và 3 kỹ thuật thực chiến dập tắt Fan-out triệt để.</p>
+            </div>
+          </a>
+
+          <!-- Article 03 -->
+          <a href="../knowledge/posts/03-sql-cte-modular-architecture.html" target="_blank" class="whitepaper-card">
+            <div class="whitepaper-thumb">
+              <img src="../images/knowledge/sql-cte-pipeline.jpg" alt="Modular CTEs" loading="lazy">
+            </div>
+            <div class="whitepaper-body">
+              <span class="whitepaper-doc-id">[DOC-03] • 🟡 TRUNG CẤP</span>
+              <h3 class="whitepaper-title">Common Table Expressions (CTE): Nghệ Thuật Modular SQL</h3>
+              <p class="whitepaper-desc">Xóa bỏ Spaghetti Subqueries, thiết kế đường ống 4 tầng chuẩn mực dbt, phân tích RFM và kỹ thuật Recursive CTE phân cấp.</p>
+            </div>
+          </a>
+
+          <!-- Article 04 -->
+          <a href="../knowledge/posts/04-sql-advanced-window-functions.html" target="_blank" class="whitepaper-card">
+            <div class="whitepaper-thumb">
+              <img src="../images/knowledge/sql-window-functions.jpg" alt="Window Functions" loading="lazy">
+            </div>
+            <div class="whitepaper-body">
+              <span class="whitepaper-doc-id">[DOC-04] • 🔴 NÂNG CAO</span>
+              <h3 class="whitepaper-title">Bậc Thầy SQL Window Functions: Chuỗi Thời Gian &amp; Deduplication</h3>
+              <p class="whitepaper-desc">Phân biệt ROW_NUMBER vs RANK vs DENSE_RANK, khử trùng bản ghi mới nhất, tính MoM/YoY bằng LAG/LEAD và Running Total.</p>
+            </div>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================
+         6. MISSION 2027 & SECURE DIRECT DISPATCH
+         ============================================ -->
+    <section class="section" id="dispatch">
+      <div class="container">
+        
+        <!-- Mission Statement Box -->
+        <div class="mission-box tech-box">
+          <h2 class="mission-title">Sẵn Sàng Cho Những Bài Toán Dữ Liệu <span class="highlight-teal">Thách Thức Nhất</span></h2>
+          <p class="mission-text">
+            Hiện tại, tôi đang hoàn thành trách nhiệm nghĩa vụ trong môi trường CAND và không ngừng mài sắc kỹ năng mỗi ngày. Mục tiêu 2027 của tôi: trở thành Analytics Engineer có thể tự build toàn bộ data stack — từ pipeline đến dashboard đến ad-hoc insight — cho doanh nghiệp. Nếu bạn đang tìm kiếm một người thực chiến, kỷ luật và thấu hiểu vận hành, tôi sẵn sàng kết nối.
+          </p>
+          <div style="margin-top: 24px;">
+            <a href="mailto:trandc3015@gmail.com" class="btn-terminal" style="padding: 10px 22px; font-size: 0.88rem;">
+              <span>&gt; mailto: trandc3015@gmail.com</span>
             </a>
           </div>
         </div>
 
-        <!-- Standalone Contact Form -->
-        <div class="contact-box">
-          <div style="text-align: center; margin-bottom: 20px;">
-            <span style="font-size: 1.8rem; display: block; margin-bottom: 6px;">📮</span>
-            <h3 style="font-size: 1.3rem; font-weight: 700;">Gửi Lời Nhắn Trực Tiếp Cho Dustin</h3>
-            <p style="font-size: 0.88rem; color: var(--text-secondary);">
-              Bạn muốn trao đổi cơ hội tuyển dụng, hỏi thăm kỹ thuật hay đơn giản là kết nối? Thông điệp sẽ được chuyển thẳng về hòm thư cá nhân của tôi (hoàn toàn bảo mật / có thể ẩn danh).
-            </p>
+        <!-- Terminal Contact Console -->
+        <div class="dispatch-terminal">
+          <div class="dispatch-terminal-header">
+            <div class="terminal-dots">
+              <span class="terminal-dot dot-red"></span>
+              <span class="terminal-dot dot-yellow"></span>
+              <span class="terminal-dot dot-green"></span>
+            </div>
+            <span>CONSOLE: SECURE_DIRECT_DISPATCH // HOST: dustin@cand</span>
+            <span style="color: var(--teal);">ONLINE</span>
           </div>
 
-          <form id="lpContactForm" class="contact-form">
-            <div class="form-group">
-              <label for="lpMsg" class="form-label">Nội dung thông điệp <span style="color: var(--accent);">*</span></label>
-              <textarea id="lpMsg" name="message" class="form-textarea" placeholder="Nhập lời nhắn, câu hỏi hoặc chia sẻ của bạn..." required></textarea>
-            </div>
+          <div class="dispatch-terminal-body">
+            <p style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px;">
+              // Nhập thông điệp trao đổi cơ hội, phản hồi kỹ thuật hoặc hợp tác 2027. Dữ liệu sẽ được dispatch thẳng về hòm thư cá nhân (bảo mật / ẩn danh tùy chọn).
+            </p>
 
-            <div class="form-row">
-              <div class="form-group">
-                <label for="lpName" class="form-label">Tên của bạn <span style="color: var(--text-muted); font-weight: 400; font-size: 0.78rem;">(Tùy chọn)</span></label>
-                <input type="text" id="lpName" name="name" class="form-input" placeholder="Để trống sẽ là 'Bạn đọc ẩn danh'...">
+            <form id="lpContactForm" class="terminal-form">
+              <div class="form-field">
+                <label for="lpMsg" class="field-label">
+                  <span>&gt; message_payload</span>
+                  <span class="required">*</span>
+                </label>
+                <textarea id="lpMsg" name="message" class="terminal-textarea" placeholder="Nhập nội dung lời nhắn, câu hỏi hoặc chia sẻ của bạn..." required></textarea>
               </div>
-              <div class="form-group">
-                <label for="lpEmail" class="form-label">Email liên hệ <span style="color: var(--text-muted); font-weight: 400; font-size: 0.78rem;">(Tùy chọn)</span></label>
-                <input type="email" id="lpEmail" name="email" class="form-input" placeholder="Nhập email nếu bạn muốn nhận hồi âm...">
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-field">
+                  <label for="lpName" class="field-label">
+                    <span>&gt; sender_identity</span>
+                    <span style="color: var(--text-muted); font-size: 0.74rem;">(tùy chọn)</span>
+                  </label>
+                  <input type="text" id="lpName" name="name" class="terminal-input" placeholder="Để trống sẽ là 'Ẩn danh'...">
+                </div>
+                <div class="form-field">
+                  <label for="lpEmail" class="field-label">
+                    <span>&gt; sender_email</span>
+                    <span style="color: var(--text-muted); font-size: 0.74rem;">(tùy chọn)</span>
+                  </label>
+                  <input type="email" id="lpEmail" name="email" class="terminal-input" placeholder="Nhập email nếu muốn nhận hồi âm...">
+                </div>
               </div>
-            </div>
 
-            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;">
-              <span>Gửi thông điệp ngay</span>
-              <span>✈️</span>
-            </button>
-          </form>
+              <button type="submit" class="terminal-submit-btn">
+                <span>[EXECUTE_SEND] Gửi Thông Điệp Ngay ➔</span>
+              </button>
+            </form>
 
-          <div id="lpStatusBox" class="contact-status-box"></div>
+            <div id="lpStatusBox" class="terminal-status-box"></div>
+          </div>
         </div>
 
       </div>
@@ -467,11 +537,11 @@
   <!-- Footer -->
   <footer class="lp-footer">
     <div class="container">
-      <p>© 2026 Trần Đức (Dustin) • Aspiring Analytics Engineer. Built with discipline &amp; passion on the road to 2027.</p>
+      <p>© 2026 Trần Đức (Dustin) • System Blueprint Edition. On the road to 2027.</p>
     </div>
   </footer>
 
   <!-- Standalone Script -->
-  <script src="landing.js?v=1"></script>
+  <script src="landing.js?v=2"></script>
 </body>
 </html>

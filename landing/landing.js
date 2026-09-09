@@ -92,11 +92,11 @@ document.addEventListener('DOMContentLoaded', () => {
             statusBox.style.border = '1px solid rgba(0, 230, 153, 0.35)';
             statusBox.style.color = '#00E699';
             statusBox.innerHTML = `
-              <div style="font-size: 1.5rem; line-height: 1; margin-right: 12px;">✅</div>
+              <div style="font-size: 1.1rem; line-height: 1; margin-right: 12px; font-family: var(--font-mono); font-weight: 700;">[200_OK]</div>
               <div>
-                <strong>Đã gửi thành công!</strong>
-                <p style="margin: 4px 0 0 0; font-size: 0.88rem; color: var(--text-secondary);">
-                  Cảm ơn bạn rất nhiều vì đã kết nối. Thông điệp đã được chuyển thẳng tới hòm thư cá nhân của Dustin (<code>trandc3015@gmail.com</code>).
+                <strong>DISPATCH_SUCCESS: Đã gửi thông điệp thành công!</strong>
+                <p style="margin: 4px 0 0 0; font-size: 0.86rem; color: var(--text-secondary);">
+                  Thông điệp đã được chuyển thẳng tới hòm thư cá nhân của Dustin (<code>trandc3015@gmail.com</code>). Cảm ơn bạn rất nhiều vì đã kết nối!
                 </p>
               </div>
             `;
@@ -110,15 +110,15 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.innerHTML = originalBtnText;
         if (statusBox) {
           statusBox.style.display = 'flex';
-          statusBox.style.background = 'rgba(255, 107, 107, 0.1)';
-          statusBox.style.border = '1px solid rgba(255, 107, 107, 0.35)';
-          statusBox.style.color = '#FF6B6B';
+          statusBox.style.background = 'rgba(244, 63, 94, 0.1)';
+          statusBox.style.border = '1px solid rgba(244, 63, 94, 0.35)';
+          statusBox.style.color = '#F43F5E';
           statusBox.innerHTML = `
-            <div style="font-size: 1.5rem; line-height: 1; margin-right: 12px;">⚠️</div>
+            <div style="font-size: 1.1rem; line-height: 1; margin-right: 12px; font-family: var(--font-mono); font-weight: 700;">[ERR_DISPATCH]</div>
             <div>
               <strong>Chưa thể gửi qua hệ thống tự động!</strong>
-              <p style="margin: 4px 0 0 0; font-size: 0.88rem; color: var(--text-secondary);">
-                Bạn có thể gửi thư trực tiếp cho tôi tại: <a href="mailto:trandc3015@gmail.com" style="color: var(--primary); text-decoration: underline;">trandc3015@gmail.com</a>.
+              <p style="margin: 4px 0 0 0; font-size: 0.86rem; color: var(--text-secondary);">
+                Bạn có thể gửi thư trực tiếp cho tôi tại: <a href="mailto:trandc3015@gmail.com" style="color: var(--teal); text-decoration: underline;">trandc3015@gmail.com</a>.
               </p>
             </div>
           `;
@@ -127,3 +127,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
