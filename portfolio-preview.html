@@ -1,0 +1,3512 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trần Đức (Dustin) — Analytics Engineer | Executive Portfolio</title>
+  <meta name="description" content="Portfolio cá nhân của Trần Đức (Dustin) — Thủ khoa UFM, cựu Data Engineer, kinh nghiệm ERP THACO, Lộc Phúc và hạ tầng IT CAND. Định vị Analytics Engineer kết hợp kỹ thuật đường ống với bài toán kinh doanh.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Favicon & Base Stylesheet -->
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="stylesheet" href="landing/landing.css?v=6">
+  
+  <!-- Custom Enhancements Inspired by minhbpham.com -->
+  <style>
+    /* ==========================================================
+       0. AMBIENT AURORA BACKGROUND, TYPEWRITER & 3D TECH HOLOGRAM
+       ========================================================== */
+    .hero-section {
+      position: relative;
+      overflow: hidden;
+      perspective: 1200px;
+    }
+
+    .aurora-container {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .aurora-grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 35%, transparent 85%);
+      -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 35%, transparent 85%);
+    }
+
+    [data-theme="light"] .aurora-grid-overlay {
+      background-image: 
+        linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+    }
+
+    .aurora-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(85px);
+      opacity: 0.48;
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      will-change: transform;
+    }
+
+    [data-theme="light"] .aurora-blob {
+      opacity: 0.28;
+      filter: blur(95px);
+    }
+
+    .blob-1 {
+      top: -12%;
+      left: 8%;
+      width: 540px;
+      height: 540px;
+      background: radial-gradient(circle, #3B82F6 0%, rgba(59, 130, 246, 0.15) 68%, transparent 100%);
+      animation: auroraFloat1 24s ease-in-out infinite alternate;
+    }
+
+    .blob-2 {
+      top: 10%;
+      right: -5%;
+      width: 580px;
+      height: 580px;
+      background: radial-gradient(circle, #8B5CF6 0%, rgba(139, 92, 246, 0.18) 65%, transparent 100%);
+      animation: auroraFloat2 28s ease-in-out infinite alternate;
+    }
+
+    .blob-3 {
+      bottom: -15%;
+      left: 32%;
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, #10B981 0%, rgba(16, 185, 129, 0.14) 70%, transparent 100%);
+      animation: auroraFloat3 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes auroraFloat1 {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(65px, 45px) scale(1.12); }
+      100% { transform: translate(-45px, 75px) scale(0.94); }
+    }
+
+    @keyframes auroraFloat2 {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-75px, 55px) scale(1.09); }
+      100% { transform: translate(35px, -45px) scale(0.92); }
+    }
+
+    @keyframes auroraFloat3 {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(55px, -65px) scale(1.14); }
+      100% { transform: translate(-65px, -35px) scale(0.91); }
+    }
+
+    .hero-section > .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Typewriter Subtitle Badge */
+    .hero-kicker-row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .hero-kicker-row .hero-kicker {
+      margin-bottom: 0;
+    }
+
+    .hero-typewriter-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: rgba(37, 99, 235, 0.12);
+      border: 1px solid rgba(37, 99, 235, 0.32);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.12);
+      min-height: 32px;
+    }
+
+    .tw-prompt {
+      color: var(--emerald);
+      font-weight: 700;
+    }
+
+    .tw-static {
+      color: var(--text-secondary);
+    }
+
+    .tw-dynamic {
+      color: #60A5FA;
+      font-weight: 700;
+      min-width: 10px;
+    }
+    [data-theme="light"] .tw-dynamic {
+      color: #1D4ED8;
+    }
+
+    .tw-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      background: #60A5FA;
+      margin-left: 2px;
+      animation: cursorBlink 0.8s infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* 3D Tech Hologram Hero Illustration */
+    .hero-visual-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1200px;
+      transform-style: preserve-3d;
+      padding: 30px 15px;
+    }
+
+    .hologram-ring-svg {
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.42;
+      animation: ringRotate 42s linear infinite;
+    }
+
+    [data-theme="light"] .hologram-ring-svg {
+      opacity: 0.22;
+    }
+
+    @keyframes ringRotate {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .hero-hologram-card {
+      position: relative;
+      z-index: 2;
+      background: rgba(13, 20, 36, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 
+        0 22px 55px rgba(0, 0, 0, 0.55),
+        0 0 45px rgba(37, 99, 235, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      max-width: 375px;
+      width: 100%;
+      transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+    }
+
+    [data-theme="light"] .hero-hologram-card {
+      background: rgba(255, 255, 255, 0.88);
+      border-color: rgba(37, 99, 235, 0.22);
+      box-shadow: 
+        0 20px 45px rgba(0, 0, 0, 0.12),
+        0 0 35px rgba(37, 99, 235, 0.18);
+    }
+
+    .hero-hologram-card::before,
+    .hero-hologram-card::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .hero-hologram-card::before {
+      top: 8px;
+      left: 8px;
+      border-top: 2px solid var(--accent);
+      border-left: 2px solid var(--accent);
+    }
+
+    .hero-hologram-card::after {
+      bottom: 8px;
+      right: 8px;
+      border-bottom: 2px solid var(--emerald);
+      border-right: 2px solid var(--emerald);
+    }
+
+    .hologram-card-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 11px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+    }
+
+    [data-theme="light"] .hologram-card-topbar {
+      border-bottom-color: rgba(0, 0, 0, 0.08);
+    }
+
+    .hologram-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--emerald);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .live-beacon {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--emerald);
+      position: relative;
+    }
+
+    .live-beacon::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: var(--emerald);
+      opacity: 0.5;
+      animation: beaconPulse 1.8s infinite ease-out;
+    }
+
+    @keyframes beaconPulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(2.6); opacity: 0; }
+    }
+
+    .hologram-id-tag {
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .hologram-img-frame {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      aspect-ratio: 4 / 4.8;
+      background: #000;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .hologram-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: contrast(1.03) brightness(0.98);
+      transition: transform 0.5s ease;
+    }
+
+    .hero-hologram-card:hover .hologram-img {
+      transform: scale(1.03);
+    }
+
+    .cyber-scan-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.85), rgba(52, 211, 153, 0.95), transparent);
+      box-shadow: 0 0 16px rgba(52, 211, 153, 0.9);
+      pointer-events: none;
+      animation: cyberScan 4.2s ease-in-out infinite;
+      z-index: 4;
+    }
+
+    @keyframes cyberScan {
+      0% { top: 0%; opacity: 0; }
+      15% { opacity: 0.95; }
+      85% { opacity: 0.95; }
+      100% { top: 100%; opacity: 0; }
+    }
+
+    .hologram-card-footer {
+      padding-top: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .hologram-name {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hologram-verified-check {
+      color: #38BDF8;
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    .hologram-desc {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    /* Floating 3D Tech Orbit Chips */
+    .floating-tech-chip {
+      position: absolute;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 15px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 50px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.2s, box-shadow 0.2s;
+      cursor: default;
+      white-space: nowrap;
+      pointer-events: auto;
+    }
+
+    [data-theme="light"] .floating-tech-chip {
+      background: rgba(255, 255, 255, 0.94);
+      border-color: rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+    }
+
+    .floating-tech-chip:hover {
+      border-color: var(--accent);
+      box-shadow: 0 16px 40px rgba(37, 99, 235, 0.35);
+    }
+
+    .chip-icon {
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chip-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.22;
+    }
+
+    .chip-title {
+      font-family: var(--font-mono);
+      font-size: 0.79rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .chip-sub {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+
+    .chip-dbt {
+      top: -10px;
+      left: -24px;
+      animation: chipFloat1 6.5s ease-in-out infinite alternate;
+    }
+
+    .chip-spark {
+      top: 16%;
+      right: -28px;
+      animation: chipFloat2 7.2s ease-in-out infinite alternate 0.5s;
+    }
+
+    .chip-snowflake {
+      bottom: 22%;
+      left: -32px;
+      animation: chipFloat3 6.8s ease-in-out infinite alternate 1s;
+    }
+
+    .chip-cand {
+      bottom: -14px;
+      right: -20px;
+      animation: chipFloat4 7.6s ease-in-out infinite alternate 1.5s;
+    }
+
+    @keyframes chipFloat1 {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-8px) rotate(-1.5deg); }
+    }
+
+    @keyframes chipFloat2 {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(10px) rotate(2deg); }
+    }
+
+    @keyframes chipFloat3 {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-9px) rotate(1.5deg); }
+    }
+
+    @keyframes chipFloat4 {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(8px) rotate(-2deg); }
+    }
+
+    @media (max-width: 960px) {
+      .hero-visual-wrapper {
+        margin-top: 24px;
+      }
+      .floating-tech-chip {
+        padding: 6px 12px;
+      }
+      .chip-dbt { top: -8px; left: 0px; }
+      .chip-spark { top: 10%; right: 0px; }
+      .chip-snowflake { bottom: 18%; left: 0px; }
+      .chip-cand { bottom: -10px; right: 0px; }
+      .hologram-ring-svg {
+        width: 400px;
+        height: 400px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-kicker-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .floating-tech-chip {
+        display: none;
+      }
+      .hero-hologram-card {
+        max-width: 320px;
+      }
+    }
+
+    /* Flow Connectors Animated Pulse */
+    .flow-node-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--emerald), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .flow-node-card:hover::after {
+      opacity: 1;
+    }
+
+    /* ==========================================================
+       1. MARQUEE TECH STREAM TICKER
+       ========================================================== */
+    .marquee-container {
+      width: 100%;
+      overflow: hidden;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .marquee-container::before,
+    .marquee-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 80px;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .marquee-container::before {
+      left: 0;
+      background: linear-gradient(to right, var(--surface), transparent);
+    }
+
+    .marquee-container::after {
+      right: 0;
+      background: linear-gradient(to left, var(--surface), transparent);
+    }
+
+    .marquee-content {
+      display: inline-flex;
+      align-items: center;
+      gap: 36px;
+      animation: marqueeScroll 28s linear infinite;
+    }
+
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .marquee-item span.dot {
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ==========================================================
+       2. HOW MY DATA FLOWS — ARCHITECTURE CANVAS
+       ========================================================== */
+    .flow-tabs-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 28px auto 36px auto;
+      flex-wrap: wrap;
+    }
+
+    .flow-tab-btn {
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-family: var(--font-mono);
+      font-size: 0.86rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .flow-tab-btn:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+      background: var(--surface-hover);
+    }
+
+    .flow-tab-btn.active {
+      background: var(--accent);
+      color: #FFFFFF;
+      border-color: var(--accent);
+      box-shadow: 0 4px 18px rgba(37, 99, 235, 0.35);
+    }
+
+    #data-flow .container {
+      max-width: 1260px;
+    }
+
+    .arch-canvas-container {
+      width: 100%;
+      overflow-x: auto;
+      background: #080D18;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px 32px 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 40px rgba(56, 189, 248, 0.05);
+      position: relative;
+      margin-top: 24px;
+    }
+
+    [data-theme="light"] .arch-canvas-container {
+      background: #0D1322;
+    }
+
+    .arch-svg-canvas {
+      display: block;
+      width: 100%;
+      min-width: 1040px;
+      height: auto;
+    }
+
+    .arch-node {
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .arch-node:hover rect.node-card {
+      stroke: #A855F7;
+      stroke-width: 2;
+      filter: drop-shadow(0 0 14px rgba(168, 85, 247, 0.55));
+    }
+
+    .conduit-base {
+      stroke: rgba(139, 92, 246, 0.35);
+      stroke-width: 2.2;
+      fill: none;
+    }
+
+    .conduit-bypass {
+      stroke: rgba(168, 85, 247, 0.45);
+      stroke-width: 1.8;
+      stroke-dasharray: 5 5;
+      fill: none;
+    }
+
+    @keyframes spinPinwheel {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .airflow-spin {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: spinPinwheel 16s linear infinite;
+    }
+
+    .airflow-spin-spark {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: spinPinwheel 16s linear infinite;
+    }
+
+    @keyframes pulseArrow {
+      0%, 100% { stroke-opacity: 0.6; }
+      50% { stroke-opacity: 1; filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.8)); }
+    }
+
+    .orchestration-arrow {
+      animation: pulseArrow 3s ease-in-out infinite;
+    }
+
+    @keyframes checkPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.18); }
+    }
+
+    .dbt-check {
+      animation: checkPulse 2s ease-in-out infinite;
+    }
+
+    .flow-pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      position: relative;
+    }
+
+    .flow-node-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 22px 18px;
+      transition: all var(--transition);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .flow-node-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .flow-node-card.core {
+      border-color: rgba(37, 99, 235, 0.4);
+      background: linear-gradient(180deg, var(--surface) 0%, rgba(37, 99, 235, 0.05) 100%);
+    }
+
+    .flow-node-badge {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .flow-node-title {
+      font-family: var(--font-display);
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .flow-node-desc {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 12px;
+      flex: 1;
+    }
+
+    .flow-node-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .flow-pill {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--surface-hover);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* ==========================================================
+       3. INTERACTIVE SQL TERMINAL ("QUERY DUSTIN")
+       ========================================================== */
+    .sql-terminal-box {
+      background: #090D16;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+      margin-top: 36px;
+    }
+
+    [data-theme="light"] .sql-terminal-box {
+      background: #111827;
+      color: #F3F4F6;
+    }
+
+    .terminal-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: #05080E;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .t-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+    .t-dot.red { background: #FF5F56; }
+    .t-dot.yellow { background: #FFBD2E; }
+    .t-dot.green { background: #27C93F; }
+
+    .terminal-title {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: #9CA3AF;
+      font-weight: 500;
+    }
+
+    .terminal-presets {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 20px;
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      flex-wrap: wrap;
+    }
+
+    .preset-label {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: #9CA3AF;
+      font-weight: 600;
+      margin-right: 4px;
+    }
+
+    .preset-btn {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 6px;
+      background: rgba(37, 99, 235, 0.15);
+      color: #93C5FD;
+      border: 1px solid rgba(37, 99, 235, 0.3);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .preset-btn:hover {
+      background: rgba(37, 99, 235, 0.3);
+      color: #FFFFFF;
+      transform: translateY(-1px);
+    }
+
+    .terminal-input-bar {
+      display: flex;
+      align-items: center;
+      padding: 14px 20px;
+      background: #090D16;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      gap: 12px;
+    }
+
+    .terminal-prompt {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--emerald);
+      white-space: nowrap;
+    }
+
+    .terminal-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: var(--font-mono);
+      font-size: 0.92rem;
+      color: #F9FAFB;
+      caret-color: #60A5FA;
+    }
+
+    .terminal-run-btn {
+      padding: 6px 16px;
+      background: var(--accent);
+      color: #FFFFFF;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background-color var(--transition);
+    }
+
+    .terminal-run-btn:hover {
+      background: var(--accent-hover);
+    }
+
+    .terminal-output {
+      padding: 20px;
+      overflow-x: auto;
+      min-height: 180px;
+      font-family: var(--font-mono);
+      font-size: 0.84rem;
+      color: #E5E7EB;
+    }
+
+    .sql-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.84rem;
+    }
+
+    .sql-table th {
+      background: rgba(255, 255, 255, 0.06);
+      color: #93C5FD;
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      letter-spacing: 0.04em;
+    }
+
+    .sql-table td {
+      padding: 9px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      color: #E5E7EB;
+      line-height: 1.5;
+    }
+
+    .sql-table tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .sql-table tr:hover {
+      background: rgba(37, 99, 235, 0.08);
+    }
+
+    .sql-stats-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 20px;
+      background: #05080E;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: #9CA3AF;
+    }
+
+    /* ==========================================================
+       4. CATEGORIZED TECH ARSENAL (SKILLS)
+       ========================================================== */
+    .arsenal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 36px;
+    }
+
+    .arsenal-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      transition: all var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .arsenal-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .arsenal-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .arsenal-icon {
+      font-size: 1.5rem;
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      background: var(--surface-hover);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .arsenal-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .arsenal-badge-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .arsenal-pill {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 6px;
+      background: var(--bg-subtle);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      transition: border-color var(--transition);
+    }
+
+    .arsenal-pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ==========================================================
+       5. FEATURED PROJECTS CARD SYSTEM
+       ========================================================== */
+    .projects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      margin-top: 40px;
+    }
+
+    .project-showcase-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 40px;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-showcase-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--border);
+      transition: background-color var(--transition);
+    }
+
+    .project-showcase-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .project-showcase-card.featured::before {
+      background: var(--accent);
+    }
+
+    .project-showcase-card.infra::before {
+      background: var(--emerald);
+    }
+
+    .project-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .project-badge-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .project-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: var(--surface-hover);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .project-badge.client {
+      background: var(--accent-subtle);
+      color: var(--accent);
+      border-color: rgba(37, 99, 235, 0.25);
+    }
+
+    .project-badge.security {
+      background: var(--emerald-subtle);
+      color: var(--emerald);
+      border-color: rgba(16, 185, 129, 0.25);
+    }
+
+    .project-duration {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .project-title {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .project-flow-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--accent);
+      background: var(--accent-subtle);
+      padding: 4px 10px;
+      border-radius: var(--radius-xs);
+      margin-bottom: 14px;
+      font-weight: 600;
+      border: 1px solid rgba(37, 99, 235, 0.2);
+    }
+
+    .project-flow-tag.spark {
+      color: #EA580C;
+      background: rgba(234, 88, 12, 0.1);
+      border-color: rgba(234, 88, 12, 0.25);
+    }
+
+    [data-theme="dark"] .project-flow-tag.spark {
+      color: #FB923C;
+      background: rgba(251, 146, 60, 0.1);
+    }
+
+    .project-flow-tag.dbt {
+      color: #E11D48;
+      background: rgba(225, 29, 72, 0.1);
+      border-color: rgba(225, 29, 72, 0.25);
+    }
+
+    [data-theme="dark"] .project-flow-tag.dbt {
+      color: #FDA4AF;
+      background: rgba(253, 164, 175, 0.1);
+    }
+
+    .project-role-tag {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-role-tag strong {
+      color: var(--text-primary);
+    }
+
+    .project-details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 32px;
+      margin-bottom: 28px;
+      padding: 24px;
+      background: var(--bg-subtle);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .project-block-title {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-block-body {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .project-block-body strong {
+      color: var(--text-primary);
+    }
+
+    .project-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .project-bullets li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .project-bullets li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .project-impact-banner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      background: var(--surface-hover);
+      border-left: 3px solid var(--emerald);
+      border-radius: var(--radius-xs);
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .project-impact-banner strong {
+      color: var(--emerald);
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .project-tech-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .project-tech-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .tech-pill {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: var(--surface-hover);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+
+    .project-action-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .project-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: var(--surface-hover);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+
+    .project-action-btn:hover {
+      background: var(--surface-active);
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .project-action-btn.primary {
+      background: var(--accent);
+      color: #FFFFFF;
+      border-color: var(--accent);
+    }
+
+    .project-action-btn.primary:hover {
+      background: var(--accent-hover);
+      color: #FFFFFF;
+    }
+
+    @media (max-width: 860px) {
+      .project-showcase-card {
+        padding: 24px 20px;
+      }
+      .project-details-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 16px;
+      }
+      .project-title {
+        font-size: 1.3rem;
+      }
+    }
+
+    /* ==========================================================
+       6. MINH PHAM STYLE: "MY CERTIFICATIONS"
+       ========================================================== */
+    .cert-minh-header {
+      margin-bottom: 32px;
+    }
+
+    .cert-minh-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .cert-minh-title .hl-purple {
+      background: linear-gradient(135deg, #A855F7 0%, #C084FC 45%, #E879F9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .cert-minh-desc {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .cert-minh-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(320px, 460px));
+      gap: 32px;
+      margin: 36px auto 0 auto;
+      justify-content: center;
+      max-width: 980px;
+    }
+
+    @media (max-width: 860px) {
+      .cert-minh-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    .cert-minh-card {
+      background: #0D121F;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 18px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      position: relative;
+      cursor: pointer;
+    }
+
+    [data-theme="light"] .cert-minh-card {
+      background: #FFFFFF;
+      border-color: rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .cert-minh-card:hover {
+      transform: translateY(-5px);
+      border-color: #A855F7;
+      box-shadow: 0 18px 40px rgba(168, 85, 247, 0.22);
+    }
+
+    .cert-minh-card.card-datacamp:hover {
+      border-color: #03EF62;
+      box-shadow: 0 18px 40px rgba(3, 239, 98, 0.2);
+    }
+
+    .cert-minh-card.featured {
+      border-color: rgba(124, 58, 237, 0.5);
+      box-shadow: 0 0 24px rgba(124, 58, 237, 0.18);
+    }
+
+    .cert-minh-preview-box {
+      background: #080C16;
+      border-radius: 12px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 0;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    [data-theme="light"] .cert-minh-preview-box {
+      background: #F1F5F9;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+    }
+
+    .cert-minh-card:hover .cert-minh-preview-box {
+      transform: scale(1.02);
+    }
+
+    /* Hero Quick Links: Download CV, Mail, GitHub, LinkedIn */
+    .hero-quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin: 20px 0 26px 0;
+    }
+
+    .quick-link-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      white-space: nowrap;
+    }
+
+    .quick-link-pill:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #A855F7;
+      color: #FFFFFF;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(168, 85, 247, 0.25);
+    }
+
+    .quick-link-pill svg {
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    .quick-link-pill:hover svg {
+      transform: scale(1.12);
+    }
+
+    .quick-link-pill.cv-download-pill {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.25) 0%, rgba(59, 130, 246, 0.2) 100%);
+      border-color: rgba(168, 85, 247, 0.45);
+      color: #FFFFFF;
+      font-weight: 700;
+    }
+
+    .quick-link-pill.cv-download-pill:hover {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.4) 0%, rgba(59, 130, 246, 0.35) 100%);
+      border-color: #C084FC;
+      box-shadow: 0 8px 24px rgba(168, 85, 247, 0.35);
+    }
+
+    [data-theme="light"] .quick-link-pill {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.1);
+      color: var(--text-primary);
+    }
+
+    [data-theme="light"] .quick-link-pill:hover {
+      background: rgba(0, 0, 0, 0.08);
+      border-color: #7C3AED;
+      color: #7C3AED;
+      box-shadow: 0 6px 16px rgba(124, 58, 237, 0.15);
+    }
+
+    /* Navbar robust nowrap styling */
+    .exec-brand {
+      white-space: nowrap !important;
+      flex-shrink: 0;
+    }
+
+    .exec-nav-links {
+      white-space: nowrap !important;
+      gap: 18px !important;
+    }
+
+    .exec-nav-links a {
+      white-space: nowrap !important;
+      font-size: 0.85rem !important;
+    }
+
+    @media (max-width: 1140px) {
+      .exec-nav-links {
+        gap: 12px !important;
+      }
+      .exec-brand-title {
+        display: none;
+      }
+    }
+
+    .cert-minh-info {
+      padding: 16px 4px 6px 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .cert-minh-card-title {
+      font-family: var(--font-display);
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: #F8FAFC;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    [data-theme="light"] .cert-minh-card-title {
+      color: #0F172A;
+    }
+
+    .cert-minh-card-title span.verify-icon {
+      font-size: 0.95rem;
+      color: #A855F7;
+      opacity: 0.8;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .cert-minh-card:hover .cert-minh-card-title span.verify-icon {
+      transform: translate(2px, -2px);
+      opacity: 1;
+    }
+
+    .cert-minh-pill {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 14px;
+      border-radius: 50px;
+      background: rgba(139, 92, 246, 0.18);
+      color: #C4B5FD;
+      border: 1px solid rgba(139, 92, 246, 0.35);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    [data-theme="light"] .cert-minh-pill {
+      background: rgba(139, 92, 246, 0.12);
+      color: #6D28D9;
+      border-color: rgba(139, 92, 246, 0.28);
+    }
+  </style>
+
+  <!-- Immediate Theme Initialization (Zero Flicker) -->
+  <script>
+    (function() {
+      try { localStorage.removeItem('dustin_theme'); } catch(e) {}
+      const savedTheme = localStorage.getItem('dustin_theme_mode') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- ============================================
+       NAVIGATION BAR — MINIMALIST & AUTHORITATIVE
+       ============================================ -->
+  <header class="exec-navbar">
+    <div class="container exec-nav-inner">
+      <a href="#hero" class="exec-brand">
+        <span class="exec-brand-name">Trần Đức</span>
+        <span class="exec-brand-title">/ Analytics Engineer</span>
+      </a>
+
+      <nav class="exec-nav-links" aria-label="Điều hướng danh mục">
+        <a href="#data-flow">Kiến Trúc</a>
+        <a href="#sql-terminal" style="color: var(--emerald); font-weight: 700;">Query SQL</a>
+        <a href="#skills">Kỹ Năng</a>
+        <a href="#projects" style="color: var(--accent); font-weight: 700;">Dự Án</a>
+        <a href="#certificates" style="color: #A855F7; font-weight: 700;">Chứng Chỉ</a>
+        <a href="#timeline">Hành Trình</a>
+        <a href="#contact">Liên Hệ</a>
+      </nav>
+
+      <div class="exec-nav-actions">
+        <button class="theme-toggle-btn" id="lpThemeBtn" aria-label="Đổi giao diện" title="Đổi giao diện">☀️</button>
+        <a href="#contact" class="btn-primary" style="padding: 8px 18px; font-size: 0.84rem;">
+          <span>Kết Nối Ngay ↗</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================================
+         1. HERO SECTION — PRESERVED 100% AS APPROVED
+         ============================================ -->
+    <section class="hero-section" id="hero">
+      <!-- Ambient Aurora Background Blobs & Grid -->
+      <div class="aurora-container" aria-hidden="true">
+        <div class="aurora-grid-overlay"></div>
+        <div class="aurora-blob blob-1"></div>
+        <div class="aurora-blob blob-2"></div>
+        <div class="aurora-blob blob-3"></div>
+      </div>
+
+      <div class="container">
+        
+        <div class="hero-grid">
+          <!-- LEFT COLUMN: EXECUTIVE BRIEFING -->
+          <div class="hero-briefing">
+            <div class="hero-kicker-row">
+              <span class="hero-kicker">PROFILE &amp; EXECUTIVE SUMMARY • MỤC TIÊU 2027</span>
+              <div class="hero-typewriter-badge" aria-label="Lĩnh vực chuyên sâu">
+                <span class="tw-prompt">&gt;</span>
+                <span class="tw-static">Specialty:</span>
+                <span class="tw-dynamic" id="heroTypewriter"></span>
+                <span class="tw-cursor" aria-hidden="true">|</span>
+              </div>
+            </div>
+
+            <h1 class="hero-headline">
+              Từ <span class="hl-blue">Data Pipeline</span> đến <span class="hl-gradient">Business Insight</span>.
+              <span class="hero-headline-sub">Tôi không chỉ <strong>xây dựng hạ tầng</strong> — tôi đi tìm câu trả lời cho <span class="hl-emerald">những bài toán thực tế</span>.</span>
+            </h1>
+
+            <p class="hero-bio">
+              Tôi là <strong>Trần Đức (Dustin)</strong> — Thủ khoa UFM, từng xây pipeline thực tế, triển khai ERP cho doanh nghiệp, và đang quản lý hạ tầng IT trong môi trường CAND. Càng tiếp xúc nhiều data, tôi càng bị thu hút bởi <strong>những câu chuyện phía sau nó</strong>. Và đó là lý do tôi chọn trở thành <strong>Analytics Engineer</strong>.
+            </p>
+
+            <!-- Quick Action & Connect Links: Download CV, Email, GitHub, LinkedIn -->
+            <div class="hero-quick-links">
+              <a href="assets/cv/TranDuc_AnalyticsEngineer_CV.pdf" download="TranDuc_AnalyticsEngineer_CV.pdf" class="quick-link-pill cv-download-pill" title="Tải hồ sơ CV định dạng PDF">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span>Download CV (PDF)</span>
+              </a>
+
+              <a href="mailto:trandc3015@gmail.com" class="quick-link-pill" title="Gửi thư trực tiếp: trandc3015@gmail.com">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="16" x="2" y="4" rx="2"/>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                </svg>
+                <span>trandc3015@gmail.com</span>
+              </a>
+
+              <a href="https://github.com/tranduc2204" target="_blank" rel="noopener noreferrer" class="quick-link-pill" title="Xem GitHub profile: tranduc2204">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                <span>GitHub</span>
+              </a>
+
+              <a href="https://www.linkedin.com/in/dustintd/" target="_blank" rel="noopener noreferrer" class="quick-link-pill" title="Kết nối LinkedIn: dustintd">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
+
+            <!-- 3 Quantitative Metrics Row -->
+            <div class="hero-metrics">
+              <div class="metric-item">
+                <span class="metric-value">3.7 / 4.0</span>
+                <span class="metric-label">Thủ Khoa Đầu Ra UFM</span>
+                <span class="metric-sub">Tin Học Quản Lý</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-value">SQL Advanced</span>
+                <span class="metric-label">Mastery Truy Vấn</span>
+                <span class="metric-sub">CTEs, Window &amp; Pipelines</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-value">Hạ Tầng CAND</span>
+                <span class="metric-label">Quản Lý IT Trực Chiến</span>
+                <span class="metric-sub">Linux, LAN, Dân Cư &amp; GTEL</span>
+              </div>
+            </div>
+
+            <div class="hero-actions">
+              <a href="#timeline" class="btn-primary">
+                <span>Xem 5 chương chuyển mình ↓</span>
+              </a>
+              <a href="#contact" class="btn-secondary">
+                <span>Gửi lời nhắn trao đổi 📮</span>
+              </a>
+              <a href="#projects" class="btn-secondary" style="border-color: var(--border-hover);">
+                <span>Khám phá Dự án Thực chiến ➔</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: INTERACTIVE 3D TECH HOLOGRAM SHOWCASE -->
+          <div class="hero-visual-wrapper" id="heroVisual">
+            <!-- Background Rotating Hologram Data Ring SVG -->
+            <svg class="hologram-ring-svg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="250" cy="250" r="235" stroke="url(#ringGrad1)" stroke-width="1.5" stroke-dasharray="8 8" opacity="0.6"/>
+              <circle cx="250" cy="250" r="195" stroke="url(#ringGrad2)" stroke-width="1.2" stroke-dasharray="16 12" opacity="0.45"/>
+              <circle cx="250" cy="250" r="160" stroke="#3B82F6" stroke-width="1" stroke-dasharray="4 6" opacity="0.35"/>
+              <circle cx="250" cy="250" r="130" stroke="#10B981" stroke-width="0.8" opacity="0.25"/>
+              <defs>
+                <linearGradient id="ringGrad1" x1="0" y1="0" x2="500" y2="500" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#3B82F6"/>
+                  <stop offset="0.5" stop-color="#8B5CF6"/>
+                  <stop offset="1" stop-color="#10B981"/>
+                </linearGradient>
+                <linearGradient id="ringGrad2" x1="500" y1="0" x2="0" y2="500" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#10B981"/>
+                  <stop offset="1" stop-color="#3B82F6"/>
+                </linearGradient>
+              </defs>
+            </svg>
+
+            <!-- Floating Tech Orbit Chips -->
+            <!-- Chip 1: dbt Core -->
+            <div class="floating-tech-chip chip-dbt" title="Transformation Layer: dbt Core">
+              <span class="chip-icon">🚀</span>
+              <div class="chip-text">
+                <span class="chip-title">dbt Core</span>
+                <span class="chip-sub">Modern ELT &amp; Tests</span>
+              </div>
+            </div>
+
+            <!-- Chip 2: Apache Spark -->
+            <div class="floating-tech-chip chip-spark" title="Distributed Engine: Apache Spark">
+              <span class="chip-icon">⚡</span>
+              <div class="chip-text">
+                <span class="chip-title">Apache Spark</span>
+                <span class="chip-sub">PySpark Big Data</span>
+              </div>
+            </div>
+
+            <!-- Chip 3: Snowflake / DuckDB -->
+            <div class="floating-tech-chip chip-snowflake" title="Storage & Compute: Snowflake / DuckDB">
+              <span class="chip-icon">❄️</span>
+              <div class="chip-text">
+                <span class="chip-title">Snowflake / DuckDB</span>
+                <span class="chip-sub">In-Warehouse Analytics</span>
+              </div>
+            </div>
+
+            <!-- Chip 4: CAND IT Infrastructure -->
+            <div class="floating-tech-chip chip-cand" title="Mission-Critical Infrastructure: CAND IT">
+              <span class="chip-icon">🛡️</span>
+              <div class="chip-text">
+                <span class="chip-title">Linux CAND IT</span>
+                <span class="chip-sub">24/7 High Availability</span>
+              </div>
+            </div>
+
+            <!-- Core Executive Holographic Card -->
+            <div class="hero-hologram-card" id="hologramCard">
+              <div class="hologram-card-topbar">
+                <div class="hologram-live-badge">
+                  <span class="live-beacon"></span>
+                  <span>SYSTEM OPERATIONAL</span>
+                </div>
+                <span class="hologram-id-tag">ID: DUSTIN-2027</span>
+              </div>
+
+              <div class="hologram-img-frame">
+                <img src="images/dustin-cand.png" alt="Trần Đức (Dustin) trong trang phục quản lý IT CAND" class="hologram-img" loading="eager">
+                <div class="cyber-scan-line" aria-hidden="true"></div>
+              </div>
+
+              <div class="hologram-card-footer">
+                <div class="hologram-name">
+                  <span>Trần Đức (Dustin)</span>
+                  <span class="hologram-verified-check" title="Thủ khoa UFM GPA 3.7 / Quản trị IT CAND">✓</span>
+                </div>
+                <div class="hologram-desc">
+                  Quản lý hạ tầng IT CAND (2025 - 2027) &bull; Aspiring Analytics Engineer
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================
+         2. MARQUEE TECH STREAM TICKER
+         ============================================ -->
+    <div class="marquee-container" aria-hidden="true">
+      <div class="marquee-content">
+        <div class="marquee-item">SQL ADVANCED <span class="dot">●</span></div>
+        <div class="marquee-item">DATACAMP DATA ENGINEER ASSOCIATE <span class="dot">●</span></div>
+        <div class="marquee-item">dbt CORE <span class="dot">●</span></div>
+        <div class="marquee-item">HACKERRANK SQL (ADVANCED) <span class="dot">●</span></div>
+        <div class="marquee-item">APACHE SPARK <span class="dot">●</span></div>
+        <div class="marquee-item">THỦ KHOA MIS UFM (GPA 3.7) <span class="dot">●</span></div>
+        <div class="marquee-item">SNOWFLAKE <span class="dot">●</span></div>
+        <div class="marquee-item">DUCKDB <span class="dot">●</span></div>
+        <div class="marquee-item">KIMBALL STAR SCHEMA <span class="dot">●</span></div>
+        <div class="marquee-item">LINUX UBUNTU <span class="dot">●</span></div>
+        <div class="marquee-item">APACHE AIRFLOW <span class="dot">●</span></div>
+        <div class="marquee-item">BRAVO ERP <span class="dot">●</span></div>
+        <div class="marquee-item">METABASE BI <span class="dot">●</span></div>
+        <div class="marquee-item">DATA TESTING &amp; LINEAGE <span class="dot">●</span></div>
+        <!-- Duplicated for continuous loop -->
+        <div class="marquee-item">SQL ADVANCED <span class="dot">●</span></div>
+        <div class="marquee-item">DATACAMP DATA ENGINEER ASSOCIATE <span class="dot">●</span></div>
+        <div class="marquee-item">dbt CORE <span class="dot">●</span></div>
+        <div class="marquee-item">HACKERRANK SQL (ADVANCED) <span class="dot">●</span></div>
+        <div class="marquee-item">APACHE SPARK <span class="dot">●</span></div>
+        <div class="marquee-item">THỦ KHOA MIS UFM (GPA 3.7) <span class="dot">●</span></div>
+        <div class="marquee-item">SNOWFLAKE <span class="dot">●</span></div>
+        <div class="marquee-item">DUCKDB <span class="dot">●</span></div>
+        <div class="marquee-item">KIMBALL STAR SCHEMA <span class="dot">●</span></div>
+        <div class="marquee-item">LINUX UBUNTU <span class="dot">●</span></div>
+        <div class="marquee-item">APACHE AIRFLOW <span class="dot">●</span></div>
+        <div class="marquee-item">BRAVO ERP <span class="dot">●</span></div>
+        <div class="marquee-item">METABASE BI <span class="dot">●</span></div>
+        <div class="marquee-item">DATA TESTING &amp; LINEAGE <span class="dot">●</span></div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         3. HOW MY DATA FLOWS — ARCHITECTURE CANVAS
+         ============================================ -->
+    <section class="section" id="data-flow">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-category">END-TO-END DATA ARCHITECTURE • HOW MY DATA FLOWS</span>
+          <h2 class="section-title">Kiến Trúc Đường Ống &amp; Luồng Dữ Liệu</h2>
+          <p class="section-desc">
+            Cách tôi thiết kế và vận hành các hệ thống dữ liệu: từ thu thập đa nguồn, chuyển đổi in-warehouse theo chuẩn dbt, đến phục vụ phân tích tự phục vụ (Self-serve BI) cho ban lãnh đạo.
+          </p>
+        </div>
+
+        <!-- Flow Switcher Tabs -->
+        <div class="flow-tabs-wrapper">
+          <button class="flow-tab-btn active" id="tabEltBtn" onclick="switchDataFlow('elt')">
+            <span>🚀 Modern ELT Stack (dbt + Snowflake / DuckDB)</span>
+          </button>
+          <button class="flow-tab-btn" id="tabEtlBtn" onclick="switchDataFlow('etl')">
+            <span>⚡ Big Data ETL Pipeline (Apache Spark + Data Lake)</span>
+          </button>
+        </div>
+
+                                <!-- Flow 1: Modern ELT Stack (Interactive Animated Architecture) -->
+        <div id="flowElt" class="arch-canvas-container">
+          <svg class="arch-svg-canvas" viewBox="0 0 1150 510" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="glowPurp" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="glowCyan" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="glowGreen" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <linearGradient id="airflowGrad" gradientUnits="userSpaceOnUse" x1="130" y1="452" x2="1020" y2="452">
+                <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.25" />
+                <stop offset="25%" stop-color="#A855F7" stop-opacity="0.85" />
+                <stop offset="55%" stop-color="#C084FC" stop-opacity="1" />
+                <stop offset="85%" stop-color="#E879F9" stop-opacity="1" />
+                <stop offset="100%" stop-color="#38BDF8" stop-opacity="1" />
+              </linearGradient>
+            </defs>
+
+            <!-- COLUMN HEADERS -->
+            <g font-family="var(--font-mono)" font-size="11.5" font-weight="700" letter-spacing="2" fill="#94A3B8">
+              <text x="105" y="26" text-anchor="middle">SOURCES</text>
+              <text x="330" y="26" text-anchor="middle">MANAGED ELT</text>
+              <text x="492" y="26" text-anchor="middle">DATA LAKE</text>
+              <text x="632" y="26" text-anchor="middle">LOAD</text>
+              <text x="812" y="26" text-anchor="middle">WAREHOUSE + TRANSFORM</text>
+              <text x="1037" y="26" text-anchor="middle">CONSUMERS</text>
+            </g>
+
+            <!-- CONNECTING CONDUITS -->
+            <g class="flow-conduits">
+              <path class="conduit-base" d="M 180 74 C 228 74, 228 198, 270 198" />
+              <circle r="3.8" fill="#C084FC" filter="url(#glowPurp)">
+                <animateMotion dur="2.8s" repeatCount="indefinite" path="M 180 74 C 228 74, 228 198, 270 198" />
+              </circle>
+
+              <path class="conduit-base" d="M 180 136 C 228 136, 228 198, 270 198" />
+              <circle r="3.8" fill="#C084FC" filter="url(#glowPurp)" visibility="hidden">
+                <set attributeName="visibility" to="visible" begin="0.4s" />
+                <animateMotion dur="2.4s" begin="0.4s" repeatCount="indefinite" path="M 180 136 C 228 136, 228 198, 270 198" />
+              </circle>
+
+              <path class="conduit-base" d="M 180 198 L 270 198" />
+              <circle r="3.8" fill="#C084FC" filter="url(#glowPurp)" visibility="hidden">
+                <set attributeName="visibility" to="visible" begin="0.8s" />
+                <animateMotion dur="1.9s" begin="0.8s" repeatCount="indefinite" path="M 180 198 L 270 198" />
+              </circle>
+
+              <path class="conduit-base" d="M 180 260 C 228 260, 228 198, 270 198" />
+              <circle r="3.8" fill="#C084FC" filter="url(#glowPurp)" visibility="hidden">
+                <set attributeName="visibility" to="visible" begin="1.2s" />
+                <animateMotion dur="2.5s" begin="1.2s" repeatCount="indefinite" path="M 180 260 C 228 260, 228 198, 270 198" />
+              </circle>
+
+              <path class="conduit-base" d="M 180 322 C 228 322, 228 198, 270 198" />
+              <circle r="3.8" fill="#C084FC" filter="url(#glowPurp)" visibility="hidden">
+                <set attributeName="visibility" to="visible" begin="1.6s" />
+                <animateMotion dur="2.9s" begin="1.6s" repeatCount="indefinite" path="M 180 322 C 228 322, 228 198, 270 198" />
+              </circle>
+
+              <path class="conduit-base" d="M 390 198 L 445 198" stroke="#38BDF8" />
+              <circle r="4" fill="#38BDF8" filter="url(#glowCyan)">
+                <animateMotion dur="1.4s" repeatCount="indefinite" path="M 390 198 L 445 198" />
+              </circle>
+
+              <path class="conduit-base" d="M 540 198 L 585 198" stroke="#10B981" />
+              <circle r="4" fill="#34D399" filter="url(#glowGreen)">
+                <animateMotion dur="1.1s" repeatCount="indefinite" path="M 540 198 L 585 198" />
+              </circle>
+
+              <path class="conduit-base" d="M 680 198 L 725 198" stroke="#06B6D4" />
+              <circle r="4" fill="#22D3EE" filter="url(#glowCyan)" visibility="hidden">
+                <set attributeName="visibility" to="visible" begin="0.3s" />
+                <animateMotion dur="1.1s" begin="0.3s" repeatCount="indefinite" path="M 680 198 L 725 198" />
+              </circle>
+
+              <!-- Bypass Conduit directly to Snowflake -->
+              <path class="conduit-bypass" d="M 390 135 C 470 30, 650 30, 725 120" />
+              <circle r="4" fill="#E879F9" filter="url(#glowPurp)" visibility="hidden">
+                <set attributeName="visibility" to="visible" begin="0.6s" />
+                <animateMotion dur="3.4s" begin="0.6s" repeatCount="indefinite" path="M 390 135 C 470 30, 650 30, 725 120" />
+              </circle>
+
+              <!-- To Consumers -->
+              <path class="conduit-base" d="M 900 136 L 950 136" stroke="#F43F5E" />
+              <circle r="4" fill="#FB7185" filter="url(#glowPurp)" visibility="hidden">
+                <set attributeName="visibility" to="visible" begin="0.2s" />
+                <animateMotion dur="1.3s" begin="0.2s" repeatCount="indefinite" path="M 900 136 L 950 136" />
+              </circle>
+
+              <path class="conduit-base" d="M 900 236 L 950 236" stroke="#8B5CF6" />
+              <circle r="4" fill="#A78BFA" filter="url(#glowPurp)" visibility="hidden">
+                <set attributeName="visibility" to="visible" begin="0.6s" />
+                <animateMotion dur="1.3s" begin="0.6s" repeatCount="indefinite" path="M 900 236 L 950 236" />
+              </circle>
+            </g>
+
+            <text x="557" y="46" text-anchor="middle" fill="#A1A1AA" font-size="10.5" font-style="italic" font-family="var(--font-mono)">direct sync → Snowflake (skip S3)</text>
+
+            <!-- Card 1: SaaS Apps -->
+            <g class="arch-node">
+              <rect class="node-card" x="30" y="50" width="150" height="48" rx="8" fill="#0C111E" stroke="rgba(139, 92, 246, 0.35)" stroke-width="1.2" />
+              <path d="M44 71 l5 -4 h4 v14 h-4 l-5 -4 h-4 v-6 z" fill="none" stroke="#A855F7" stroke-width="1.4" />
+              <path d="M55 70 a 5 5 0 0 1 0 8" fill="none" stroke="#C084FC" stroke-width="1.2" />
+              <text x="66" y="69" fill="#FFFFFF" font-size="12.5" font-weight="600" font-family="var(--font-sans)">client SaaS apps</text>
+              <text x="66" y="85" fill="#94A3B8" font-size="10" font-family="var(--font-mono)">CRM · ads · billing</text>
+            </g>
+
+            <!-- Card 2: Databases -->
+            <g class="arch-node">
+              <rect class="node-card" x="30" y="112" width="150" height="48" rx="8" fill="#0C111E" stroke="rgba(139, 92, 246, 0.35)" stroke-width="1.2" />
+              <path d="M42 130 c0 -3 7 -3 7 -3 s7 0 7 3 v4 c0 3 -7 3 -7 3 s-7 0 -7 -3 z M42 138 c0 3 7 3 7 3 s7 0 7 -3 M42 143 c0 3 7 3 7 3 s7 0 7 -3" fill="none" stroke="#A855F7" stroke-width="1.4" />
+              <text x="66" y="131" fill="#FFFFFF" font-size="12.5" font-weight="600" font-family="var(--font-sans)">client databases</text>
+              <text x="66" y="147" fill="#94A3B8" font-size="10" font-family="var(--font-mono)">Postgres · MySQL</text>
+            </g>
+
+            <!-- Card 3: APIs -->
+            <g class="arch-node">
+              <rect class="node-card" x="30" y="174" width="150" height="48" rx="8" fill="#0C111E" stroke="rgba(139, 92, 246, 0.35)" stroke-width="1.2" />
+              <path d="M44 198 l-4 5 l4 5 M54 198 l4 5 l-4 5 M50 195 l-2 11" fill="none" stroke="#A855F7" stroke-width="1.4" stroke-linecap="round" />
+              <text x="66" y="193" fill="#FFFFFF" font-size="12.5" font-weight="600" font-family="var(--font-sans)">client APIs</text>
+              <text x="66" y="209" fill="#94A3B8" font-size="10" font-family="var(--font-mono)">REST · webhooks</text>
+            </g>
+
+            <!-- Card 4: Event streams -->
+            <g class="arch-node">
+              <rect class="node-card" x="30" y="236" width="150" height="48" rx="8" fill="#0C111E" stroke="rgba(139, 92, 246, 0.35)" stroke-width="1.2" />
+              <circle cx="46" cy="260" r="3.5" fill="#A855F7" />
+              <circle cx="55" cy="254" r="2.2" fill="#C084FC" />
+              <circle cx="55" cy="266" r="2.2" fill="#C084FC" />
+              <circle cx="37" cy="256" r="2.2" fill="#C084FC" />
+              <line x1="46" y1="260" x2="55" y2="254" stroke="#A855F7" stroke-width="1" />
+              <line x1="46" y1="260" x2="55" y2="266" stroke="#A855F7" stroke-width="1" />
+              <line x1="46" y1="260" x2="37" y2="256" stroke="#A855F7" stroke-width="1" />
+              <text x="66" y="255" fill="#FFFFFF" font-size="12.5" font-weight="600" font-family="var(--font-sans)">event streams</text>
+              <text x="66" y="271" fill="#94A3B8" font-size="10" font-family="var(--font-mono)">Snowplow · Segment</text>
+            </g>
+
+            <!-- Card 5: Flat files -->
+            <g class="arch-node">
+              <rect class="node-card" x="30" y="298" width="150" height="48" rx="8" fill="#0C111E" stroke="rgba(139, 92, 246, 0.35)" stroke-width="1.2" />
+              <path d="M43 316 h8 l4 4 v10 h-12 z" fill="none" stroke="#A855F7" stroke-width="1.4" />
+              <path d="M51 316 v4 h4" fill="none" stroke="#A855F7" stroke-width="1.2" />
+              <text x="66" y="317" fill="#FFFFFF" font-size="12.5" font-weight="600" font-family="var(--font-sans)">flat files</text>
+              <text x="66" y="333" fill="#94A3B8" font-size="10" font-family="var(--font-mono)">SFTP · spreadsheets</text>
+            </g>
+
+            <!-- Fivetran Card -->
+            <g class="arch-node">
+              <rect class="node-card" x="270" y="85" width="120" height="226" rx="10" fill="#0C1322" stroke="rgba(56, 189, 248, 0.55)" stroke-width="1.4" />
+              <g transform="translate(315, 108) scale(1.15)">
+                <rect x="0" y="6" width="6" height="19" rx="2" fill="#0073FF" transform="skewX(-20)" />
+                <rect x="11" y="0" width="6" height="25" rx="2" fill="#0073FF" transform="skewX(-20)" />
+                <rect x="22" y="6" width="6" height="19" rx="2" fill="#0073FF" transform="skewX(-20)" />
+              </g>
+              <text x="330" y="162" text-anchor="middle" fill="#FFFFFF" font-size="16" font-weight="700" font-family="var(--font-sans)">Fivetran</text>
+              <text x="330" y="184" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">managed connectors</text>
+              <text x="330" y="202" text-anchor="middle" fill="#64748B" font-size="9.5" font-family="var(--font-mono)">Automated ELT · CDC</text>
+              <line x1="290" y1="216" x2="370" y2="216" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1" />
+              <rect x="286" y="230" width="88" height="24" rx="12" fill="rgba(56, 189, 248, 0.12)" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1" />
+              <text x="330" y="246" text-anchor="middle" fill="#38BDF8" font-size="10" font-weight="700" font-family="var(--font-mono)">150+ SOURCES</text>
+              <text x="330" y="278" text-anchor="middle" fill="#64748B" font-size="9.5" font-family="var(--font-mono)">sync: 5-min batch</text>
+            </g>
+
+            <!-- S3 Card -->
+            <g class="arch-node">
+              <rect class="node-card" x="445" y="100" width="95" height="196" rx="10" fill="#0C1819" stroke="rgba(16, 185, 129, 0.55)" stroke-width="1.4" />
+              <g transform="translate(480, 122) scale(1.2)">
+                <path d="M0 6 c0 -3 10 -3 10 -3 s10 0 10 3 v12 c0 3 -10 3 -10 3 s-10 0 -10 -3 z" fill="#10B981" fill-opacity="0.2" stroke="#10B981" stroke-width="1.4" />
+                <path d="M0 6 c0 3 10 3 10 3 s10 0 10 -3" fill="none" stroke="#10B981" stroke-width="1.2" />
+                <path d="M-2 4 c0 -4 12 -4 12 -4 s12 0 12 4" fill="none" stroke="#34D399" stroke-width="1.2" />
+              </g>
+              <text x="492.5" y="170" text-anchor="middle" fill="#34D399" font-size="15" font-weight="700" font-family="var(--font-sans)">S3 Lake</text>
+              <text x="492.5" y="192" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">raw archive</text>
+              <text x="492.5" y="210" text-anchor="middle" fill="#64748B" font-size="9.5" font-family="var(--font-mono)">daily partitions</text>
+              <line x1="460" y1="222" x2="525" y2="222" stroke="rgba(16, 185, 129, 0.25)" stroke-width="1" />
+              <rect x="456" y="236" width="73" height="22" rx="11" fill="rgba(16, 185, 129, 0.12)" stroke="rgba(16, 185, 129, 0.4)" stroke-width="1" />
+              <text x="492.5" y="251" text-anchor="middle" fill="#10B981" font-size="9.5" font-weight="700" font-family="var(--font-mono)">PARQUET</text>
+            </g>
+
+            <!-- COPY INTO Card -->
+            <g class="arch-node">
+              <rect class="node-card" x="585" y="100" width="95" height="196" rx="10" fill="#0B1624" stroke="rgba(6, 182, 212, 0.55)" stroke-width="1.4" />
+              <g transform="translate(632.5, 130) scale(1.2)">
+                <line x1="0" y1="-10" x2="0" y2="10" stroke="#06B6D4" stroke-width="2" stroke-linecap="round" />
+                <line x1="-8.66" y1="-5" x2="8.66" y2="5" stroke="#06B6D4" stroke-width="2" stroke-linecap="round" />
+                <line x1="-8.66" y1="5" x2="8.66" y2="-5" stroke="#06B6D4" stroke-width="2" stroke-linecap="round" />
+                <circle cx="0" cy="0" r="3" fill="#06B6D4" />
+              </g>
+              <text x="632.5" y="170" text-anchor="middle" fill="#22D3EE" font-size="13.5" font-weight="700" font-family="var(--font-mono)">COPY INTO</text>
+              <text x="632.5" y="192" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">S3 → Snowflake</text>
+              <text x="632.5" y="210" text-anchor="middle" fill="#64748B" font-size="9.5" font-family="var(--font-mono)">external stages</text>
+              <line x1="600" y1="222" x2="665" y2="222" stroke="rgba(6, 182, 212, 0.25)" stroke-width="1" />
+              <rect x="597" y="236" width="71" height="22" rx="11" fill="rgba(6, 182, 212, 0.12)" stroke="rgba(6, 182, 212, 0.4)" stroke-width="1" />
+              <text x="632.5" y="251" text-anchor="middle" fill="#06B6D4" font-size="9.5" font-weight="700" font-family="var(--font-mono)">FAST LOAD</text>
+            </g>
+
+            <!-- Snowflake + dbt Card -->
+            <g class="arch-node">
+              <rect class="node-card" x="725" y="50" width="175" height="296" rx="12" fill="#0E0F20" stroke="rgba(168, 85, 247, 0.65)" stroke-width="1.5" />
+              <text x="812.5" y="78" text-anchor="middle" fill="#FFFFFF" font-size="16" font-weight="700" font-family="var(--font-sans)">Snowflake + dbt</text>
+              <line x1="745" y1="88" x2="880" y2="88" stroke="rgba(168, 85, 247, 0.3)" stroke-width="1" />
+
+              <g transform="translate(746, 114) scale(1.15)">
+                <line x1="0" y1="-6" x2="0" y2="6" stroke="#38BDF8" stroke-width="1.6" stroke-linecap="round" />
+                <line x1="-5.2" y1="-3" x2="5.2" y2="3" stroke="#38BDF8" stroke-width="1.6" stroke-linecap="round" />
+                <line x1="-5.2" y1="3" x2="5.2" y2="-3" stroke="#38BDF8" stroke-width="1.6" stroke-linecap="round" />
+              </g>
+              <text x="764" y="114" fill="#FFFFFF" font-size="13" font-weight="600" font-family="var(--font-sans)">Snowflake DW</text>
+              <text x="764" y="128" fill="#94A3B8" font-size="10" font-family="var(--font-mono)">raw · analytics schemas</text>
+
+              <g transform="translate(743, 160) scale(1.15)">
+                <rect x="0" y="0" width="7.5" height="7.5" rx="1.8" fill="#FF694B" transform="rotate(45 3.75 3.75)" />
+                <path d="M3.75 1.5 L3.75 6 M1.5 3.75 L6 3.75" stroke="#FFFFFF" stroke-width="0.9" />
+              </g>
+              <text x="764" y="162" fill="#FFFFFF" font-size="13" font-weight="600" font-family="var(--font-sans)">dbt models</text>
+              <text x="764" y="176" fill="#94A3B8" font-size="10" font-family="var(--font-mono)">stg → int → marts</text>
+
+              <g transform="translate(742, 206) scale(1.15)">
+                <circle cx="5" cy="5" r="5.5" fill="none" stroke="#60A5FA" stroke-width="1.4" />
+                <path d="M2.5 5 l2 2 l4 -4" fill="none" stroke="#60A5FA" stroke-width="1.4" stroke-linecap="round" />
+              </g>
+              <text x="764" y="210" fill="#FFFFFF" font-size="13" font-weight="600" font-family="var(--font-sans)">dbt Tests &amp; CI/CD</text>
+              <text x="764" y="224" fill="#94A3B8" font-size="10" font-family="var(--font-mono)">PR checks · schema audit</text>
+
+              <rect x="755" y="258" width="115" height="28" rx="14" fill="rgba(16, 185, 129, 0.14)" stroke="rgba(16, 185, 129, 0.5)" stroke-width="1.2" />
+              <text x="812.5" y="277" text-anchor="middle" fill="#10B981" font-size="11.5" font-weight="700" font-family="var(--font-mono)">dbt build <tspan class="dbt-check" fill="#34D399">✓</tspan></text>
+            </g>
+
+            <!-- Card: Omni -->
+            <g class="arch-node">
+              <rect class="node-card" x="950" y="105" width="175" height="62" rx="10" fill="#140C1A" stroke="rgba(244, 63, 94, 0.45)" stroke-width="1.2" />
+              <rect x="964" y="120" width="22" height="22" rx="5" fill="#FF3366" />
+              <text x="975" y="135" text-anchor="middle" fill="#FFFFFF" font-size="9" font-weight="700" font-family="var(--font-sans)">omni</text>
+              <text x="996" y="129" fill="#FFFFFF" font-size="13" font-weight="600" font-family="var(--font-sans)">Omni BI</text>
+              <text x="996" y="146" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">BI · dashboards</text>
+            </g>
+
+            <!-- Card: Client teams -->
+            <g class="arch-node">
+              <rect class="node-card" x="950" y="205" width="175" height="62" rx="10" fill="#101024" stroke="rgba(139, 92, 246, 0.45)" stroke-width="1.2" />
+              <g transform="translate(964, 222)">
+                <rect x="0" y="2" width="20" height="14" rx="3" fill="none" stroke="#A78BFA" stroke-width="1.4" />
+                <path d="M0 4 l10 6 l10 -6" fill="none" stroke="#A78BFA" stroke-width="1.4" />
+              </g>
+              <text x="996" y="229" fill="#FFFFFF" font-size="13" font-weight="600" font-family="var(--font-sans)">Client Teams</text>
+              <text x="996" y="246" fill="#94A3B8" font-size="10" font-family="var(--font-mono)">embedded · self-serve</text>
+            </g>
+
+            <!-- Airflow Orchestration Banner -->
+            <g class="arch-orchestration">
+              <rect x="100" y="375" width="950" height="96" rx="14" fill="#080D1A" stroke="rgba(168, 85, 247, 0.35)" stroke-width="1.2" />
+              <g class="airflow-spin" style="transform-box: fill-box; transform-origin: center;">
+                <g transform="translate(535, 396) scale(1.25)">
+                  <path d="M8 8 C8 4 12 0 16 4 C16 8 12 8 8 8 Z" fill="#00C7D4" />
+                  <path d="M8 8 C12 8 16 12 12 16 C8 16 8 12 8 8 Z" fill="#00D084" />
+                  <path d="M8 8 C8 12 4 16 0 12 C0 8 4 8 8 8 Z" fill="#FF6900" />
+                  <path d="M8 8 C4 8 0 4 4 0 C8 0 8 4 8 8 Z" fill="#EB144C" />
+                </g>
+              </g>
+              <text x="565" y="412" fill="#FFFFFF" font-size="16" font-weight="700" letter-spacing="1" font-family="var(--font-sans)">Apache Airflow</text>
+              <text x="575" y="432" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="var(--font-mono)">schedules ingestion · dbt runs · data-quality checks · CI/CD</text>
+
+              <!-- Prominent Pipeline Execution Arrow -->
+              <line class="orchestration-arrow" x1="130" y1="452" x2="1020" y2="452" stroke="url(#airflowGrad)" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 6" />
+              <polygon points="1016,446 1030,452 1016,458" fill="#38BDF8" />
+              <circle r="4.2" fill="#E879F9" filter="url(#glowPurp)">
+                <animateMotion dur="3s" repeatCount="indefinite" path="M 130 452 L 1020 452" />
+              </circle>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Flow 2: Big Data ETL Stack (Hidden by default) -->
+        <div id="flowEtl" class="arch-canvas-container" style="display: none;">
+          <svg class="arch-svg-canvas" viewBox="0 0 1150 510" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="glowPurp2" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="glowOrange2" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="glowCyan2" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <linearGradient id="airflowGrad2" gradientUnits="userSpaceOnUse" x1="130" y1="452" x2="1020" y2="452">
+                <stop offset="0%" stop-color="#F97316" stop-opacity="0.25" />
+                <stop offset="25%" stop-color="#FB923C" stop-opacity="0.85" />
+                <stop offset="55%" stop-color="#A855F7" stop-opacity="1" />
+                <stop offset="85%" stop-color="#C084FC" stop-opacity="1" />
+                <stop offset="100%" stop-color="#38BDF8" stop-opacity="1" />
+              </linearGradient>
+            </defs>
+
+            <!-- COLUMN HEADERS -->
+            <g font-family="var(--font-mono)" font-size="11.5" font-weight="700" letter-spacing="2" fill="#94A3B8">
+              <text x="105" y="26" text-anchor="middle">BIG DATA SOURCES</text>
+              <text x="330" y="26" text-anchor="middle">STREAM BUS</text>
+              <text x="492" y="26" text-anchor="middle">LAKEHOUSE</text>
+              <text x="632" y="26" text-anchor="middle">STAGE</text>
+              <text x="812" y="26" text-anchor="middle">SPARK ENGINE + TRANSFORM</text>
+              <text x="1037" y="26" text-anchor="middle">CONSUMERS</text>
+            </g>
+
+            <!-- CONNECTING CONDUITS -->
+            <g class="flow-conduits">
+              <path class="conduit-base" d="M 180 74 C 228 74, 228 198, 270 198" />
+              <circle r="3.8" fill="#FB923C" filter="url(#glowOrange2)">
+                <animateMotion dur="2.8s" repeatCount="indefinite" path="M 180 74 C 228 74, 228 198, 270 198" />
+              </circle>
+
+              <path class="conduit-base" d="M 180 136 C 228 136, 228 198, 270 198" />
+              <circle r="3.8" fill="#FB923C" filter="url(#glowOrange2)" visibility="hidden">
+                <set attributeName="visibility" to="visible" begin="0.4s" />
+                <animateMotion dur="2.4s" begin="0.4s" repeatCount="indefinite" path="M 180 136 C 228 136, 228 198, 270 198" />
+              </circle>
+
+              <path class="conduit-base" d="M 180 198 L 270 198" />
+              <circle r="3.8" fill="#FB923C" filter="url(#glowOrange2)" visibility="hidden">
+                <set attributeName="visibility" to="visible" begin="0.8s" />
+                <animateMotion dur="1.9s" begin="0.8s" repeatCount="indefinite" path="M 180 198 L 270 198" />
+              </circle>
+
+              <path class="conduit-base" d="M 180 260 C 228 260, 228 198, 270 198" />
+              <circle r="3.8" fill="#FB923C" filter="url(#glowOrange2)" visibility="hidden">
+                <set attributeName="visibility" to="visible" begin="1.2s" />
+                <animateMotion dur="2.5s" begin="1.2s" repeatCount="indefinite" path="M 180 260 C 228 260, 228 198, 270 198" />
+              </circle>
+
+              <path class="conduit-base" d="M 180 322 C 228 322, 228 198, 270 198" />
+              <circle r="3.8" fill="#FB923C" filter="url(#glowOrange2)" visibility="hidden">
+                <set attributeName="visibility" to="visible" begin="1.6s" />
+                <animateMotion dur="2.9s" begin="1.6s" repeatCount="indefinite" path="M 180 322 C 228 322, 228 198, 270 198" />
+              </circle>
+
+              <path class="conduit-base" d="M 390 198 L 445 198" stroke="#F97316" />
+              <circle r="4" fill="#F97316" filter="url(#glowOrange2)">
+                <animateMotion dur="1.4s" repeatCount="indefinite" path="M 390 198 L 445 198" />
+              </circle>
+
+              <path class="conduit-base" d="M 540 198 L 585 198" stroke="#10B981" />
+              <circle r="4" fill="#34D399" filter="url(#glowCyan2)">
+                <animateMotion dur="1.1s" repeatCount="indefinite" path="M 540 198 L 585 198" />
+              </circle>
+
+              <path class="conduit-base" d="M 680 198 L 725 198" stroke="#38BDF8" />
+              <circle r="4" fill="#38BDF8" filter="url(#glowCyan2)" visibility="hidden">
+                <set attributeName="visibility" to="visible" begin="0.3s" />
+                <animateMotion dur="1.1s" begin="0.3s" repeatCount="indefinite" path="M 680 198 L 725 198" />
+              </circle>
+
+              <!-- Bypass Conduit directly to Spark Streaming -->
+              <path class="conduit-bypass" d="M 390 135 C 470 30, 650 30, 725 120" stroke="#F97316" />
+              <circle r="4" fill="#F43F5E" filter="url(#glowPurp2)" visibility="hidden">
+                <set attributeName="visibility" to="visible" begin="0.6s" />
+                <animateMotion dur="3.4s" begin="0.6s" repeatCount="indefinite" path="M 390 135 C 470 30, 650 30, 725 120" />
+              </circle>
+
+              <!-- To Consumers -->
+              <path class="conduit-base" d="M 900 136 L 950 136" stroke="#38BDF8" />
+              <circle r="4" fill="#38BDF8" filter="url(#glowCyan2)" visibility="hidden">
+                <set attributeName="visibility" to="visible" begin="0.2s" />
+                <animateMotion dur="1.3s" begin="0.2s" repeatCount="indefinite" path="M 900 136 L 950 136" />
+              </circle>
+
+              <path class="conduit-base" d="M 900 236 L 950 236" stroke="#A855F7" />
+              <circle r="4" fill="#C084FC" filter="url(#glowPurp2)" visibility="hidden">
+                <set attributeName="visibility" to="visible" begin="0.6s" />
+                <animateMotion dur="1.3s" begin="0.6s" repeatCount="indefinite" path="M 900 236 L 950 236" />
+              </circle>
+            </g>
+
+            <text x="557" y="46" text-anchor="middle" fill="#A1A1AA" font-size="10.5" font-style="italic" font-family="var(--font-mono)">direct → Spark Streaming (micro-batch)</text>
+
+            <!-- Card 1: Event streams -->
+            <g class="arch-node">
+              <rect class="node-card" x="30" y="50" width="150" height="48" rx="8" fill="#0C111E" stroke="rgba(249, 115, 22, 0.35)" stroke-width="1.2" />
+              <path d="M44 71 l5 -4 h4 v14 h-4 l-5 -4 h-4 v-6 z" fill="none" stroke="#F97316" stroke-width="1.4" />
+              <path d="M55 70 a 5 5 0 0 1 0 8" fill="none" stroke="#FDBA74" stroke-width="1.2" />
+              <text x="66" y="69" fill="#FFFFFF" font-size="12.5" font-weight="600" font-family="var(--font-sans)">event streams</text>
+              <text x="66" y="85" fill="#94A3B8" font-size="10" font-family="var(--font-mono)">CDC · app events</text>
+            </g>
+
+            <!-- Card 2: Databases -->
+            <g class="arch-node">
+              <rect class="node-card" x="30" y="112" width="150" height="48" rx="8" fill="#0C111E" stroke="rgba(249, 115, 22, 0.35)" stroke-width="1.2" />
+              <path d="M42 130 c0 -3 7 -3 7 -3 s7 0 7 3 v4 c0 3 -7 3 -7 3 s-7 0 -7 -3 z M42 138 c0 3 7 3 7 3 s7 0 7 -3 M42 143 c0 3 7 3 7 3 s7 0 7 -3" fill="none" stroke="#F97316" stroke-width="1.4" />
+              <text x="66" y="131" fill="#FFFFFF" font-size="12.5" font-weight="600" font-family="var(--font-sans)">client databases</text>
+              <text x="66" y="147" fill="#94A3B8" font-size="10" font-family="var(--font-mono)">Postgres · MySQL</text>
+            </g>
+
+            <!-- Card 3: APIs -->
+            <g class="arch-node">
+              <rect class="node-card" x="30" y="174" width="150" height="48" rx="8" fill="#0C111E" stroke="rgba(249, 115, 22, 0.35)" stroke-width="1.2" />
+              <path d="M44 198 l-4 5 l4 5 M54 198 l4 5 l-4 5 M50 195 l-2 11" fill="none" stroke="#F97316" stroke-width="1.4" stroke-linecap="round" />
+              <text x="66" y="193" fill="#FFFFFF" font-size="12.5" font-weight="600" font-family="var(--font-sans)">client APIs</text>
+              <text x="66" y="209" fill="#94A3B8" font-size="10" font-family="var(--font-mono)">REST · Webhooks</text>
+            </g>
+
+            <!-- Card 4: ERP -->
+            <g class="arch-node">
+              <rect class="node-card" x="30" y="236" width="150" height="48" rx="8" fill="#0C111E" stroke="rgba(249, 115, 22, 0.35)" stroke-width="1.2" />
+              <rect x="42" y="250" width="16" height="16" rx="2" fill="none" stroke="#F97316" stroke-width="1.4" />
+              <path d="M42 258 h16 M50 250 v16" stroke="#F97316" stroke-width="1.2" />
+              <text x="66" y="255" fill="#FFFFFF" font-size="12.5" font-weight="600" font-family="var(--font-sans)">enterprise ERP</text>
+              <text x="66" y="271" fill="#94A3B8" font-size="10" font-family="var(--font-mono)">BRAVO · SQL Server</text>
+            </g>
+
+            <!-- Card 5: Flat files -->
+            <g class="arch-node">
+              <rect class="node-card" x="30" y="298" width="150" height="48" rx="8" fill="#0C111E" stroke="rgba(249, 115, 22, 0.35)" stroke-width="1.2" />
+              <path d="M43 316 h8 l4 4 v10 h-12 z" fill="none" stroke="#F97316" stroke-width="1.4" />
+              <path d="M51 316 v4 h4" fill="none" stroke="#F97316" stroke-width="1.2" />
+              <text x="66" y="317" fill="#FFFFFF" font-size="12.5" font-weight="600" font-family="var(--font-sans)">flat files</text>
+              <text x="66" y="333" fill="#94A3B8" font-size="10" font-family="var(--font-mono)">CSV · JSON · Parquet</text>
+            </g>
+
+            <!-- Kafka Card -->
+            <g class="arch-node">
+              <rect class="node-card" x="270" y="85" width="120" height="226" rx="10" fill="#140F0A" stroke="rgba(249, 115, 22, 0.55)" stroke-width="1.4" />
+              <g transform="translate(315, 108)">
+                <circle cx="15" cy="15" r="14" fill="none" stroke="#F97316" stroke-width="1.6" />
+                <circle cx="15" cy="8" r="3" fill="#F97316" />
+                <circle cx="8" cy="19" r="3" fill="#F97316" />
+                <circle cx="22" cy="19" r="3" fill="#F97316" />
+                <line x1="15" y1="8" x2="8" y2="19" stroke="#FDBA74" stroke-width="1.2" />
+                <line x1="15" y1="8" x2="22" y2="19" stroke="#FDBA74" stroke-width="1.2" />
+              </g>
+              <text x="330" y="162" text-anchor="middle" fill="#FFFFFF" font-size="16" font-weight="700" font-family="var(--font-sans)">Apache Kafka</text>
+              <text x="330" y="184" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">distributed topics</text>
+              <text x="330" y="202" text-anchor="middle" fill="#64748B" font-size="9.5" font-family="var(--font-mono)">real-time buffer</text>
+              <line x1="290" y1="216" x2="370" y2="216" stroke="rgba(249, 115, 22, 0.25)" stroke-width="1" />
+              <rect x="286" y="230" width="88" height="24" rx="12" fill="rgba(249, 115, 22, 0.12)" stroke="rgba(249, 115, 22, 0.4)" stroke-width="1" />
+              <text x="330" y="246" text-anchor="middle" fill="#F97316" font-size="10" font-weight="700" font-family="var(--font-mono)">STREAM BUS</text>
+              <text x="330" y="278" text-anchor="middle" fill="#64748B" font-size="9.5" font-family="var(--font-mono)">partitioned logs</text>
+            </g>
+
+            <!-- MinIO / S3 Card -->
+            <g class="arch-node">
+              <rect class="node-card" x="445" y="100" width="95" height="196" rx="10" fill="#0C1819" stroke="rgba(16, 185, 129, 0.55)" stroke-width="1.4" />
+              <g transform="translate(480, 122) scale(1.2)">
+                <path d="M0 6 c0 -3 10 -3 10 -3 s10 0 10 3 v12 c0 3 -10 3 -10 3 s-10 0 -10 -3 z" fill="#10B981" fill-opacity="0.2" stroke="#10B981" stroke-width="1.4" />
+                <path d="M0 6 c0 3 10 3 10 3 s10 0 10 -3" fill="none" stroke="#10B981" stroke-width="1.2" />
+                <path d="M-2 4 c0 -4 12 -4 12 -4 s12 0 12 4" fill="none" stroke="#34D399" stroke-width="1.2" />
+              </g>
+              <text x="492.5" y="170" text-anchor="middle" fill="#34D399" font-size="14" font-weight="700" font-family="var(--font-sans)">MinIO / S3</text>
+              <text x="492.5" y="192" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">data lakehouse</text>
+              <text x="492.5" y="210" text-anchor="middle" fill="#64748B" font-size="9.5" font-family="var(--font-mono)">snappy parquet</text>
+              <line x1="460" y1="222" x2="525" y2="222" stroke="rgba(16, 185, 129, 0.25)" stroke-width="1" />
+              <rect x="456" y="236" width="73" height="22" rx="11" fill="rgba(16, 185, 129, 0.12)" stroke="rgba(16, 185, 129, 0.4)" stroke-width="1" />
+              <text x="492.5" y="251" text-anchor="middle" fill="#10B981" font-size="9.5" font-weight="700" font-family="var(--font-mono)">DELTA LAKE</text>
+            </g>
+
+            <!-- STAGE Card -->
+            <g class="arch-node">
+              <rect class="node-card" x="585" y="100" width="95" height="196" rx="10" fill="#0B1624" stroke="rgba(56, 189, 248, 0.55)" stroke-width="1.4" />
+              <g transform="translate(632.5, 132) scale(1.2)">
+                <circle cx="0" cy="0" r="11" fill="none" stroke="#38BDF8" stroke-width="1.6" />
+                <path d="M-6 -2 l6 6 l6 -6" fill="none" stroke="#38BDF8" stroke-width="1.6" stroke-linecap="round" />
+              </g>
+              <text x="632.5" y="170" text-anchor="middle" fill="#38BDF8" font-size="13.5" font-weight="700" font-family="var(--font-mono)">STAGE</text>
+              <text x="632.5" y="192" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">Schema Inference</text>
+              <text x="632.5" y="210" text-anchor="middle" fill="#64748B" font-size="9.5" font-family="var(--font-mono)">micro-partitions</text>
+              <line x1="600" y1="222" x2="665" y2="222" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1" />
+              <rect x="597" y="236" width="71" height="22" rx="11" fill="rgba(56, 189, 248, 0.12)" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1" />
+              <text x="632.5" y="251" text-anchor="middle" fill="#38BDF8" font-size="9.5" font-weight="700" font-family="var(--font-mono)">VALIDATED</text>
+            </g>
+
+            <!-- Apache Spark Card -->
+            <g class="arch-node">
+              <rect class="node-card" x="725" y="50" width="175" height="296" rx="12" fill="#140D07" stroke="rgba(249, 115, 22, 0.65)" stroke-width="1.5" />
+              <text x="812.5" y="78" text-anchor="middle" fill="#FFFFFF" font-size="16" font-weight="700" font-family="var(--font-sans)">Apache Spark</text>
+              <line x1="745" y1="88" x2="880" y2="88" stroke="rgba(249, 115, 22, 0.3)" stroke-width="1" />
+
+              <g transform="translate(746, 114)">
+                <polygon points="0,-7 7,0 0,7 -7,0" fill="#F97316" />
+              </g>
+              <text x="764" y="114" fill="#FFFFFF" font-size="13" font-weight="600" font-family="var(--font-sans)">PySpark Engine</text>
+              <text x="764" y="128" fill="#94A3B8" font-size="10" font-family="var(--font-mono)">distributed RDD &amp; DF</text>
+
+              <g transform="translate(743, 160)">
+                <circle cx="5" cy="5" r="6" fill="none" stroke="#FDBA74" stroke-width="1.4" />
+                <path d="M2 5 h6 M5 2 v6" stroke="#FDBA74" stroke-width="1.2" />
+              </g>
+              <text x="764" y="162" fill="#FFFFFF" font-size="13" font-weight="600" font-family="var(--font-sans)">Broadcast Join</text>
+              <text x="764" y="176" fill="#94A3B8" font-size="10" font-family="var(--font-mono)">shuffle partition tuning</text>
+
+              <g transform="translate(742, 206)">
+                <path d="M2 3 c0 -2 4 -2 4 -2 s4 0 4 2 v4 c0 2 -4 2 -4 2 s-4 0 -4 -2 z" fill="none" stroke="#60A5FA" stroke-width="1.4" />
+              </g>
+              <text x="764" y="210" fill="#FFFFFF" font-size="13" font-weight="600" font-family="var(--font-sans)">Postgres Marts</text>
+              <text x="764" y="224" fill="#94A3B8" font-size="10" font-family="var(--font-mono)">serving curated tables</text>
+
+              <rect x="755" y="258" width="115" height="28" rx="14" fill="rgba(16, 185, 129, 0.14)" stroke="rgba(16, 185, 129, 0.5)" stroke-width="1.2" />
+              <text x="812.5" y="277" text-anchor="middle" fill="#10B981" font-size="11.5" font-weight="700" font-family="var(--font-mono)">spark-submit <tspan class="dbt-check" fill="#34D399">✓</tspan></text>
+            </g>
+
+            <!-- Card: Metabase -->
+            <g class="arch-node">
+              <rect class="node-card" x="950" y="105" width="175" height="62" rx="10" fill="#0C1420" stroke="rgba(56, 189, 248, 0.45)" stroke-width="1.2" />
+              <circle cx="974" cy="131" r="10" fill="#0284C7" />
+              <path d="M970 131 l3 3 l5 -5" fill="none" stroke="#FFFFFF" stroke-width="1.4" />
+              <text x="996" y="129" fill="#FFFFFF" font-size="13" font-weight="600" font-family="var(--font-sans)">Metabase</text>
+              <text x="996" y="146" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">BI · Dashboards</text>
+            </g>
+
+            <!-- Card: ML Pipeline -->
+            <g class="arch-node">
+              <rect class="node-card" x="950" y="205" width="175" height="62" rx="10" fill="#140C1E" stroke="rgba(168, 85, 247, 0.45)" stroke-width="1.2" />
+              <g transform="translate(964, 222)">
+                <circle cx="5" cy="5" r="3.5" fill="#A855F7" />
+                <circle cx="15" cy="12" r="3.5" fill="#C084FC" />
+                <line x1="5" y1="5" x2="15" y2="12" stroke="#A855F7" stroke-width="1.2" />
+              </g>
+              <text x="996" y="229" fill="#FFFFFF" font-size="13" font-weight="600" font-family="var(--font-sans)">ML Pipeline</text>
+              <text x="996" y="246" fill="#94A3B8" font-size="10" font-family="var(--font-mono)">feature store · models</text>
+            </g>
+
+            <!-- Airflow Orchestration Banner -->
+            <g class="arch-orchestration">
+              <rect x="100" y="375" width="950" height="96" rx="14" fill="#080D1A" stroke="rgba(249, 115, 22, 0.35)" stroke-width="1.2" />
+              <g class="airflow-spin" style="transform-box: fill-box; transform-origin: center;">
+                <g transform="translate(535, 396) scale(1.25)">
+                  <path d="M8 8 C8 4 12 0 16 4 C16 8 12 8 8 8 Z" fill="#00C7D4" />
+                  <path d="M8 8 C12 8 16 12 12 16 C8 16 8 12 8 8 Z" fill="#00D084" />
+                  <path d="M8 8 C8 12 4 16 0 12 C0 8 4 8 8 8 Z" fill="#FF6900" />
+                  <path d="M8 8 C4 8 0 4 4 0 C8 0 8 4 8 8 Z" fill="#EB144C" />
+                </g>
+              </g>
+              <text x="565" y="412" fill="#FFFFFF" font-size="16" font-weight="700" letter-spacing="1" font-family="var(--font-sans)">Apache Airflow</text>
+              <text x="575" y="432" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="var(--font-mono)">schedules spark-submit · monitors DAG runs · alerts on failure</text>
+
+              <!-- Prominent Pipeline Execution Arrow -->
+              <line class="orchestration-arrow" x1="130" y1="452" x2="1020" y2="452" stroke="url(#airflowGrad2)" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 6" />
+              <polygon points="1016,446 1030,452 1016,458" fill="#38BDF8" />
+              <circle r="4.2" fill="#38BDF8" filter="url(#glowOrange2)">
+                <animateMotion dur="3s" repeatCount="indefinite" path="M 130 452 L 1020 452" />
+              </circle>
+            </g>
+          </svg>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================
+         4. INTERACTIVE SQL TERMINAL — "QUERY DUSTIN"
+         ============================================ -->
+    <section class="section" id="sql-terminal" style="background: var(--bg-subtle);">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-category">LIVE INTERACTIVE TERMINAL • QUERY DUSTIN</span>
+          <h2 class="section-title">Truy Vấn Hồ Sơ Bằng SQL Thực Tế</h2>
+          <p class="section-desc">
+            Không cần đọc văn bản dài — bạn có thể trực tiếp chạy các câu lệnh SQL dưới đây để truy vấn kinh nghiệm, kỹ năng, dự án và học vấn của tôi từ cơ sở dữ liệu.
+          </p>
+        </div>
+
+        <div class="sql-terminal-box">
+          <!-- Top Bar -->
+          <div class="terminal-topbar">
+            <div class="terminal-dots">
+              <span class="t-dot red"></span>
+              <span class="t-dot yellow"></span>
+              <span class="t-dot green"></span>
+            </div>
+            <span class="terminal-title">dustin_analytics_db — SQL Session (PostgreSQL / Snowflake Engine)</span>
+            <span style="font-size: 0.72rem; color: var(--emerald); font-family: var(--font-mono); font-weight: 600;">● CONNECTED</span>
+          </div>
+
+          <!-- Presets -->
+          <div class="terminal-presets">
+            <span class="preset-label">Gợi ý truy vấn:</span>
+            <button class="preset-btn" onclick="runPresetQuery('experience')">SELECT * FROM experience;</button>
+            <button class="preset-btn" onclick="runPresetQuery('skills')">SELECT * FROM technical_skills;</button>
+            <button class="preset-btn" onclick="runPresetQuery('projects')">SELECT * FROM featured_projects;</button>
+            <button class="preset-btn" onclick="runPresetQuery('certificates')" style="color: #FBBF24; border-color: rgba(245, 158, 11, 0.35);">SELECT * FROM verified_certificates;</button>
+            <button class="preset-btn" onclick="runPresetQuery('education')">SELECT * FROM education_honors;</button>
+          </div>
+
+          <!-- Input Bar -->
+          <div class="terminal-input-bar">
+            <span class="terminal-prompt">dustin_db=&gt;</span>
+            <input type="text" id="terminalSqlInput" class="terminal-input" value="SELECT * FROM experience;" placeholder="Gõ câu lệnh SQL (hoặc bấm chọn gợi ý ở trên)..." autocomplete="off">
+            <button class="terminal-run-btn" onclick="executeCurrentQuery()">
+              <span>Chạy Query</span>
+              <span>↵</span>
+            </button>
+          </div>
+
+          <!-- Output Area -->
+          <div id="terminalOutput" class="terminal-output">
+            <!-- Rendered by JavaScript -->
+          </div>
+
+          <!-- Stats Bar -->
+          <div class="sql-stats-bar">
+            <span id="terminalExecutionStats">Trạng thái: 4 bản ghi được trả về trong 12ms.</span>
+            <span>Mẹo: Bạn có thể click các nút gợi ý phía trên để đổi bảng.</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================
+         5. THE INTERSECTION — DIFFERENTIATION
+         ============================================ -->
+    <section class="section" id="intersection">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-category">DIFFERENTIATION &amp; VALUE PROPOSITION</span>
+          <h2 class="section-title">Tại Sao Lại Là Analytics Engineer?</h2>
+          <p class="section-desc">
+            Tôi không chọn Analytics Engineer vì nó là từ khóa xu hướng. Tôi chọn vì toàn bộ quá trình tích lũy — từ xây pipeline, triển khai ERP, đến quản trị hạ tầng CAND — đã tự nhiên hội tụ vào đúng giao điểm này: người vừa tự tay build được hệ thống, vừa hiểu sâu sắc bài toán kinh doanh.
+          </p>
+        </div>
+
+        <div class="intersect-grid">
+          
+          <!-- Pillar 1 -->
+          <div class="intersect-col">
+            <span class="col-kicker">01 // BUSINESS DOMAIN</span>
+            <h3 class="col-title">Nền Tảng Quản Trị</h3>
+            <div class="col-subtitle">MIS UFM • Triển Khai ERP</div>
+            <ul class="col-points">
+              <li>Thủ khoa Tin học quản lý UFM — rèn luyện tư duy cốt lõi: công nghệ sinh ra để phụng sự kinh doanh, không phải ngược lại.</li>
+              <li>Hiểu tường tận bức tranh vận hành doanh nghiệp: Mua hàng, Kho bãi, Kế toán và Dòng tiền.</li>
+              <li>Nắm bắt chính xác điều mà C-Level và các trưởng bộ phận thực sự quan tâm để ra quyết định.</li>
+            </ul>
+          </div>
+
+          <!-- Pillar 2 (Highlighted) -->
+          <div class="intersect-col highlighted">
+            <span class="col-kicker" style="color: var(--accent);">TARGET // VALUE CONVERGENCE</span>
+            <h3 class="col-title">The Analytics Engineer</h3>
+            <div class="col-subtitle">Tự Chủ End-to-End • Kỷ Nguyên AI</div>
+            <ul class="col-points">
+              <li><strong>Tự chủ toàn diện:</strong> Tự tay chuẩn bị dữ liệu từ gốc nên hiểu sâu sắc business domain — xóa bỏ hoàn toàn khoảng cách bất đồng giữa DE và DA.</li>
+              <li><strong>Triệt tiêu độ trễ:</strong> Dựng luồng dữ liệu sạch ➔ tự mình giải quyết các câu hỏi Ad-hoc sống còn tức thì cho ban điều hành.</li>
+              <li><strong>Dữ liệu sẵn sàng cho AI:</strong> Áp dụng chuẩn mực dbt, Semantic Layer và Data Modeling (Kimball Star Schema) vững chắc.</li>
+            </ul>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="intersect-col">
+            <span class="col-kicker">02 // INFRASTRUCTURE &amp; DE</span>
+            <h3 class="col-title">Kỹ Thuật &amp; Hạ Tầng</h3>
+            <div class="col-subtitle">Data Engineer • IT Support CAND</div>
+            <ul class="col-points">
+              <li>Tự tay thiết kế và dựng các Data Pipeline, làm chủ SQL ở cấp độ Advanced.</li>
+              <li>Quản trị hạ tầng mạng LAN, hệ điều hành Linux (Ubuntu) và máy chủ vật lý.</li>
+              <li>Tư duy "Mission-Critical": Bảo mật khắt khe, tính sẵn sàng 24/7 từ hệ thống dân cư &amp; báo cháy GTEL.</li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================
+         6. CATEGORIZED TECH ARSENAL (SKILLSET)
+         ============================================ -->
+    <section class="section" id="skills" style="background: var(--bg-subtle);">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-category">CATEGORIZED SKILLSET • TECH ARSENAL</span>
+          <h2 class="section-title">Hạ Tầng Vững Vàng, Truy Vấn Sâu Sắc</h2>
+          <p class="section-desc">
+            Hệ sinh thái công cụ tôi sử dụng hàng ngày — mỗi công nghệ đều gắn liền với kinh nghiệm thực tế trong hành trình làm việc và tự học liên tục.
+          </p>
+        </div>
+
+        <div class="arsenal-grid">
+          
+          <!-- Category 1 -->
+          <div class="arsenal-card">
+            <div class="arsenal-header">
+              <div class="arsenal-icon">🔄</div>
+              <div>
+                <span style="font-size: 0.74rem; font-family: var(--font-mono); color: var(--accent); font-weight: 700;">TRANSFORM &amp; CODE</span>
+                <h3 class="arsenal-title">Data Processing</h3>
+              </div>
+            </div>
+            <div class="arsenal-badge-list">
+              <span class="arsenal-pill" style="border-color: #F43F5E; color: #F43F5E;">dbt Core</span>
+              <span class="arsenal-pill" style="border-color: #F97316; color: #F97316;">Apache Spark (PySpark)</span>
+              <span class="arsenal-pill">SQL Advanced Mastery</span>
+              <span class="arsenal-pill">Python (Data Pipelines)</span>
+              <span class="arsenal-pill">CTEs &amp; Window Functions</span>
+            </div>
+          </div>
+
+          <!-- Category 2 -->
+          <div class="arsenal-card">
+            <div class="arsenal-header">
+              <div class="arsenal-icon">❄️</div>
+              <div>
+                <span style="font-size: 0.74rem; font-family: var(--font-mono); color: var(--accent); font-weight: 700;">STORAGE &amp; OLAP</span>
+                <h3 class="arsenal-title">Warehouse &amp; Lakehouse</h3>
+              </div>
+            </div>
+            <div class="arsenal-badge-list">
+              <span class="arsenal-pill" style="border-color: var(--accent); color: var(--accent);">Snowflake</span>
+              <span class="arsenal-pill">DuckDB</span>
+              <span class="arsenal-pill">PostgreSQL</span>
+              <span class="arsenal-pill">SQL Server (Stored Procs)</span>
+              <span class="arsenal-pill">MinIO / S3 Storage</span>
+              <span class="arsenal-pill">Parquet Format</span>
+            </div>
+          </div>
+
+          <!-- Category 3 -->
+          <div class="arsenal-card">
+            <div class="arsenal-header">
+              <div class="arsenal-icon">🌪️</div>
+              <div>
+                <span style="font-size: 0.74rem; font-family: var(--font-mono); color: var(--accent); font-weight: 700;">WORKFLOW &amp; DEVOPS</span>
+                <h3 class="arsenal-title">Orchestration &amp; Ops</h3>
+              </div>
+            </div>
+            <div class="arsenal-badge-list">
+              <span class="arsenal-pill">Apache Airflow (DAGs)</span>
+              <span class="arsenal-pill">Docker Containerization</span>
+              <span class="arsenal-pill">Git &amp; GitHub Actions</span>
+              <span class="arsenal-pill">Cron Scheduling</span>
+              <span class="arsenal-pill">dbt Testing &amp; Docs</span>
+            </div>
+          </div>
+
+          <!-- Category 4 -->
+          <div class="arsenal-card">
+            <div class="arsenal-header">
+              <div class="arsenal-icon">📊</div>
+              <div>
+                <span style="font-size: 0.74rem; font-family: var(--font-mono); color: var(--accent); font-weight: 700;">BUSINESS INTELLIGENCE</span>
+                <h3 class="arsenal-title">Analytics Engineering</h3>
+              </div>
+            </div>
+            <div class="arsenal-badge-list">
+              <span class="arsenal-pill">Kimball Star Schema</span>
+              <span class="arsenal-pill">Semantic Layer</span>
+              <span class="arsenal-pill">Metabase BI</span>
+              <span class="arsenal-pill">Ad-hoc Insights</span>
+              <span class="arsenal-pill">Data Lineage &amp; QA</span>
+              <span class="arsenal-pill">Fan-out Prevention</span>
+            </div>
+          </div>
+
+          <!-- Category 5 -->
+          <div class="arsenal-card">
+            <div class="arsenal-header">
+              <div class="arsenal-icon">🛡️</div>
+              <div>
+                <span style="font-size: 0.74rem; font-family: var(--font-mono); color: var(--emerald); font-weight: 700;">MISSION-CRITICAL CAND</span>
+                <h3 class="arsenal-title">Hạ Tầng &amp; An Ninh</h3>
+              </div>
+            </div>
+            <div class="arsenal-badge-list">
+              <span class="arsenal-pill">Linux OS (Ubuntu)</span>
+              <span class="arsenal-pill">Mạng LAN &amp; Switch / Router</span>
+              <span class="arsenal-pill">CSDL Quốc Gia Dân Cư</span>
+              <span class="arsenal-pill">Hệ Thống Báo Cháy GTEL</span>
+              <span class="arsenal-pill">Phân Quyền &amp; Bảo Mật</span>
+              <span class="arsenal-pill">High Availability 24/7</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================
+         7. FEATURED TECHNICAL PROJECTS (5 CASE STUDIES)
+         ============================================ -->
+    <section class="section" id="projects">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-category">PROOF OF WORK • REAL-WORLD CASE STUDIES</span>
+          <h2 class="section-title">Dự Án Thực Chiến &amp; Bài Toán Đã Giải Quyết</h2>
+          <p class="section-desc">
+            Bao gồm 2 Flagship Showcase sẵn sàng gắn repository (Spark ETL &amp; dbt ELT) cùng các dự án triển khai ERP doanh nghiệp thực tế và quản trị hạ tầng an ninh CAND.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          
+          <!-- PROJECT 01: BIG DATA ETL WITH APACHE SPARK -->
+          <div class="project-showcase-card featured">
+            <div class="project-header-row">
+              <div class="project-badge-group">
+                <span class="project-badge" style="background: rgba(249, 115, 22, 0.1); color: #F97316; border-color: rgba(249, 115, 22, 0.3);">⚡ Big Data ETL Pipeline</span>
+                <span class="project-badge">Apache Spark &amp; Python</span>
+              </div>
+              <span class="project-duration">Khung dự án sẵn sàng gắn Repo &amp; Demo</span>
+            </div>
+
+            <h3 class="project-title">End-to-End Big Data ETL Pipeline: Batch &amp; Streaming Ingestion with Apache Spark</h3>
+            <div class="project-flow-tag spark">
+              <span>Luồng xử lý:</span>
+              <strong>RAW SOURCES / APIs ➔ APACHE SPARK (TRANSFORM &amp; PARTITIONING) ➔ POSTGRESQL / DATA LAKE</strong>
+            </div>
+            <div class="project-role-tag">
+              <span>Định vị:</span>
+              <strong>Data Engineer / Pipeline Architect (Personal Project Showcase)</strong>
+            </div>
+
+            <div class="project-details-grid">
+              <div>
+                <div class="project-block-title">📌 Bối cảnh &amp; Bài toán kỹ thuật</div>
+                <div class="project-block-body">
+                  Xây dựng đường ống <strong>ETL phân tán</strong> xử lý khối lượng dữ liệu lớn (Batch &amp; Streaming event logs), giải quyết bài toán nghẽn cổ chai tính toán, tối ưu tài nguyên phần cứng (Memory/CPU) và làm sạch dữ liệu triệt để trước khi nạp vào kho lưu trữ trung tâm.
+                </div>
+              </div>
+
+              <div>
+                <div class="project-block-title">⚙️ Kiến trúc xử lý (Apache Spark ETL)</div>
+                <ul class="project-bullets">
+                  <li><strong>Extract &amp; Ingestion:</strong> Thu thập dữ liệu đa nguồn (REST APIs, CSV/JSON batch files, Event streams) qua Python.</li>
+                  <li><strong>PySpark Distributed Transformation:</strong> Viết PySpark jobs chuẩn hóa schema, xử lý missing data, tính toán các metrics tổng hợp đa chiều trên cụm tính toán.</li>
+                  <li><strong>Tối ưu hóa hiệu năng Spark:</strong> Tối ưu Shuffle partitions, kỹ thuật <strong>Broadcast Join</strong> để triệt tiêu độ trễ mạng khi JOIN bảng lớn với bảng danh mục nhỏ.</li>
+                  <li><strong>Load &amp; Data Lake Storage:</strong> Nạp dữ liệu sạch ra định dạng cột tối ưu <strong>Parquet / Delta Lake</strong> và đồng bộ vào PostgreSQL Data Warehouse.</li>
+                  <li><strong>Orchestration:</strong> Thiết lập DAG tự động hóa chu kỳ chạy pipeline qua <strong>Apache Airflow</strong> kèm cơ chế retry và alert lỗi.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="project-impact-banner">
+              <span>🎯 <strong>Điểm nhấn kỹ thuật:</strong> Minh chứng năng lực làm chủ tư duy <strong>ETL truyền thống</strong> — biến đổi dữ liệu phân tán nặng ngay trên cụm tính toán Apache Spark trước khi đưa vào kho lưu trữ downstream.</span>
+            </div>
+
+            <div class="project-tech-row">
+              <span class="project-tech-label">Tech Stack:</span>
+              <span class="tech-pill">Apache Spark</span>
+              <span class="tech-pill">PySpark</span>
+              <span class="tech-pill">Python</span>
+              <span class="tech-pill">Apache Airflow</span>
+              <span class="tech-pill">Parquet / MinIO</span>
+              <span class="tech-pill">PostgreSQL</span>
+              <span class="tech-pill">Docker</span>
+            </div>
+
+            <div class="project-action-links">
+              <a href="https://github.com/tranduc2204" target="_blank" class="project-action-btn primary">
+                <span>📂 GitHub Repository (Chừa sẵn) ↗</span>
+              </a>
+              <a href="#contact" class="project-action-btn">
+                <span>📊 Architecture Diagram ↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- PROJECT 02: MODERN ELT WITH DBT -->
+          <div class="project-showcase-card featured">
+            <div class="project-header-row">
+              <div class="project-badge-group">
+                <span class="project-badge" style="background: rgba(225, 29, 72, 0.1); color: #F43F5E; border-color: rgba(225, 29, 72, 0.3);">🚀 Modern ELT &amp; Analytics Stack</span>
+                <span class="project-badge">dbt Core + Snowflake / DuckDB</span>
+              </div>
+              <span class="project-duration">Flagship Showcase • Road to 2027</span>
+            </div>
+
+            <h3 class="project-title">End-to-End Modern ELT Pipeline: In-Warehouse Transformation with dbt &amp; Kimball Star Schema</h3>
+            <div class="project-flow-tag dbt">
+              <span>Luồng xử lý:</span>
+              <strong>RAW INGESTION ➔ CLOUD WAREHOUSE (SNOWFLAKE / DUCKDB) ➔ IN-WAREHOUSE TRANSFORM (dbt 3-LAYER) ➔ BI METRICS</strong>
+            </div>
+            <div class="project-role-tag">
+              <span>Định vị:</span>
+              <strong>Analytics Engineer (Flagship Engineering Showcase)</strong>
+            </div>
+
+            <div class="project-details-grid">
+              <div>
+                <div class="project-block-title">📌 Bối cảnh &amp; Bài toán kinh doanh</div>
+                <div class="project-block-body">
+                  Xây dựng nền tảng dữ liệu phục vụ kinh doanh (Self-serve BI &amp; Ad-hoc insights) theo chuẩn mực <strong>Modern Data Stack</strong>. Chuyển đổi dữ liệu vận hành phân tán thành một <strong>Single Source of Truth</strong> duy nhất, giúp ban giám đốc ra quyết định tức thì mà không cần chờ đợi kỹ thuật viên trích xuất thủ công.
+                </div>
+              </div>
+
+              <div>
+                <div class="project-block-title">⚙️ Kiến trúc xử lý (dbt In-Warehouse ELT)</div>
+                <ul class="project-bullets">
+                  <li><strong>Extract &amp; Load (Raw Layer):</strong> Nạp nguyên trạng dữ liệu thô vào Snowflake / DuckDB qua Python / EL pipeline.</li>
+                  <li><strong>Kiến trúc dbt 3 tầng chuẩn mực:</strong>
+                    <br>• <em>Staging Models:</em> Làm sạch kiểu dữ liệu, đổi tên cột chuẩn mực (renaming &amp; casting).
+                    <br>• <em>Intermediate Models:</em> Kết hợp logic nghiệp vụ, khử trùng bản ghi và xử lý Window Functions.
+                    <br>• <em>Dimensional Marts:</em> Thiết kế <strong>Kimball Star Schema</strong> (Fact Orders/Revenue, Dim Customers, Dim Products) triệt tiêu hoàn toàn Fan-out.
+                  </li>
+                  <li><strong>Automated Testing &amp; Lineage:</strong> Tích hợp dbt test tự động (<code>not_null</code>, <code>unique</code>, <code>relationships</code>) và tự động sinh đồ thị Data Lineage DAG trực quan.</li>
+                  <li><strong>Semantic Layer &amp; BI Integration:</strong> Chuẩn hóa định nghĩa các chỉ số sống còn (MoM Revenue, Churn Rate, LTV, AOV) kết nối trực tiếp với Metabase Dashboard.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="project-impact-banner">
+              <span>🎯 <strong>Điểm nhấn kỹ thuật:</strong> Minh chứng năng lực tự chủ toàn diện của <strong>Analytics Engineer</strong> — khai thác tối đa sức mạnh tính toán của Data Warehouse và quản lý dữ liệu như mã nguồn phần mềm (Analytics as Code).</span>
+            </div>
+
+            <div class="project-tech-row">
+              <span class="project-tech-label">Tech Stack:</span>
+              <span class="tech-pill">dbt Core</span>
+              <span class="tech-pill">Snowflake / DuckDB</span>
+              <span class="tech-pill">Kimball Star Schema</span>
+              <span class="tech-pill">SQL Advanced</span>
+              <span class="tech-pill">Automated Testing</span>
+              <span class="tech-pill">Semantic Layer</span>
+              <span class="tech-pill">Metabase</span>
+            </div>
+
+            <div class="project-action-links">
+              <a href="https://github.com/tranduc2204" target="_blank" class="project-action-btn primary">
+                <span>📂 GitHub Repository (Chừa sẵn) ↗</span>
+              </a>
+              <a href="#contact" class="project-action-btn">
+                <span>📈 Live Dashboard &amp; Lineage ↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- PROJECT 03: THACO GROUP (ENTERPRISE ERP) -->
+          <div class="project-showcase-card">
+            <div class="project-header-row">
+              <div class="project-badge-group">
+                <span class="project-badge client">🏢 Khách hàng Doanh nghiệp</span>
+                <span class="project-badge">THACO Group (Trường Hải Auto)</span>
+              </div>
+              <span class="project-duration">03/2024 — 11/2024</span>
+            </div>
+
+            <h3 class="project-title">Triển Khai Phân Hệ Quản Lý Mua Hàng ERP (Purchasing Management)</h3>
+            <div class="project-role-tag">
+              <span>Vai trò:</span>
+              <strong>ERP Implementation &amp; SQL Database Specialist</strong>
+              <span>• Đơn vị: Cổ phần Phần mềm BRAVO</span>
+            </div>
+
+            <div class="project-details-grid">
+              <div>
+                <div class="project-block-title">📌 Bối cảnh &amp; Thách thức nghiệp vụ</div>
+                <div class="project-block-body">
+                  THACO là tập đoàn công nghiệp và phân phối ô tô quy mô hàng đầu Việt Nam với lưu lượng chứng từ mua hàng, hợp đồng cung ứng phụ tùng khổng lồ. Yêu cầu đặt ra là số liệu luân chuyển giữa các phòng ban Mua hàng ➔ Kho ➔ Kế toán phải được đối soát tự động, triệt tiêu độ trễ và sai lệch số dư công nợ nhà cung cấp.
+                </div>
+              </div>
+
+              <div>
+                <div class="project-block-title">⚙️ Giải pháp kỹ thuật &amp; Kiến trúc dữ liệu</div>
+                <ul class="project-bullets">
+                  <li><strong>Tối ưu Stored Procedures &amp; Views:</strong> Viết và refactor các thủ tục lưu trữ phức tạp trên SQL Server phục vụ tính toán điều kiện mua hàng và tổng hợp báo cáo.</li>
+                  <li><strong>Data Migration &amp; Data Validation:</strong> Xây dựng các script kiểm tra logic dữ liệu, đảm bảo quá trình chuyển đổi dữ liệu từ hệ thống cũ sang Bravo ERP chính xác 100%.</li>
+                  <li><strong>Tối ưu hóa hiệu năng truy vấn:</strong> Phân tích Execution Plan, thêm Index chiến lược để loại bỏ nghẽn tắc khi phát sinh các báo cáo tổng hợp thời gian thực.</li>
+                  <li><strong>Phân tích yêu cầu &amp; Hỗ trợ trực tiếp:</strong> Làm việc trực tiếp với Key Users của THACO để hiệu chỉnh tính năng và giải quyết bài toán vận hành phát sinh.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="project-impact-banner">
+              <span>🎯 <strong>Giá trị thực tiễn:</strong> Tự động hóa hoàn toàn quy trình phê duyệt đơn hàng mua, chuẩn hóa dữ liệu đầu vào cho toàn chuỗi cung ứng và giảm thiểu 90% lỗi sai lệch số liệu đối soát cuối kỳ.</span>
+            </div>
+
+            <div class="project-tech-row">
+              <span class="project-tech-label">Tech Stack:</span>
+              <span class="tech-pill">SQL Server</span>
+              <span class="tech-pill">Bravo ERP Framework</span>
+              <span class="tech-pill">Complex Stored Procedures</span>
+              <span class="tech-pill">Data Migration &amp; QA</span>
+              <span class="tech-pill">Query Optimization</span>
+            </div>
+          </div>
+
+          <!-- PROJECT 04: LOC PHUC FINE JEWELRY (ENTERPRISE ERP) -->
+          <div class="project-showcase-card">
+            <div class="project-header-row">
+              <div class="project-badge-group">
+                <span class="project-badge client">💎 Chuỗi Bán Lẻ &amp; Kim Hoàn</span>
+                <span class="project-badge">Lộc Phúc Fine Jewelry</span>
+              </div>
+              <span class="project-duration">05/2024 — 02/2025</span>
+            </div>
+
+            <h3 class="project-title">Tích Hợp Đa Phân Hệ ERP: Mua Hàng, Kho Bãi &amp; Quản Lý Máy Móc Thiết Bị</h3>
+            <div class="project-role-tag">
+              <span>Vai trò:</span>
+              <strong>ERP Implementation &amp; Data Solution Specialist</strong>
+              <span>• Đơn vị: Cổ phần Phần mềm BRAVO</span>
+            </div>
+
+            <div class="project-details-grid">
+              <div>
+                <div class="project-block-title">📌 Bối cảnh &amp; Thách thức nghiệp vụ</div>
+                <div class="project-block-body">
+                  Đặc thù ngành trang sức cao cấp yêu cầu kiểm soát hao hụt nguyên liệu (vàng, đá quý), tồn kho từng cửa hàng và lịch trình khấu hao, bảo dưỡng máy móc chế tác cực kỳ chặt chẽ. Dữ liệu đòi hỏi độ chính xác đến từng con số thập phân và khả năng truy vết nguồn gốc (lineage) chi tiết.
+                </div>
+              </div>
+
+              <div>
+                <div class="project-block-title">⚙️ Giải pháp kỹ thuật &amp; Kiến trúc dữ liệu</div>
+                <ul class="project-bullets">
+                  <li><strong>Thiết kế đường ống dữ liệu liên phân hệ:</strong> Kết nối thông suốt dòng thông tin từ Mua hàng (Purchasing) ➔ Nhập kho nguyên liệu (Warehouse) ➔ Cấp phát máy móc thiết bị (Equipment).</li>
+                  <li><strong>Thiết kế Views &amp; Stored Procedures báo cáo:</strong> Xây dựng các mẫu báo cáo quản trị chuyên sâu phục vụ kiểm toán nội bộ và phân tích chi phí khấu hao tài sản.</li>
+                  <li><strong>Xử lý &amp; Chuẩn hóa Data Batch:</strong> Hỗ trợ import/export dữ liệu lớn hàng ngày giữa các showroom và trung tâm chế tác, kiểm soát bẫy trùng lặp bản ghi.</li>
+                  <li><strong>Triển khai On-site &amp; Tinh chỉnh:</strong> Phối hợp cùng đội ngũ kỹ thuật triển khai trực tiếp tại trụ sở doanh nghiệp, hiệu chỉnh chức năng theo phản hồi của ban lãnh đạo.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="project-impact-banner">
+              <span>🎯 <strong>Giá trị thực tiễn:</strong> Giúp ban lãnh đạo Lộc Phúc theo dõi chính xác vòng đời tài sản máy móc, kiểm soát tồn kho tức thì theo thời gian thực và loại bỏ hoàn toàn các điểm mù thất thoát nguyên vật liệu.</span>
+            </div>
+
+            <div class="project-tech-row">
+              <span class="project-tech-label">Tech Stack:</span>
+              <span class="tech-pill">SQL Server</span>
+              <span class="tech-pill">Inventory &amp; Warehouse Modeling</span>
+              <span class="tech-pill">Equipment Life-cycle Tracking</span>
+              <span class="tech-pill">Advanced Views</span>
+              <span class="tech-pill">On-site Deployment</span>
+            </div>
+          </div>
+
+          <!-- PROJECT 05: CAND MISSION-CRITICAL IT -->
+          <div class="project-showcase-card infra">
+            <div class="project-header-row">
+              <div class="project-badge-group">
+                <span class="project-badge security">🛡️ Hạ Tầng Trọng Yếu</span>
+                <span class="project-badge">Môi Trường CAND (2025 — 2027)</span>
+              </div>
+              <span class="project-duration">05/2025 — Hiện tại</span>
+            </div>
+
+            <h3 class="project-title">Quản Trị Mạng LAN &amp; Hệ Thống Dữ Liệu Nghiệp Vụ Trọng Yếu 24/7</h3>
+            <div class="project-role-tag">
+              <span>Vai trò:</span>
+              <strong>IT Support &amp; Quản Trị Hạ Tầng Mạng (Trưng Dụng)</strong>
+              <span>• Đội CS PCCC &amp; CNCH Khu Vực 15</span>
+            </div>
+
+            <div class="project-details-grid">
+              <div>
+                <div class="project-block-title">📌 Bối cảnh &amp; Yêu cầu nhiệm vụ</div>
+                <div class="project-block-body">
+                  Môi trường lực lượng vũ trang đòi hỏi tính sẵn sàng phục vụ chỉ huy chiến đấu 24/7. Dữ liệu và hạ tầng thông tin phải được bảo vệ với mức độ an ninh cao nhất, không được phép gián đoạn kết nối hay xảy ra sự cố rò rỉ dữ liệu.
+                </div>
+              </div>
+
+              <div>
+                <div class="project-block-title">⚙️ Nhiệm vụ kỹ thuật &amp; Trách nhiệm hạ tầng</div>
+                <ul class="project-bullets">
+                  <li><strong>Quản trị mạng nội bộ LAN:</strong> Trực tiếp khảo sát, đấu nối, cấu hình switch/router và tối ưu hóa đường truyền mạng LAN cho toàn đơn vị tác chiến.</li>
+                  <li><strong>Vận hành hệ thống CSDL Dân Cư &amp; Văn Thư:</strong> Quản trị tài khoản, phân quyền bảo mật và bảo đảm hệ thống Cơ sở dữ liệu Quốc gia về Dân cư hoạt động thông suốt.</li>
+                  <li><strong>Hệ thống Báo cháy Thông minh GTEL:</strong> Giám sát và bảo trì hệ thống truyền tin báo sự cố cháy nổ trực tuyến thuộc Bộ Công an, xử lý tín hiệu thời gian thực.</li>
+                  <li><strong>Kỷ luật hạ tầng &amp; High Availability:</strong> Rèn giũa tư duy "Hạ tầng không phải hộp đen" — tính toán khả năng dự phòng (redundancy) và xử lý sự cố tức thì.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="project-impact-banner">
+              <span>🎯 <strong>Giá trị thực tiễn:</strong> Bảo đảm hệ thống CNTT và truyền tin của đơn vị trực chiến hoạt động 100% thời gian, rèn luyện tính kỷ luật quân ngũ thép và tác phong làm việc chuẩn mực.</span>
+            </div>
+
+            <div class="project-tech-row">
+              <span class="project-tech-label">Tech Stack:</span>
+              <span class="tech-pill">Linux OS (Ubuntu)</span>
+              <span class="tech-pill">Mạng LAN &amp; Routing/Switching</span>
+              <span class="tech-pill">CSDL Quốc Gia Về Dân Cư</span>
+              <span class="tech-pill">Hệ Thống Báo Cháy GTEL</span>
+              <span class="tech-pill">Bảo Mật &amp; Phân Quyền</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================
+         8. MY CERTIFICATIONS (MINH PHAM BENCHMARK)
+         ============================================ -->
+    <section class="section" id="certificates">
+      <div class="container">
+        
+        <div class="cert-minh-header">
+          <h2 class="cert-minh-title">My <span class="hl-purple">certifications</span></h2>
+          <p class="cert-minh-desc">Professional certifications that validate my expertise</p>
+        </div>
+
+        <div class="cert-minh-grid">
+          
+          <!-- Card 1: DataCamp Data Engineer Associate -->
+          <a href="https://www.datacamp.com/certificate/DEA0015986472728" target="_blank" rel="noopener noreferrer" class="cert-minh-card card-datacamp" title="Bấm để xác minh chứng chỉ DataCamp trực tuyến">
+            <div class="cert-minh-preview-box" style="background: #05192D; padding: 0;">
+              <img src="images/datacamp_de_associate.png" alt="DataCamp Certified Data Engineer Associate" style="width: 100%; height: 100%; object-fit: contain; display: block;" loading="lazy">
+            </div>
+            <div class="cert-minh-info">
+              <h3 class="cert-minh-card-title">
+                <span>Data Engineer Associate</span>
+                <span class="verify-icon" title="Xem chứng chỉ trực tiếp">↗</span>
+              </h3>
+              <span class="cert-minh-pill" style="color: #03EF62; background: rgba(3, 239, 98, 0.12); border-color: rgba(3, 239, 98, 0.35);">DataCamp</span>
+            </div>
+          </a>
+
+          <!-- Card 2: HackerRank SQL Advanced (Featured Glow as in Minh Pham's middle card) -->
+          <a href="https://www.hackerrank.com/certificates/94fe47fea170" target="_blank" rel="noopener noreferrer" class="cert-minh-card featured" title="Bấm để xác minh chứng chỉ HackerRank trực tuyến">
+            <div class="cert-minh-preview-box" style="background: #FFFFFF; padding: 0;">
+              <img src="images/hackerrank_sql_advanced.png" alt="HackerRank SQL (Advanced) Certificate - Đức Trần" style="width: 100%; height: 100%; object-fit: contain; display: block;" loading="lazy">
+            </div>
+            <div class="cert-minh-info">
+              <h3 class="cert-minh-card-title">
+                <span>SQL Advanced</span>
+                <span class="verify-icon" title="Xem chứng chỉ trực tiếp">↗</span>
+              </h3>
+              <span class="cert-minh-pill" style="color: #00EA64; background: rgba(0, 234, 100, 0.12); border-color: rgba(0, 234, 100, 0.35);">HackerRank</span>
+            </div>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================
+         9. CAREER TRACK RECORD (5-CHAPTER TIMELINE)
+         ============================================ -->
+    <section class="section" id="timeline">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-category">CAREER TRACK RECORD</span>
+          <h2 class="section-title">5 Chương Định Hình Năng Lực Thực Chiến</h2>
+          <p class="section-desc">
+            Mỗi trải nghiệm không phải là một lát cắt ngẫu nhiên, mà là từng mắt xích nối tiếp nhau tạo nên một kỹ sư có gốc rễ hạ tầng vững vàng và tư duy kinh doanh nhạy bén.
+          </p>
+        </div>
+
+        <div class="record-list">
+          
+          <!-- Chapter 1 -->
+          <div class="record-item">
+            <div class="record-meta">
+              <span class="record-phase">CHƯƠNG 01: NỀN TẢNG HỌC THUẬT</span>
+              <span class="record-years">UFM • 2020 - 2024</span>
+            </div>
+            <h3 class="record-heading">Thủ Khoa Đầu Ra — Đại Học Tài Chính - Marketing (UFM)</h3>
+            <p class="record-body">
+              Tôi chọn ngành Hệ thống thông tin quản lý — chuyên ngành Tin học quản lý tại UFM. Tôi muốn hiểu cách công nghệ thông tin phụng sự bài toán kinh doanh thực tế, chứ không chỉ viết code trong phòng lab. Khi tốt nghiệp với danh hiệu Thủ khoa toàn ngành (GPA 3.7/4.0), tôi biết nền tảng này sẽ theo mình suốt sự nghiệp.
+            </p>
+            <div class="record-takeaway">
+              <strong>💡 Bài học cốt lõi:</strong> Nền tảng tư duy hệ thống — nhìn dữ liệu không chỉ là bảng và cột vô hồn, mà là luồng huyết mạch thông tin chảy qua toàn bộ doanh nghiệp.
+            </div>
+          </div>
+
+          <!-- Chapter 2 -->
+          <div class="record-item">
+            <div class="record-meta">
+              <span class="record-phase">CHƯƠNG 02: VA CHẠM THỰC TẾ &amp; CHUYÊN MÔN HÓA</span>
+              <span class="record-years">DATA ENGINEER EXPERIENCE • 2023 - 2024</span>
+            </div>
+            <h3 class="record-heading">Dấn Thân Làm Data Engineer &amp; Bứt Phá Chứng Chỉ SQL Advanced</h3>
+            <p class="record-body">
+              Từ khi còn ngồi trên ghế nhà trường, tôi dấn thân vào vị trí Junior Data Engineer tại Estuary Solution. Đây là nơi tôi lần đầu chạm vào data thực tế — hàng triệu dòng dữ liệu cần được xây dựng thành pipeline, đối soát và làm sạch. Sau đó, tôi tập trung thi đỗ chứng chỉ SQL Advanced từ HackerRank và Data Engineer từ DataCamp — vì tôi hiểu SQL chính là xương sống của mọi phân tích dữ liệu chuyên sâu.
+            </p>
+            <div class="record-takeaway">
+              <strong>💡 Bài học cốt lõi:</strong> Viết query chạy được thì dễ, nhưng viết query tối ưu, tránh được bẫy nhân đôi Fan-out, xử lý Three-Valued Logic với NULL và tận dụng Window Functions mới là đẳng cấp thực sự.
+            </div>
+          </div>
+
+          <!-- Chapter 3 -->
+          <div class="record-item">
+            <div class="record-meta">
+              <span class="record-phase">CHƯƠNG 03: TƯ DUY HỆ THỐNG DOANH NGHIỆP</span>
+              <span class="record-years">ERP IMPLEMENTATION • 2024 - 2025</span>
+            </div>
+            <h3 class="record-heading">Triển Khai ERP — Thấu Hiểu Bức Tranh Vận Hành Doanh Nghiệp Lớn</h3>
+            <p class="record-body">
+              Bước sang vai trò triển khai ERP tại BRAVO, tôi trực tiếp làm việc cùng các trưởng phòng ban và ban giám đốc tại THACO và Lộc Phúc Jewelry. Đây là lúc tôi thấu hiểu bức tranh toàn cảnh: một con số trên dashboard thực chất là kết quả của chuỗi vận hành liên hoàn từ Mua hàng ➔ Nhập kho ➔ Đối soát công nợ ➔ Hạch toán sổ cái.
+            </p>
+            <div class="record-takeaway">
+              <strong>💡 Bài học cốt lõi:</strong> Khả năng dịch Business Requirements thành Data Architecture giúp tôi luôn tạo ra các mô hình dữ liệu phản ánh chính xác thực tế kinh doanh.
+            </div>
+          </div>
+
+          <!-- Chapter 4 -->
+          <div class="record-item">
+            <div class="record-meta">
+              <span class="record-phase">CHƯƠNG 04: KỶ LUẬT THÉP &amp; HẠ TẦNG TRỌNG YẾU</span>
+              <span class="record-years">NGHĨA VỤ CAND • 2025 - 2027</span>
+            </div>
+            <h3 class="record-heading">Trực Chiến Hạ Tầng &amp; Hệ Thống Thông Tin An Ninh CAND</h3>
+            <p class="record-body">
+              Khi nhận lệnh nghĩa vụ CAND, tôi được trưng dụng làm IT Support tại Đội PCCC Khu Vực 15. Tôi được tiếp xúc sâu với hạ tầng mạng LAN, máy chủ Linux, cơ sở dữ liệu quốc gia về dân cư và hệ thống truyền tin báo cháy GTEL. Nghĩa vụ quân ngũ hóa ra là một bước ngoặt quý báu giúp tôi hiểu sâu về hạ tầng vật lý — thứ mà một kỹ sư dữ liệu thông thường hiếm khi có cơ hội chạm tới.
+            </p>
+            <div class="record-takeaway">
+              <strong>💡 Bài học cốt lõi:</strong> Hạ tầng không còn là chiếc hộp đen. Môi trường yêu cầu độ chính xác tuyệt đối, bảo mật cao và sẵn sàng 24/7 đã rèn luyện cho tôi tính kỷ luật và tính cẩn trọng cao độ.
+            </div>
+          </div>
+
+          <!-- Chapter 5 -->
+          <div class="record-item">
+            <div class="record-meta">
+              <span class="record-phase">CHƯƠNG 05: HỘI TỤ &amp; ĐỊNH VỊ TƯƠNG LAI</span>
+              <span class="record-years">KỶ NGUYÊN AI • ROAD TO 2027</span>
+            </div>
+            <h3 class="record-heading">Bước Ngoặt Định Vị: Trở Thành Analytics Engineer Toàn Năng</h3>
+            <p class="record-body">
+              Càng tiếp xúc nhiều data, tôi càng bị cuốn hút bởi câu chuyện đằng sau các con số và các bài toán Ad-hoc của C-Level. Trong kỷ nguyên AI, ranh giới giữa Data Analyst và Data Engineer đang mờ dần. Analytics Engineer ra đời để nắm trọn chu trình: tự tay build pipeline, tự chuẩn bị dữ liệu sạch, và vì chính mình là người dựng nên — tôi hiểu rõ business context hơn bất kỳ ai để cung cấp câu trả lời tức thì.
+            </p>
+            <div class="record-takeaway">
+              <strong>💡 Bài học cốt lõi:</strong> Sẵn sàng làm chủ toàn bộ Modern Data Stack và tạo ra giá trị đo lường được cho các tổ chức đang tìm kiếm nhân sự dữ liệu thực chiến.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+
+    <!-- ============================================
+         10. MISSION 2027 & DIRECT CONTACT
+         ============================================ -->
+    <section class="section contact-section" id="contact" style="background: var(--bg-subtle);">
+      <div class="container">
+        
+        <!-- Mission Panel -->
+        <div class="mission-panel">
+          <span class="section-category">TẦM NHÌN NGHỀ NGHIỆP • MỤC TIÊU 2027</span>
+          <h2 class="mission-title">Sẵn Sàng Cho Những Bài Toán Dữ Liệu Thách Thức Nhất</h2>
+          <p class="mission-paragraph">
+            Hiện tại, tôi đang hoàn thành trách nhiệm nghĩa vụ trong môi trường CAND và không ngừng mài sắc kỹ năng thực chiến mỗi ngày. Mục tiêu 2027 của tôi: trở thành Analytics Engineer có thể tự chủ toàn bộ data stack — từ pipeline đến dimensional modeling đến ad-hoc insights — phục vụ các quyết định chiến lược của doanh nghiệp. Nếu bạn đang tìm kiếm một nhân sự dữ liệu thực chiến, kỷ luật và am hiểu vận hành, tôi luôn sẵn sàng kết nối.
+          </p>
+          <a href="mailto:trandc3015@gmail.com" class="direct-email-link">
+            <span>✉️ Gửi email trực tiếp: trandc3015@gmail.com</span>
+          </a>
+        </div>
+
+        <!-- Contact Card -->
+        <div class="contact-card">
+          <h3 class="contact-card-title">Gửi Lời Nhắn Trực Tiếp Cho Dustin</h3>
+          <p class="contact-card-desc">
+            Bạn muốn trao đổi về cơ hội tuyển dụng, hỏi thăm kỹ thuật hay đơn giản là kết nối? Lời nhắn sẽ được gửi thẳng về hòm thư cá nhân của tôi.
+          </p>
+
+          <form id="lpContactForm" class="contact-form">
+            <div class="form-group">
+              <label for="lpMsg" class="form-label">Nội dung thông điệp <span style="color: #EF4444;">*</span></label>
+              <textarea id="lpMsg" name="message" class="form-textarea" placeholder="Nhập nội dung trao đổi hoặc bài toán dữ liệu doanh nghiệp bạn đang quan tâm..." required></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="lpName" class="form-label">Họ tên của bạn <span style="color: var(--text-muted); font-size: 0.8rem; font-weight: 400;">(Tùy chọn)</span></label>
+                <input type="text" id="lpName" name="name" class="form-input" placeholder="Để trống nếu muốn gửi ẩn danh...">
+              </div>
+              <div class="form-group">
+                <label for="lpEmail" class="form-label">Email phản hồi <span style="color: var(--text-muted); font-size: 0.8rem; font-weight: 400;">(Tùy chọn)</span></label>
+                <input type="email" id="lpEmail" name="email" class="form-input" placeholder="Nhập email để tôi phản hồi bạn...">
+              </div>
+            </div>
+
+            <button type="submit" class="form-submit-btn">
+              <span>Gửi thông điệp ngay ➔</span>
+            </button>
+          </form>
+
+          <div id="lpStatusBox" class="form-status-box"></div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================
+       FOOTER — MINIMALIST & PROFESSIONAL
+       ============================================ -->
+  <footer class="exec-footer">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <p>© 2026 Trần Đức (Dustin) • Aspiring Analytics Engineer. Road to 2027.</p>
+      <div style="display: flex; gap: 20px; font-size: 0.88rem;">
+        <a href="mailto:trandc3015@gmail.com" style="color: var(--text-secondary); text-decoration: none;">Email</a>
+        <a href="https://github.com/tranduc2204" target="_blank" style="color: var(--text-secondary); text-decoration: none;">GitHub</a>
+        <a href="https://www.linkedin.com/in/dustintd/" target="_blank" style="color: var(--text-secondary); text-decoration: none;">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       INTERACTIVE ENGINE JAVASCRIPT
+       ============================================ -->
+  <script src="landing/landing.js?v=6"></script>
+  <script>
+    // --- 1. How My Data Flows Switcher ---
+    function switchDataFlow(mode) {
+      const eltGrid = document.getElementById('flowElt');
+      const etlGrid = document.getElementById('flowEtl');
+      const eltBtn = document.getElementById('tabEltBtn');
+      const etlBtn = document.getElementById('tabEtlBtn');
+
+      if (mode === 'elt') {
+        if (eltGrid) eltGrid.style.display = 'block';
+        if (etlGrid) etlGrid.style.display = 'none';
+        if (eltBtn) eltBtn.classList.add('active');
+        if (etlBtn) etlBtn.classList.remove('active');
+      } else {
+        if (eltGrid) eltGrid.style.display = 'none';
+        if (etlGrid) etlGrid.style.display = 'block';
+        if (eltBtn) eltBtn.classList.remove('active');
+        if (etlBtn) etlBtn.classList.add('active');
+      }
+    }
+
+    // --- 2. Interactive SQL Terminal Mock Database ---
+    const DB_DATA = {
+      experience: {
+        headers: ["period", "role", "organization", "key_impact"],
+        rows: [
+          ["2025 - 2027", "Quản Trị Hạ Tầng IT (Trưng Dụng)", "CAND — Đội CS PCCC & CNCH KV 15", "Quản trị mạng LAN 24/7, vận hành CSDL Quốc gia Dân cư & Báo cháy GTEL."],
+          ["2024 - 2025", "ERP Software Implementation Specialist", "Cổ phần Phần mềm BRAVO", "Triển khai ERP THACO & Lộc Phúc Jewelry; tối ưu Stored Procs & Views SQL Server."],
+          ["2023 - 2024", "Junior Data Engineer", "Estuary Solution", "Xây dựng ETL pipeline thực tế, đối soát và làm sạch dữ liệu lớn."],
+          ["2020 - 2024", "Sinh Viên & Tốt Nghiệp Thủ Khoa", "Đại Học Tài Chính - Marketing (UFM)", "GPA 3.7/4.0 Tin học quản lý, rèn luyện tư duy hệ thống phục vụ kinh doanh."]
+        ]
+      },
+      skills: {
+        headers: ["category", "primary_stack", "proficiency", "focus_areas"],
+        rows: [
+          ["Transformation", "dbt Core, SQL Advanced, Python", "Expert / Advanced", "Staging, Intermediate, Kimball Star Schema, Tests"],
+          ["Compute / Big Data", "Apache Spark (PySpark)", "Advanced", "Broadcast Join, Partitioning, Shuffle Optimization"],
+          ["Warehouse & Lake", "Snowflake, DuckDB, PostgreSQL, SQL Server", "Advanced", "In-Warehouse ELT, Stored Procedures, Parquet"],
+          ["Orchestration", "Apache Airflow, Docker, Cron", "Advanced", "Automated DAGs, Retries, Backfill, Monitoring"],
+          ["Infrastructure", "Linux (Ubuntu), Mạng LAN, Security", "Production Ready", "High Availability 24/7, CSDL Dân Cư CAND"]
+        ]
+      },
+      projects: {
+        headers: ["project_name", "type", "tech_stack", "business_outcome"],
+        rows: [
+          ["Spark Big Data Pipeline", "ETL Showcase", "PySpark, Python, Airflow, Parquet", "Tối ưu hóa biến đổi dữ liệu lớn phân tán trước khi lưu kho."],
+          ["Modern Analytics Stack", "ELT Flagship", "dbt Core, Snowflake/DuckDB, Kimball", "Cung cấp Single Source of Truth & Semantic Layer cho C-Level."],
+          ["THACO Group ERP", "Production Client", "SQL Server, Bravo ERP, Stored Procs", "Tự động hóa luồng phê duyệt mua hàng và khử 90% lệch đối soát."],
+          ["Lộc Phúc Fine Jewelry", "Production Client", "SQL Server, Inventory & Equipment", "Kiểm soát hao hụt vàng/đá quý và vòng đời tài sản máy móc."],
+          ["Hạ Tầng IT CAND", "Mission-Critical", "Linux Ubuntu, Mạng LAN, GTEL, Dân Cư", "Bảo đảm 100% thời gian thông suốt chỉ huy tác chiến an ninh."]
+        ]
+      },
+      education: {
+        headers: ["degree", "institution", "gpa", "honors_and_certs"],
+        rows: [
+          ["Cử nhân Tin Học Quản Lý (MIS)", "Đại Học Tài Chính - Marketing (UFM)", "3.7 / 4.0", "🏆 Thủ Khoa Đầu Ra Toàn Ngành"],
+          ["HackerRank Skill Certificate", "HackerRank", "Advanced", "🏅 SQL (Advanced) Certificate"],
+          ["DataCamp Associate Certificate", "DataCamp", "Verified", "🏅 Data Engineer Associate (DEA0015986472728)"]
+        ]
+      },
+      certificates: {
+        headers: ["credential_name", "issuer", "credential_id", "issued_date", "verification_link"],
+        rows: [
+          ["Data Engineer Associate", "DataCamp", "DEA0015986472728", "03/2026", "datacamp.com/certificate/DEA0015986472728"],
+          ["SQL (Advanced) Skill Certificate", "HackerRank", "94fe47fea170", "01/2024", "hackerrank.com/certificates/94fe47fea170"]
+        ]
+      }
+    };
+
+    function renderTable(tableObj, executionMs) {
+      let html = '<table class="sql-table"><thead><tr>';
+      tableObj.headers.forEach(h => {
+        html += `<th>${h}</th>`;
+      });
+      html += '</tr></thead><tbody>';
+
+      tableObj.rows.forEach(row => {
+        html += '<tr>';
+        row.forEach(cell => {
+          // If cell is a URL, render as clickable link
+          if (cell.includes('http') || cell.includes('.com/certificate')) {
+            const url = cell.startsWith('http') ? cell : `https://${cell}`;
+            html += `<td><a href="${url}" target="_blank" style="color: #60A5FA; text-decoration: underline;">${cell} ↗</a></td>`;
+          } else {
+            html += `<td>${cell}</td>`;
+          }
+        });
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+
+      const outputEl = document.getElementById('terminalOutput');
+      const statsEl = document.getElementById('terminalExecutionStats');
+      if (outputEl) outputEl.innerHTML = html;
+      if (statsEl) statsEl.innerHTML = `Trạng thái: ${tableObj.rows.length} bản ghi trả về trong ${executionMs}ms • Truy vấn thực thi thành công.`;
+    }
+
+    function runPresetQuery(presetKey) {
+      const inputEl = document.getElementById('terminalSqlInput');
+      let queryStr = '';
+      if (presetKey === 'experience') queryStr = 'SELECT * FROM experience;';
+      else if (presetKey === 'skills') queryStr = 'SELECT * FROM technical_skills;';
+      else if (presetKey === 'projects') queryStr = 'SELECT * FROM featured_projects;';
+      else if (presetKey === 'certificates') queryStr = 'SELECT * FROM verified_certificates;';
+      else if (presetKey === 'education') queryStr = 'SELECT * FROM education_honors;';
+
+      if (inputEl) inputEl.value = queryStr;
+      executeCurrentQuery();
+    }
+
+    function executeCurrentQuery() {
+      const inputEl = document.getElementById('terminalSqlInput');
+      const query = (inputEl ? inputEl.value : '').toLowerCase().trim();
+      const randomMs = Math.floor(Math.random() * 12) + 8;
+
+      if (query.includes('skill')) {
+        renderTable(DB_DATA.skills, randomMs);
+      } else if (query.includes('project') || query.includes('work')) {
+        renderTable(DB_DATA.projects, randomMs);
+      } else if (query.includes('cert') || query.includes('license') || query.includes('credential')) {
+        renderTable(DB_DATA.certificates, randomMs);
+      } else if (query.includes('edu') || query.includes('ufm') || query.includes('degree')) {
+        renderTable(DB_DATA.education, randomMs);
+      } else if (query.includes('table')) {
+        const tablesList = {
+          headers: ["table_name", "schema", "record_count", "description"],
+          rows: [
+            ["experience", "public", "4", "Quá trình công tác: CAND, BRAVO ERP, Estuary, UFM"],
+            ["technical_skills", "public", "5", "Ma trận kỹ năng dbt, Spark, Snowflake, SQL, Linux"],
+            ["featured_projects", "public", "5", "Dự án thực tế: Spark ETL, dbt ELT, THACO, Lộc Phúc, CAND"],
+            ["verified_certificates", "public", "2", "Chứng chỉ quốc tế DataCamp Data Engineer & HackerRank SQL Advanced"],
+            ["education_honors", "public", "3", "Thủ khoa UFM GPA 3.7, chứng chỉ HackerRank & DataCamp"]
+          ]
+        };
+        renderTable(tablesList, randomMs);
+      } else {
+        // Default to experience
+        renderTable(DB_DATA.experience, randomMs);
+      }
+    }
+
+    // --- 0. Dynamic Typewriter Effect ---
+    (function initTypewriter() {
+      const phrases = [
+        "Analytics Engineering (dbt Core + Kimball)",
+        "Big Data Distributed Pipelines (Apache Spark)",
+        "In-Warehouse Modeling (Snowflake / DuckDB)",
+        "Mission-Critical Infrastructure (Linux CAND IT)",
+        "Executive Decision Support (Self-Serve BI)"
+      ];
+      const targetEl = document.getElementById('heroTypewriter');
+      if (!targetEl) return;
+
+      let phraseIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      const typeSpeed = 55;
+      const deleteSpeed = 30;
+      const holdTime = 2200;
+
+      function tick() {
+        const currentPhrase = phrases[phraseIndex];
+
+        if (isDeleting) {
+          targetEl.textContent = currentPhrase.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          targetEl.textContent = currentPhrase.substring(0, charIndex + 1);
+          charIndex++;
+        }
+
+        let delta = isDeleting ? deleteSpeed : typeSpeed;
+
+        if (!isDeleting && charIndex === currentPhrase.length) {
+          delta = holdTime;
+          isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+          delta = 350;
+        }
+
+        setTimeout(tick, delta);
+      }
+
+      tick();
+    })();
+
+    // --- 0.1 3D Mouse Parallax Engine ---
+    (function initMouseParallax() {
+      const heroEl = document.getElementById('hero');
+      const hologramCard = document.getElementById('hologramCard');
+      const auroraBlobs = document.querySelectorAll('.aurora-blob');
+      const floatingChips = document.querySelectorAll('.floating-tech-chip');
+      if (!heroEl || !hologramCard) return;
+
+      // Check for touch devices / reduced motion preference
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion || 'ontouchstart' in window) return;
+
+      let mouseX = 0, mouseY = 0;
+      let targetX = 0, targetY = 0;
+      let isHovering = false;
+
+      heroEl.addEventListener('mousemove', (e) => {
+        const rect = heroEl.getBoundingClientRect();
+        mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+        mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+        isHovering = true;
+      });
+
+      heroEl.addEventListener('mouseleave', () => {
+        isHovering = false;
+      });
+
+      function renderParallax() {
+        const ease = isHovering ? 0.08 : 0.04;
+        const destX = isHovering ? mouseX : 0;
+        const destY = isHovering ? mouseY : 0;
+
+        targetX += (destX - targetX) * ease;
+        targetY += (destY - targetY) * ease;
+
+        // 1. Tilt main hologram card
+        const rotY = targetX * 9;
+        const rotX = -targetY * 9;
+        hologramCard.style.transform = `perspective(1000px) rotateY(${rotY.toFixed(2)}deg) rotateX(${rotX.toFixed(2)}deg)`;
+
+        // 2. Parallax background aurora blobs (opposite direction)
+        auroraBlobs.forEach((blob, idx) => {
+          const factor = (idx + 1) * -16;
+          blob.style.transform = `translate3d(${(targetX * factor).toFixed(1)}px, ${(targetY * factor).toFixed(1)}px, 0)`;
+        });
+
+        // 3. Parallax floating tech chips with varying depths
+        const depths = [14, -16, 16, -14];
+        floatingChips.forEach((chip, idx) => {
+          const depth = depths[idx % depths.length];
+          chip.style.transform = `translate3d(${(targetX * depth).toFixed(1)}px, ${(targetY * depth).toFixed(1)}px, 0)`;
+        });
+
+        requestAnimationFrame(renderParallax);
+      }
+
+      requestAnimationFrame(renderParallax);
+    })();
+
+    // Initialize Default Terminal Output on Load
+    document.addEventListener('DOMContentLoaded', () => {
+      executeCurrentQuery();
+
+      const inputEl = document.getElementById('terminalSqlInput');
+      if (inputEl) {
+        inputEl.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            executeCurrentQuery();
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
