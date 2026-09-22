@@ -1,518 +1,1534 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="dark">
+<html lang="vi" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trần Đức (Dustin) — Aspiring Analytics Engineer | Executive Profile</title>
-  <meta name="description" content="Thủ khoa UFM, cựu Data Engineer, kinh nghiệm triển khai ERP và quản lý hạ tầng IT CAND. Định vị Analytics Engineer kết hợp kỹ thuật đường ống với lời giải cho những bài toán thực tế.">
+  <title>Trần Đức (Dustin) — Analytics Engineer &amp; Blog Cá Nhân</title>
+  <meta name="description" content="Hồ sơ năng lực kỹ thuật và blog cá nhân của Trần Đức (Dustin) - Analytics Engineer, Thủ khoa UFM GPA 3.7, Quản trị hạ tầng CNTT CAND 24/7. Chuyên sâu về Modern Data Stack: dbt, Snowflake, dlt, SQL Server CDC.">
   
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Favicon & Isolated Stylesheet -->
   <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-  <link rel="stylesheet" href="landing.css?v=4">
-  
-  <!-- Immediate Theme Initialization (Zero Flicker) -->
-  <script>
-    (function() {
-      try { localStorage.removeItem('dustin_theme'); } catch(e) {}
-      const savedTheme = localStorage.getItem('dustin_theme_mode') || 'dark';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-    })();
-  </script>
+  <link rel="stylesheet" href="landing.css?v=50">
 </head>
 <body>
 
-  <!-- ============================================
-       NAVIGATION BAR — MINIMALIST & AUTHORITATIVE
-       ============================================ -->
-  <header class="exec-navbar">
-    <div class="container exec-nav-inner">
-      <a href="#hero" class="exec-brand">
-        <span class="exec-brand-name">Trần Đức</span>
-        <span class="exec-brand-title">/ Analytics Engineer</span>
+  <!-- 1. Editorial Navigation Bar (Kristin Wong Style Minimalist Brand) -->
+  <header class="site-nav">
+    <div class="container nav-inner">
+      <a href="#about" class="nav-brand">
+        <div>
+          <span class="nav-brand-title" style="letter-spacing: 0.04em;">trần đức</span>
+          <span class="nav-brand-subtitle"> &bull; analytics engineer</span>
+        </div>
       </a>
 
-      <nav class="exec-nav-links" aria-label="Điều hướng chính">
-        <a href="#intersection">Điểm Giao Thoa</a>
-        <a href="#timeline">Hành Trình</a>
-        <a href="#competencies">Bộ Kỹ Năng</a>
-        <a href="#case-studies">Bài Viết Chuyên Sâu</a>
-        <a href="#contact">Liên Hệ</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#about" class="nav-link" data-i18n="nav_about">About</a></li>
+          <li><a href="#pipeline" class="nav-link" data-i18n="nav_pipeline">Pipeline</a></li>
+          <li><a href="#experience" class="nav-link" data-i18n="nav_experience">Experience</a></li>
+          <li><a href="#works" class="nav-link" data-i18n="nav_works">Projects</a></li>
+          <li><a href="#milestones" class="nav-link" data-i18n="nav_milestones">Milestones</a></li>
+          <li><a href="#certs" class="nav-link" data-i18n="nav_certs">Credentials</a></li>
+          <li><a href="#essays" class="nav-link" data-i18n="nav_essays">Writing</a></li>
+          <li><a href="../blog/index.html" class="nav-link" style="color: var(--emerald); font-weight: 600;" data-i18n="nav_blog">Blog ✍️</a></li>
+          <li>
+            <a href="../assets/cv/TranDuc_AnalyticsEngineer_CV.pdf" download="TranDuc_AnalyticsEngineer_CV.pdf" class="nav-link nav-cta" data-i18n="nav_cv">CV (PDF) ↓</a>
+          </li>
+          <li>
+            <button id="langToggleBtn" class="nav-lang-toggle" onclick="toggleLanguage()" aria-label="Toggle Language" title="English / Tiếng Việt">
+              <span class="lang-code en active">EN</span>
+              <span class="lang-slash">/</span>
+              <span class="lang-code vi">VI</span>
+            </button>
+          </li>
+        </ul>
       </nav>
-
-      <div class="exec-nav-actions">
-        <button class="theme-toggle-btn" id="lpThemeBtn" aria-label="Đổi giao diện" title="Đổi giao diện">☀️</button>
-        <a href="../home.html" class="btn-secondary" style="padding: 8px 16px; font-size: 0.84rem;" title="Chuyển sang trang chủ blog & kiến thức">
-          <span>Trang Chủ Blog ➔</span>
-        </a>
-        <a href="#contact" class="btn-primary" style="padding: 8px 18px; font-size: 0.84rem;">
-          <span>Liên hệ ↗</span>
-        </a>
-      </div>
     </div>
   </header>
 
   <main>
-    <!-- ============================================
-         1. HERO SECTION — EXECUTIVE BRIEFING & PROFILE
-         ============================================ -->
-    <section class="hero-section" id="hero">
+    <!-- 2. Hero Section (Minh Pham Light Theme Structure — No Photo, Tech Vector Artwork) -->
+    <section class="hero-section" id="about">
       <div class="container">
         
-        <div class="hero-grid">
-          <!-- LEFT COLUMN: EXECUTIVE BRIEFING -->
-          <div class="hero-briefing">
-            <span class="hero-kicker">PROFILE &amp; EXECUTIVE SUMMARY • MỤC TIÊU 2027</span>
+        <div class="hero-mark-layout">
+          
+          <!-- Left Column: Bio, Roles, Socials & Pill CTAs -->
+          <div class="hero-content-col">
+            
+            <!-- Live Visitor Counter Pill -->
+            <div class="hero-visitor-pill">
+              <span class="visitor-pulse-dot"></span>
+              <span class="visitor-text" data-i18n="hero_visitors"><strong id="liveVisitorCount">1,280+</strong> visitors</span>
+            </div>
 
-            <h1 class="hero-headline">
-              Từ <span class="hl-blue">Data Pipeline</span> đến <span class="hl-gradient">Business Insight</span>.
-              <span class="hero-headline-sub">Tôi không chỉ <strong>xây dựng hạ tầng</strong> — tôi đi tìm câu trả lời cho <span class="hl-emerald">những bài toán thực tế</span>.</span>
+            <!-- Hero Manifesto -->
+            <h1 class="hero-manifesto-title" data-i18n-html="hero_title">
+              From <span class="accent-pipeline">Data Pipeline</span> to <span class="accent-insight">Business Insight</span>.
             </h1>
-
-            <p class="hero-bio">
-              Tôi là <strong>Trần Đức (Dustin)</strong> — Thủ khoa UFM, từng xây pipeline thực tế, triển khai ERP cho doanh nghiệp, và đang quản lý hạ tầng IT trong môi trường CAND. Càng tiếp xúc nhiều data, tôi càng bị thu hút bởi <strong>những câu chuyện phía sau nó</strong>. Và đó là lý do tôi chọn trở thành <strong>Analytics Engineer</strong>.
+            <h2 class="hero-manifesto-sub" data-i18n-html="hero_sub">
+              I don't just build infrastructure — I seek answers to <span class="accent-practical">real-world business problems</span>.
+            </h2>
+            <p class="hero-manifesto-bio" data-i18n-html="hero_bio">
+              I am <strong>Trần Đức (Dustin)</strong> — <strong>Valedictorian at UFM</strong> (GPA 3.7/4.0), experienced in <strong>building production pipelines</strong>, <strong>implementing ERP systems</strong> for enterprises, and currently <strong>managing IT infrastructure</strong> in the <strong>People's Police (CAND)</strong> environment. The deeper I work with data, the more captivated I become by <span class="accent-story">the stories behind it</span>. That is why I chose to become an <strong class="accent-role">Analytics Engineer | Data Engineer</strong>.
             </p>
 
-            <!-- 3 Quantitative Metrics Row -->
-            <div class="hero-metrics">
-              <div class="metric-item">
-                <span class="metric-value">3.7 / 4.0</span>
-                <span class="metric-label">Thủ Khoa Đầu Ra UFM</span>
-                <span class="metric-sub">Tin Học Quản Lý</span>
-              </div>
-              <div class="metric-item">
-                <span class="metric-value">SQL Advanced</span>
-                <span class="metric-label">Mastery Truy Vấn</span>
-                <span class="metric-sub">CTEs, Window &amp; Pipelines</span>
-              </div>
-              <div class="metric-item">
-                <span class="metric-value">Hạ Tầng CAND</span>
-                <span class="metric-label">Quản Lý IT Trực Chiến</span>
-                <span class="metric-sub">Linux, LAN, Dân Cư &amp; GTEL</span>
-              </div>
-            </div>
-
-            <div class="hero-actions">
-              <a href="#timeline" class="btn-primary">
-                <span>Xem 5 chương chuyển mình</span>
-                <span>↓</span>
+            <!-- Circular Social Icons Strip with Tooltips -->
+            <div class="hero-social-strip">
+              <!-- LinkedIn -->
+              <a href="https://www.linkedin.com/in/tranduc2204/" target="_blank" rel="noopener noreferrer" class="hero-social-btn" data-tip="LinkedIn" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z"/></svg>
               </a>
-              <a href="#contact" class="btn-secondary">
-                <span>Gửi lời nhắn trao đổi</span>
-                <span>📮</span>
+              <!-- GitHub -->
+              <a href="https://github.com/tranduc2204" target="_blank" rel="noopener noreferrer" class="hero-social-btn" data-tip="GitHub" aria-label="GitHub">
+                <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>
               </a>
-              <a href="../home.html" class="btn-secondary" style="border-color: var(--border-hover);">
-                <span>Vào Trang Chủ Blog ➔</span>
+              <!-- HackerRank -->
+              <a href="https://www.hackerrank.com/profile/trandc3015" target="_blank" rel="noopener noreferrer" class="hero-social-btn" data-tip="HackerRank" aria-label="HackerRank">
+                <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm2.5 13.75h-1.5V13.2h-2v2.55H9.5V8.25h1.5v2.75h2V8.25h1.5Z"/></svg>
+              </a>
+              <!-- DataCamp -->
+              <a href="https://www.datacamp.com/portfolio/trandc3015" target="_blank" rel="noopener noreferrer" class="hero-social-btn" data-tip="DataCamp" aria-label="DataCamp">
+                <svg viewBox="0 0 24 24"><path d="M12 3L2 8l10 5 10-5-10-5zm0 8.7L4.4 8 12 4.2 19.6 8 12 11.7zm-8 2.8l8 4 8-4v2.5l-8 4-8-4V14.5z"/></svg>
+              </a>
+              <!-- Blog -->
+              <a href="../blog/index.html" class="hero-social-btn" data-tip="Personal Blog" aria-label="Blog">
+                <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+              </a>
+              <!-- Email Copy -->
+              <button onclick="copyEmailAddress()" class="hero-social-btn" data-tip="Copy Email" aria-label="Sao chép Email">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              </button>
+            </div>
+
+            <!-- Two Pill CTA Buttons (Download Resume & Book Coffee Chat) -->
+            <div class="hero-cta-group">
+              <a href="../assets/cv/TranDuc_AnalyticsEngineer_CV.pdf" download="TranDuc_AnalyticsEngineer_CV.pdf" class="hero-pill-btn hero-btn-purple">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span data-i18n="hero_cta_resume">Download Resume</span>
+              </a>
+              <a href="#contact" class="hero-pill-btn hero-btn-white">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                <span data-i18n="hero_cta_chat">Book a coffee chat</span>
               </a>
             </div>
+
           </div>
 
-          <!-- RIGHT COLUMN: MINIMALIST PORTRAIT CARD -->
-          <div class="hero-portrait-card">
-            <div class="portrait-frame">
-              <img src="../images/dustin-cand.png" alt="Trần Đức (Dustin) trong trang phục quản lý IT CAND" class="portrait-img" loading="eager">
-            </div>
-            <div class="portrait-caption">
-              <span class="caption-name">Trần Đức (Dustin)</span>
-              <span class="caption-role">Quản lý hạ tầng IT CAND (2025 - 2027) &amp; Aspiring Analytics Engineer</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- End-to-End Architecture Flowchart -->
-        <div class="arch-flow-wrapper">
-          <div class="arch-header">
-            <span class="arch-tag">END-TO-END DATA ARCHITECTURE FLOWCHART</span>
-            <span style="font-size: 0.8rem; color: var(--emerald); font-weight: 600;">● TỰ CHỦ TOÀN DIỆN</span>
-          </div>
-
-          <div class="arch-flow-grid">
-            <!-- Step 1 -->
-            <div class="arch-step">
-              <span class="step-label">TẦNG 1: INPUT LAYER</span>
-              <div class="step-title">Dữ Liệu Vận Hành &amp; ERP</div>
-              <div class="step-desc">Nguồn dữ liệu thực tế từ Mua hàng, Kho, Kế toán và Dòng tiền doanh nghiệp.</div>
-            </div>
-
-            <div class="arch-arrow">→</div>
-
-            <!-- Step 2 -->
-            <div class="arch-step core">
-              <span class="step-label" style="color: var(--accent);">TẦNG 2: PROCESSING ENGINE</span>
-              <div class="step-title">Hạ Tầng &amp; Đường Ống</div>
-              <div class="step-desc">Chuẩn hóa dữ liệu qua SQL Advanced, Python Pipelines và hệ điều hành Linux CAND.</div>
-            </div>
-
-            <div class="arch-arrow">→</div>
-
-            <!-- Step 3 -->
-            <div class="arch-step">
-              <span class="step-label">TẦNG 3: VALUE LAYER</span>
-              <div class="step-title">Analytics Engineer</div>
-              <div class="step-desc">Xây dựng Semantic Layer, Data Modeling (Kimball) và trực tiếp trả lời câu hỏi Ad-hoc cho C-Level.</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ============================================
-         2. THE INTERSECTION — STRUCTURAL GRID
-         ============================================ -->
-    <section class="section" id="intersection">
-      <div class="container">
-        
-        <div class="section-header">
-          <span class="section-category">DIFFERENTIATION &amp; VALUE PROPOSITION</span>
-          <h2 class="section-title">Tại Sao Lại Là Analytics Engineer?</h2>
-          <p class="section-desc">
-            Tôi không chọn Analytics Engineer vì nó đang trending. Tôi chọn vì hành trình của tôi — từ xây pipeline, triển khai ERP, đến quản trị hạ tầng CAND — đã tự nhiên hội tụ vào đúng giao điểm này: người vừa build được hệ thống, vừa hiểu được bài toán kinh doanh.
-          </p>
-        </div>
-
-        <div class="intersect-grid">
-          
-          <!-- Pillar 1 -->
-          <div class="intersect-col">
-            <span class="col-kicker">01 // BUSINESS DOMAIN</span>
-            <h3 class="col-title">Nền Tảng Quản Trị</h3>
-            <div class="col-subtitle">MIS UFM • Triển Khai ERP</div>
-            <ul class="col-points">
-              <li>Thủ khoa Tin học quản lý UFM — nền tảng cho tôi tư duy rằng công nghệ sinh ra để phụng sự kinh doanh, không phải ngược lại.</li>
-              <li>Hiểu tường tận bức tranh vận hành doanh nghiệp: Mua hàng, Kho bãi, Kế toán và Dòng tiền.</li>
-              <li>Nắm bắt chính xác điều mà C-Level và các trưởng bộ phận thực sự quan tâm để ra quyết định.</li>
-            </ul>
-          </div>
-
-          <!-- Pillar 2 (Highlighted) -->
-          <div class="intersect-col highlighted">
-            <span class="col-kicker" style="color: var(--accent);">TARGET // VALUE CONVERGENCE</span>
-            <h3 class="col-title">The Analytics Engineer</h3>
-            <div class="col-subtitle">Tự Chủ End-to-End • Kỷ Nguyên AI</div>
-            <ul class="col-points">
-              <li><strong>Tự chủ toàn diện:</strong> Chính tôi prepare mọi thứ nên tôi hiểu business domain sâu hơn — không còn cảnh DA chờ DE, DE không hiểu DA cần gì.</li>
-              <li><strong>Triệt tiêu độ trễ:</strong> Tự tay dựng luồng dữ liệu sạch ➔ tự mình giải quyết các câu hỏi Ad-hoc sống còn tức thì cho ban giám đốc.</li>
-              <li><strong>Dữ liệu sẵn sàng cho AI:</strong> Áp dụng chuẩn mực dbt, Semantic Layer và Data Modeling (Kimball Star Schema) vững chắc.</li>
-            </ul>
-          </div>
-
-          <!-- Pillar 3 -->
-          <div class="intersect-col">
-            <span class="col-kicker">02 // INFRASTRUCTURE &amp; DE</span>
-            <h3 class="col-title">Kỹ Thuật &amp; Hạ Tầng</h3>
-            <div class="col-subtitle">Data Engineer • IT Support CAND</div>
-            <ul class="col-points">
-              <li>Tự tay thiết kế và dựng các Data Pipeline, làm chủ SQL ở cấp độ Advanced.</li>
-              <li>Quản trị hạ tầng mạng LAN, hệ điều hành Linux (Ubuntu) và máy chủ vật lý.</li>
-              <li>Tư duy "Mission-Critical": Bảo mật khắt khe, tính sẵn sàng 24/7 từ hệ thống dân cư &amp; báo cháy GTEL.</li>
-            </ul>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ============================================
-         3. CAREER TRACK RECORD (5-CHAPTER TIMELINE)
-         ============================================ -->
-    <section class="section" id="timeline">
-      <div class="container">
-        
-        <div class="section-header">
-          <span class="section-category">CAREER TRACK RECORD</span>
-          <h2 class="section-title">5 Chương Định Hình Năng Lực Thực Chiến</h2>
-          <p class="section-desc">
-            Mỗi trải nghiệm không phải là một lát cắt ngẫu nhiên, mà là từng mắt xích nối tiếp nhau tạo nên một kỹ sư có gốc rễ hạ tầng và tư duy kinh doanh nhạy bén.
-          </p>
-        </div>
-
-        <div class="record-list">
-          
-          <!-- Chapter 1 -->
-          <div class="record-item">
-            <div class="record-meta">
-              <span class="record-phase">CHƯƠNG 01: NỀN TẢNG HỌC THUẬT</span>
-              <span class="record-years">UFM • 2020 - 2024</span>
-            </div>
-            <h3 class="record-heading">Thủ Khoa Đầu Ra — Đại Học Tài Chính - Marketing (UFM)</h3>
-            <p class="record-body">
-              Tôi chọn ngành Hệ thống thông tin quản lý — chuyên ngành Tin học quản lý tại UFM. Không phải ngẫu nhiên. Tôi muốn hiểu cách công nghệ thông tin phục vụ bài toán kinh doanh thực tế, chứ không chỉ viết code trong phòng lab. Khi tốt nghiệp với danh hiệu Thủ khoa (GPA 3.7/4.0), tôi biết nền tảng này sẽ theo mình rất lâu.
-            </p>
-            <div class="record-takeaway">
-              <strong>💡 Bài học rút ra:</strong> Nền tảng cho tôi tư duy hệ thống — nhìn dữ liệu không chỉ là bảng và cột, mà là luồng thông tin chảy qua toàn bộ doanh nghiệp.
-            </div>
-          </div>
-
-          <!-- Chapter 2 -->
-          <div class="record-item">
-            <div class="record-meta">
-              <span class="record-phase">CHƯƠNG 02: VA CHẠM THỰC TẾ &amp; CHUYÊN MÔN HÓA</span>
-              <span class="record-years">DATA ENGINEER EXPERIENCE • 2024</span>
-            </div>
-            <h3 class="record-heading">Dấn Thân Làm Data Engineer &amp; Bứt Phá Chứng Chỉ SQL Advanced</h3>
-            <p class="record-body">
-              Ra trường, tôi dấn thân ngay vào vị trí Data Engineer. Đây là nơi tôi lần đầu chạm vào data thực tế — không còn là bài tập mẫu, mà là hàng triệu dòng dữ liệu cần được "nắn" thành pipeline, đối soát và biến thành báo cáo có ý nghĩa. Sau đó, tôi nghỉ việc để tập trung cày chứng chỉ SQL Advanced — vì tôi hiểu rằng SQL là xương sống, và muốn thành thạo nó ở mức cao nhất.
-            </p>
-            <div class="record-takeaway">
-              <strong>💡 Bài học rút ra:</strong> Lý thuyết khác xa thực tế. Viết query chạy được thì dễ, nhưng viết query tối ưu — tránh được Fan-out, xử lý NULL, tận dụng Window Functions — mới là bản lĩnh thực sự.
-            </div>
-          </div>
-
-          <!-- Chapter 3 -->
-          <div class="record-item">
-            <div class="record-meta">
-              <span class="record-phase">CHƯƠNG 03: TƯ DUY HỆ THỐNG DOANH NGHIỆP</span>
-              <span class="record-years">ERP IMPLEMENTATION • 2024 - 2025</span>
-            </div>
-            <h3 class="record-heading">Triển Khai ERP — Thấu Hiểu Bức Tranh Vận Hành Toàn Diện</h3>
-            <p class="record-body">
-              Bước sang vai trò triển khai ERP, tôi được ngồi cùng các chủ doanh nghiệp, giám đốc tài chính và trưởng phòng ban. Đây là lúc tôi nhìn thấy bức tranh toàn cảnh: một con số trên báo cáo thực chất là kết quả của chuỗi liên hoàn từ đặt hàng ➔ nhập kho ➔ đối soát công nợ ➔ hạch toán sổ cái. Kinh nghiệm này cho tôi hiểu stakeholder thực sự quan tâm điều gì và biết cách dịch business requirements thành dữ liệu.
-            </p>
-            <div class="record-takeaway">
-              <strong>💡 Bài học rút ra:</strong> Hiểu rõ Business Requirements và luồng vận hành giúp tôi không bao giờ tạo ra những bảng dữ liệu "vô hồn".
-            </div>
-          </div>
-
-          <!-- Chapter 4 -->
-          <div class="record-item">
-            <div class="record-meta">
-              <span class="record-phase">CHƯƠNG 04: KỶ LUẬT THÉP &amp; HẠ TẦNG TRỌNG YẾU</span>
-              <span class="record-years">NGHĨA VỤ CAND • 2025 - 2027</span>
-            </div>
-            <h3 class="record-heading">Trực Chiến Hạ Tầng &amp; Hệ Thống Thông Tin Trọng Yếu CAND</h3>
-            <p class="record-body">
-              Khi nhận lệnh nghĩa vụ Công an nhân dân, tôi nghĩ hành trình data của mình sẽ phải tạm dừng. Nhưng may mắn, tôi được trưng dụng làm IT Support — được tiếp xúc với data rất nhiều, kể cả hạ tầng mạng, máy chủ, hệ thống quản lý dân cư và truyền tin báo cháy GTEL. Nghĩa vụ tưởng là gián đoạn, hóa ra là bước ngoặt cho tôi hiểu thêm chiều sâu về hạ tầng — thứ mà một Data Engineer thuần túy ít khi có cơ hội chạm tới.
-            </p>
-            <div class="record-takeaway">
-              <strong>💡 Bài học rút ra:</strong> Hạ tầng không còn là chiếc hộp đen. Làm việc trong môi trường yêu cầu dữ liệu chính xác tuyệt đối, bảo mật cao và sẵn sàng 24/7 đã rèn cho tôi tính kỷ luật thép.
-            </div>
-          </div>
-
-          <!-- Chapter 5 -->
-          <div class="record-item">
-            <div class="record-meta">
-              <span class="record-phase">CHƯƠNG 05: HỘI TỤ &amp; ĐỊNH VỊ TƯƠNG LAI</span>
-              <span class="record-years">KỶ NGUYÊN AI • ROAD TO 2027</span>
-            </div>
-            <h3 class="record-heading">Bước Ngoặt Định Vị: Trở Thành Analytics Engineer Toàn Năng</h3>
-            <p class="record-body">
-              Càng tiếp xúc nhiều data, tôi càng quan tâm hơn về câu chuyện phía sau nó. Tôi bắt đầu tìm hiểu về ad-hoc — những bài toán phía sau bức tranh doanh nghiệp, thứ mà CEO cần để ra quyết định. Trong thời đại AI, ranh giới giữa Data Analyst và Data Engineer đang dần mờ đi. Analytics Engineer ra đời chính là để giải quyết điều này: tôi tự build pipeline cho riêng mình, tự prepare data, và vì chính tôi là người chuẩn bị mọi thứ — tôi hiểu business domain sâu hơn bất kỳ ai.
-            </p>
-            <div class="record-takeaway">
-              <strong>💡 Bài học rút ra:</strong> Tôi đã tự mày mò rất nhiều khóa học. Và tôi muốn chia sẻ hành trình này cho các bạn — vì tôi hiểu cảm giác không biết bắt đầu từ đâu.
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ============================================
-         4. TECHNICAL COMPETENCIES MATRIX
-         ============================================ -->
-    <section class="section" id="competencies">
-      <div class="container">
-        
-        <div class="section-header">
-          <span class="section-category">TECHNICAL COMPETENCIES</span>
-          <h2 class="section-title">Hạ Tầng Vững Vàng, Truy Vấn Sâu Sắc</h2>
-          <p class="section-desc">
-            Đây là những công cụ tôi dùng hàng ngày — không phải vì trending, mà vì mỗi thứ đều gắn với một kinh nghiệm thực tế cụ thể trong hành trình của tôi.
-          </p>
-        </div>
-
-        <div class="matrix-grid">
-          
-          <!-- Group 1 -->
-          <div class="matrix-card">
-            <h3 class="matrix-group-title">Hạ Tầng &amp; Hệ Điều Hành</h3>
-            <p class="matrix-group-desc">Tôi luyện từ môi trường trực chiến CAND</p>
-            <div class="matrix-items">
-              <span class="matrix-badge">Linux OS (Ubuntu)</span>
-              <span class="matrix-badge">Hạ tầng mạng LAN</span>
-              <span class="matrix-badge">Cấu hình Switch &amp; Router</span>
-              <span class="matrix-badge">Hardware Management</span>
-              <span class="matrix-badge">Bảo mật &amp; Phân quyền</span>
-              <span class="matrix-badge">High Availability</span>
-            </div>
-          </div>
-
-          <!-- Group 2 -->
-          <div class="matrix-card">
-            <h3 class="matrix-group-title">Đường Ống &amp; Lưu Trữ</h3>
-            <p class="matrix-group-desc">Kinh nghiệm thực chiến Data Engineer</p>
-            <div class="matrix-items">
-              <span class="matrix-badge">Python (Data pipelines)</span>
-              <span class="matrix-badge">PostgreSQL / MySQL</span>
-              <span class="matrix-badge">Snowflake</span>
-              <span class="matrix-badge">Apache Airflow</span>
-              <span class="matrix-badge">ETL / ELT Architecture</span>
-              <span class="matrix-badge">Data Ingestion</span>
-            </div>
-          </div>
-
-          <!-- Group 3 -->
-          <div class="matrix-card">
-            <h3 class="matrix-group-title">Analytics Engineering</h3>
-            <p class="matrix-group-desc">Vũ khí giải quyết bài toán kinh doanh</p>
-            <div class="matrix-items">
-              <span class="matrix-badge">SQL Advanced Mastery</span>
-              <span class="matrix-badge">dbt (data build tool)</span>
-              <span class="matrix-badge">Kimball Star Schema</span>
-              <span class="matrix-badge">Ad-hoc Analytics</span>
-              <span class="matrix-badge">Window Functions</span>
-              <span class="matrix-badge">Data Testing &amp; Governance</span>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ============================================
-         5. TECHNICAL CASE STUDIES & WHITEPAPERS
-         ============================================ -->
-    <section class="section" id="case-studies">
-      <div class="container">
-        
-        <div class="section-header">
-          <span class="section-category">PROOF OF WORK &amp; KNOWLEDGE HUB</span>
-          <h2 class="section-title">Tri Thức Thực Chiến: SQL Field Notes</h2>
-          <p class="section-desc">
-            Tôi tin rằng cách tốt nhất để chứng minh năng lực là qua sản phẩm thực tế. Dưới đây là chuỗi bài viết tôi tự tay biên soạn — mỗi bài đều đúc kết từ những lỗi tôi từng mắc, những bẫy tôi từng rơi vào khi làm việc thực tế với SQL.
-          </p>
-        </div>
-
-        <div class="papers-grid">
-          
-          <!-- Article 01 -->
-          <a href="../knowledge/posts/01-sql-execution-order.html" target="_blank" class="paper-card">
-            <div class="paper-thumb">
-              <img src="../images/knowledge/sql-execution-order.jpg" alt="Thứ tự thực thi SQL" loading="lazy">
-            </div>
-            <div class="paper-content">
-              <span class="paper-meta">🟢 CƠ BẢN • 8 PHÚT ĐỌC</span>
-              <h3 class="paper-title">Tư Duy SQL Từ Gốc: Thứ Tự Thực Thi &amp; Bẫy Lọc Dữ Liệu</h3>
-              <p class="paper-summary">Cách Query Engine xử lý từ FROM tới LIMIT, giải phẫu vì sao không lọc alias ở WHERE và bẫy Three-Valued Logic với NULL.</p>
-            </div>
-          </a>
-
-          <!-- Article 02 -->
-          <a href="../knowledge/posts/02-sql-joins-fanout-trap.html" target="_blank" class="paper-card">
-            <div class="paper-thumb">
-              <img src="../images/knowledge/sql-joins-fanout.jpg" alt="SQL JOINs và Fan-out trap" loading="lazy">
-            </div>
-            <div class="paper-content">
-              <span class="paper-meta">🟡 TRUNG CẤP • 12 PHÚT ĐỌC</span>
-              <h3 class="paper-title">Chinh Phục SQL JOINs: Hóa Giải Bẫy Nhân Đôi Fan-Out Trap</h3>
-              <p class="paper-summary">Nguyên nhân khiến doanh thu bị đội lên gấp 3 lần khi JOIN 1-Nhiều và 3 kỹ thuật thực chiến dập tắt Fan-out triệt để.</p>
-            </div>
-          </a>
-
-          <!-- Article 03 -->
-          <a href="../knowledge/posts/03-sql-cte-modular-architecture.html" target="_blank" class="paper-card">
-            <div class="paper-thumb">
-              <img src="../images/knowledge/sql-cte-pipeline.jpg" alt="Modular CTEs" loading="lazy">
-            </div>
-            <div class="paper-content">
-              <span class="paper-meta">🟡 TRUNG CẤP • 10 PHÚT ĐỌC</span>
-              <h3 class="paper-title">Common Table Expressions (CTE): Nghệ Thuật Modular SQL</h3>
-              <p class="paper-summary">Xóa bỏ Spaghetti Subqueries, thiết kế đường ống 4 tầng chuẩn mực dbt, phân tích RFM và kỹ thuật Recursive CTE phân cấp.</p>
-            </div>
-          </a>
-
-          <!-- Article 04 -->
-          <a href="../knowledge/posts/04-sql-advanced-window-functions.html" target="_blank" class="paper-card">
-            <div class="paper-thumb">
-              <img src="../images/knowledge/sql-window-functions.jpg" alt="Window Functions" loading="lazy">
-            </div>
-            <div class="paper-content">
-              <span class="paper-meta">🔴 NÂNG CAO • 15 PHÚT ĐỌC</span>
-              <h3 class="paper-title">Bậc Thầy SQL Window Functions: Chuỗi Thời Gian &amp; Deduplication</h3>
-              <p class="paper-summary">Phân biệt ROW_NUMBER vs RANK vs DENSE_RANK, khử trùng bản ghi mới nhất, tính MoM/YoY bằng LAG/LEAD và Running Total.</p>
-            </div>
-          </a>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ============================================
-         6. MISSION 2027 & DIRECT CONTACT
-         ============================================ -->
-    <section class="section contact-section" id="contact">
-      <div class="container">
-        
-        <!-- Mission Panel -->
-        <div class="mission-panel">
-          <span class="section-category">TẦM NHÌN NGHỀ NGHIỆP • 2027</span>
-          <h2 class="mission-title">Sẵn Sàng Cho Những Bài Toán Dữ Liệu Thách Thức Nhất</h2>
-          <p class="mission-paragraph">
-            Hiện tại, tôi đang hoàn thành trách nhiệm nghĩa vụ trong môi trường CAND và không ngừng mài sắc kỹ năng mỗi ngày. Mục tiêu 2027 của tôi: trở thành Analytics Engineer có thể tự build toàn bộ data stack — từ pipeline đến dashboard đến ad-hoc insight — cho doanh nghiệp. Nếu bạn đang tìm kiếm một người thực chiến, kỷ luật và thấu hiểu vận hành, tôi sẵn sàng kết nối.
-          </p>
-          <a href="mailto:trandc3015@gmail.com" class="direct-email-link">
-            <span>✉️ Gửi email hợp tác: trandc3015@gmail.com</span>
-          </a>
-        </div>
-
-        <!-- Contact Card -->
-        <div class="contact-card">
-          <h3 class="contact-card-title">Gửi Lời Nhắn Trực Tiếp Cho Dustin</h3>
-          <p class="contact-card-desc">
-            Bạn muốn trao đổi cơ hội tuyển dụng, hỏi thăm kỹ thuật hay đơn giản là kết nối? Thông điệp sẽ được gửi thẳng về hòm thư cá nhân của tôi.
-          </p>
-
-          <form id="lpContactForm" class="contact-form">
-            <div class="form-group">
-              <label for="lpMsg" class="form-label">Nội dung thông điệp <span style="color: #EF4444;">*</span></label>
-              <textarea id="lpMsg" name="message" class="form-textarea" placeholder="Nhập nội dung trao đổi hoặc bài toán doanh nghiệp bạn quan tâm..." required></textarea>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="lpName" class="form-label">Họ tên của bạn <span style="color: var(--text-muted); font-size: 0.8rem; font-weight: 400;">(Tùy chọn)</span></label>
-                <input type="text" id="lpName" name="name" class="form-input" placeholder="Để trống nếu muốn gửi ẩn danh...">
-              </div>
-              <div class="form-group">
-                <label for="lpEmail" class="form-label">Email phản hồi <span style="color: var(--text-muted); font-size: 0.8rem; font-weight: 400;">(Tùy chọn)</span></label>
-                <input type="email" id="lpEmail" name="email" class="form-input" placeholder="Nhập email để nhận phản hồi...">
+          <!-- Right Column: Minimalist Tech Portrait Card (Khoa-Style FIG.01 Frame) -->
+          <div class="hero-basic-showcase">
+            <div class="hero-basic-frame">
+              <div class="hero-frame-ghost"></div>
+              <div class="hero-basic-card">
+                <div class="hero-tag-fig">FIG. 01</div>
+                <img id="heroUserPhoto" src="../images/dustin-cand.png" alt="Trần Đức (Dustin)" class="hero-basic-img" loading="eager">
+                <div class="hero-scrim-overlay"></div>
+                <div class="hero-bottom-bar">
+                  <div class="hero-status-pill">
+                    <span class="status-green-dot"></span>
+                    <span data-i18n="status_available">Available</span>
+                  </div>
+                  <div class="hero-corner-name">Dustin</div>
+                </div>
               </div>
             </div>
+          </div>
 
-            <button type="submit" class="form-submit-btn">
-              <span>Gửi thông điệp ngay ➔</span>
-            </button>
-          </form>
-
-          <div id="lpStatusBox" class="form-status-box"></div>
         </div>
 
+        <!-- Credentials Logo Strip (Minh Pham / Kristin Wong Style Highlight Bar) -->
+        <div class="credentials-strip">
+          <div class="credentials-inner">
+            <div class="cred-item">
+              <div class="cred-org" data-i18n="cred_cand_org">PEOPLE'S POLICE (CAND)</div>
+              <div class="cred-highlight" data-i18n="cred_cand_val">IT SUPPORT and Operations</div>
+            </div>
+            <div class="cred-item">
+              <div class="cred-org" data-i18n="cred_bravo_org">BRAVO HCM</div>
+              <div class="cred-highlight" data-i18n="cred_bravo_val">ERP Implementation Specialist</div>
+            </div>
+            <div class="cred-item">
+              <div class="cred-org" data-i18n="cred_estuary_org">Estuary Solution</div>
+              <div class="cred-highlight" data-i18n="cred_estuary_val">Junior Data Engineer</div>
+            </div>
+            <div class="cred-item">
+              <div class="cred-org" data-i18n="cred_ufm_org">univ of Finance marketing</div>
+              <div class="cred-highlight" data-i18n="cred_ufm_val">Valedictorian GPA 3.7/4.0</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. Modern Data Stack & Architecture Pipeline (Unified Executive Overview + Interactive DAG) -->
+    <section class="dataflow-section" id="pipeline">
+      <div class="container">
+        
+        <div class="exec-overview-header">
+          <span class="exec-tag-num">01</span>
+          <span class="exec-tag-label" data-i18n="exec_tag_label">GIỚI THIỆU // EXECUTIVE STATEMENT</span>
+        </div>
+
+        <h2 class="exec-overview-title" data-i18n="exec_overview_title">
+          Rút ngắn khoảng cách từ giao dịch thực tế đến quyết định của Ban Điều Hành
+        </h2>
+
+        <div class="exec-overview-cols">
+          <div class="exec-col">
+            <div class="exec-col-tag" data-i18n="exec_col1_tag">01 // PHẠM VI NGHIỆP VỤ & BỐI CẢNH VẬN HÀNH</div>
+            <p class="exec-col-text" data-i18n="exec_col1_text">
+              Tôi xây dựng hệ thống báo cáo và phân tích tự động hóa phục vụ các khối trọng yếu: Ban Giám Đốc (BOD), Khối Mua Hàng, Vận Hành Kho và Đội ngũ Bán Hàng. Thay thế toàn bộ các quy trình tổng hợp số liệu thủ công cồng kềnh, hệ thống tự động cập nhật trạng thái kinh doanh, tiến độ giao hàng, cảnh báo tồn kho an toàn và hiệu suất doanh thu ngay khi giao dịch vừa phát sinh.
+            </p>
+          </div>
+          <div class="exec-col">
+            <div class="exec-col-tag" data-i18n="exec_col2_tag">02 // GIÁ TRỊ KINH DOANH & CẦU NỐI NGHIỆP VỤ</div>
+            <p class="exec-col-text" data-i18n="exec_col2_text">
+              Xuất phát điểm từ tư vấn triển khai ERP thực tế trên hàng chục quy trình của doanh nghiệp lớn, tôi hiểu tường tận &quot;nỗi đau&quot; của người dùng cuối khi số liệu không khớp thực tế. Thay vì chỉ đợi nhận yêu cầu kỹ thuật thụ động, tôi chủ động cùng các Trưởng bộ phận mổ xẻ vấn đề: số liệu này giải quyết điều gì, tác động đến dòng tiền ra sao? Từ đó, biến dữ liệu thô thành công cụ đo lường KPI chính xác, thúc đẩy năng suất và bảo vệ biên lợi nhuận doanh nghiệp.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2-Variant Toggle (ELT vs ETL) -->
+        <div class="pipeline-toggle-wrap">
+          <button type="button" class="pipeline-toggle-pill active" id="btnToggleElt" onclick="switchPipelineVariant('elt')">
+            <span>🚀</span> <span data-i18n="toggle_elt">Modern ELT Stack (dbt + Snowflake / DuckDB)</span>
+          </button>
+          <button type="button" class="pipeline-toggle-pill" id="btnToggleEtl" onclick="switchPipelineVariant('etl')">
+            <span>⚡</span> <span data-i18n="toggle_etl">Big Data ETL Pipeline (Apache Spark + Data Lake)</span>
+          </button>
+        </div>
+
+        <!-- The Dark Architecture DAG Canvas -->
+        <div class="pipeline-dag-container">
+          <div class="pipeline-viewport">
+            <svg class="pipeline-svg-dag" viewBox="0 -60 1460 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- userSpaceOnUse Gradients -->
+                <linearGradient id="flowGradPurple" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#9146FF" stop-opacity="0.8"/>
+                  <stop offset="50%" stop-color="#BF94FF" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.8"/>
+                </linearGradient>
+                <linearGradient id="flowGradCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.8"/>
+                  <stop offset="100%" stop-color="#34D399" stop-opacity="0.9"/>
+                </linearGradient>
+                <linearGradient id="orchLineGrad" gradientUnits="userSpaceOnUse" x1="300" y1="620" x2="1240" y2="620">
+                  <stop offset="0%" stop-color="#9146FF"/>
+                  <stop offset="50%" stop-color="#BF94FF"/>
+                  <stop offset="100%" stop-color="#38BDF8"/>
+                </linearGradient>
+
+                <!-- Glowing Packet Filter -->
+                <filter id="packetGlowPurple" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="3" result="blur"/>
+                  <feMerge>
+                    <feMergeNode in="blur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+                <filter id="packetGlowCyan" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="3" result="blur"/>
+                  <feMerge>
+                    <feMergeNode in="blur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+                <filter id="glowPurpleCard" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#A855F7" flood-opacity="0.45"/>
+                </filter>
+              </defs>
+
+              <!-- ================================================================
+                   VARIANT 1: MODERN ELT STACK (dbt + Snowflake / DuckDB)
+                   ================================================================ -->
+              <g id="groupVariantElt" class="pl-v active">
+                
+                <!-- Column Headings -->
+                <text x="130" y="-20" text-anchor="middle" fill="#94A3B8" font-size="12" letter-spacing="2.5" font-family="var(--font-mono)" font-weight="700">SOURCES</text>
+                <text x="385" y="-20" text-anchor="middle" fill="#94A3B8" font-size="12" letter-spacing="2.5" font-family="var(--font-mono)" font-weight="700">MANAGED ELT</text>
+                <text x="605" y="-20" text-anchor="middle" fill="#94A3B8" font-size="12" letter-spacing="2.5" font-family="var(--font-mono)" font-weight="700">DATA LAKE</text>
+                <text x="810" y="-20" text-anchor="middle" fill="#94A3B8" font-size="12" letter-spacing="2.5" font-family="var(--font-mono)" font-weight="700">LOAD</text>
+                <text x="1055" y="-20" text-anchor="middle" fill="#94A3B8" font-size="12" letter-spacing="2.5" font-family="var(--font-mono)" font-weight="700">WAREHOUSE + TRANSFORM</text>
+                <text x="1325" y="-20" text-anchor="middle" fill="#94A3B8" font-size="12" letter-spacing="2.5" font-family="var(--font-mono)" font-weight="700">CONSUMERS</text>
+
+                <!-- Annotation Notes (Above curved arch) -->
+                <text x="710" y="130" text-anchor="middle" fill="#94A3B8" font-size="11" font-style="italic" font-family="var(--font-mono)">direct sync → Snowflake (skip S3)</text>
+
+                <!-- Connecting Curves (Edges) -->
+                <!-- Edge 1 to 5: Converge from Sources to Fivetran -->
+                <path d="M230,108 C255,108 250,315 265,315" class="pl-edge" id="eltEdge1"/>
+                <path d="M230,203 C255,203 250,315 265,315" class="pl-edge" id="eltEdge2"/>
+                <path d="M230,298 C250,298 255,315 265,315" class="pl-edge" id="eltEdge3"/>
+                <path d="M230,393 C250,393 255,315 265,315" class="pl-edge" id="eltEdge4"/>
+                <path d="M230,488 C255,488 250,315 265,315" class="pl-edge" id="eltEdge5"/>
+
+                <!-- Single connector into Fivetran -->
+                <path d="M265,315 L295,315" class="pl-edge" id="eltEdgeToFivetran"/>
+                <circle cx="265" cy="315" r="4.5" fill="#A855F7" filter="url(#packetGlowPurple)"/>
+
+                <!-- Edge 6: Fivetran -> S3 Lake -->
+                <path d="M475,315 L535,315" class="pl-edge" id="eltEdge6"/>
+                <!-- Edge 7: S3 Lake -> COPY INTO -->
+                <path d="M675,315 L735,315" class="pl-edge" id="eltEdge7"/>
+                <!-- Edge 8: COPY INTO -> Snowflake -->
+                <path d="M885,315 L945,315" class="pl-edge" id="eltEdge8"/>
+
+                <!-- Edge 9: Dashed direct shortcut (Fivetran -> Snowflake bypass) -->
+                <path d="M475,235 C620,140 800,140 945,235" class="pl-dashed" id="eltEdge9"/>
+                <circle cx="710" cy="148" r="3.5" fill="#A855F7" filter="url(#packetGlowPurple)"/>
+
+                <!-- Edge 10 & 11: Snowflake -> Consumers -->
+                <path d="M1165,305 C1195,305 1195,248 1225,248" class="pl-edge" id="eltEdge10"/>
+                <path d="M1165,305 C1195,305 1195,368 1225,368" class="pl-edge" id="eltEdge11"/>
+                <circle cx="1165" cy="305" r="4" fill="#F472B6" filter="url(#packetGlowPurple)"/>
+                <circle cx="1195" cy="305" r="3.5" fill="#F472B6"/>
+
+                <!-- Animated Packets -->
+                <circle class="pl-packet" r="4" fill="#BF94FF" filter="url(#packetGlowPurple)">
+                  <animateMotion dur="1.3s" repeatCount="indefinite" path="M230,108 C255,108 250,315 265,315"/>
+                </circle>
+                <circle class="pl-packet" r="4" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                  <animateMotion dur="1.3s" begin="0.25s" repeatCount="indefinite" path="M230,203 C255,203 250,315 265,315"/>
+                </circle>
+                <circle class="pl-packet" r="3.8" fill="#BF94FF" filter="url(#packetGlowPurple)">
+                  <animateMotion dur="1.3s" begin="0.5s" repeatCount="indefinite" path="M230,298 C250,298 255,315 265,315"/>
+                </circle>
+                <circle class="pl-packet" r="3.8" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                  <animateMotion dur="1.3s" begin="0.75s" repeatCount="indefinite" path="M230,393 C250,393 255,315 265,315"/>
+                </circle>
+                <circle class="pl-packet" r="4" fill="#34D399" filter="url(#packetGlowCyan)">
+                  <animateMotion dur="1.3s" begin="0.3s" repeatCount="indefinite" path="M230,488 C255,488 250,315 265,315"/>
+                </circle>
+
+                <!-- Fivetran -> S3 packet -->
+                <circle class="pl-packet" r="4.5" fill="#34D399" filter="url(#packetGlowCyan)">
+                  <animateMotion dur="1.1s" begin="0.4s" repeatCount="indefinite" path="M475,315 L535,315"/>
+                </circle>
+                <!-- S3 -> COPY INTO packet -->
+                <circle class="pl-packet" r="4.5" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                  <animateMotion dur="1.1s" begin="0.8s" repeatCount="indefinite" path="M675,315 L735,315"/>
+                </circle>
+                <!-- COPY INTO -> Snowflake packet -->
+                <circle class="pl-packet" r="4.8" fill="#BF94FF" filter="url(#packetGlowPurple)">
+                  <animateMotion dur="1.1s" begin="1.2s" repeatCount="indefinite" path="M885,315 L945,315"/>
+                </circle>
+                <!-- Direct shortcut packet -->
+                <circle class="pl-packet" r="3.8" fill="#A78BFA" filter="url(#packetGlowPurple)">
+                  <animateMotion dur="1.8s" begin="0.6s" repeatCount="indefinite" path="M475,235 C620,140 800,140 945,235"/>
+                </circle>
+                <!-- Warehouse -> Omni BI packet -->
+                <circle class="pl-packet" r="4" fill="#F472B6" filter="url(#packetGlowPurple)">
+                  <animateMotion dur="1.1s" begin="1.6s" repeatCount="indefinite" path="M1165,305 C1195,305 1195,248 1225,248"/>
+                </circle>
+                <!-- Warehouse -> Client Teams packet -->
+                <circle class="pl-packet" r="4" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                  <animateMotion dur="1.1s" begin="1.8s" repeatCount="indefinite" path="M1165,305 C1195,305 1195,368 1225,368"/>
+                </circle>
+
+                <!-- ================= Nodes (Cards) ================= -->
+                <!-- Col 1: SOURCES (5 Cards) -->
+                <!-- Card 1: client SaaS apps -->
+                <g class="pl-node" onclick="inspectPipelineNode('elt', 'src-saas')">
+                  <rect x="30" y="80" width="200" height="56" rx="10" fill="#0A1124" stroke="#4F46E5" stroke-opacity="0.8" stroke-width="1.3"/>
+                  <!-- Megaphone icon -->
+                  <path d="M48,103 L55,98 L55,118 L48,113 Z M55,103 L63,99 L63,117 L55,113 Z M47,106 L44,106 C43,106 42,107 42,108 L42,110 C42,111 43,112 44,112 L47,112 Z" fill="#818CF8"/>
+                  <text x="135" y="102" text-anchor="middle" fill="#F8FAFC" font-size="13" font-family="var(--font-mono)" font-weight="700">client SaaS apps</text>
+                  <text x="135" y="121" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">CRM · ads · billing</text>
+                  <circle cx="218" cy="108" r="3" fill="#A855F7"/>
+                </g>
+
+                <!-- Card 2: client databases -->
+                <g class="pl-node" onclick="inspectPipelineNode('elt', 'src-databases')">
+                  <rect x="30" y="175" width="200" height="56" rx="10" fill="#0A1124" stroke="#4F46E5" stroke-opacity="0.8" stroke-width="1.3"/>
+                  <!-- Database cylinder icon -->
+                  <ellipse cx="50" cy="197" rx="8" ry="3" fill="none" stroke="#818CF8" stroke-width="1.5"/>
+                  <path d="M42,197 L42,207 C42,209 46,211 50,211 C54,211 58,209 58,207 L58,197" fill="none" stroke="#818CF8" stroke-width="1.5"/>
+                  <path d="M42,202 C42,204 46,206 50,206 C54,206 58,204 58,202" fill="none" stroke="#818CF8" stroke-width="1.5"/>
+                  <text x="135" y="197" text-anchor="middle" fill="#F8FAFC" font-size="13" font-family="var(--font-mono)" font-weight="700">client databases</text>
+                  <text x="135" y="216" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">Postgres · MySQL</text>
+                  <circle cx="218" cy="203" r="3" fill="#A855F7"/>
+                </g>
+
+                <!-- Card 3: client APIs -->
+                <g class="pl-node" onclick="inspectPipelineNode('elt', 'src-apis')">
+                  <rect x="30" y="270" width="200" height="56" rx="10" fill="#0A1124" stroke="#4F46E5" stroke-opacity="0.8" stroke-width="1.3"/>
+                  <text x="50" y="303" text-anchor="middle" fill="#818CF8" font-size="14.5" font-family="var(--font-mono)" font-weight="800">&lt;/&gt;</text>
+                  <text x="135" y="292" text-anchor="middle" fill="#F8FAFC" font-size="13" font-family="var(--font-mono)" font-weight="700">client APIs</text>
+                  <text x="135" y="311" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">REST · webhooks</text>
+                  <circle cx="218" cy="298" r="3" fill="#A855F7"/>
+                </g>
+
+                <!-- Card 4: event streams -->
+                <g class="pl-node" onclick="inspectPipelineNode('elt', 'src-streams')">
+                  <rect x="30" y="365" width="200" height="56" rx="10" fill="#0A1124" stroke="#4F46E5" stroke-opacity="0.8" stroke-width="1.3"/>
+                  <!-- Branching nodes icon -->
+                  <circle cx="45" cy="393" r="2.5" fill="#818CF8"/>
+                  <circle cx="56" cy="387" r="2.5" fill="#818CF8"/>
+                  <circle cx="56" cy="399" r="2.5" fill="#818CF8"/>
+                  <line x1="45" y1="393" x2="56" y2="387" stroke="#818CF8" stroke-width="1.2"/>
+                  <line x1="45" y1="393" x2="56" y2="399" stroke="#818CF8" stroke-width="1.2"/>
+                  <text x="135" y="387" text-anchor="middle" fill="#F8FAFC" font-size="13" font-family="var(--font-mono)" font-weight="700">event streams</text>
+                  <text x="135" y="406" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">Snowplow · Segment</text>
+                  <circle cx="218" cy="393" r="3" fill="#A855F7"/>
+                </g>
+
+                <!-- Card 5: flat files -->
+                <g class="pl-node" onclick="inspectPipelineNode('elt', 'src-flatfiles')">
+                  <rect x="30" y="460" width="200" height="56" rx="10" fill="#0A1124" stroke="#4F46E5" stroke-opacity="0.8" stroke-width="1.3"/>
+                  <!-- File document icon -->
+                  <path d="M45,478 L52,478 L56,482 L56,498 L45,498 Z" fill="none" stroke="#818CF8" stroke-width="1.5"/>
+                  <path d="M52,478 L52,482 L56,482" fill="none" stroke="#818CF8" stroke-width="1.5"/>
+                  <text x="135" y="482" text-anchor="middle" fill="#F8FAFC" font-size="13" font-family="var(--font-mono)" font-weight="700">flat files</text>
+                  <text x="135" y="501" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">SFTP · spreadsheets</text>
+                  <circle cx="218" cy="488" r="3" fill="#A855F7"/>
+                </g>
+
+                <!-- Col 2: MANAGED ELT (Fivetran) -->
+                <g class="pl-node" onclick="inspectPipelineNode('elt', 'ing-fivetran')">
+                  <rect x="295" y="210" width="180" height="210" rx="14" fill="#0A1124" stroke="#00C4CC" stroke-width="1.6" stroke-opacity="0.9"/>
+                  <!-- Fivetran 3 diagonal bars logo -->
+                  <g transform="translate(367, 236)">
+                    <path d="M3,5 L9,21" stroke="#00C4CC" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M15,1 L21,25" stroke="#00C4CC" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M27,5 L33,21" stroke="#00C4CC" stroke-width="4" stroke-linecap="round"/>
+                  </g>
+                  <text x="385" y="282" text-anchor="middle" fill="#FFFFFF" font-size="18" font-weight="700" font-family="var(--font-mono)">Fivetran</text>
+                  <text x="385" y="304" text-anchor="middle" fill="#94A3B8" font-size="11.5" font-family="var(--font-mono)">managed connectors</text>
+                  <text x="385" y="324" text-anchor="middle" fill="#94A3B8" font-size="11.5" font-family="var(--font-mono)">Automated ELT · CDC</text>
+                  <rect x="330" y="344" width="110" height="22" rx="11" fill="rgba(0, 196, 204, 0.12)" stroke="#00C4CC" stroke-width="1"/>
+                  <text x="385" y="359" text-anchor="middle" fill="#22D3EE" font-size="10.5" font-weight="700" font-family="var(--font-mono)">150+ SOURCES</text>
+                  <text x="385" y="394" text-anchor="middle" fill="#64748B" font-size="11" font-family="var(--font-mono)">sync: 5-min batch</text>
+                </g>
+
+                <!-- Col 3: DATA LAKE (S3 Lake) -->
+                <g class="pl-node" onclick="inspectPipelineNode('elt', 'lake-s3')">
+                  <rect x="535" y="210" width="140" height="210" rx="14" fill="#0A1124" stroke="#A855F7" stroke-width="2" filter="url(#glowPurpleCard)"/>
+                  <!-- Green cylinder icon -->
+                  <g transform="translate(591, 238)">
+                    <ellipse cx="14" cy="6" rx="14" ry="5" fill="none" stroke="#34D399" stroke-width="1.5"/>
+                    <path d="M0,6 L0,20 C0,23 6,26 14,26 C22,26 28,23 28,20 L28,6" fill="none" stroke="#34D399" stroke-width="1.5"/>
+                    <path d="M0,13 C0,16 6,19 14,19 C22,19 28,16 28,13" fill="none" stroke="#34D399" stroke-width="1.5"/>
+                  </g>
+                  <text x="605" y="286" text-anchor="middle" fill="#34D399" font-size="18" font-weight="700" font-family="var(--font-mono)">S3 Lake</text>
+                  <text x="605" y="308" text-anchor="middle" fill="#94A3B8" font-size="11.5" font-family="var(--font-mono)">raw archive</text>
+                  <text x="605" y="328" text-anchor="middle" fill="#94A3B8" font-size="11.5" font-family="var(--font-mono)">daily partitions</text>
+                  <rect x="555" y="348" width="100" height="22" rx="11" fill="rgba(52, 211, 153, 0.12)" stroke="#34D399" stroke-width="1"/>
+                  <text x="605" y="363" text-anchor="middle" fill="#34D399" font-size="10.5" font-weight="700" font-family="var(--font-mono)">PARQUET</text>
+                </g>
+
+                <!-- Col 4: LOAD (COPY INTO) -->
+                <g class="pl-node" onclick="inspectPipelineNode('elt', 'load-copy')">
+                  <rect x="735" y="210" width="150" height="210" rx="14" fill="#0A1124" stroke="#06B6D4" stroke-width="1.5"/>
+                  <!-- Cyan Asterisk icon -->
+                  <g transform="translate(798, 238)">
+                    <line x1="12" y1="2" x2="12" y2="24" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"/>
+                    <line x1="1" y1="13" x2="23" y2="13" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"/>
+                    <line x1="4" y1="5" x2="20" y2="21" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"/>
+                    <line x1="4" y1="21" x2="20" y2="5" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"/>
+                  </g>
+                  <text x="810" y="286" text-anchor="middle" fill="#38BDF8" font-size="17" font-weight="700" font-family="var(--font-mono)">COPY INTO</text>
+                  <text x="810" y="308" text-anchor="middle" fill="#94A3B8" font-size="11.5" font-family="var(--font-mono)">S3 → Snowflake</text>
+                  <text x="810" y="328" text-anchor="middle" fill="#94A3B8" font-size="11.5" font-family="var(--font-mono)">external stages</text>
+                  <rect x="755" y="348" width="110" height="22" rx="11" fill="rgba(56, 189, 248, 0.12)" stroke="#38BDF8" stroke-width="1"/>
+                  <text x="810" y="363" text-anchor="middle" fill="#38BDF8" font-size="10.5" font-weight="700" font-family="var(--font-mono)">FAST LOAD</text>
+                </g>
+
+                <!-- Col 5: WAREHOUSE + TRANSFORM (Snowflake + dbt) -->
+                <g class="pl-node" onclick="inspectPipelineNode('elt', 'wh-snowflake')">
+                  <rect x="945" y="140" width="220" height="350" rx="16" fill="#0A1124" stroke="#8B5CF6" stroke-width="1.8"/>
+                  <text x="1055" y="176" text-anchor="middle" fill="#FFFFFF" font-size="17" font-weight="700" font-family="var(--font-mono)">Snowflake + dbt</text>
+
+                  <!-- Row 1: Snowflake DW -->
+                  <g transform="translate(965, 212)">
+                    <!-- Cyan Snowflake icon -->
+                    <line x1="8" y1="0" x2="8" y2="16" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="0" y1="8" x2="16" y2="8" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="2" y1="2" x2="14" y2="14" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="2" y1="14" x2="14" y2="2" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+                  </g>
+                  <text x="990" y="222" text-anchor="start" fill="#FFFFFF" font-size="13.5" font-weight="700" font-family="var(--font-mono)">Snowflake DW</text>
+                  <text x="990" y="238" text-anchor="start" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">raw · analytics schemas</text>
+
+                  <!-- Row 2: dbt models -->
+                  <path d="M968,280 L974,272 L980,280 L974,288 Z" fill="#FF694B"/>
+                  <text x="990" y="280" text-anchor="start" fill="#FFFFFF" font-size="13.5" font-weight="700" font-family="var(--font-mono)">dbt models</text>
+                  <text x="990" y="296" text-anchor="start" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">stg → int → marts</text>
+
+                  <!-- Row 3: dbt Tests & CI/CD -->
+                  <circle cx="974" cy="336" r="7" fill="none" stroke="#38BDF8" stroke-width="1.5"/>
+                  <path d="M971,336 L973.5,338.5 L978,333.5" fill="none" stroke="#38BDF8" stroke-width="1.5"/>
+                  <text x="990" y="337" text-anchor="start" fill="#FFFFFF" font-size="13.5" font-weight="700" font-family="var(--font-mono)">dbt Tests &amp; CI/CD</text>
+                  <text x="990" y="353" text-anchor="start" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">PR checks · schema audit</text>
+
+                  <!-- Bottom Pill: dbt build ✓ -->
+                  <rect x="985" y="415" width="140" height="28" rx="14" fill="rgba(16, 185, 129, 0.15)" stroke="#10B981" stroke-width="1"/>
+                  <text x="1055" y="433" text-anchor="middle" fill="#34D399" font-size="11.5" font-weight="700" font-family="var(--font-mono)">dbt build ✓</text>
+                </g>
+
+                <!-- Col 6: CONSUMERS -->
+                <!-- Omni BI -->
+                <g class="pl-node" onclick="inspectPipelineNode('elt', 'con-omni')">
+                  <rect x="1225" y="215" width="200" height="66" rx="12" fill="#0A1124" stroke="#BE123C" stroke-width="1.6"/>
+                  <!-- Omni red pill logo -->
+                  <rect x="1238" y="238" width="32" height="18" rx="5" fill="#E11D48"/>
+                  <text x="1254" y="251" text-anchor="middle" fill="#FFFFFF" font-size="9" font-weight="800" font-family="var(--font-sans)">omni</text>
+                  <text x="1335" y="242" text-anchor="middle" fill="#FFFFFF" font-size="13.5" font-weight="700" font-family="var(--font-mono)">Omni BI</text>
+                  <text x="1335" y="260" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">BI · dashboards</text>
+                </g>
+
+                <!-- Client Teams -->
+                <g class="pl-node" onclick="inspectPipelineNode('elt', 'con-teams')">
+                  <rect x="1225" y="335" width="200" height="66" rx="12" fill="#0A1124" stroke="#475569" stroke-width="1.6"/>
+                  <!-- Mail icon -->
+                  <g transform="translate(1242, 355)">
+                    <rect x="0" y="0" width="18" height="13" rx="2" fill="none" stroke="#A78BFA" stroke-width="1.5"/>
+                    <path d="M0,2 L9,8 L18,2" fill="none" stroke="#A78BFA" stroke-width="1.5"/>
+                  </g>
+                  <text x="1335" y="360" text-anchor="middle" fill="#FFFFFF" font-size="13.5" font-weight="700" font-family="var(--font-mono)">Client Teams</text>
+                  <text x="1335" y="378" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">embedded · self-serve</text>
+                </g>
+
+                <!-- Bottom Orchestration Box: Apache Airflow -->
+                <g class="pl-node" onclick="inspectPipelineNode('elt', 'orch-airflow')">
+                  <rect x="200" y="550" width="1115" height="95" rx="14" fill="#070D1A" stroke="rgba(139, 92, 246, 0.45)" stroke-width="1.4"/>
+                  
+                  <!-- Apache Airflow multicolored pinwheel icon -->
+                  <g transform="translate(710, 566)">
+                    <circle cx="10" cy="10" r="3.5" fill="#FFFFFF"/>
+                    <circle cx="10" cy="3" r="3" fill="#00C4CC"/>
+                    <circle cx="17" cy="10" r="3" fill="#EF4444"/>
+                    <circle cx="10" cy="17" r="3" fill="#10B981"/>
+                    <circle cx="3" cy="10" r="3" fill="#F59E0B"/>
+                  </g>
+                  <text x="770" y="580" text-anchor="start" fill="#FFFFFF" font-size="16.5" font-weight="700" font-family="var(--font-mono)">Apache Airflow</text>
+                  <text x="757" y="602" text-anchor="middle" fill="#94A3B8" font-size="11.5" font-family="var(--font-mono)">schedules ingestion · dbt runs · data-quality checks · CI/CD</text>
+
+                  <!-- Dashed progress runner line -->
+                  <path d="M260,622 L1250,622" stroke="#38BDF8" stroke-width="2" stroke-dasharray="6 6" fill="none"/>
+                  <circle cx="265" cy="622" r="5" fill="#BF94FF" filter="url(#packetGlowPurple)"/>
+                  <polygon points="1250,617 1262,622 1250,627" fill="#38BDF8"/>
+                  <circle class="pl-packet" r="4.5" fill="#BF94FF" filter="url(#packetGlowPurple)">
+                    <animateMotion dur="4s" repeatCount="indefinite" path="M260,622 L1250,622"/>
+                  </circle>
+                </g>
+              </g>
+
+              <!-- ================================================================
+                   VARIANT 2: ENTERPRISE ETL PIPELINE (BRAVO ERP THACO / LỘC PHÚC)
+                   ================================================================ -->
+              <g id="groupVariantEtl" class="pl-v hidden">
+                
+                <!-- Column Headings -->
+                <text x="130" y="-20" text-anchor="middle" fill="#94A3B8" font-size="12" letter-spacing="2.5" font-family="var(--font-mono)" font-weight="700">SOURCES</text>
+                <text x="385" y="-20" text-anchor="middle" fill="#94A3B8" font-size="12" letter-spacing="2.5" font-family="var(--font-mono)" font-weight="700">EXTRACTION</text>
+                <text x="605" y="-20" text-anchor="middle" fill="#94A3B8" font-size="12" letter-spacing="2.5" font-family="var(--font-mono)" font-weight="700">IN-TRANSIT TRANSFORM</text>
+                <text x="810" y="-20" text-anchor="middle" fill="#94A3B8" font-size="12" letter-spacing="2.5" font-family="var(--font-mono)" font-weight="700">DATA MARTS</text>
+                <text x="1055" y="-20" text-anchor="middle" fill="#94A3B8" font-size="12" letter-spacing="2.5" font-family="var(--font-mono)" font-weight="700">DATA MARTS + SERVING</text>
+                <text x="1325" y="-20" text-anchor="middle" fill="#94A3B8" font-size="12" letter-spacing="2.5" font-family="var(--font-mono)" font-weight="700">CONSUMERS</text>
+
+                <!-- Annotation Notes -->
+                <text x="710" y="160" text-anchor="middle" fill="#64748B" font-size="11" font-style="italic" font-family="var(--font-mono)">direct → Audit Logs (skip staging)</text>
+
+                <!-- Connecting Curves (Edges) -->
+                <!-- Edge 1: BRAVO SQL -> Extractor -->
+                <path d="M230,108 C265,108 260,265 295,265" class="pl-edge" id="etlEdge1"/>
+                <!-- Edge 2: Purchasing POs -> Extractor -->
+                <path d="M230,203 C265,203 260,295 295,295" class="pl-edge" id="etlEdge2"/>
+                <!-- Edge 3: Inventory 0.01g -> Extractor -->
+                <path d="M230,298 C265,298 260,325 295,325" class="pl-edge" id="etlEdge3"/>
+                <!-- Edge 4: General Ledger -> Extractor -->
+                <path d="M230,393 C265,393 260,355 295,355" class="pl-edge" id="etlEdge4"/>
+                <!-- Edge 5: Vouchers -> Transform Engine directly -->
+                <path d="M230,488 C360,510 430,420 535,385" class="pl-edge" id="etlEdge5"/>
+
+                <!-- Edge 6: Extractor -> Transform Engine -->
+                <path d="M475,315 C505,315 505,315 535,315" class="pl-edge" id="etlEdge6"/>
+                <!-- Edge 7: Transform Engine -> Target Data Marts -->
+                <path d="M675,315 C705,315 705,315 735,315" class="pl-edge" id="etlEdge7"/>
+                <!-- Edge 8: Target Data Marts -> Serving DWH -->
+                <path d="M885,315 C915,315 915,315 945,315" class="pl-edge" id="etlEdge8"/>
+                <!-- Edge 9: Dashed shortcut (Extractor -> DWH Audit) -->
+                <path d="M475,245 C640,170 800,170 945,220" class="pl-dashed" id="etlEdge9"/>
+
+                <!-- Edge 10: DWH -> BOD Executive -->
+                <path d="M1165,248 C1195,248 1195,248 1225,248" class="pl-edge" id="etlEdge10"/>
+                <!-- Edge 11: DWH -> Finance & Accountants -->
+                <path d="M1165,368 C1195,368 1195,368 1225,368" class="pl-edge" id="etlEdge11"/>
+
+                <!-- Bottom Orchestration Edge -->
+                <path d="M320,620 L1225,620" stroke="url(#orchLineGrad)" stroke-width="3.5" stroke-linecap="round" fill="none" id="etlEdgeOrch"/>
+                <polygon points="1225,612 1248,620 1225,628" fill="#38BDF8"/>
+
+                <!-- ================= Glowing Animated Packets (HIỆU ỨNG CHIẾU CHIẾU) ================= -->
+                <!-- Edge 1 packet -->
+                <circle class="pl-packet" r="4" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                  <animateMotion dur="1.3s" repeatCount="indefinite" path="M230,108 C265,108 260,265 295,265"/>
+                </circle>
+                <!-- Edge 2 packet -->
+                <circle class="pl-packet" r="4" fill="#BF94FF" filter="url(#packetGlowPurple)">
+                  <animateMotion dur="1.3s" begin="0.25s" repeatCount="indefinite" path="M230,203 C265,203 260,295 295,295"/>
+                </circle>
+                <!-- Edge 3 packet -->
+                <circle class="pl-packet" r="3.8" fill="#F59E0B" filter="url(#packetGlowCyan)">
+                  <animateMotion dur="1.3s" begin="0.5s" repeatCount="indefinite" path="M230,298 C265,298 260,325 295,325"/>
+                </circle>
+                <!-- Edge 4 packet -->
+                <circle class="pl-packet" r="3.8" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                  <animateMotion dur="1.3s" begin="0.75s" repeatCount="indefinite" path="M230,393 C265,393 260,355 295,355"/>
+                </circle>
+                <!-- Edge 5 packet -->
+                <circle class="pl-packet" r="4.2" fill="#34D399" filter="url(#packetGlowCyan)">
+                  <animateMotion dur="1.7s" begin="0.3s" repeatCount="indefinite" path="M230,488 C360,510 430,420 535,385"/>
+                </circle>
+
+                <!-- Extractor -> Transform Engine packet -->
+                <circle class="pl-packet" r="4.5" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                  <animateMotion dur="1.1s" begin="0.4s" repeatCount="indefinite" path="M475,315 C505,315 505,315 535,315"/>
+                </circle>
+                <!-- Transform -> Target Data Marts packet -->
+                <circle class="pl-packet" r="4.5" fill="#BF94FF" filter="url(#packetGlowPurple)">
+                  <animateMotion dur="1.1s" begin="0.8s" repeatCount="indefinite" path="M675,315 C705,315 705,315 735,315"/>
+                </circle>
+                <!-- Marts -> Serving DWH packet -->
+                <circle class="pl-packet" r="4.8" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                  <animateMotion dur="1.1s" begin="1.2s" repeatCount="indefinite" path="M885,315 C915,315 915,315 945,315"/>
+                </circle>
+                <!-- Direct shortcut packet -->
+                <circle class="pl-packet" r="3.8" fill="#F59E0B" filter="url(#packetGlowCyan)">
+                  <animateMotion dur="1.8s" begin="0.6s" repeatCount="indefinite" path="M475,245 C640,170 800,170 945,220"/>
+                </circle>
+
+                <!-- DWH -> BOD packet -->
+                <circle class="pl-packet" r="4" fill="#34D399" filter="url(#packetGlowCyan)">
+                  <animateMotion dur="1.1s" begin="1.6s" repeatCount="indefinite" path="M1165,248 C1195,248 1195,248 1225,248"/>
+                </circle>
+                <!-- DWH -> Finance packet -->
+                <circle class="pl-packet" r="4" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                  <animateMotion dur="1.1s" begin="1.8s" repeatCount="indefinite" path="M1165,368 C1195,368 1195,368 1225,368"/>
+                </circle>
+
+                <!-- SQL Server Agent Orchestration running packets -->
+                <circle class="pl-packet" r="4.5" fill="#FFFFFF" filter="url(#packetGlowCyan)">
+                  <animateMotion dur="3.5s" repeatCount="indefinite" path="M320,620 L1225,620"/>
+                </circle>
+                <circle class="pl-packet" r="3.8" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                  <animateMotion dur="3.5s" begin="1.75s" repeatCount="indefinite" path="M320,620 L1225,620"/>
+                </circle>
+
+                <!-- ================= Nodes (Cards) ================= -->
+                <!-- Col 1: Sources -->
+                <g class="pl-node" onclick="inspectPipelineNode('etl', 'src-bravo')">
+                  <rect x="27" y="77" width="206" height="62" rx="13" fill="none" stroke="#38BDF8" stroke-opacity="0.12" stroke-width="1.5"/>
+                  <rect x="30" y="80" width="200" height="56" rx="10" fill="rgba(17, 24, 39, 0.75)" stroke="#38BDF8" stroke-opacity="0.55" stroke-width="1.5"/>
+                  <text x="50" y="105" font-size="18">🏭</text>
+                  <text x="135" y="102" text-anchor="middle" fill="#F1F5F9" font-size="13.5" font-family="var(--font-mono)" font-weight="700">BRAVO 8 SQL Server</text>
+                  <text x="135" y="122" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">Core OLTP Database</text>
+                </g>
+
+                <g class="pl-node" onclick="inspectPipelineNode('etl', 'src-po')">
+                  <rect x="27" y="172" width="206" height="62" rx="13" fill="none" stroke="#38BDF8" stroke-opacity="0.12" stroke-width="1.5"/>
+                  <rect x="30" y="175" width="200" height="56" rx="10" fill="rgba(17, 24, 39, 0.75)" stroke="#38BDF8" stroke-opacity="0.55" stroke-width="1.5"/>
+                  <text x="50" y="200" font-size="18">📑</text>
+                  <text x="135" y="197" text-anchor="middle" fill="#F1F5F9" font-size="13.5" font-family="var(--font-mono)" font-weight="700">Purchasing &amp; POs</text>
+                  <text x="135" y="217" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">Đơn mua linh kiện THACO</text>
+                </g>
+
+                <g class="pl-node" onclick="inspectPipelineNode('etl', 'src-inv')">
+                  <rect x="27" y="267" width="206" height="62" rx="13" fill="none" stroke="#38BDF8" stroke-opacity="0.12" stroke-width="1.5"/>
+                  <rect x="30" y="270" width="200" height="56" rx="10" fill="rgba(17, 24, 39, 0.75)" stroke="#38BDF8" stroke-opacity="0.55" stroke-width="1.5"/>
+                  <text x="50" y="295" font-size="18">💍</text>
+                  <text x="135" y="292" text-anchor="middle" fill="#F1F5F9" font-size="13.5" font-family="var(--font-mono)" font-weight="700">Inventory &amp; Warehouses</text>
+                  <text x="135" y="312" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">Kim Hoàn 0.01g &amp; Ô Tô</text>
+                </g>
+
+                <g class="pl-node" onclick="inspectPipelineNode('etl', 'src-gl')">
+                  <rect x="27" y="362" width="206" height="62" rx="13" fill="none" stroke="#38BDF8" stroke-opacity="0.12" stroke-width="1.5"/>
+                  <rect x="30" y="365" width="200" height="56" rx="10" fill="rgba(17, 24, 39, 0.75)" stroke="#38BDF8" stroke-opacity="0.55" stroke-width="1.5"/>
+                  <text x="50" y="390" font-size="18">📒</text>
+                  <text x="135" y="387" text-anchor="middle" fill="#F1F5F9" font-size="13.5" font-family="var(--font-mono)" font-weight="700">General Ledger &amp; AR</text>
+                  <text x="135" y="407" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">Sổ cái &amp; Công nợ đối tác</text>
+                </g>
+
+                <g class="pl-node" onclick="inspectPipelineNode('etl', 'src-vouchers')">
+                  <rect x="27" y="457" width="206" height="62" rx="13" fill="none" stroke="#38BDF8" stroke-opacity="0.12" stroke-width="1.5"/>
+                  <rect x="30" y="460" width="200" height="56" rx="10" fill="rgba(17, 24, 39, 0.75)" stroke="#38BDF8" stroke-opacity="0.55" stroke-width="1.5"/>
+                  <text x="50" y="485" font-size="18">📝</text>
+                  <text x="135" y="482" text-anchor="middle" fill="#F1F5F9" font-size="13.5" font-family="var(--font-mono)" font-weight="700">B20 Voucher Stream</text>
+                  <text x="135" y="502" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">Chứng từ kế toán ngày</text>
+                </g>
+
+                <!-- Col 2: Ingestion (ETL Staging Extractor) -->
+                <g class="pl-node" onclick="inspectPipelineNode('etl', 'ing-extractor')">
+                  <rect x="292" y="207" width="186" height="216" rx="15" fill="none" stroke="#38BDF8" stroke-opacity="0.1" stroke-width="1.5"/>
+                  <rect x="295" y="210" width="180" height="210" rx="12" fill="rgba(17, 24, 39, 0.75)" stroke="#38BDF8" stroke-opacity="0.5" stroke-width="1.5"/>
+                  <text x="385" y="260" text-anchor="middle" font-size="34">⚙️</text>
+                  <text x="385" y="300" text-anchor="middle" fill="#38BDF8" font-size="17" font-weight="bold" font-family="var(--font-mono)">ETL Extractor</text>
+                  <text x="385" y="328" text-anchor="middle" fill="#94A3B8" font-size="11.5" font-family="var(--font-mono)">Batch extraction</text>
+                  <text x="385" y="348" text-anchor="middle" fill="#94A3B8" font-size="11.5" font-family="var(--font-mono)">Delta Checksums</text>
+                  <rect x="330" y="365" width="110" height="22" rx="11" fill="rgba(56, 189, 248, 0.15)" stroke="#38BDF8" stroke-width="0.8"/>
+                  <text x="385" y="379" text-anchor="middle" fill="#7DD3FC" font-size="10" font-weight="700" font-family="var(--font-mono)">DELTA SYNC</text>
+                </g>
+
+                <!-- Col 3: In-Transit Transformation Engine -->
+                <g class="pl-node" onclick="inspectPipelineNode('etl', 'trans-engine')">
+                  <rect x="532" y="207" width="146" height="216" rx="15" fill="none" stroke="#F59E0B" stroke-opacity="0.1" stroke-width="1.5"/>
+                  <rect x="535" y="210" width="140" height="210" rx="12" fill="rgba(17, 24, 39, 0.75)" stroke="#F59E0B" stroke-opacity="0.5" stroke-width="1.5"/>
+                  <text x="605" y="260" text-anchor="middle" font-size="34">⚡</text>
+                  <text x="605" y="300" text-anchor="middle" fill="#F59E0B" font-size="18" font-weight="bold" font-family="var(--font-mono)">Transform Proc</text>
+                  <text x="605" y="332" text-anchor="middle" fill="#94A3B8" font-size="11.5" font-family="var(--font-mono)">FIFO Costing</text>
+                  <text x="605" y="352" text-anchor="middle" fill="#94A3B8" font-size="11.5" font-family="var(--font-mono)">Gold Audit 0.01g</text>
+                  <text x="605" y="372" text-anchor="middle" fill="#64748B" font-size="10" font-family="var(--font-mono)">Tax Cleansing</text>
+                </g>
+
+                <!-- Col 4: Target Data Marts -->
+                <g class="pl-node" onclick="inspectPipelineNode('etl', 'load-marts')">
+                  <rect x="732" y="207" width="156" height="216" rx="15" fill="none" stroke="#10B981" stroke-opacity="0.1" stroke-width="1.5"/>
+                  <rect x="735" y="210" width="150" height="210" rx="12" fill="rgba(17, 24, 39, 0.75)" stroke="#10B981" stroke-opacity="0.5" stroke-width="1.5"/>
+                  <text x="810" y="260" text-anchor="middle" font-size="34">📦</text>
+                  <text x="810" y="300" text-anchor="middle" fill="#34D399" font-size="17" font-weight="bold" font-family="var(--font-mono)">Target Marts</text>
+                  <text x="810" y="332" text-anchor="middle" fill="#94A3B8" font-size="11.5" font-family="var(--font-mono)">Curated OLAP</text>
+                  <text x="810" y="352" text-anchor="middle" fill="#94A3B8" font-size="11.5" font-family="var(--font-mono)">Fact Sales &amp; Inv</text>
+                  <rect x="755" y="370" width="110" height="22" rx="11" fill="rgba(16, 185, 129, 0.15)" stroke="#10B981" stroke-width="0.8"/>
+                  <text x="810" y="384" text-anchor="middle" fill="#6EE7B7" font-size="10" font-weight="700" font-family="var(--font-mono)">RECONCILED</text>
+                </g>
+
+                <!-- Col 5: Warehouse & Serving (SQL Server DWH + SSAS) -->
+                <g class="pl-node" onclick="inspectPipelineNode('etl', 'wh-ssas')">
+                  <rect x="942" y="137" width="226" height="356" rx="19" fill="none" stroke="#38BDF8" stroke-opacity="0.12" stroke-width="1.5"/>
+                  <rect x="945" y="140" width="220" height="350" rx="16" fill="rgba(56, 189, 248, 0.08)" stroke="#38BDF8" stroke-opacity="0.55" stroke-width="1.5"/>
+                  
+                  <text x="1055" y="180" text-anchor="middle" fill="#38BDF8" font-size="17" font-weight="bold" font-family="var(--font-mono)">SQL DWH + SSAS</text>
+                  <line x1="972" y1="200" x2="1138" y2="200" stroke="#38BDF8" stroke-opacity="0.3" stroke-width="1"/>
+
+                  <!-- Row 1: Audit Reconciliation -->
+                  <text x="980" y="234" font-size="16">🛡️</text>
+                  <text x="1065" y="232" text-anchor="middle" fill="#F1F5F9" font-size="13.5" font-family="var(--font-mono)" font-weight="700">Reconciliation</text>
+                  <text x="1055" y="250" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="var(--font-mono)">Khớp 100% Sổ Kế Toán</text>
+                  <line x1="972" y1="272" x2="1138" y2="272" stroke="#38BDF8" stroke-opacity="0.18" stroke-width="1" stroke-dasharray="3 5"/>
+
+                  <!-- Row 2: Multidimensional Cubes -->
+                  <text x="980" y="306" font-size="16">🎲</text>
+                  <text x="1065" y="304" text-anchor="middle" fill="#F1F5F9" font-size="13.5" font-family="var(--font-mono)" font-weight="700">OLAP Cubes</text>
+                  <text x="1055" y="322" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="var(--font-mono)">SSAS · Doanh thu &amp; Cost</text>
+                  <line x1="972" y1="344" x2="1138" y2="344" stroke="#38BDF8" stroke-opacity="0.18" stroke-width="1" stroke-dasharray="3 5"/>
+
+                  <!-- Row 3: Automated Tax Validation -->
+                  <text x="980" y="378" font-size="16">📑</text>
+                  <text x="1065" y="376" text-anchor="middle" fill="#F1F5F9" font-size="13.5" font-family="var(--font-mono)" font-weight="700">Tax Auditing</text>
+                  <text x="1055" y="394" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="var(--font-mono)">Hóa đơn GTGT &amp; Thuế</text>
+
+                  <rect x="990" y="425" width="130" height="26" rx="13" fill="rgba(56, 189, 248, 0.15)" stroke="#38BDF8" stroke-width="0.8"/>
+                  <text x="1055" y="442" text-anchor="middle" fill="#7DD3FC" font-size="11.5" font-weight="700" font-family="var(--font-mono)">RECONCILED 100%</text>
+                </g>
+
+                <!-- Col 6: Consumers -->
+                <g class="pl-node" onclick="inspectPipelineNode('etl', 'con-bod')">
+                  <rect x="1222" y="217" width="206" height="62" rx="13" fill="none" stroke="#38BDF8" stroke-opacity="0.12" stroke-width="1.5"/>
+                  <rect x="1225" y="220" width="200" height="56" rx="10" fill="rgba(17, 24, 39, 0.75)" stroke="#38BDF8" stroke-opacity="0.55" stroke-width="1.5"/>
+                  <text x="1245" y="246" font-size="18">👔</text>
+                  <text x="1335" y="243" text-anchor="middle" fill="#F1F5F9" font-size="14" font-family="var(--font-mono)" font-weight="700">BOD Executive</text>
+                  <text x="1335" y="263" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">Báo cáo điều hành THACO</text>
+                </g>
+
+                <g class="pl-node" onclick="inspectPipelineNode('etl', 'con-finance')">
+                  <rect x="1222" y="337" width="206" height="62" rx="13" fill="none" stroke="#38BDF8" stroke-opacity="0.12" stroke-width="1.5"/>
+                  <rect x="1225" y="340" width="200" height="56" rx="10" fill="rgba(17, 24, 39, 0.75)" stroke="#38BDF8" stroke-opacity="0.55" stroke-width="1.5"/>
+                  <text x="1245" y="366" font-size="18">💰</text>
+                  <text x="1335" y="363" text-anchor="middle" fill="#F1F5F9" font-size="14" font-family="var(--font-mono)" font-weight="700">Finance &amp; Audit</text>
+                  <text x="1335" y="383" text-anchor="middle" fill="#94A3B8" font-size="10.5" font-family="var(--font-mono)">Kế toán trưởng &amp; Thuế</text>
+                </g>
+
+                <!-- Bottom Orchestration Label -->
+                <g class="pl-node" onclick="inspectPipelineNode('etl', 'orch-agent')">
+                  <text x="770" y="598" text-anchor="middle" fill="#38BDF8" font-size="16" font-weight="bold" font-family="var(--font-mono)">🕒 SQL Server Agent &amp; Scheduled Tasks</text>
+                  <text x="770" y="650" text-anchor="middle" fill="#64748B" font-size="12" font-family="var(--font-mono)">
+                    nightly batch execution · transaction reconciliation · automated balance checks
+                  </text>
+                </g>
+
+                <text x="770" y="685" text-anchor="middle" fill="#4B5563" font-size="11" font-family="var(--font-mono)">
+                  solid = primary flow · dashed = audit logs bypass · packets = nightly batch sync
+                </text>
+              </g>
+
+            </svg>
+          </div>
+        </div>
+
+        <!-- Dynamic Architecture Inspector Panel -->
+        <div class="bp-inspector-panel" id="bpInspectorPanel">
+          <div class="bp-inspector-header">
+            <div class="bp-inspector-title" id="bpInspectorTitle">
+              <span>⚙️</span>
+              <span>Khám phá trạm dữ liệu</span>
+            </div>
+            <span class="bp-inspector-stage-tag" id="bpInspectorStageTag">STAGE DETAIL</span>
+          </div>
+          <p class="bp-inspector-body" id="bpInspectorDesc">
+            Bấm vào bất kỳ trạm dữ liệu nào ở sơ đồ bên trên để xem giải trình kiến trúc và mã nguồn thực tế.
+          </p>
+          <pre class="bp-inspector-code"><code id="bpInspectorCode">-- Mã nguồn trạm dữ liệu</code></pre>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- 4. Work Experience (Khoa Le Style 2-Column Timeline) -->
+    <section class="editorial-section" id="experience">
+      <span id="skills" style="display:none;"></span>
+      <div class="container">
+        
+        <div class="exec-overview-header">
+          <span class="exec-tag-num">02</span>
+          <span class="exec-tag-label" data-i18n="exp_tag_label">SỰ NGHIỆP // WORK EXPERIENCE</span>
+        </div>
+
+        <h2 class="section-heading" data-i18n="exp_section_title">Kinh nghiệm làm việc.</h2>
+        <p class="section-subtext" data-i18n="exp_section_desc">
+          Hành trình thực chiến từ xây dựng pipeline dữ liệu đầu tiên, tư vấn triển khai ERP cho các tập đoàn lớn đến trực chiến quản trị hạ tầng CNTT trong môi trường kỷ luật.
+        </p>
+
+        <div class="exp-timeline-list">
+
+          <!-- 1. CAND (Current) -->
+          <article class="exp-item-card">
+            <div class="exp-item-meta">
+              <span class="exp-item-date" data-i18n="exp1_date">05/2025 — HIỆN TẠI</span>
+              <h3 class="exp-item-company" data-i18n="exp1_company">Công An Nhân Dân (CAND)</h3>
+              <span class="exp-item-loc" data-i18n="exp1_loc">TP. HỒ CHÍ MINH, VIỆT NAM</span>
+            </div>
+            <div class="exp-item-body">
+              <div class="exp-item-role-wrap">
+                <h4 class="exp-item-role" data-i18n="exp1_role">IT Support &amp; Operations</h4>
+                <span class="exp-item-focus" data-i18n="exp1_focus">Quản trị Hạ tầng &amp; Hệ thống Dân cư</span>
+              </div>
+              <p class="exp-item-desc" data-i18n="exp1_desc">
+                Trực tiếp vận hành, bảo trì và trực chiến 24/7 toàn bộ hạ tầng CNTT trọng yếu trong môi trường kỷ luật nghiêm ngặt: từ quản trị mạng LAN nội bộ, hệ thống cơ sở dữ liệu dân cư quốc gia, truyền tin báo cháy tự động đến phần mềm văn thư điện tử phục vụ các phòng ban nghiệp vụ.
+              </p>
+              <div class="exp-item-bullets-grid">
+                <ul class="exp-bullets-col">
+                  <li data-i18n="exp1_b1">Cấu hình và quản trị hệ thống mạng LAN/VLAN nội bộ, thiết lập chính sách bảo mật mạng và định tuyến an toàn giữa các đơn vị nghiệp vụ.</li>
+                  <li data-i18n="exp1_b2">Trực tiếp quản lý và vận hành hệ thống Cơ sở Dữ liệu Dân cư Quốc gia — bảo đảm tính sẵn sàng, toàn vẹn và bảo mật dữ liệu tuyệt đối theo tiêu chuẩn ngành.</li>
+                </ul>
+                <ul class="exp-bullets-col">
+                  <li data-i18n="exp1_b3">Giám sát và vận hành hệ thống truyền tin báo cháy tự động 24/7, duy trì kênh kết nối thông suốt phục vụ công tác chỉ huy và ứng phó khẩn cấp.</li>
+                  <li data-i18n="exp1_b4">Triển khai, hướng dẫn và hỗ trợ kỹ thuật người dùng cuối với phần mềm văn thư điện tử, số hóa quy trình luân chuyển công văn và hồ sơ công việc.</li>
+                </ul>
+              </div>
+              <div class="exp-item-tech-strip">
+                <span class="skill-pill">LAN / VLAN</span>
+                <span class="skill-pill">National Database</span>
+                <span class="skill-pill">Fire Alarm Systems</span>
+                <span class="skill-pill">Document Workflow</span>
+                <span class="skill-pill">Network Security</span>
+                <span class="skill-pill">24/7 Operations</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2. BRAVO ERP (THACO & Loc Phuc Jewelry) -->
+          <article class="exp-item-card">
+            <div class="exp-item-meta">
+              <span class="exp-item-date" data-i18n="exp2_date">01/2024 — 02/2025</span>
+              <h3 class="exp-item-company" data-i18n="exp2_company">Cổ phần Phần mềm BRAVO</h3>
+              <span class="exp-item-loc" data-i18n="exp2_loc">TP. HỒ CHÍ MINH, VIỆT NAM</span>
+            </div>
+            <div class="exp-item-body">
+              <div class="exp-item-role-wrap">
+                <h4 class="exp-item-role" data-i18n="exp2_role">ERP Implementation Specialist</h4>
+                <span class="exp-item-focus" data-i18n="exp2_focus">Mua Hàng, Kho Vận &amp; Quản Lý Tài Sản</span>
+              </div>
+              <p class="exp-item-desc" data-i18n="exp2_desc">
+                Tư vấn, cấu hình và trực tiếp triển khai giải pháp BRAVO ERP trên quy mô hàng chục quy trình phức tạp cho các tập đoàn sản xuất và bán lẻ hàng đầu Việt Nam (THACO, Lộc Phúc Jewelry). Đóng vai trò cầu nối trực tiếp giữa bài toán kinh doanh thực tế và mô hình dữ liệu trong SQL Server.
+              </p>
+              <div class="exp-item-bullets-grid">
+                <ul class="exp-bullets-col">
+                  <li data-i18n-html="exp2_b1"><strong>Dự án THACO (Trường Hải Auto):</strong> Triển khai module Quản lý Mua hàng — chuẩn hóa quy trình PR &rarr; PO &rarr; Nhận hàng; viết stored procedure tổng hợp tiến độ mua sắm và đối soát công nợ nhà cung cấp.</li>
+                  <li data-i18n-html="exp2_b2"><strong>Dự án Kim hoàn Lộc Phúc:</strong> Triển khai trọn gói Purchasing, Kho vận và Quản lý Tài sản thiết bị — thiết kế logic theo dõi định mức hao hụt vàng bạc đá quý đạt độ chính xác kiểm kê 0.01g.</li>
+                </ul>
+                <ul class="exp-bullets-col">
+                  <li data-i18n="exp2_b3">Thiết kế và tối ưu hàng chục Stored Procedures, Views và SQL queries phức tạp cho hệ thống báo cáo quản trị điều hành, giảm thời gian xử lý dữ liệu cuối tháng hơn 70%.</li>
+                  <li data-i18n="exp2_b4">Chủ trì công tác Data Migration và Data Validation từ hệ thống cũ sang ERP mới; trực tiếp đào tạo người dùng cuối và đồng hành xử lý phát sinh trong giai đoạn go-live.</li>
+                </ul>
+              </div>
+              <div class="exp-item-tech-strip">
+                <span class="skill-pill">SQL Server</span>
+                <span class="skill-pill">Bravo ERP Framework</span>
+                <span class="skill-pill">Stored Procedures</span>
+                <span class="skill-pill">Data Migration</span>
+                <span class="skill-pill">Purchasing Module</span>
+                <span class="skill-pill">Warehouse 0.01g Audit</span>
+                <span class="skill-pill">Performance Tuning</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3. Estuary Solution -->
+          <article class="exp-item-card">
+            <div class="exp-item-meta">
+              <span class="exp-item-date" data-i18n="exp3_date">06/2023 — 08/2023</span>
+              <h3 class="exp-item-company" data-i18n="exp3_company">Estuary Solution</h3>
+              <span class="exp-item-loc" data-i18n="exp3_loc">TP. HỒ CHÍ MINH, VIỆT NAM</span>
+            </div>
+            <div class="exp-item-body">
+              <div class="exp-item-role-wrap">
+                <h4 class="exp-item-role" data-i18n="exp3_role">Junior Data Engineer</h4>
+                <span class="exp-item-focus" data-i18n="exp3_focus">Xây Dựng Pipeline Dữ Liệu &amp; Báo Cáo Đầu Tiên</span>
+              </div>
+              <p class="exp-item-desc" data-i18n="exp3_desc">
+                Cột mốc khởi đầu cho sự nghiệp Data Engineering: nơi tôi lần đầu tiên trực tiếp thiết kế luồng pipeline thực tế, xây dựng các tác vụ ETL đầu tiên để thu thập dữ liệu thô và phát triển các bộ báo cáo phân tích phục vụ kinh doanh.
+              </p>
+              <div class="exp-item-bullets-grid">
+                <ul class="exp-bullets-col">
+                  <li data-i18n="exp3_b1">Xây dựng những pipeline ETL đầu tiên: thu thập dữ liệu thô từ nhiều nguồn phân tán, xử lý chuẩn hóa và làm sạch trước khi nạp vào cơ sở dữ liệu phân tích.</li>
+                  <li data-i18n="exp3_b2">Phát triển các báo cáo nghiệp vụ và dashboard phân tích đầu tiên, trực quan hóa các chỉ số đo lường hiệu suất vận hành giúp doanh nghiệp theo dõi số liệu trực quan.</li>
+                </ul>
+                <ul class="exp-bullets-col">
+                  <li data-i18n="exp3_b3">Ứng dụng Python scripting và SQL để tự động hóa quy trình xử lý dữ liệu định kỳ, thay thế các thao tác xuất file và tổng hợp bảng tính thủ công.</li>
+                  <li data-i18n="exp3_b4">Hình thành tư duy cốt lõi về chất lượng dữ liệu (Data Quality): hiểu rõ nguyên tắc truy vết nguồn gốc (lineage) và tính nhất quán của số liệu từ hệ thống nguồn đến báo cáo cuối cùng.</li>
+                </ul>
+              </div>
+              <div class="exp-item-tech-strip">
+                <span class="skill-pill">Python</span>
+                <span class="skill-pill">SQL Server</span>
+                <span class="skill-pill">ETL Pipelines</span>
+                <span class="skill-pill">Data Reporting</span>
+                <span class="skill-pill">Data Cleaning</span>
+                <span class="skill-pill">Data Quality</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. My Works / Projects (Mark Pham Style with Modal Viewer media_1789876757111.png) -->
+    <section class="works-section" id="works">
+      <div class="container">
+        
+        <div class="works-header-row">
+          <h2 class="works-title">My Works</h2>
+          <div class="works-subtitle">What I do at 2 AM on a Saturday &bull; Engineering projects built with production standards.</div>
+        </div>
+
+        <!-- Filter Pills Bar -->
+        <div class="works-filter-bar">
+          <button class="works-filter-btn active" data-filter="all" onclick="filterWorks('all')">Featured (4)</button>
+          <button class="works-filter-btn" data-filter="Data Pipeline" onclick="filterWorks('Data Pipeline')">Data Pipeline (2)</button>
+          <button class="works-filter-btn" data-filter="Enterprise ERP" onclick="filterWorks('Enterprise ERP')">Enterprise ERP (1)</button>
+          <button class="works-filter-btn" data-filter="Big Data" onclick="filterWorks('Big Data')">Big Data (1)</button>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="works-grid">
+          
+          <!-- Project 1: AdventureWorks -->
+          <div class="work-card" data-category="Data Pipeline" onclick="openProjectModal('adventureworks')">
+            <div class="work-card-media" style="background: linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%);">
+              <span class="work-card-media-badge">Data Pipeline</span>
+              <div class="work-card-expand-icon">⤢</div>
+              <div class="work-card-graphic">❄️ 🦋</div>
+            </div>
+            <div class="work-card-body">
+              <h3 class="work-card-title">AdventureWorks Modern Data Platform</h3>
+              <p class="work-card-desc">
+                Production-grade ELT pipeline syncing SQL Server CDC to Snowflake Bronze/Gold via dlt (Python), modeled with dbt Core and visualized in Metabase BI.
+              </p>
+              <div class="work-tech-pills">
+                <span class="work-tech-pill">dbt Core</span>
+                <span class="work-tech-pill">Snowflake</span>
+                <span class="work-tech-pill">dlt</span>
+                <span class="work-tech-pill">SQL Server CDC</span>
+                <span class="work-tech-pill">Docker</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: Enterprise ERP BRAVO -->
+          <div class="work-card" data-category="Enterprise ERP" onclick="openProjectModal('erp_bravo')">
+            <div class="work-card-media" style="background: linear-gradient(135deg, #312E81 0%, #1E293B 100%);">
+              <span class="work-card-media-badge">Enterprise ERP</span>
+              <div class="work-card-expand-icon">⤢</div>
+              <div class="work-card-graphic">🏭 💎</div>
+            </div>
+            <div class="work-card-body">
+              <h3 class="work-card-title">Enterprise ERP BRAVO (THACO &amp; Lộc Phúc)</h3>
+              <p class="work-card-desc">
+                Triển khai phân hệ Mua hàng, Quản lý kho, Kế toán tại THACO và hệ thống kiểm soát định mức hao hụt kim hoàn 0.01g tại Lộc Phúc Jewelry.
+              </p>
+              <div class="work-tech-pills">
+                <span class="work-tech-pill">SQL Server</span>
+                <span class="work-tech-pill">SSIS</span>
+                <span class="work-tech-pill">T-SQL</span>
+                <span class="work-tech-pill">FIFO Costing</span>
+                <span class="work-tech-pill">Power BI</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3: Big Data Spark Lakehouse -->
+          <div class="work-card" data-category="Big Data" onclick="openProjectModal('bigdata_spark')">
+            <div class="work-card-media" style="background: linear-gradient(135deg, #4C1D95 0%, #0F172A 100%);">
+              <span class="work-card-media-badge">Big Data</span>
+              <div class="work-card-expand-icon">⤢</div>
+              <div class="work-card-graphic">🔥 ⚡</div>
+            </div>
+            <div class="work-card-body">
+              <h3 class="work-card-title">End-to-End Big Data Lakehouse với Spark &amp; Airflow</h3>
+              <p class="work-card-desc">
+                Đường ống xử lý dữ liệu lớn phân tán: Apache Kafka, PySpark Structured Streaming micro-batch 1s, Delta Lake ACID và Airflow Orchestration.
+              </p>
+              <div class="work-tech-pills">
+                <span class="work-tech-pill">Apache Spark</span>
+                <span class="work-tech-pill">PySpark</span>
+                <span class="work-tech-pill">Kafka</span>
+                <span class="work-tech-pill">Delta Lake</span>
+                <span class="work-tech-pill">Airflow</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4: CAND IT Support -->
+          <div class="work-card" data-category="Data Pipeline" onclick="openProjectModal('cand_infra')">
+            <div class="work-card-media" style="background: linear-gradient(135deg, #064E3B 0%, #0F172A 100%);">
+              <span class="work-card-media-badge">Data Pipeline</span>
+              <div class="work-card-expand-icon">⤢</div>
+              <div class="work-card-graphic">🛡️ 📡</div>
+            </div>
+            <div class="work-card-body">
+              <h3 class="work-card-title">Hạ Tầng CNTT Trực Chiến 24/7 — CAND</h3>
+              <p class="work-card-desc">
+                Quản trị hạ tầng mạng viễn thông, CSDL Quốc gia về Dân cư và hệ thống truyền tin báo cháy khẩn cấp GTEL tại Đội Cảnh sát PCCC &amp; CNCH Khu vực 15.
+              </p>
+              <div class="work-tech-pills">
+                <span class="work-tech-pill">Linux Ubuntu</span>
+                <span class="work-tech-pill">pfSense</span>
+                <span class="work-tech-pill">VLAN</span>
+                <span class="work-tech-pill">WireGuard</span>
+                <span class="work-tech-pill">Monitoring</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. Cột Mốc Cuộc Đời (Life Milestones / Journey Timeline) -->
+    <section class="editorial-section" id="milestones">
+      <div class="container">
+        <div class="section-label" data-i18n="milestones_cat">CAREER CHRONOLOGY &bull; HÀNH TRÌNH PHÁT TRIỂN</div>
+        <h2 class="section-heading" data-i18n="milestones_title">Cột mốc sự nghiệp &amp; Bước đệm trưởng thành.</h2>
+        <p class="section-subtext" data-i18n="milestones_desc">
+          Những dấu mốc thực chiến định hình bản lĩnh: từ bệ phóng Thủ khoa UFM, lăn lộn triển khai ERP tại doanh nghiệp lớn, kỷ luật trực chiến 24/7 trong ngành Công an đến mục tiêu Analytics Engineer toàn năng.
+        </p>
+
+        <div class="timeline-list">
+          
+          <!-- Milestone 1: UFM -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-card-header">
+                <span class="timeline-year-pill" data-i18n="ms1_date">10/2020 — 04/2024</span>
+              </div>
+              <h3 class="timeline-title">
+                <span class="timeline-icon">🎓</span>
+                <span data-i18n="ms1_title">Đại học Tài chính - Marketing (UFM)</span>
+              </h3>
+              <div class="timeline-org" data-i18n="ms1_org">Thủ khoa đầu ra — GPA 3.7/4.0</div>
+            </div>
+          </div>
+
+          <!-- Milestone 2: Estuary Solution -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-card-header">
+                <span class="timeline-year-pill" data-i18n="ms2_date">06/2023 — 08/2023</span>
+              </div>
+              <h3 class="timeline-title">
+                <span class="timeline-icon">💻</span>
+                <span data-i18n="ms2_title">Junior Data Engineer</span>
+              </h3>
+              <div class="timeline-org" data-i18n="ms2_org">Estuary Solution</div>
+            </div>
+          </div>
+
+          <!-- Milestone 3: HackerRank SQL Advanced -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-card-header">
+                <span class="timeline-year-pill" data-i18n="ms3_date">01/2024</span>
+              </div>
+              <h3 class="timeline-title">
+                <span class="timeline-icon">🏅</span>
+                <span data-i18n="ms3_title">Chứng chỉ SQL (Advanced) — HackerRank</span>
+              </h3>
+              <div class="timeline-org" data-i18n="ms3_org">HackerRank Skill Certification</div>
+            </div>
+          </div>
+
+          <!-- Milestone 4: BRAVO ERP -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-card-header">
+                <span class="timeline-year-pill" data-i18n="ms4_date">01/2024 — 02/2025</span>
+              </div>
+              <h3 class="timeline-title">
+                <span class="timeline-icon">⚙️</span>
+                <span data-i18n="ms4_title">ERP Implementation Specialist</span>
+              </h3>
+              <div class="timeline-org" data-i18n="ms4_org">Cổ phần Phần mềm BRAVO (BRAVO ERP)</div>
+            </div>
+          </div>
+
+          <!-- Milestone 5: CAND (Current / Active) -->
+          <div class="timeline-item active">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-card-header">
+                <span class="timeline-year-pill active" data-i18n="ms5_date"><span class="live-pulse-dot"></span> 05/2025 — HIỆN TẠI</span>
+              </div>
+              <h3 class="timeline-title">
+                <span class="timeline-icon">🔥</span>
+                <span data-i18n="ms5_title">Nghĩa vụ CAND — Quản Trị Hạ Tầng &amp; IT Support &amp; Operations</span>
+              </h3>
+              <div class="timeline-org" data-i18n="ms5_org">Đội Cảnh sát PCCC &amp; CNCH Khu vực 15</div>
+            </div>
+          </div>
+
+          <!-- Milestone 6: DataCamp -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-card-header">
+                <span class="timeline-year-pill" data-i18n="ms6_date">03/2026</span>
+              </div>
+              <h3 class="timeline-title">
+                <span class="timeline-icon">🏆</span>
+                <span data-i18n="ms6_title">Chứng chỉ Data Engineer Associate — DataCamp</span>
+              </h3>
+              <div class="timeline-org" data-i18n="ms6_org">DataCamp Professional Certification</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Show Certificates (Chứng Chỉ Chuyên Môn) -->
+    <section class="editorial-section" id="certs">
+      <div class="container">
+        <div class="section-label">Verified Credentials &bull; Chứng Chỉ</div>
+        <h2 class="section-heading">Chứng chỉ quốc tế &amp; Học thuật.</h2>
+        <p class="section-subtext">
+          Các chứng chỉ độc lập chứng thực năng lực giải thuật SQL phức tạp, tư duy thiết kế đường ống dữ liệu và nền tảng học thuật xuất sắc.
+        </p>
+
+        <div class="certs-grid">
+          
+          <!-- Cert 1: HackerRank SQL Advanced -->
+          <a href="https://www.hackerrank.com/certificates/94fe47fea170" target="_blank" rel="noopener noreferrer" class="cert-card cert-card-clickable">
+            <div class="cert-card-img-wrap">
+              <img src="../images/hackerrank_sql_advanced.png" alt="HackerRank SQL (Advanced) Certificate" loading="lazy">
+            </div>
+            <div class="cert-card-body">
+              <div class="cert-card-badge">VERIFIED CREDENTIAL &bull; TOP GLOBAL</div>
+              <h3 class="cert-card-title">HackerRank SQL (Advanced)</h3>
+              <p class="cert-card-desc">
+                Chứng chỉ kiểm chứng tư duy giải thuật SQL cấp độ cao nhất: Window Functions, Recursive CTEs, bài toán Gaps &amp; Islands và tối ưu hóa truy vấn phức tạp.
+              </p>
+              <div class="cert-card-footer-row">
+                <span class="cert-status-tag">✓ Validated &bull; Certified</span>
+                <span class="cert-link-action">Xác thực chứng chỉ ↗</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Cert 2: DataCamp DE Associate -->
+          <a href="https://www.datacamp.com/certificate/DEA0015986472728" target="_blank" rel="noopener noreferrer" class="cert-card cert-card-clickable">
+            <div class="cert-card-img-wrap">
+              <img src="../images/datacamp_de_associate.png" alt="DataCamp Data Engineer Associate Certificate" loading="lazy">
+            </div>
+            <div class="cert-card-body">
+              <div class="cert-card-badge">ASSOCIATE CERTIFICATION</div>
+              <h3 class="cert-card-title">DataCamp Data Engineer Associate</h3>
+              <p class="cert-card-desc">
+                Đánh giá toàn diện năng lực thiết kế Data Pipeline, Data Warehousing, Data Modeling (Kimball), kiểm soát chất lượng dữ liệu và bảo mật đám mây.
+              </p>
+              <div class="cert-card-footer-row">
+                <span class="cert-status-tag">✓ Validated &bull; Certified</span>
+                <span class="cert-link-action">Xác thực chứng chỉ ↗</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Cert 3: UFM Valedictorian -->
+          <div class="cert-card cert-card-clickable" onclick="openUfmModal()">
+            <div class="cert-card-img-wrap" style="background: linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%); color: #FFFFFF;">
+              <div style="text-align: center; padding: 20px;">
+                <div style="font-size: 2.5rem; margin-bottom: 4px;">🎓</div>
+                <div style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 700; color: #FFFFFF;">Thủ Khoa GPA 3.7/4.0</div>
+                <div style="font-family: var(--font-mono); font-size: 0.72rem; color: #A78BFA; margin-top: 4px;">UFM &bull; BẰNG CỬ NHÂN XUẤT SẮC</div>
+              </div>
+            </div>
+            <div class="cert-card-body">
+              <div class="cert-card-badge">ACADEMIC EXCELLENCE &bull; OFFICIAL LOOKUP</div>
+              <h3 class="cert-card-title">Thủ Khoa Tin Học Quản Lý — UFM</h3>
+              <p class="cert-card-desc">
+                Tốt nghiệp Thủ khoa toàn khóa ngành Hệ thống thông tin quản lý với điểm số 3.7/4.0. Bấm để tra cứu văn bằng chính thức đã được nhập sẵn thông tin từ Cổng UIS UFM.
+              </p>
+              <div class="cert-card-footer-row">
+                <span class="cert-status-tag">✓ MSSV: 2021010131</span>
+                <span class="cert-link-action" style="color: var(--emerald);">Tra cứu văn bằng ➔</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Selected Writing (Kristin Wong Style with Italic Script) -->
+    <section class="editorial-section" id="essays">
+      <div class="container">
+        
+        <!-- Kristin Wong style heading -->
+        <div class="selected-writing-header">
+          <span class="selected-writing-label">SELECTED</span>
+          <h2 class="selected-writing-script">writing</h2>
+        </div>
+
+        <p class="section-subtext" style="text-align: center; margin: 0 auto 36px;">
+          Những bài tự sự đúc kết từ giảng đường đại học, qua các dự án doanh nghiệp lớn, kỷ luật quân ngũ khắt khe đến định vị Analytics Engineer toàn năng. Bấm vào để đọc toàn văn trên trang độc lập.
+        </p>
+
+        <!-- Featured Headline Essay (Direct Link to Standalone Page) -->
+        <a href="../blog/bai-viet-5.html" class="featured-essay-card" style="text-decoration: none; display: block; cursor: pointer;">
+          <span class="featured-pill">BÀI VIẾT NỔI BẬT &bull; KỸ THUẬT CHUYÊN SÂU</span>
+          <h3 class="featured-essay-title">
+            Deep-Dive: Xây Dựng Enterprise Data Platform Với CDC, dlt, Snowflake &amp; dbt Core
+          </h3>
+          <p class="featured-essay-excerpt">
+            Làm sao để đồng bộ liên tục dữ liệu giao dịch OLTP từ cơ sở dữ liệu quan hệ sang Cloud Data Warehouse với độ trễ thấp nhất và không làm ảnh hưởng đến hiệu năng sản xuất? Một bài phân tích chi tiết về kiến trúc Change Data Capture, giải thuật khử trùng lặp qua LSN và mô hình hóa Kimball Star Schema.
+          </p>
+          <div class="essay-meta-row">
+            <span>05 Tháng 03, 2026</span>
+            <span>&bull;</span>
+            <span>12 phút đọc</span>
+            <span class="read-link">Đọc bài viết toàn văn ➔</span>
+          </div>
+        </a>
+
+        <!-- Archive of Other Essays (Direct Links to Standalone Pages) -->
+        <div class="essays-archive-list">
+          
+          <a href="../blog/bai-viet-1.html" class="essay-row-card" style="text-decoration: none; display: flex;">
+            <div>
+              <div class="essay-row-meta">
+                <span class="essay-category">ĐỊNH VỊ NGHỀ NGHIỆP</span>
+                <span>7 phút đọc &bull; 20 Tháng 03, 2026</span>
+              </div>
+              <h3 class="essay-row-title">Từ Thủ Khoa UFM Đến Định Vị Analytics Engineer Toàn Năng</h3>
+            </div>
+            <span class="essay-row-arrow">➔</span>
+          </a>
+
+          <a href="../blog/bai-viet-2.html" class="essay-row-card" style="text-decoration: none; display: flex;">
+            <div>
+              <div class="essay-row-meta">
+                <span class="essay-category">KIẾN TRÚC ERP</span>
+                <span>9 phút đọc &bull; 15 Tháng 02, 2026</span>
+              </div>
+              <h3 class="essay-row-title">Những Bài Học Xương Máu Khi Triển Khai ERP Tại THACO &amp; Lộc Phúc</h3>
+            </div>
+            <span class="essay-row-arrow">➔</span>
+          </a>
+
+          <a href="../blog/bai-viet-3.html" class="essay-row-card" style="text-decoration: none; display: flex;">
+            <div>
+              <div class="essay-row-meta">
+                <span class="essay-category">KỶ LUẬT QUÂN NGŨ</span>
+                <span>8 phút đọc &bull; 28 Tháng 01, 2026</span>
+              </div>
+              <h3 class="essay-row-title">18 Tháng Trong Môi Trường CAND: Hạ Tầng Mạng Không Phải Chiếc Hộp Đen</h3>
+            </div>
+            <span class="essay-row-arrow">➔</span>
+          </a>
+
+          <a href="../blog/bai-viet-4.html" class="essay-row-card" style="text-decoration: none; display: flex;">
+            <div>
+              <div class="essay-row-meta">
+                <span class="essay-category">KỶ LUẬT TỰ HỌC</span>
+                <span>6 phút đọc &bull; 18 Tháng 12, 2025</span>
+              </div>
+              <h3 class="essay-row-title">Chiến Lược Tự Học Data Dưới Áp Lực Quân Ngũ &amp; Chinh Phục Chứng Chỉ Quốc Tế</h3>
+            </div>
+            <span class="essay-row-arrow">➔</span>
+          </a>
+
+        </div>
+
+        <!-- View All Articles CTA Button -->
+        <div style="margin-top: 36px; text-align: center;">
+          <a href="../blog/index.html" class="btn-secondary" style="font-size: 0.95rem; padding: 12px 28px; display: inline-flex; align-items: center; gap: 8px;">
+            <span>Xem Toàn Bộ 5 Bài Viết Trên Blog Cá Nhân</span>
+            <span>➔</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 9. Contact Section -->
+    <section class="editorial-section" id="contact">
+      <div class="container">
+        <div class="section-label">Get in Touch &bull; Kết Nối</div>
+        <h2 class="section-heading">Bắt đầu một cuộc trò chuyện.</h2>
+        <p class="section-subtext">
+          Tôi luôn hào hứng trao đổi về các bài toán kiến trúc Modern Data Stack, tối ưu hóa mô hình dữ liệu doanh nghiệp hoặc cơ hội hợp tác nghề nghiệp.
+        </p>
+
+        <div class="contact-editorial-card">
+          <div class="contact-info-block">
+            <h3 class="contact-info-title">Thông tin liên hệ</h3>
+            <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 24px; line-height: 1.6;">
+              Bạn có thể gửi thư trực tiếp, kết nối qua mạng xã hội nghề nghiệp hoặc để lại lời nhắn nhanh ở khung bên cạnh.
+            </p>
+
+            <div class="contact-info-item">
+              <span class="contact-info-label">EMAIL CHÍNH THỨC</span>
+              <a href="mailto:trandc3015@gmail.com" class="contact-info-val">trandc3015@gmail.com</a>
+            </div>
+
+            <div class="contact-info-item">
+              <span class="contact-info-label">MẠNG XÃ HỘI NGHỀ NGHIỆP</span>
+              <div style="display: flex; gap: 14px; margin-top: 4px;">
+                <a href="https://github.com/tranduc2204" target="_blank" rel="noopener noreferrer" class="contact-info-val">GitHub ↗</a>
+                <span style="color: var(--text-muted);">&bull;</span>
+                <a href="https://www.linkedin.com/in/dustintd/" target="_blank" rel="noopener noreferrer" class="contact-info-val">LinkedIn ↗</a>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <span class="contact-info-label">ĐỊA BÀN HOẠT ĐỘNG</span>
+              <div class="contact-info-val" style="color: var(--text-primary);">TP. Hồ Chí Minh, Việt Nam</div>
+            </div>
+          </div>
+
+          <div class="contact-form-card">
+            <form id="contactForm">
+              <div style="margin-bottom: 16px;">
+                <label class="contact-label-field">Nội dung lời nhắn *</label>
+                <textarea class="contact-textarea-input" name="message" placeholder="Chia sẻ về bài toán của bạn, cơ hội hợp tác hoặc câu hỏi..." required></textarea>
+              </div>
+
+              <div style="margin-bottom: 16px;">
+                <label class="contact-label-field">Họ tên của bạn</label>
+                <input type="text" class="contact-text-input" name="name" placeholder="Tên bạn hoặc tổ chức...">
+              </div>
+
+              <div style="margin-bottom: 18px;">
+                <label class="contact-label-field">Email phản hồi</label>
+                <input type="email" class="contact-text-input" name="email" placeholder="email@company.com">
+              </div>
+
+              <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Gửi tin nhắn trực tiếp ➔</button>
+            </form>
+            <div id="contactStatusBox" style="display: none; margin-top: 14px; font-size: 0.88rem;"></div>
+          </div>
+
+        </div>
       </div>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer class="exec-footer">
-    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-      <p>© 2026 Trần Đức (Dustin) • Aspiring Analytics Engineer. Road to 2027.</p>
-      <div style="display: flex; gap: 16px; font-size: 0.88rem;">
-        <a href="../home.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">Trang Chủ Blog &amp; Kiến Thức ➔</a>
-        <a href="https://github.com/tranduc2204" target="_blank" style="color: var(--text-muted); text-decoration: none;">GitHub</a>
-        <a href="https://www.linkedin.com/in/dustintd/" target="_blank" style="color: var(--text-muted); text-decoration: none;">LinkedIn</a>
+  <footer class="site-footer">
+    <div class="container footer-content-row">
+      <div>© 2026 Trần Đức (Dustin) &bull; Analytics Engineer &amp; Blog Cá Nhân.</div>
+      <div class="footer-nav-links">
+        <a href="mailto:trandc3015@gmail.com" class="footer-nav-link">Email</a>
+        <a href="https://github.com/tranduc2204" target="_blank" rel="noopener noreferrer" class="footer-nav-link">GitHub</a>
+        <a href="https://www.linkedin.com/in/dustintd/" target="_blank" rel="noopener noreferrer" class="footer-nav-link">LinkedIn</a>
+        <a href="../assets/cv/TranDuc_AnalyticsEngineer_CV.pdf" download="TranDuc_AnalyticsEngineer_CV.pdf" class="footer-nav-link">CV (PDF)</a>
       </div>
     </div>
   </footer>
 
-  <!-- Standalone Script -->
-  <script src="landing.js?v=4"></script>
+  <!-- Mark Pham Style Project Detail Modal (media_1789876776598.png) -->
+  <div id="projectModal" class="project-modal-overlay" onclick="handleBackdropProjectClick(event)">
+    <div class="project-modal-sheet">
+      <div class="project-modal-banner">
+        <button class="project-modal-close-btn" onclick="closeProjectModal()" aria-label="Đóng cửa sổ">✕</button>
+        <div id="modalProjectGraphic" style="font-size: 3.8rem;">❄️ 🦋</div>
+      </div>
+      <div class="project-modal-content">
+        <span class="project-modal-tag" id="modalProjectTag">Data Pipeline</span>
+        <h2 class="project-modal-title" id="modalProjectTitle">Project Title</h2>
+        <p class="project-modal-lead" id="modalProjectLead">Project Lead summary...</p>
+
+        <!-- Mark Pham Key Highlights Grid -->
+        <div class="modal-highlights-section">
+          <div class="modal-highlights-title">KEY HIGHLIGHTS</div>
+          <div class="modal-highlights-grid" id="modalProjectHighlights">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+
+        <!-- Architectural Problem & Solution -->
+        <div class="project-modal-body">
+          <p><strong>Bài toán kỹ thuật &amp; nghiệp vụ:</strong> <span id="modalProjectProblem">...</span></p>
+          <p><strong>Giải pháp kiến trúc &amp; thực thi:</strong> <span id="modalProjectSolution">...</span></p>
+        </div>
+
+        <!-- Tech stack pills -->
+        <div style="margin-bottom: 24px;">
+          <div style="font-family: var(--font-mono); font-size: 0.7rem; color: #94A3B8; margin-bottom: 8px; text-transform: uppercase;">TECH STACK</div>
+          <div class="work-tech-pills" id="modalProjectTech">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="modal-actions-row">
+          <a id="modalProjectReadLink" href="#" class="btn-primary" style="background: #7C3AED;">Đọc Deep-Dive Toàn Văn 📖</a>
+          <a id="modalProjectGithubLink" href="#" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="border: 1px solid var(--border); color: var(--text-primary); background: #F1F5F9;">GitHub Repository ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UFM Degree Verification Modal (Official UIS UFM Lookup) -->
+  <div id="ufmModal" class="ufm-modal-overlay" onclick="handleBackdropUfmClick(event)">
+    <div class="ufm-modal-sheet">
+      <div class="ufm-modal-header">
+        <button class="ufm-modal-close-btn" onclick="closeUfmModal()" aria-label="Đóng cửa sổ">✕</button>
+        <div style="font-size: 1.8rem; margin-bottom: 4px;">🎓</div>
+        <div style="font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; color: #A78BFA; text-transform: uppercase;">
+          CỔNG THÔNG TIN UIS UFM &bull; TRA CỨU VĂN BẰNG CHÍNH THỨC
+        </div>
+        <h2 style="font-size: 1.35rem; font-weight: 800; color: #FFFFFF; margin-top: 4px;">
+          Xác Thực Văn Bằng Tốt Nghiệp — Đại Học Tài Chính - Marketing
+        </h2>
+      </div>
+      <div class="ufm-modal-body">
+        
+        <!-- Prefilled Parameters Box -->
+        <div class="ufm-params-box">
+          <div class="ufm-params-title">
+            <span>THÔNG TIN TRA CỨU ĐÃ NHẬP SẴN</span>
+            <span style="color: var(--emerald); font-weight: 700;">✓ TỰ ĐỘNG KHỚP CSDL TRƯỜNG</span>
+          </div>
+          <div class="ufm-params-grid">
+            <div class="ufm-param-item">
+              <div class="ufm-param-label">Họ và tên</div>
+              <div class="ufm-param-val">Trần Đức</div>
+            </div>
+            <div class="ufm-param-item">
+              <div class="ufm-param-label">Mã sinh viên (MSSV)</div>
+              <div class="ufm-param-val" style="color: #2563EB;">2021010131</div>
+            </div>
+            <div class="ufm-param-item">
+              <div class="ufm-param-label">Ngày sinh</div>
+              <div class="ufm-param-val">22 (22/04/2002)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Official Result Table Card -->
+        <div class="ufm-result-card">
+          <div class="ufm-result-top">
+            <div class="ufm-verified-pill">
+              <span>✓</span> XÁC THỰC CHÍNH THỨC TỪ UIS UFM
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #64748B;">
+              Số hiệu: <strong style="color: #7C3AED;">UFM-7017587</strong>
+            </span>
+          </div>
+          
+          <table class="ufm-result-table">
+            <tbody>
+              <tr>
+                <td class="label-cell">Họ và tên</td>
+                <td class="val-cell"><strong>Trần Đức</strong> <span style="color: #64748B; font-weight: normal; margin-left: 6px;">(Tran Duc)</span></td>
+              </tr>
+              <tr>
+                <td class="label-cell">Mã số sinh viên (MSSV)</td>
+                <td class="val-cell" style="font-family: var(--font-mono); color: #2563EB; font-weight: 700;">2021010131</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Ngày sinh &bull; Nơi sinh</td>
+                <td class="val-cell">22/04/2002 &bull; TP. Hồ Chí Minh (Nam)</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Bậc &amp; Hệ đào tạo</td>
+                <td class="val-cell">Đại học &bull; Chính quy (Khóa DHCQ2020)</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Ngành đào tạo</td>
+                <td class="val-cell"><strong>Hệ thống thông tin quản lý</strong></td>
+              </tr>
+              <tr>
+                <td class="label-cell">Chuyên ngành</td>
+                <td class="val-cell">Tin học quản lý</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Xếp loại tốt nghiệp</td>
+                <td class="val-cell">
+                  <span style="display: inline-block; background: #ECFDF5; color: #059669; border: 1px solid #A7F3D0; font-weight: 700; font-size: 0.82rem; padding: 2px 10px; border-radius: 6px;">
+                    Xuất sắc (Excellent) &bull; Thủ khoa GPA 3.7/4.0
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td class="label-cell">Số hiệu bằng tốt nghiệp</td>
+                <td class="val-cell" style="font-family: var(--font-mono); font-weight: 700; color: #7C3AED;">UFM-7017587</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Số vào sổ cấp bằng</td>
+                <td class="val-cell" style="font-family: var(--font-mono);">3292/20DTH3_3/2024</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Năm tốt nghiệp &bull; Ngày ký</td>
+                <td class="val-cell">2024 &bull; Ký ngày 11/11/2024</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="ufm-modal-actions">
+          <a href="https://uis.ufm.edu.vn/TraCuuVanBang" target="_blank" rel="noopener noreferrer" class="btn-primary" onclick="handleUfmPortalClick(event)" style="text-decoration: none;">
+            Mở Cổng Tra Cứu UFM (uis.ufm.edu.vn) ↗
+          </a>
+          <button type="button" class="btn-secondary" onclick="copyUfmInfo()">
+            Sao chép thông tin xác thực
+          </button>
+        </div>
+        
+        <p style="font-size: 0.76rem; color: #94A3B8; margin-top: 14px; line-height: 1.5;">
+          * Kết quả trên được kết xuất chính thức từ cơ sở dữ liệu văn bằng Trường Đại học Tài chính - Marketing (<a href="https://uis.ufm.edu.vn/TraCuuVanBang" target="_blank" rel="noopener noreferrer" style="color: #64748B;">uis.ufm.edu.vn/TraCuuVanBang</a>). Khi bấm mở cổng trường, hệ thống sẽ tự động sao chép MSSV 2021010131 để bạn tra cứu nhanh chóng.
+        </p>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Copy Toast Notification -->
+  <div class="copy-toast" id="copyToast">
+    ✓ Đã sao chép email: trandc3015@gmail.com
+  </div>
+
+  <!-- Scripts -->
+  <script src="landing.js?v=50"></script>
 </body>
 </html>

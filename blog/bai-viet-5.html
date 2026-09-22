@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deep-Dive Kỹ Thuật: Xây Dựng Enterprise Data Platform Với CDC, dlt, Snowflake &amp; dbt Core — Trần Đức (Dustin)</title>
+  <meta name="description" content="Khám phá chi tiết kiến trúc AdventureWorks Modern Data Platform: Change Data Capture qua Log Sequence Number, RSA Key-Pair Auth, CDC Deduplication trong dbt, SCD Type 2 và 30 automated data quality tests.">
+  
+  <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+  <link rel="stylesheet" href="../landing/landing.css?v=26">
+</head>
+<body class="article-page-body">
+
+  <!-- Editorial Top Navigation Bar -->
+  <header class="site-nav">
+    <div class="container nav-inner">
+      <a href="../portfolio-preview.html" class="nav-brand">
+        <div>
+          <span class="nav-brand-title">Trần Đức</span>
+          <span class="nav-brand-subtitle"> &bull; Blog Cá Nhân</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../portfolio-preview.html#about" class="nav-link">Giới Thiệu</a></li>
+          <li><a href="index.html" class="nav-link" style="color: var(--emerald); font-weight: 600;">Blog / Tạp Chí</a></li>
+          <li><a href="../portfolio-preview.html#pipeline" class="nav-link">Kiến Trúc Data</a></li>
+          <li><a href="../portfolio-preview.html#projects" class="nav-link">Dự Án</a></li>
+          <li><a href="../portfolio-preview.html#contact" class="nav-link">Liên Hệ</a></li>
+          <li>
+            <a href="../portfolio-preview.html" class="nav-link nav-cta">← Về Trang Chủ</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Article Container -->
+  <main class="article-container">
+    
+    <!-- Breadcrumb Navigation -->
+    <div class="article-breadcrumb">
+      <a href="../portfolio-preview.html">Trang chủ</a>
+      <span>/</span>
+      <a href="index.html">Blog Cá Nhân</a>
+      <span>/</span>
+      <span style="color: var(--text-primary);">Kỹ thuật chuyên sâu</span>
+    </div>
+
+    <!-- Article Header -->
+    <header class="article-hero">
+      <div class="article-badge-row">
+        <span class="article-category-pill">KỸ THUẬT CHUYÊN SÂU &bull; FLAGSHIP PROJECT</span>
+        <span class="article-meta-info">05 Tháng 03, 2026 &bull; 12 phút đọc</span>
+      </div>
+
+      <h1 class="article-main-title">
+        Deep-Dive: Xây Dựng Enterprise Data Platform Với CDC, dlt, Snowflake &amp; dbt Core
+      </h1>
+
+      <p class="article-lead-paragraph">
+        Làm sao để đồng bộ liên tục dữ liệu giao dịch bán hàng từ cơ sở dữ liệu quan hệ (OLTP) sang Cloud Data Warehouse với độ trễ tối thiểu mà không gây nghẽn hiệu năng sản xuất? Bài viết này mổ xẻ toàn bộ giải pháp kỹ thuật từ dự án <strong>AdventureWorks Data Platform</strong>: kiến trúc Change Data Capture, giải thuật khử trùng lặp qua LSN, mô hình hóa Kimball Star Schema và tự động hóa CI/CD với 30 tests.
+      </p>
+
+      <div class="article-author-row">
+        <img src="../images/dustin-cand.png" alt="Trần Đức (Dustin)" class="article-author-avatar">
+        <div>
+          <div class="article-author-name">Trần Đức (Dustin)</div>
+          <div class="article-author-role">Data Platform Architect &bull; Analytics Engineer &bull; Author</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Prose Content -->
+    <article class="article-prose">
+      <p class="drop-cap">
+        Trong các doanh nghiệp bán lẻ và sản xuất hiện đại, dữ liệu giao dịch phát sinh liên tục từng giây: đơn hàng mới được tạo, trạng thái thanh toán được cập nhật, và một số đơn hàng bị hủy bỏ hoặc hoàn trả. Phương thức trích xuất truyền thống — chạy các câu lệnh <code>SELECT * FROM sales</code> quét toàn bộ bảng (full table scan) vào nửa đêm — đã bộc lộ những tử huyệt chết người: gây khóa bảng vận hành (database locks), tải trùng lặp dữ liệu khổng lồ và khiến ban giám đốc phải đợi đến sáng hôm sau mới có số liệu báo cáo.
+      </p>
+
+      <h2>1. Kiến Trúc Medallion Architecture Khép Kín</h2>
+      <p>
+        Để giải quyết triệt để vấn đề trên, tôi thiết kế nền tảng dữ liệu theo mô hình <strong>Medallion Architecture</strong> 3 tầng rõ ràng:
+      </p>
+
+      <div class="article-code-block">
+        <div class="article-code-header">
+          <span>PIPELINE ARCHITECTURE // End-to-End Data Journey</span>
+          <span>DIAGRAM</span>
+        </div>
+        <pre><code>[SQL Server 2022 CDC]  -- (Transaction Log Stream)
+          │
+          ▼
+    [dlt Python Ingest] -- (RSA Key-Pair Auth / Cursor by LSN)
+          │
+          ▼
+ [Snowflake BRONZE]   -- (Append-Only Raw Archive)
+          │
+          ▼
+  [dbt Core STAGING]   -- (CDC Deduplication: ROW_NUMBER over _start_lsn)
+          │
+          ├─► [dbt SNAPSHOTS] -- (SCD Type 2: snap_products price changes)
+          │
+          ▼
+   [Snowflake GOLD]    -- (Kimball Star Schema: fct_sales merged + dim tables)
+          │
+          ▼
+   [Metabase BI Tool]  -- (12 Business KPIs &amp; Executive Revenue Dashboards)</code></pre>
+      </div>
+
+      <h2>2. Kích Hoạt CDC &amp; Trích Xuất Bằng Thư Viện dlt (Python)</h2>
+      <p>
+        Trên hệ quản trị cơ sở dữ liệu Microsoft SQL Server 2022 (chạy trong môi trường Docker Container), tôi kích hoạt tính năng <strong>Change Data Capture (CDC)</strong> ở cấp độ cơ sở dữ liệu và từng bảng giao dịch:
+      </p>
+
+      <div class="article-code-block">
+        <div class="article-code-header">
+          <span>SQL SERVER // Enable Database &amp; Table CDC</span>
+          <span>T-SQL</span>
+        </div>
+        <pre><code>-- Kích hoạt CDC cấp Database
+EXEC sys.sp_cdc_enable_db;
+
+-- Kích hoạt CDC cho bảng bán hàng dbo.sales
+EXEC sys.sp_cdc_enable_table
+    @source_schema = N'dbo',
+    @source_name   = N'sales',
+    @role_name     = NULL,
+    @supports_net_changes = 1;</code></pre>
+      </div>
+
+      <p>
+        Khi CDC hoạt động, SQL Server Agent tự động đọc transaction log và ghi nhận các sự kiện thay đổi vào bảng hệ thống <code>cdc.dbo_sales_CT</code>. Mỗi bản ghi được gắn kèm một mã định danh nhật ký giao dịch duy nhất gọi là <strong>Log Sequence Number (LSN)</strong> (cột <code>__$start_lsn</code>) và mã hành động <code>__$operation</code> (1 = Delete, 2 = Insert, 3 = Update Before, 4 = Update After).
+      </p>
+
+      <p>
+        Thay vì sử dụng các dịch vụ trả phí đắt đỏ như Fivetran, tôi ứng dụng thư viện mã nguồn mở <strong>dlt (data load tool)</strong> của Python. Với dlt, tôi thiết lập cursor tăng dần (incremental cursor) theo cột nhị phân <code>__$start_lsn</code>:
+      </p>
+
+      <div class="article-code-block">
+        <div class="article-code-header">
+          <span>PYTHON // dlt Incremental Ingestion by LSN Cursor</span>
+          <span>PYTHON 3.11</span>
+        </div>
+        <pre><code>import dlt
+from dlt.sources.sql_database import sql_database
+
+# Định nghĩa cursor LSN tăng dần để chỉ trích xuất các event mới
+source = sql_database(
+    credentials="mssql+pyodbc://sa:Password@localhost:1433/AdventureWorks",
+    schema="cdc"
+)
+source.resources["dbo_sales_CT"].apply_hints(
+    incremental=dlt.sources.incremental(
+        '"__$start_lsn"',
+        initial_value=b"\x00" * 10
+    )
+)
+
+# Nạp dữ liệu append-only vào Snowflake Bronze schema
+pipeline = dlt.pipeline(
+    pipeline_name="adventureworks_cdc_pipeline",
+    destination="snowflake",
+    dataset_name="bronze"
+)
+load_info = pipeline.run(source.with_resources("dbo_sales_CT"), write_disposition="append")
+print(load_info)</code></pre>
+      </div>
+
+      <h2>3. Chứng Thực Bảo Mật Chuẩn Enterprise: Snowflake RSA Key-Pair Auth</h2>
+      <p>
+        Trong môi trường doanh nghiệp thực tế, việc sử dụng mật khẩu tài khoản tĩnh (Basic Auth) để nạp dữ liệu là hành vi vi phạm nghiêm trọng quy chuẩn an toàn thông tin. Tôi thiết lập cơ chế <strong>RSA Key-Pair Authentication</strong> 2048-bit cho người dùng service account <code>DLT_USER</code> trong Snowflake:
+      </p>
+      <ul>
+        <li style="margin-bottom: 8px;">Khóa công khai (Public Key) được gán trực tiếp vào Snowflake User: <code>ALTER USER DLT_USER SET RSA_PUBLIC_KEY = '...';</code></li>
+        <li style="margin-bottom: 8px;">Khóa riêng tư (Private Key) được bảo vệ bằng mật khẩu mã hóa (passphrase) và lưu trữ an toàn trong biến môi trường hệ thống.</li>
+        <li style="margin-bottom: 8px;">Áp dụng nguyên tắc đặc quyền tối thiểu (Least Privilege): Gán quyền qua Role chuyên dụng <code>INGESTION_ROLE</code>, chỉ cho phép tạo bảng và nạp dữ liệu trong schema BRONZE.</li>
+      </ul>
+
+      <h2>4. Giải Thuật CDC Deduplication Trong dbt Staging</h2>
+      <p>
+        Khi nạp theo cơ chế Append-only từ CDC, bảng Bronze sẽ chứa nhiều bản ghi cho cùng một đơn hàng nếu đơn hàng đó trải qua các sự kiện cập nhật trạng thái (Update). Nếu trực tiếp đưa dữ liệu này vào báo cáo, doanh thu sẽ bị nhân đôi hoặc nhân ba (hiện tượng Fan-out sai lệch).
+      </p>
+      <p>
+        Trong model <code>src_cdc_sales.sql</code> của dbt Core, tôi áp dụng giải thuật khử trùng lặp sử dụng hàm cửa sổ <code>ROW_NUMBER()</code>:
+      </p>
+
+      <div class="article-code-block">
+        <div class="article-code-header">
+          <span>DBT CORE // models/staging/src_cdc_sales.sql</span>
+          <span>SQL (SNOWFLAKE DIALECT)</span>
+        </div>
+        <pre><code>WITH raw_cdc_events AS (
+    SELECT * FROM {{ source('bronze', 'dbo_sales_ct') }}
+),
+
+ranked_events AS (
+    SELECT
+        order_number,
+        order_line_item,
+        customer_key,
+        product_key,
+        order_quantity,
+        unit_price,
+        order_date,
+        __$operation AS cdc_operation,
+        __$start_lsn AS cdc_lsn,
+        -- Đánh số thứ tự sự kiện: Ưu tiên LSN lớn nhất và Seqval mới nhất
+        ROW_NUMBER() OVER (
+            PARTITION BY order_number, order_line_item
+            ORDER BY __$start_lsn DESC, __$seqval DESC
+        ) AS event_rank
+    FROM raw_cdc_events
+    -- Loại bỏ bản ghi UPDATE_BEFORE (operation = 3) để tránh rác
+    WHERE __$operation != 3
+)
+
+SELECT
+    order_number,
+    order_line_item,
+    customer_key,
+    product_key,
+    order_quantity,
+    unit_price,
+    order_date,
+    CASE WHEN cdc_operation = 1 THEN TRUE ELSE FALSE END AS is_deleted
+FROM ranked_events
+WHERE event_rank = 1;</code></pre>
+      </div>
+
+      <blockquote>
+        "Giải thuật này đảm bảo tính đúng đắn 100%: Dù một đơn hàng bị sửa đổi 10 lần trong ngày, tầng Staging chỉ xuất ra đúng 1 trạng thái mới nhất. Nếu đơn hàng bị xóa (operation = 1), cờ 'is_deleted' được bật để xử lý soft-delete tại tầng Fact."
+      </blockquote>
+
+      <h2>5. Theo Dõi Lịch Sử Biến Động Giá Với dbt Snapshot (SCD Type 2)</h2>
+      <p>
+        Trong kinh doanh bán lẻ, giá bán sản phẩm (Unit Price) và chi phí vốn (Standard Cost) thay đổi theo thời gian. Nếu báo cáo tài chính sử dụng giá bán hiện tại để nhân với số lượng đơn hàng đã bán cách đây 2 năm, doanh thu lịch sử sẽ bị sai lệch hoàn toàn.
+      </p>
+      <p>
+        Tôi cấu hình <strong>dbt Snapshot</strong> để triển khai Slowly Changing Dimension (SCD Type 2) trên bảng sản phẩm (<code>snap_products</code>):
+      </p>
+
+      <div class="article-code-block">
+        <div class="article-code-header">
+          <span>DBT SNAPSHOT // snapshots/snap_products.sql</span>
+          <span>SQL / JINJA</span>
+        </div>
+        <pre><code>{% snapshot snap_products %}
+
+{{
+    config(
+      target_schema='gold',
+      unique_key='product_key',
+      strategy='check',
+      check_cols=['product_price', 'product_cost', 'product_name']
+    )
+}}
+
+SELECT 
+    product_key,
+    product_name,
+    model_name,
+    product_cost,
+    product_price
+FROM {{ ref('stg_products') }}
+
+{% endsnapshot %}</code></pre>
+      </div>
+      <p>
+        dbt tự động sinh các cột <code>dbt_valid_from</code> và <code>dbt_valid_to</code>. Khi nối (JOIN) với bảng Fact Sales, hệ thống sử dụng phép so sánh ngày <code>order_date BETWEEN dbt_valid_from AND COALESCE(dbt_valid_to, '9999-12-31')</code>, đảm bảo từng đơn hàng luôn được tính đúng mức giá tại chính xác thời điểm phát sinh giao dịch.
+      </p>
+
+      <h2>6. Kimball Star Schema &amp; Incremental Merge Trên Fact Sales</h2>
+      <p>
+        Tại schema GOLD, dữ liệu được tổ chức chuẩn <strong>Kimball Star Schema</strong>:
+      </p>
+      <ul>
+        <li style="margin-bottom: 8px;"><strong>Fact Table:</strong> <code>fct_sales</code> (23,935 dòng đơn hàng). Áp dụng chiến lược <code>incremental_strategy='merge'</code> với khóa chính <code>unique_key=['order_number', 'order_line_item']</code>. Khi dbt chạy định kỳ, chỉ những đơn hàng phát sinh mới hoặc có thay đổi trạng thái mới được nạp vào, tiết kiệm 95% chi phí điện toán (Snowflake Credits).</li>
+        <li style="margin-bottom: 8px;"><strong>Dimension Tables:</strong> <code>dim_customers</code>, <code>dim_products</code>, <code>dim_territories</code>, <code>dim_calendar</code> (hỗ trợ phân tích thời gian theo Fiscal Year/Quarter).</li>
+      </ul>
+
+      <h2>7. Đảm Bảo Chất Lượng Với 30 Automated dbt Tests &amp; CI/CD</h2>
+      <p>
+        "Không có dữ liệu rác nào được phép lọt vào tầng Gold". Tôi thiết lập hệ thống kiểm thử tự động gồm 30 test cases:
+      </p>
+      <ul>
+        <li style="margin-bottom: 8px;"><strong>Generic Tests:</strong> Kiểm tra <code>unique</code> và <code>not_null</code> trên tất cả các khóa chính (Primary Keys và Surrogate Keys).</li>
+        <li style="margin-bottom: 8px;"><strong>Referential Integrity Tests:</strong> Kiểm tra <code>relationships</code> đảm bảo mọi <code>customer_key</code> và <code>product_key</code> trong Fact Sales đều tồn tại hợp lệ trong các bảng Dimension tương ứng (Zero Orphan Records).</li>
+        <li style="margin-bottom: 8px;"><strong>Singular Business Logic Tests:</strong> Viết các custom test SQL kiểm tra số lượng đặt hàng không bao giờ được âm (<code>order_quantity &gt; 0</code>) và ngày đặt hàng không được vượt quá ngày hiện tại.</li>
+      </ul>
+
+      <!-- Takeaway Callout Box -->
+      <div class="article-takeaway">
+        <div class="article-takeaway-title">
+          <span>🚀</span> Kết Quả Dự Án AdventureWorks Data Platform
+        </div>
+        <div class="article-takeaway-body">
+          <ul style="margin-left: 20px; margin-top: 6px;">
+            <li><strong>23,935</strong> đơn hàng lịch sử được merge chính xác tuyệt đối mà không có bản ghi trùng lặp.</li>
+            <li><strong>30/30</strong> dbt tests vượt qua tự động trong pipeline CI/CD trước khi triển khai lên môi trường Production.</li>
+            <li><strong>100%</strong> dữ liệu biến động giá bán được lưu vết lịch sử qua SCD Type 2.</li>
+            <li>Dashboard <strong>Metabase BI</strong> hiển thị tức thì 12 chỉ số KPI kinh doanh cốt lõi (Gross Revenue, Net Margin, Return Rate by Territory, Customer Lifetime Value).</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Tổng Kết &amp; Mã Nguồn Mở</h2>
+      <p>
+        Dự án AdventureWorks Modern Data Platform là minh chứng thực tế cho năng lực thiết kế kiến trúc và kỹ năng thực thi của tôi trong vai trò một Analytics Engineer. Toàn bộ mã nguồn, từ Docker compose, dlt ingestion script, các model dbt, snapshots và test suite đều được tôi công khai trên GitHub.
+      </p>
+      <p>
+        <a href="https://github.com/tranduc2204/adventure_works" target="_blank" rel="noopener noreferrer" style="color: var(--emerald); font-weight: 700; text-decoration: underline; font-size: 1.05rem;">
+          Khám phá toàn bộ Repository trên GitHub (tranduc2204/adventure_works) ↗
+        </a>
+      </p>
+    </article>
+
+    <!-- Author Bio Card -->
+    <div class="author-card">
+      <img src="../images/dustin-cand.png" alt="Trần Đức (Dustin)" class="author-card-avatar">
+      <div>
+        <h3 class="author-card-title">Trần Đức (Dustin)</h3>
+        <p class="author-card-bio">
+          Thủ khoa UFM ngành Tin học quản lý. Tác giả dự án AdventureWorks Data Platform. Chuyên sâu về Data Modeling (Kimball Star Schema), In-Warehouse Transformations (dbt Core), Cloud Data Warehouse (Snowflake) và Change Data Capture (CDC).
+        </p>
+        <div class="author-card-links">
+          <a href="mailto:trandc3015@gmail.com" class="author-card-link">Email</a>
+          <a href="https://github.com/tranduc2204/adventure_works" target="_blank" rel="noopener noreferrer" class="author-card-link">AdventureWorks Repo ↗</a>
+          <a href="https://github.com/tranduc2204" target="_blank" rel="noopener noreferrer" class="author-card-link">GitHub Profile ↗</a>
+          <a href="https://www.linkedin.com/in/dustintd/" target="_blank" rel="noopener noreferrer" class="author-card-link">LinkedIn ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Next / Previous Article Navigation -->
+    <nav class="article-nav-row">
+      <a href="bai-viet-4.html" class="article-nav-card">
+        <div class="article-nav-label">← Bài viết trước</div>
+        <div class="article-nav-title">Chiến Lược Tự Học Data Trong Quân Ngũ &amp; Chinh Phục Chứng Chỉ Quốc Tế</div>
+      </a>
+
+      <a href="index.html" class="article-nav-card" style="text-align: right;">
+        <div class="article-nav-label">Về trang lưu trữ blog →</div>
+        <div class="article-nav-title">Xem toàn bộ 5 bài viết chuyên môn &amp; tự sự</div>
+      </a>
+    </nav>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content-row">
+      <div>© 2026 Trần Đức (Dustin) &bull; Analytics Engineer &amp; Blog Cá Nhân.</div>
+      <div class="footer-nav-links">
+        <a href="../portfolio-preview.html" class="footer-nav-link">Trang chủ</a>
+        <a href="index.html" class="footer-nav-link">Blog</a>
+        <a href="mailto:trandc3015@gmail.com" class="footer-nav-link">Email</a>
+        <a href="https://github.com/tranduc2204" target="_blank" rel="noopener noreferrer" class="footer-nav-link">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../landing/landing.js?v=26"></script>
+</body>
+</html>
+

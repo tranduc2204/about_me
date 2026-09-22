@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Những Bài Học Xương Máu Khi Triển Khai ERP Tại THACO &amp; Lộc Phúc — Trần Đức (Dustin)</title>
+  <meta name="description" content="Bài học thực chiến từ quá trình triển khai hệ thống ERP BRAVO phân hệ Mua hàng, Quản lý kho, Kế toán tại THACO và Lộc Phúc Jewelry: Khi dữ liệu không được phép sai 0.01%.">
+  
+  <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+  <link rel="stylesheet" href="../landing/landing.css?v=26">
+</head>
+<body class="article-page-body">
+
+  <!-- Editorial Top Navigation Bar -->
+  <header class="site-nav">
+    <div class="container nav-inner">
+      <a href="../portfolio-preview.html" class="nav-brand">
+        <div>
+          <span class="nav-brand-title">Trần Đức</span>
+          <span class="nav-brand-subtitle"> &bull; Blog Cá Nhân</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../portfolio-preview.html#about" class="nav-link">Giới Thiệu</a></li>
+          <li><a href="index.html" class="nav-link" style="color: var(--emerald); font-weight: 600;">Blog / Tạp Chí</a></li>
+          <li><a href="../portfolio-preview.html#pipeline" class="nav-link">Kiến Trúc Data</a></li>
+          <li><a href="../portfolio-preview.html#projects" class="nav-link">Dự Án</a></li>
+          <li><a href="../portfolio-preview.html#contact" class="nav-link">Liên Hệ</a></li>
+          <li>
+            <a href="../portfolio-preview.html" class="nav-link nav-cta">← Về Trang Chủ</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Article Container -->
+  <main class="article-container">
+    
+    <!-- Breadcrumb Navigation -->
+    <div class="article-breadcrumb">
+      <a href="../portfolio-preview.html">Trang chủ</a>
+      <span>/</span>
+      <a href="index.html">Blog Cá Nhân</a>
+      <span>/</span>
+      <span style="color: var(--text-primary);">Kiến trúc ERP</span>
+    </div>
+
+    <!-- Article Header -->
+    <header class="article-hero">
+      <div class="article-badge-row">
+        <span class="article-category-pill">KIẾN TRÚC DỮ LIỆU ERP</span>
+        <span class="article-meta-info">15 Tháng 02, 2026 &bull; 9 phút đọc</span>
+      </div>
+
+      <h1 class="article-main-title">
+        Những Bài Học Xương Máu Khi Triển Khai ERP Tại THACO &amp; Lộc Phúc Jewelry
+      </h1>
+
+      <p class="article-lead-paragraph">
+        Rời giảng đường đại học để bước thẳng vào phân xưởng sản xuất ô tô của THACO và xưởng chế tác kim hoàn của Lộc Phúc Jewelry, tôi nhận ra một chân lý khắc nghiệt: Trong thực tế sản xuất kinh doanh, không có khái niệm dữ liệu đúng 99%. Nó phải đúng 100%.
+      </p>
+
+      <div class="article-author-row">
+        <img src="../images/dustin-cand.png" alt="Trần Đức (Dustin)" class="article-author-avatar">
+        <div>
+          <div class="article-author-name">Trần Đức (Dustin)</div>
+          <div class="article-author-role">Cựu ERP Implementation Specialist &bull; Analytics Engineer</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Prose Content -->
+    <article class="article-prose">
+      <p class="drop-cap">
+        Triển khai ERP (Enterprise Resource Planning) thường được xem là một trong những công việc "nặng đô" nhất của dân hệ thống thông tin. Không có những slide hào nhoáng, không có những thuật ngữ AI bay bổng, công việc ở đây là ngồi trực tiếp với các thủ kho, kế toán trưởng, trưởng ca bảo dưỡng và các kỹ sư cơ khí để giải quyết từng chứng từ, từng quy trình đối soát công nợ.
+      </p>
+
+      <h2>1. Bài Toán Khối Lượng Chứng Từ Khổng Lồ Tại THACO (Trường Hải Auto)</h2>
+      <p>
+        Tại Tập đoàn THACO, quy mô vận hành trải dài trên nhiều công ty con và chi nhánh khắp cả nước. Mỗi ngày, phân hệ Mua hàng tiếp nhận hàng nghìn đơn đặt hàng (Purchase Orders), phiếu nhập kho vật tư linh kiện và hóa đơn thanh toán của các nhà cung cấp toàn cầu.
+      </p>
+      <p>
+        Tại đây, tôi học được bài học đắt giá về <strong>Concurrency (Đồng thời) &amp; Database Locks</strong> trong Microsoft SQL Server:
+      </p>
+      <ul>
+        <li style="margin-bottom: 12px;">Vào ngày chốt sổ cuối tháng, khi hàng chục kế toán cùng chạy Stored Procedure tổng hợp công nợ trong khi các thủ kho vẫn đang quét mã vạch xuất nhập phụ tùng, hệ thống xảy ra hiện tượng Deadlock nghiêm trọng.</li>
+        <li style="margin-bottom: 12px;">Nguyên nhân đến từ việc các câu lệnh truy vấn trong ERP chưa được đánh Index phù hợp và sử dụng Transaction Isolation Level không tối ưu, khiến toàn bộ bảng chứng từ bị khóa (Exclusive Table Lock).</li>
+      </ul>
+
+      <blockquote>
+        "Một Stored Procedure viết ẩu có thể biến chiếc máy chủ hàng trăm triệu thành một cỗ máy đóng băng, làm đình trệ hoạt động của cả một xưởng lắp ráp ô tô."
+      </blockquote>
+
+      <h2>2. Lộc Phúc Fine Jewelry: Độ Chính Xác Tuyệt Đối Đến Từng Miligram Vàng</h2>
+      <p>
+        Nếu như tại THACO bài toán là tốc độ xử lý khối lượng lớn (Volume &amp; Velocity), thì tại Lộc Phúc Jewelry, bài toán lại là <strong>Veracity (Độ chính xác tuyệt đối)</strong>.
+      </p>
+      <p>
+        Vàng và đá quý không thể đối soát theo kiểu "ước lượng làm tròn". Trong quá trình gia công và chế tác trang sức:
+      </p>
+      <ul>
+        <li style="margin-bottom: 12px;">Vàng miếng thô được xuất ra giao cho thợ kim hoàn; qua các công đoạn nấu, cán, đúc, đánh bóng và gắn đá quý, sẽ có một tỷ lệ hao hụt bay hơi nhất định (tính bằng phân và ly).</li>
+        <li style="margin-bottom: 12px;">Hệ thống ERP phải theo dõi được định mức hao hụt chuẩn của từng mã hàng, so sánh với khối lượng vàng thu hồi thực tế sau ca làm việc. Sai số dù chỉ 0.01 gram vàng nhân lên với hàng nghìn sản phẩm mỗi tuần sẽ tạo ra khoản thất thoát hàng tỷ đồng.</li>
+      </ul>
+
+      <!-- Code Box Example -->
+      <div class="article-code-block">
+        <div class="article-code-header">
+          <span>SQL SERVER // Stored Procedure Audit Transaction Check</span>
+          <span>T-SQL</span>
+        </div>
+        <pre><code>-- Nguyên tắc FIFO &amp; Kiểm soát hao hụt kim hoàn trong BRAVO ERP
+SELECT 
+    w.WorkOrderId,
+    w.ArtisanId,
+    w.GoldPurityCode,
+    w.IssuedWeight_Grams,
+    w.FinishedWeight_Grams,
+    w.ScrapRecovered_Grams,
+    (w.IssuedWeight_Grams - (w.FinishedWeight_Grams + w.ScrapRecovered_Grams)) AS ActualLoss_Grams,
+    m.StandardLossPercentage * w.IssuedWeight_Grams AS PermittedLoss_Grams
+FROM dbo.WorkOrderDetails w
+INNER JOIN dbo.MaterialStandards m ON w.ProductTypeId = m.ProductTypeId
+WHERE (w.IssuedWeight_Grams - (w.FinishedWeight_Grams + w.ScrapRecovered_Grams)) > (m.StandardLossPercentage * w.IssuedWeight_Grams);</code></pre>
+      </div>
+
+      <h2>3. Ba Nguyên Tắc Bất Di Bất Dịch Tôi Đúc Kết Được</h2>
+      <p>
+        Trải nghiệm tại hai doanh nghiệp đầu ngành đã dạy tôi 3 bài học nền tảng mà không trường đại học nào dạy:
+      </p>
+
+      <div class="article-takeaway">
+        <div class="article-takeaway-title">
+          <span>⚖️</span> Nguyên Tắc 1: Dữ Liệu Trên Màn Hình Là Phản Chiếu Của Quy Trình Vật Lý
+        </div>
+        <div class="article-takeaway-body">
+          Nếu người công nhân trong kho không quét mã xuất kho ngay khi xe tải rời đi, mọi dashboard Real-time BI đều trở thành rác. Một kỹ sư dữ liệu xuất sắc phải hiểu rõ luồng đi thực tế của hàng hóa và con người trước khi thiết kế schema.
+        </div>
+      </div>
+
+      <div class="article-takeaway" style="background: var(--amber-subtle); border-color: var(--amber-border);">
+        <div class="article-takeaway-title" style="color: var(--amber);">
+          <span>🛡️</span> Nguyên Tắc 2: Audit Trail (Nhật Ký Vết) Là Tấm Khiên Bảo Vệ Hệ Thống
+        </div>
+        <div class="article-takeaway-body" style="color: #92400E;">
+          Không bao giờ được phép dùng lệnh <code>DELETE</code> hoặc <code>UPDATE</code> đè trực tiếp lên chứng từ tài chính. Mọi biến động phải được lưu vết qua append-only logs, trạng thái hủy (is_deleted) và theo dõi lịch sử biến động qua mô hình SCD Type 2.
+        </div>
+      </div>
+
+      <div class="article-takeaway">
+        <div class="article-takeaway-title">
+          <span>⚡</span> Nguyên Tắc 3: Tách Bạch Nghiêm Ngặt Tầng OLTP Và Analytics
+        </div>
+        <div class="article-takeaway-body">
+          Đừng bao giờ để các báo cáo phân tích đè nặng lên cơ sở dữ liệu vận hành sản xuất. Giải pháp chuẩn là sử dụng Change Data Capture (CDC) để truyền tin liên tục sang Cloud Data Warehouse như Snowflake, nơi các truy vấn phân tích có thể chạy thoải mái mà không ảnh hưởng tới người dùng ERP.
+        </div>
+      </div>
+
+      <h2>Từ Tư Duy ERP Sang Kiến Trúc Analytics Engineering Hiện Đại</h2>
+      <p>
+        Chính nhờ những năm tháng "lăn lộn" với hệ thống ERP BRAVO trên SQL Server, khi tiếp cận với Modern Data Stack gồm <strong>dbt Core, Snowflake, dlt, và Star Schema Kimball</strong>, tôi nhận ra đây là sự tiến hóa tự nhiên và hoàn hảo. Tôi mang nguyên vẹn tính cẩn trọng, kỷ luật đối soát số liệu của một chuyên viên ERP vào từng mô hình dữ liệu mà mình xây dựng hôm nay.
+      </p>
+    </article>
+
+    <!-- Author Bio Card -->
+    <div class="author-card">
+      <img src="../images/dustin-cand.png" alt="Trần Đức (Dustin)" class="author-card-avatar">
+      <div>
+        <h3 class="author-card-title">Trần Đức (Dustin)</h3>
+        <p class="author-card-bio">
+          Thủ khoa UFM ngành Tin học quản lý (GPA 3.7/4.0). Cựu chuyên viên triển khai ERP tại THACO & Lộc Phúc Jewelry. Hiện trực chiến hạ tầng CNTT CAND 24/7 và theo đuổi sự nghiệp Analytics Engineer chuyên sâu.
+        </p>
+        <div class="author-card-links">
+          <a href="mailto:trandc3015@gmail.com" class="author-card-link">Email</a>
+          <a href="https://github.com/tranduc2204" target="_blank" rel="noopener noreferrer" class="author-card-link">GitHub ↗</a>
+          <a href="https://www.linkedin.com/in/dustintd/" target="_blank" rel="noopener noreferrer" class="author-card-link">LinkedIn ↗</a>
+          <a href="../portfolio-preview.html#pipeline" class="author-card-link">Kiến Trúc Data ➔</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Next / Previous Article Navigation -->
+    <nav class="article-nav-row">
+      <a href="bai-viet-1.html" class="article-nav-card">
+        <div class="article-nav-label">← Bài viết trước</div>
+        <div class="article-nav-title">Từ Thủ Khoa UFM Đến Định Vị Analytics Engineer Toàn Năng</div>
+      </a>
+
+      <a href="bai-viet-3.html" class="article-nav-card" style="text-align: right;">
+        <div class="article-nav-label">Bài viết tiếp theo →</div>
+        <div class="article-nav-title">18 Tháng Trong Môi Trường CAND: Hạ Tầng Không Phải Chiếc Hộp Đen</div>
+      </a>
+    </nav>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content-row">
+      <div>© 2026 Trần Đức (Dustin) &bull; Analytics Engineer &amp; Blog Cá Nhân.</div>
+      <div class="footer-nav-links">
+        <a href="../portfolio-preview.html" class="footer-nav-link">Trang chủ</a>
+        <a href="index.html" class="footer-nav-link">Blog</a>
+        <a href="mailto:trandc3015@gmail.com" class="footer-nav-link">Email</a>
+        <a href="https://github.com/tranduc2204" target="_blank" rel="noopener noreferrer" class="footer-nav-link">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../landing/landing.js?v=26"></script>
+</body>
+</html>
+

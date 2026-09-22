@@ -1,65 +1,194 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="dark">
+<html lang="vi" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog — Trần Đức (Dustin) | Chia sẻ hành trình</title>
-  <meta name="description" content="Blog cá nhân — chia sẻ kinh nghiệm, hành trình self-improvement, và kiến thức kỹ thuật.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <title>Blog Cá Nhân &amp; Tạp Chí Hành Trình — Trần Đức (Dustin)</title>
+  <meta name="description" content="Tuyển tập các bài tự sự, góc nhìn chuyên môn và bài học thực chiến từ giảng đường đại học UFM, triển khai ERP tại THACO/Lộc Phúc, kỷ luật hạ tầng CAND đến định vị Analytics Engineer toàn năng.">
+  
   <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-  <link rel="stylesheet" href="../assets/css/main.css?v=11">
-  <script>
-    (function() {
-      try { localStorage.removeItem('dustin_theme'); } catch(e) {}
-      const savedTheme = localStorage.getItem('dustin_theme_mode') || 'dark';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-    })();
-  </script>
+  <link rel="stylesheet" href="../landing/landing.css?v=50">
 </head>
-<body>
-  <nav class="navbar" id="navbar">
-    <div class="container">
-      <a href="../index.html" class="nav-logo"><span class="gradient-text">Dustin</span> học data</a>
-      <div class="nav-right-group">
-        <div class="nav-links" id="navLinks">
-          <a href="../index.html">Home</a>
-          <a href="../about.html">About</a>
-          <a href="../journey.html">Journey</a>
-          <a href="../knowledge/index.html">Knowledge</a>
-          <a href="../blog/index.html" class="active">Blog</a>
+<body class="article-page-body">
+
+  <!-- Navigation Bar -->
+  <header class="site-nav">
+    <div class="container nav-inner">
+      <a href="../portfolio-preview.html" class="nav-brand">
+        <div>
+          <span class="nav-brand-title">Trần Đức</span>
+          <span class="nav-brand-subtitle"> &bull; Blog Cá Nhân &amp; Tạp Chí</span>
         </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Chuyển sang chế độ sáng" title="Chuyển sang chế độ sáng">☀️</button>
-        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
-      </div>
-    </div>
-  </nav>
-  <header class="page-header">
-    <div class="container" style="position:relative;">
-      <span class="section-label">Blog</span>
-      <h1>📝 <span class="gradient-text">Blog</span></h1>
-      <p>Chia sẻ kinh nghiệm, hành trình self-improvement, và những bài học trên đường đến Analytics Engineer.</p>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../portfolio-preview.html#about" class="nav-link">Giới Thiệu</a></li>
+          <li><a href="index.html" class="nav-link" style="color: var(--emerald); font-weight: 600;">Blog / Tạp Chí</a></li>
+          <li><a href="../portfolio-preview.html#pipeline" class="nav-link">Kiến Trúc Data</a></li>
+          <li><a href="../portfolio-preview.html#projects" class="nav-link">Dự Án</a></li>
+          <li><a href="../portfolio-preview.html#contact" class="nav-link">Liên Hệ</a></li>
+          <li>
+            <a href="../portfolio-preview.html" class="nav-link nav-cta">← Về Trang Chủ</a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </header>
-  <section class="section">
-    <div class="container">
-      <div class="coming-soon">
-        <div>
-          <h2 class="gradient-text">🚧 Đang xây dựng</h2>
-          <p>Blog sẽ sớm có chuỗi bài viết "Road to Analytics Engineer" và nhiều nội dung thú vị khác. Stay tuned!</p>
-          <a href="../index.html" class="btn btn-primary">← Về trang chủ</a>
+
+  <main style="padding-top: calc(var(--nav-height) + 36px); padding-bottom: 80px;">
+    <div class="container" style="max-width: 900px;">
+      
+      <!-- Page Header -->
+      <div style="margin-bottom: 36px;">
+        <div class="section-label">Editorial Publication &bull; Tự Sự &amp; Chuyên Môn</div>
+        <h1 class="section-heading" style="font-size: clamp(2.4rem, 4.2vw, 3.4rem); margin-bottom: 16px;">
+          Góc nhìn &amp; Hành trình cuộc đời.
+        </h1>
+        <p class="section-subtext" style="max-width: 68ch; margin-bottom: 24px;">
+          Nơi tôi ghi lại những bài học xương máu đúc kết từ giảng đường đại học, qua các dự án doanh nghiệp lớn (THACO, Lộc Phúc Jewelry), kỷ luật quân ngũ khắt khe tại CAND đến định vị Analytics Engineer toàn năng với Modern Data Stack. Bấm vào từng bài viết để đọc toàn văn.
+        </p>
+
+        <!-- Category Filter Pills -->
+        <div class="blog-filter-bar">
+          <button class="filter-btn active" onclick="filterBlogArticles('all')">Tất cả bài viết (5)</button>
+          <button class="filter-btn" onclick="filterBlogArticles('tech')">Kỹ thuật chuyên sâu (1)</button>
+          <button class="filter-btn" onclick="filterBlogArticles('career')">Định vị nghề nghiệp (1)</button>
+          <button class="filter-btn" onclick="filterBlogArticles('erp')">Triển khai ERP (1)</button>
+          <button class="filter-btn" onclick="filterBlogArticles('military')">Kỷ luật quân ngũ (1)</button>
+          <button class="filter-btn" onclick="filterBlogArticles('learning')">Kỷ luật tự học (1)</button>
         </div>
       </div>
+
+      <!-- Featured Headline Essay -->
+      <div class="featured-essay-card blog-item" data-category="tech" onclick="window.location.href='bai-viet-5.html'" style="cursor: pointer; margin-bottom: 32px;">
+        <span class="featured-pill">BÀI VIẾT NỔI BẬT &bull; KỸ THUẬT CHUYÊN SÂU</span>
+        <h2 class="featured-essay-title">
+          Deep-Dive: Xây Dựng Enterprise Data Platform Với CDC, dlt, Snowflake &amp; dbt Core
+        </h2>
+        <p class="featured-essay-excerpt">
+          Làm sao để đồng bộ liên tục dữ liệu giao dịch OLTP từ cơ sở dữ liệu quan hệ sang Cloud Data Warehouse với độ trễ thấp nhất và không làm ảnh hưởng đến hiệu năng sản xuất? Một bài phân tích chi tiết về kiến trúc Change Data Capture, giải thuật khử trùng lặp qua LSN và mô hình hóa Kimball Star Schema.
+        </p>
+        <div class="essay-meta-row">
+          <span>05 Tháng 03, 2026</span>
+          <span>&bull;</span>
+          <span>12 phút đọc</span>
+          <span class="read-link">Đọc bài viết toàn văn ➔</span>
+        </div>
+      </div>
+
+      <!-- Archive of Other Essays -->
+      <div class="essays-archive-list">
+        
+        <!-- Article 1 -->
+        <div class="essay-row-card blog-item" data-category="career" onclick="window.location.href='bai-viet-1.html'" style="cursor: pointer;">
+          <div>
+            <div class="essay-row-meta">
+              <span class="essay-category">ĐỊNH VỊ NGHỀ NGHIỆP</span>
+              <span>7 phút đọc &bull; 20 Tháng 03, 2026</span>
+            </div>
+            <h3 class="essay-row-title">Từ Thủ Khoa UFM Đến Định Vị Analytics Engineer Toàn Năng</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px; line-height: 1.5;">
+              Vì sao tôi không chọn một con đường an phận mà quyết tâm trở thành chiếc cầu nối sống còn giữa Data Engineering và Data Analytics?
+            </p>
+          </div>
+          <span class="essay-row-arrow">➔</span>
+        </div>
+
+        <!-- Article 2 -->
+        <div class="essay-row-card blog-item" data-category="erp" onclick="window.location.href='bai-viet-2.html'" style="cursor: pointer;">
+          <div>
+            <div class="essay-row-meta">
+              <span class="essay-category">KIẾN TRÚC ERP</span>
+              <span>9 phút đọc &bull; 15 Tháng 02, 2026</span>
+            </div>
+            <h3 class="essay-row-title">Những Bài Học Xương Máu Khi Triển Khai ERP Tại THACO &amp; Lộc Phúc</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px; line-height: 1.5;">
+              Khi một Stored Procedure làm nghẽn chuỗi cung ứng xe hơi và bài toán sai số không được vượt quá 0.01 gram vàng tại xưởng kim hoàn.
+            </p>
+          </div>
+          <span class="essay-row-arrow">➔</span>
+        </div>
+
+        <!-- Article 3 -->
+        <div class="essay-row-card blog-item" data-category="military" onclick="window.location.href='bai-viet-3.html'" style="cursor: pointer;">
+          <div>
+            <div class="essay-row-meta">
+              <span class="essay-category">KỶ LUẬT QUÂN NGŨ</span>
+              <span>8 phút đọc &bull; 28 Tháng 01, 2026</span>
+            </div>
+            <h3 class="essay-row-title">18 Tháng Trong Môi Trường CAND: Hạ Tầng Mạng Không Phải Chiếc Hộp Đen</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px; line-height: 1.5;">
+              Trực chiến 24/7 với CSDL Quốc gia về Dân cư và hệ thống báo cháy GTEL: Bài học tôn trọng tầng vật lý bên dưới mọi data pipeline.
+            </p>
+          </div>
+          <span class="essay-row-arrow">➔</span>
+        </div>
+
+        <!-- Article 4 -->
+        <div class="essay-row-card blog-item" data-category="learning" onclick="window.location.href='bai-viet-4.html'" style="cursor: pointer;">
+          <div>
+            <div class="essay-row-meta">
+              <span class="essay-category">KỶ LUẬT TỰ HỌC</span>
+              <span>6 phút đọc &bull; 18 Tháng 12, 2025</span>
+            </div>
+            <h3 class="essay-row-title">Chiến Lược Tự Học Data Dưới Áp Lực Quân Ngũ &amp; Chinh Phục Chứng Chỉ Quốc Tế</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 6px; line-height: 1.5;">
+              Phương pháp Deep Focus Block trong doanh trại và lộ trình vượt qua HackerRank SQL Advanced cùng DataCamp Data Engineer Associate.
+            </p>
+          </div>
+          <span class="essay-row-arrow">➔</span>
+        </div>
+
+      </div>
+
+      <!-- Author Card at bottom of archive -->
+      <div class="author-card" style="margin-top: 48px;">
+        <img src="../images/dustin-cand.png" alt="Trần Đức (Dustin)" class="author-card-avatar">
+        <div>
+          <h3 class="author-card-title">Về tác giả Trần Đức (Dustin)</h3>
+          <p class="author-card-bio">
+            Thủ khoa ngành Tin học quản lý UFM (GPA 3.7/4.0). Hiện trực chiến hạ tầng CNTT CAND 24/7 và theo đuổi định vị Analytics Engineer toàn năng với Modern Data Stack: dbt, Snowflake, dlt, SQL Server CDC.
+          </p>
+          <div class="author-card-links">
+            <a href="mailto:trandc3015@gmail.com" class="author-card-link">Email</a>
+            <a href="https://github.com/tranduc2204" target="_blank" rel="noopener noreferrer" class="author-card-link">GitHub ↗</a>
+            <a href="https://www.linkedin.com/in/dustintd/" target="_blank" rel="noopener noreferrer" class="author-card-link">LinkedIn ↗</a>
+            <a href="../portfolio-preview.html" class="author-card-link">Xem Portfolio Đầy Đủ ➔</a>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </section>
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-bottom">
-        <p>© 2026 Trần Đức (Dustin). Built with 💜 on the road to Analytics Engineer.</p>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content-row">
+      <div>© 2026 Trần Đức (Dustin) &bull; Analytics Engineer &amp; Blog Cá Nhân.</div>
+      <div class="footer-nav-links">
+        <a href="../portfolio-preview.html" class="footer-nav-link">Trang chủ</a>
+        <a href="index.html" class="footer-nav-link">Blog</a>
+        <a href="mailto:trandc3015@gmail.com" class="footer-nav-link">Email</a>
+        <a href="https://github.com/tranduc2204" target="_blank" rel="noopener noreferrer" class="footer-nav-link">GitHub</a>
+        <a href="https://www.linkedin.com/in/dustintd/" target="_blank" rel="noopener noreferrer" class="footer-nav-link">LinkedIn</a>
       </div>
     </div>
   </footer>
-  <script src="../assets/js/main.js?v=11"></script>
+
+  <script>
+    function filterBlogArticles(cat) {
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      document.querySelectorAll('.blog-item').forEach(item => {
+        if (cat === 'all' || item.dataset.category === cat) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  </script>
 </body>
 </html>

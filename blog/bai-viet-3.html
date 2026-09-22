@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>18 Tháng Trong Môi Trường CAND: Hạ Tầng Không Phải Hộp Đen — Trần Đức (Dustin)</title>
+  <meta name="description" content="Trải nghiệm trực chiến hạ tầng CNTT 24/7 tại Đội Cảnh sát PCCC & CNCH Khu vực 15: Quản trị CSDL Dân cư, hệ thống báo cháy GTEL và bài học kỷ luật thép.">
+  
+  <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+  <link rel="stylesheet" href="../landing/landing.css?v=26">
+</head>
+<body class="article-page-body">
+
+  <!-- Editorial Top Navigation Bar -->
+  <header class="site-nav">
+    <div class="container nav-inner">
+      <a href="../portfolio-preview.html" class="nav-brand">
+        <div>
+          <span class="nav-brand-title">Trần Đức</span>
+          <span class="nav-brand-subtitle"> &bull; Blog Cá Nhân</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../portfolio-preview.html#about" class="nav-link">Giới Thiệu</a></li>
+          <li><a href="index.html" class="nav-link" style="color: var(--emerald); font-weight: 600;">Blog / Tạp Chí</a></li>
+          <li><a href="../portfolio-preview.html#pipeline" class="nav-link">Kiến Trúc Data</a></li>
+          <li><a href="../portfolio-preview.html#projects" class="nav-link">Dự Án</a></li>
+          <li><a href="../portfolio-preview.html#contact" class="nav-link">Liên Hệ</a></li>
+          <li>
+            <a href="../portfolio-preview.html" class="nav-link nav-cta">← Về Trang Chủ</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Article Container -->
+  <main class="article-container">
+    
+    <!-- Breadcrumb Navigation -->
+    <div class="article-breadcrumb">
+      <a href="../portfolio-preview.html">Trang chủ</a>
+      <span>/</span>
+      <a href="index.html">Blog Cá Nhân</a>
+      <span>/</span>
+      <span style="color: var(--text-primary);">Kỷ luật quân ngũ</span>
+    </div>
+
+    <!-- Article Header -->
+    <header class="article-hero">
+      <div class="article-badge-row">
+        <span class="article-category-pill">KỶ LUẬT QUÂN NGŨ</span>
+        <span class="article-meta-info">28 Tháng 01, 2026 &bull; 8 phút đọc</span>
+      </div>
+
+      <h1 class="article-main-title">
+        18 Tháng Trong Môi Trường CAND: Hạ Tầng Mạng Không Phải Chiếc Hộp Đen
+      </h1>
+
+      <p class="article-lead-paragraph">
+        Đảm nhận nhiệm vụ quản trị hạ tầng CNTT tại Đội Cảnh sát PCCC &amp; CNCH Khu vực 15 — nơi mọi sự cố kỹ thuật đều gắn liền với tính mạng người dân và an ninh trật tự, tôi hiểu rằng: đằng sau mọi dòng code hào nhoáng trên màn hình là một tầng hạ tầng vật lý không bao giờ được phép gục ngã.
+      </p>
+
+      <div class="article-author-row">
+        <img src="../images/dustin-cand.png" alt="Trần Đức (Dustin)" class="article-author-avatar">
+        <div>
+          <div class="article-author-name">Trần Đức (Dustin)</div>
+          <div class="article-author-role">Hạ sĩ quan CAND &bull; Quản trị Hạ tầng CNTT 24/7 &bull; Analytics Engineer</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Prose Content -->
+    <article class="article-prose">
+      <p class="drop-cap">
+        Khi nhận quyết định thực hiện nghĩa vụ quân sự trong lực lượng Công an Nhân dân, tôi biết mình chuẩn bị bước vào một môi trường hoàn toàn khác biệt với không gian làm việc công nghệ tự do. Không có những buổi làm việc từ xa (remote work), không có sự chần chừ hay hoãn lại. Tại đây, kỷ luật là mệnh lệnh, và tính sẵn sàng của hệ thống mạng là 100%.
+      </p>
+
+      <h2>1. Sứ Mệnh 24/7: CSDL Dân Cư &amp; Hệ Thống Báo Cháy GTEL</h2>
+      <p>
+        Hàng ngày, đơn vị của tôi tiếp nhận và vận hành hai hệ thống thông tin mang tính sống còn:
+      </p>
+      <ul>
+        <li style="margin-bottom: 12px;"><strong>Cơ sở dữ liệu Quốc gia về Dân cư:</strong> Hệ thống lưu trữ và đối soát định danh cá nhân, phục vụ hàng nghìn lượt tra cứu nghiệp vụ mỗi ngày. Mọi cổng kết nối VPN mã hóa từ đơn vị về Trung tâm dữ liệu của Bộ Công an phải được duy trì liên tục và bảo mật tuyệt đối.</li>
+        <li style="margin-bottom: 12px;"><strong>Hệ thống truyền tin báo sự cố GTEL:</strong> Khi có tín hiệu báo cháy khẩn cấp từ các cơ sở trọng điểm trên địa bàn, tín hiệu số được truyền về trung tâm điều phối qua đường truyền chuyên dụng. Một giây chậm trễ hay một gói tin (packet) bị rớt có thể đồng nghĩa với việc xe cứu hỏa xuất phát muộn.</li>
+      </ul>
+
+      <blockquote>
+        "Trong môi trường trực chiến, bạn không thể nói: 'Hệ thống bị lỗi do mạng nhà mạng chập chờn'. Khi chuông báo động reo, nhiệm vụ của người kỹ sư là đảm bảo hạ tầng hoạt động thông suốt ngay trong tích tắc."
+      </blockquote>
+
+      <h2>2. Tự Tay Bấm Từng Đầu Cáp Mạng Đến Cấu Hình Linux Server</h2>
+      <p>
+        Nhiều kỹ sư phần mềm hiện nay thường nhìn nhận hạ tầng mạng và máy chủ như một "chiếc hộp đen" (Blackbox) — họ chỉ biết rằng khi gọi API hay chạy truy vấn SQL thì hệ thống sẽ tự trả về kết quả. Nhưng 18 tháng quân ngũ đã cho tôi cơ hội "chạm" vào tầng sâu nhất của công nghệ:
+      </p>
+
+      <p>
+        Tôi trực tiếp leo thang khảo sát địa hình, đi dây mạng Cat6 âm tường, tự tay bấm hàng trăm đầu cáp RJ45 theo chuẩn T568B, đo suy hao tín hiệu bằng thiết bị kiểm tra cáp chuyên dụng. Tôi cấu hình các thiết bị Switch mạng doanh nghiệp, chia VLAN cách ly mạng nghiệp vụ và mạng nội bộ, thiết lập Firewall pfSense và quản trị các máy chủ chạy hệ điều hành Linux Ubuntu Server.
+      </p>
+
+      <!-- Code Box Example -->
+      <div class="article-code-block">
+        <div class="article-code-header">
+          <span>LINUX // Network Monitoring &amp; High-Availability Check</span>
+          <span>BASH</span>
+        </div>
+        <pre><code># Kiểm tra băng thông, độ trễ và tỷ lệ rớt gói trên kênh truyền GTEL chuyên dụng
+ping -c 100 -i 0.2 10.240.15.1 | awk -F'/' 'END{ print "Min=" $4 " Avg=" $5 " Max=" $6 " ms" }'
+
+# Giám sát trạng thái WireGuard/IPsec Tunnel về CSDL Quốc gia
+ipsec statusall | grep -E "ESTABLISHED|INSTALLED"
+systemctl is-active --quiet gtel-dispatcher &amp;&amp; echo "GTEL Service: RUNNING 24/7"</code></pre>
+      </div>
+
+      <h2>3. Kỷ Luật Thép Định Hình Tư Duy Xây Dựng Data Pipeline</h2>
+      <p>
+        Nhiều người hỏi tôi: <em>"Làm quản trị mạng trong ngành Công an thì giúp ích gì cho việc trở thành Analytics Engineer sau này?"</em>. Câu trả lời là: <strong>Rất nhiều!</strong>
+      </p>
+
+      <div class="article-takeaway">
+        <div class="article-takeaway-title">
+          <span>🎯</span> Tinh Thần Ownership (Làm Chủ Tuyệt Đối)
+        </div>
+        <div class="article-takeaway-body">
+          Khi một sự cố xảy ra vào 3 giờ sáng, bạn là người chịu trách nhiệm cuối cùng. Thái độ này chuyển hóa thành việc khi tôi viết một pipeline trên dbt và Snowflake, tôi luôn kiểm tra từng edge-case, đặt ra các assertion tests nghiêm ngặt để đảm bảo dữ liệu không bao giờ bị đứt gãy.
+        </div>
+      </div>
+
+      <div class="article-takeaway" style="background: var(--amber-subtle); border-color: var(--amber-border);">
+        <div class="article-takeaway-title" style="color: var(--amber);">
+          <span>🔒</span> Tư Duy Bảo Mật &amp; Zero-Trust
+        </div>
+        <div class="article-takeaway-body" style="color: #92400E;">
+          Quy chế an toàn thông tin khắt khe của CAND rèn luyện cho tôi thói quen không bao giờ lưu trữ mật khẩu trần (plaintext credentials) trong mã nguồn. Đó là lý do trong dự án AdventureWorks, tôi áp dụng xác thực mã hóa RSA Key-Pair cho người dùng service account nạp dữ liệu vào Snowflake.
+        </div>
+      </div>
+
+      <h2>Lời Kết</h2>
+      <p>
+        18 tháng quân ngũ không làm tôi thụt lùi về chuyên môn, mà ngược lại, đã tôi luyện cho tôi một bản lĩnh thép: chịu được áp lực cực đại, tư duy đi từ gốc rễ hạ tầng vật lý lên tầng ứng dụng, và tính kỷ luật để tự học không ngừng nghỉ mỗi đêm.
+      </p>
+    </article>
+
+    <!-- Author Bio Card -->
+    <div class="author-card">
+      <img src="../images/dustin-cand.png" alt="Trần Đức (Dustin)" class="author-card-avatar">
+      <div>
+        <h3 class="author-card-title">Trần Đức (Dustin)</h3>
+        <p class="author-card-bio">
+          Thủ khoa UFM ngành Tin học quản lý (GPA 3.7/4.0). Hiện trực chiến quản trị hạ tầng mạng & hệ thống CNTT CAND 24/7 tại Đội Cảnh sát PCCC & CNCH Khu vực 15, theo đuổi định vị Analytics Engineer toàn năng.
+        </p>
+        <div class="author-card-links">
+          <a href="mailto:trandc3015@gmail.com" class="author-card-link">Email</a>
+          <a href="https://github.com/tranduc2204" target="_blank" rel="noopener noreferrer" class="author-card-link">GitHub ↗</a>
+          <a href="https://www.linkedin.com/in/dustintd/" target="_blank" rel="noopener noreferrer" class="author-card-link">LinkedIn ↗</a>
+          <a href="../portfolio-preview.html#pipeline" class="author-card-link">Kiến Trúc Data ➔</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Next / Previous Article Navigation -->
+    <nav class="article-nav-row">
+      <a href="bai-viet-2.html" class="article-nav-card">
+        <div class="article-nav-label">← Bài viết trước</div>
+        <div class="article-nav-title">Những Bài Học Xương Máu Khi Triển Khai ERP Tại THACO &amp; Lộc Phúc</div>
+      </a>
+
+      <a href="bai-viet-4.html" class="article-nav-card" style="text-align: right;">
+        <div class="article-nav-label">Bài viết tiếp theo →</div>
+        <div class="article-nav-title">Chiến Lược Tự Học Data Trong Quân Ngũ &amp; Chinh Phục Chứng Chỉ Quốc Tế</div>
+      </a>
+    </nav>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content-row">
+      <div>© 2026 Trần Đức (Dustin) &bull; Analytics Engineer &amp; Blog Cá Nhân.</div>
+      <div class="footer-nav-links">
+        <a href="../portfolio-preview.html" class="footer-nav-link">Trang chủ</a>
+        <a href="index.html" class="footer-nav-link">Blog</a>
+        <a href="mailto:trandc3015@gmail.com" class="footer-nav-link">Email</a>
+        <a href="https://github.com/tranduc2204" target="_blank" rel="noopener noreferrer" class="footer-nav-link">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../landing/landing.js?v=26"></script>
+</body>
+</html>
+
