@@ -7,7 +7,7 @@
   <meta name="description" content="Tuyển tập các bài tự sự, góc nhìn chuyên môn và bài học thực chiến từ giảng đường đại học UFM, triển khai ERP tại THACO/Lộc Phúc, kỷ luật hạ tầng CAND đến định vị Analytics Engineer toàn năng.">
   
   <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-  <link rel="stylesheet" href="../landing/landing.css?v=50">
+  <link rel="stylesheet" href="../landing/landing.css?v=54">
 </head>
 <body class="article-page-body">
 
@@ -21,18 +21,28 @@
         </div>
       </a>
 
-      <nav>
+      <!-- Desktop Links & Slide-Down Mobile Drawer -->
+      <nav class="nav-menu-wrapper" id="navMenuWrapper">
         <ul class="nav-links">
-          <li><a href="../portfolio-preview.html#about" class="nav-link">Giới Thiệu</a></li>
-          <li><a href="index.html" class="nav-link" style="color: var(--emerald); font-weight: 600;">Blog / Tạp Chí</a></li>
-          <li><a href="../portfolio-preview.html#pipeline" class="nav-link">Kiến Trúc Data</a></li>
-          <li><a href="../portfolio-preview.html#projects" class="nav-link">Dự Án</a></li>
-          <li><a href="../portfolio-preview.html#contact" class="nav-link">Liên Hệ</a></li>
-          <li>
-            <a href="../portfolio-preview.html" class="nav-link nav-cta">← Về Trang Chủ</a>
+          <li><a href="../portfolio-preview.html#about" class="nav-link" onclick="closeMobileMenu()">Giới Thiệu</a></li>
+          <li><a href="index.html" class="nav-link" style="color: var(--emerald); font-weight: 600;" onclick="closeMobileMenu()">Blog / Tạp Chí</a></li>
+          <li><a href="../portfolio-preview.html#pipeline" class="nav-link" onclick="closeMobileMenu()">Kiến Trúc Data</a></li>
+          <li><a href="../portfolio-preview.html#projects" class="nav-link" onclick="closeMobileMenu()">Dự Án</a></li>
+          <li><a href="../portfolio-preview.html#contact" class="nav-link" onclick="closeMobileMenu()">Liên Hệ</a></li>
+          <li class="nav-item-cta">
+            <a href="../portfolio-preview.html" class="nav-link nav-cta" onclick="closeMobileMenu()">← Về Trang Chủ</a>
           </li>
         </ul>
       </nav>
+
+      <!-- Right Action Cluster: Mobile Hamburger Toggle -->
+      <div class="nav-actions-cluster">
+        <button class="nav-mobile-toggle" id="navMobileToggle" aria-label="Toggle Navigation Menu" aria-expanded="false" onclick="toggleMobileMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -189,6 +199,56 @@
         }
       });
     }
+
+    function toggleMobileMenu() {
+      const menuWrapper = document.getElementById('navMenuWrapper');
+      const toggleBtn = document.getElementById('navMobileToggle');
+      if (!menuWrapper || !toggleBtn) return;
+      const isOpen = menuWrapper.classList.contains('open');
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    }
+
+    function openMobileMenu() {
+      const menuWrapper = document.getElementById('navMenuWrapper');
+      const toggleBtn = document.getElementById('navMobileToggle');
+      if (menuWrapper) menuWrapper.classList.add('open');
+      if (toggleBtn) {
+        toggleBtn.classList.add('active');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+      }
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+      const menuWrapper = document.getElementById('navMenuWrapper');
+      const toggleBtn = document.getElementById('navMobileToggle');
+      if (menuWrapper) menuWrapper.classList.remove('open');
+      if (toggleBtn) {
+        toggleBtn.classList.remove('active');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      }
+      document.body.style.overflow = '';
+    }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1024) closeMobileMenu();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMobileMenu();
+    });
+
+    document.addEventListener('click', (e) => {
+      const nav = document.querySelector('.site-nav');
+      const menu = document.getElementById('navMenuWrapper');
+      if (menu && menu.classList.contains('open') && nav && !nav.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
   </script>
 </body>
 </html>

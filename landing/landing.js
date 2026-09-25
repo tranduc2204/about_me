@@ -1462,6 +1462,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroTypewriter();
   initVisitorCounter();
 
+  // Initialize 3D Argent Massif Topographic Terrain (White Theme)
+  if (typeof initArgentMassifScene === 'function') {
+    initArgentMassifScene();
+  }
+
   // Initialize Mark Pham Blueprint Canvas with default architecture
   const canvasEl = document.getElementById('blueprintCanvas');
   if (canvasEl) {
@@ -1474,7 +1479,12 @@ document.addEventListener('DOMContentLoaded', () => {
     switchPipelineVariant('elt');
   }
 
-  // Smooth scrolling for anchor links
+  // Initialize GSAP & Scroll Motion Engine (GPT-TASTE)
+  if (typeof initScrollMotionEngine === 'function') {
+    initScrollMotionEngine();
+  }
+
+  // Smooth scrolling for anchor links with header offset
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const targetId = this.getAttribute('href').slice(1);
@@ -1482,9 +1492,28 @@ document.addEventListener('DOMContentLoaded', () => {
       const targetEl = document.getElementById(targetId);
       if (targetEl) {
         e.preventDefault();
-        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (typeof closeMobileMenu === 'function') closeMobileMenu();
+        const navHeight = 72;
+        const targetPos = targetEl.getBoundingClientRect().top + window.scrollY - navHeight;
+        window.scrollTo({ top: targetPos, behavior: 'smooth' });
       }
     });
+  });
+
+  // Mobile Menu Auto-close on resize to desktop view (> 1024px)
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1024) {
+      if (typeof closeMobileMenu === 'function') closeMobileMenu();
+    }
+  });
+
+  // Close mobile menu if clicked outside the site-nav header
+  document.addEventListener('click', (e) => {
+    const nav = document.querySelector('.site-nav');
+    const menu = document.getElementById('navMenuWrapper');
+    if (menu && menu.classList.contains('open') && nav && !nav.contains(e.target)) {
+      closeMobileMenu();
+    }
   });
 
   // Contact form submission
@@ -1524,14 +1553,54 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Escape key to close any active modal
+  // Escape key to close any active modal or mobile menu
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
+      if (typeof closeMobileMenu === 'function') closeMobileMenu();
       if (typeof closeProjectModal === 'function') closeProjectModal();
       if (typeof closeUfmModal === 'function') closeUfmModal();
     }
   });
 });
+
+// --- 8.5. MOBILE NAVIGATION CONTROLLER ---
+function toggleMobileMenu() {
+  const menuWrapper = document.getElementById('navMenuWrapper');
+  const toggleBtn = document.getElementById('navMobileToggle');
+  if (!menuWrapper || !toggleBtn) return;
+  const isOpen = menuWrapper.classList.contains('open');
+  if (isOpen) {
+    closeMobileMenu();
+  } else {
+    openMobileMenu();
+  }
+}
+
+function openMobileMenu() {
+  const menuWrapper = document.getElementById('navMenuWrapper');
+  const toggleBtn = document.getElementById('navMobileToggle');
+  if (menuWrapper) {
+    menuWrapper.classList.add('open');
+  }
+  if (toggleBtn) {
+    toggleBtn.classList.add('active');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+  }
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobileMenu() {
+  const menuWrapper = document.getElementById('navMenuWrapper');
+  const toggleBtn = document.getElementById('navMobileToggle');
+  if (menuWrapper) {
+    menuWrapper.classList.remove('open');
+  }
+  if (toggleBtn) {
+    toggleBtn.classList.remove('active');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+  }
+  document.body.style.overflow = '';
+}
 
 // --- 9. UFM DEGREE LOOKUP MODAL CONTROLLER ---
 function openUfmModal() {
@@ -1941,6 +2010,13 @@ function setLanguage(lang) {
       el.setAttribute('placeholder', dict[key]);
     }
   });
+
+  // Refresh ScrollTrigger after DOM text updates
+  if (typeof window.ScrollTrigger !== 'undefined') {
+    setTimeout(() => {
+      try { window.ScrollTrigger.refresh(); } catch (e) {}
+    }, 150);
+  }
 }
 
 function toggleLanguage() {
@@ -1954,5 +2030,489 @@ if (document.readyState === 'loading') {
 } else {
   setLanguage(currentLang);
 }
+
+// ==========================================================================
+// --- 11. ADVANCED GSAP SCROLL MOTION & INTERSECTION CONTROLLER (GPT-TASTE) ---
+// ==========================================================================
+function initScrollMotionEngine() {
+  const progressBar = document.getElementById('scrollProgressBar');
+  const siteNav = document.querySelector('.site-nav');
+
+  // A. Top Reading Progress Bar & Scrolled Nav State
+  const updateScrollProgress = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    if (progressBar && scrollHeight > 0) {
+      const percent = Math.min(Math.max((scrollTop / scrollHeight) * 100, 0), 100);
+      progressBar.style.width = `${percent}%`;
+    }
+    if (siteNav) {
+      siteNav.classList.toggle('scrolled', scrollTop > 35);
+    }
+  };
+
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+  updateScrollProgress();
+
+  // B. Check GSAP & ScrollTrigger Availability
+  const hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+
+  if (hasGsap) {
+    try {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // 1. Hero Cinematic Stagger (Paced, Gradual & Luxurious)
+      const heroTl = gsap.timeline({ delay: 0.2, defaults: { ease: 'power2.out' } });
+
+      if (document.querySelector('.hero-visitor-pill')) {
+        heroTl.from('.hero-visitor-pill', { y: -16, opacity: 0, duration: 1.1 });
+      }
+      if (document.querySelector('.hero-manifesto-title')) {
+        heroTl.from('.hero-manifesto-title', { y: 35, opacity: 0, duration: 1.45, ease: 'power3.out' }, '-=0.7');
+      }
+      if (document.querySelector('.hero-manifesto-sub')) {
+        heroTl.from('.hero-manifesto-sub', { y: 24, opacity: 0, duration: 1.35 }, '-=0.9');
+      }
+      if (document.querySelector('.hero-manifesto-bio')) {
+        heroTl.from('.hero-manifesto-bio', { y: 20, opacity: 0, duration: 1.3 }, '-=0.9');
+      }
+      if (document.querySelector('.hero-social-strip')) {
+        heroTl.from('.hero-social-strip .hero-social-btn', {
+          scale: 0.85,
+          opacity: 0,
+          duration: 0.85,
+          stagger: 0.08
+        }, '-=0.7');
+      }
+      if (document.querySelector('.hero-cta-group')) {
+        heroTl.from('.hero-cta-group .hero-pill-btn', {
+          y: 22,
+          opacity: 0,
+          duration: 1.15,
+          stagger: 0.16
+        }, '-=0.6');
+      }
+      if (document.querySelector('.hero-basic-showcase')) {
+        heroTl.from('.hero-basic-showcase', {
+          scale: 0.94,
+          y: 35,
+          opacity: 0,
+          duration: 1.6,
+          ease: 'power2.out'
+        }, '-=1.1');
+      }
+
+      // 1B. Parallax Micro-Motion (GPT-Taste & Stitch)
+      if (document.querySelector('.hero-basic-frame')) {
+        gsap.to('.hero-basic-frame', {
+          scrollTrigger: {
+            trigger: '#about',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 2.0
+          },
+          y: 45,
+          ease: 'none'
+        });
+      }
+
+      // 2. Credentials Strip Stagger (Slow & Calm)
+      if (document.querySelector('.credentials-strip')) {
+        gsap.from('.credentials-strip .cred-item', {
+          scrollTrigger: {
+            trigger: '.credentials-strip',
+            start: 'top 90%'
+          },
+          y: 24,
+          opacity: 0,
+          duration: 1.15,
+          stagger: 0.16,
+          ease: 'power2.out'
+        });
+      }
+
+      // 3. Executive Overview Reveal (#pipeline)
+      if (document.querySelector('.exec-overview-header')) {
+        gsap.from('.exec-overview-header, .exec-overview-title', {
+          scrollTrigger: {
+            trigger: '#pipeline',
+            start: 'top 82%'
+          },
+          y: 30,
+          opacity: 0,
+          duration: 1.25,
+          stagger: 0.18,
+          ease: 'power2.out'
+        });
+
+        gsap.from('.exec-col', {
+          scrollTrigger: {
+            trigger: '.exec-overview-cols',
+            start: 'top 84%'
+          },
+          y: 40,
+          opacity: 0,
+          duration: 1.4,
+          stagger: 0.25,
+          ease: 'power2.out'
+        });
+      }
+
+      // 4. Architecture Pipeline Canvas & DAG (With Gentle Parallax Scrub)
+      if (document.querySelector('.variant-dag-container')) {
+        gsap.from('.dataflow-header, .variant-dag-container, .data-inspector-panel', {
+          scrollTrigger: {
+            trigger: '.variant-dag-container',
+            start: 'top 82%'
+          },
+          y: 38,
+          opacity: 0,
+          duration: 1.35,
+          stagger: 0.22,
+          ease: 'power2.out'
+        });
+
+        gsap.to('.variant-dag-container', {
+          scrollTrigger: {
+            trigger: '#pipeline',
+            start: 'top 70%',
+            end: 'bottom top',
+            scrub: 2.2
+          },
+          y: -16,
+          ease: 'none'
+        });
+      }
+
+      // 5. Work Experience Timeline Cards (#experience)
+      const expCards = document.querySelectorAll('.exp-item-card');
+      if (expCards.length > 0) {
+        expCards.forEach((card, idx) => {
+          gsap.from(card, {
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 85%'
+            },
+            y: 45,
+            opacity: 0,
+            duration: 1.4,
+            delay: idx * 0.1,
+            ease: 'power2.out'
+          });
+
+          // Staggered reveal for sub-bullets inside each experience card
+          const bullets = card.querySelectorAll('.exp-item-bullets-grid li');
+          if (bullets.length > 0) {
+            bullets.forEach((li, lIdx) => {
+              gsap.from(li, {
+                scrollTrigger: {
+                  trigger: card,
+                  start: 'top 82%'
+                },
+                y: 16,
+                opacity: 0,
+                duration: 0.95,
+                delay: 0.25 + lIdx * 0.08,
+                ease: 'power2.out'
+              });
+            });
+          }
+        });
+      }
+
+      // 6. Works / Project Bento Grid Cards (#works)
+      const workCards = document.querySelectorAll('.work-card');
+      if (workCards.length > 0) {
+        gsap.from(workCards, {
+          scrollTrigger: {
+            trigger: '.works-grid',
+            start: 'top 82%'
+          },
+          y: 45,
+          scale: 0.96,
+          opacity: 0,
+          duration: 1.35,
+          stagger: 0.22,
+          ease: 'power3.out'
+        });
+      }
+
+      // 7. Milestones Cascading Reveal (#milestones)
+      const milestoneCards = document.querySelectorAll('.timeline-card');
+      if (milestoneCards.length > 0) {
+        gsap.from(milestoneCards, {
+          scrollTrigger: {
+            trigger: '.timeline-list',
+            start: 'top 84%'
+          },
+          y: 32,
+          opacity: 0,
+          duration: 1.2,
+          stagger: 0.18,
+          ease: 'power2.out'
+        });
+      }
+
+      // 8. Verified Credentials & Certificates Cards (#certs)
+      const certCards = document.querySelectorAll('.cert-card');
+      if (certCards.length > 0) {
+        gsap.from(certCards, {
+          scrollTrigger: {
+            trigger: '.certs-grid',
+            start: 'top 84%'
+          },
+          y: 35,
+          opacity: 0,
+          duration: 1.25,
+          stagger: 0.18,
+          ease: 'power2.out'
+        });
+      }
+
+      // 9. Selected Writing / Blog Cards (#essays)
+      const writingCards = document.querySelectorAll('.writing-card');
+      if (writingCards.length > 0) {
+        gsap.from(writingCards, {
+          scrollTrigger: {
+            trigger: '.writing-grid',
+            start: 'top 84%'
+          },
+          y: 35,
+          opacity: 0,
+          duration: 1.25,
+          stagger: 0.18,
+          ease: 'power2.out'
+        });
+      }
+
+      // 10. Contact Section Card (#contact)
+      if (document.querySelector('.contact-card')) {
+        gsap.from('.contact-card', {
+          scrollTrigger: {
+            trigger: '#contact',
+            start: 'top 82%'
+          },
+          scale: 0.96,
+          y: 32,
+          opacity: 0,
+          duration: 1.4,
+          ease: 'power2.out'
+        });
+      }
+
+    } catch (err) {
+      console.warn('GSAP initialization exception, activating fallback:', err);
+      initIntersectionFallback();
+    }
+  } else {
+    // C. IntersectionObserver Fallback for offline / blocked CDN environments
+    initIntersectionFallback();
+  }
+
+  // D. Dynamic ScrollSpy for Active Nav Link
+  initScrollSpy();
+}
+
+function initIntersectionFallback() {
+  const targets = document.querySelectorAll(
+    '.credentials-strip, .exec-overview-cols, .variant-dag-container, ' +
+    '.exp-item-card, .work-card, .timeline-card, .cert-card, .writing-card, .contact-card'
+  );
+
+  if ('IntersectionObserver' in window && targets.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    targets.forEach(el => {
+      el.classList.add('scroll-reveal');
+      observer.observe(el);
+    });
+  } else {
+    // Immediate fallback display
+    targets.forEach(el => el.classList.add('is-visible'));
+  }
+}
+
+function initScrollSpy() {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links .nav-link');
+  if (!sections.length || !navLinks.length) return;
+
+  const onScrollSpy = () => {
+    const scrollPos = (window.scrollY || document.documentElement.scrollTop) + 120;
+    let currentId = '';
+
+    sections.forEach(sec => {
+      const top = sec.offsetTop;
+      const height = sec.offsetHeight;
+      if (scrollPos >= top && scrollPos < top + height) {
+        currentId = sec.getAttribute('id');
+      }
+    });
+
+    if (currentId) {
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === `#${currentId}`) {
+          link.classList.add('active');
+        } else if (href && href.startsWith('#')) {
+          link.classList.remove('active');
+        }
+      });
+    }
+  };
+
+  window.addEventListener('scroll', onScrollSpy, { passive: true });
+}
+
+// ==========================================================================
+// --- 12. 3D ARGENT MASSIF TOPOGRAPHIC TERRAIN (THREE.JS - WHITE THEME) ---
+// ==========================================================================
+function initArgentMassifScene() {
+  const canvas = document.getElementById('argentMassifCanvas');
+  const container = document.getElementById('hero3dLandscape');
+  if (!canvas || !container || typeof window.THREE === 'undefined') return;
+
+  // Scene & Atmosphere
+  const scene = new THREE.Scene();
+  // Delicate editorial fog that melts terrain edges into the warm paper background
+  const fogColor = 0xFBFBFA;
+  scene.fog = new THREE.FogExp2(fogColor, 0.016);
+
+  let width = container.clientWidth || window.innerWidth;
+  let height = container.clientHeight || 720;
+
+  const camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
+  camera.position.set(0, 36, 82);
+  camera.lookAt(0, 4, 0);
+
+  // High performance WebGL renderer with alpha transparency
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({
+      canvas: canvas,
+      alpha: true,
+      antialias: true,
+      powerPreference: 'high-performance'
+    });
+  } catch (e) {
+    console.warn('WebGL initialization failed, 3D landscape unavailable:', e);
+    return;
+  }
+
+  renderer.setSize(width, height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  // Geometry: Topographic Height-field Plane (Argent Massif Grid)
+  const planeWidth = 160;
+  const planeHeight = 110;
+  const segX = 76;
+  const segY = 52;
+  const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight, segX, segY);
+  geometry.rotateX(-Math.PI / 2.38);
+
+  // Cache base coordinate grid for dynamic displacement
+  const posAttr = geometry.attributes.position;
+  const count = posAttr.count;
+  const basePositions = new Float32Array(count * 3);
+  for (let i = 0; i < count * 3; i++) {
+    basePositions[i] = posAttr.array[i];
+  }
+
+  // Material: Refined silver-slate wireframe (White Theme adaptation of Argent Massif)
+  const material = new THREE.MeshBasicMaterial({
+    color: 0x94A3B8,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.38
+  });
+
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.position.set(16, -10, -8); // Offset toward right to harmonize with portrait frame
+  scene.add(mesh);
+
+  // Mouse interaction state with smooth damping
+  let mouseX = 0, mouseY = 0;
+  let targetX = 0, targetY = 0;
+
+  const onMouseMove = (e) => {
+    const halfW = window.innerWidth / 2;
+    const halfH = window.innerHeight / 2;
+    mouseX = (e.clientX - halfW) / halfW;
+    mouseY = (e.clientY - halfH) / halfH;
+  };
+  window.addEventListener('mousemove', onMouseMove, { passive: true });
+
+  // Responsive window resize
+  const onResize = () => {
+    if (!container) return;
+    width = container.clientWidth;
+    height = container.clientHeight;
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height);
+  };
+  window.addEventListener('resize', onResize);
+
+  // IntersectionObserver: Pause rendering loop when Hero scrolls out of view
+  let isVisible = true;
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      isVisible = entries[0].isIntersecting;
+    }, { threshold: 0.05 });
+    observer.observe(container);
+  }
+
+  // Animation Loop: Calm, gradual undulating wave ("từ từ thôi" pacing)
+  const clock = new THREE.Clock();
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function renderLoop() {
+    requestAnimationFrame(renderLoop);
+    if (!isVisible) return;
+
+    const time = clock.getElapsedTime() * 0.42; // Slow, majestic wave progression
+
+    if (!prefersReduced) {
+      const positions = geometry.attributes.position.array;
+      for (let i = 0; i < count; i++) {
+        const x = basePositions[i * 3];
+        const y = basePositions[i * 3 + 1];
+
+        // Complex harmonic wave formula simulating topographic ridgelines
+        const wave1 = Math.sin(x * 0.055 + time * 0.65) * 4.2;
+        const wave2 = Math.cos(y * 0.075 + time * 0.48) * 3.4;
+        const wave3 = Math.sin((x + y) * 0.035 + time * 0.32) * 2.2;
+
+        // Mountain Massif crest ridge elevation
+        const ridge1 = Math.exp(-((x - 12) * (x - 12)) / 1200) * 8.5;
+        const ridge2 = Math.exp(-((y + 8) * (y + 8)) / 900) * 3.8;
+
+        positions[i * 3 + 2] = (wave1 + wave2 + wave3) * 0.75 + ridge1 + ridge2;
+      }
+      geometry.attributes.position.needsUpdate = true;
+    }
+
+    // Smooth rotational damping reacting to user's cursor
+    targetX += (mouseX * 0.08 - targetX) * 0.025;
+    targetY += (mouseY * 0.05 - targetY) * 0.025;
+
+    mesh.rotation.z = targetX * 0.25;
+    mesh.rotation.y = targetX * 0.18;
+    mesh.rotation.x = -Math.PI / 2.38 + targetY * 0.18;
+
+    renderer.render(scene, camera);
+  }
+
+  renderLoop();
+}
+
+
 
 

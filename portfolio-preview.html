@@ -7,9 +7,12 @@
   <meta name="description" content="Hồ sơ năng lực kỹ thuật và blog cá nhân của Trần Đức (Dustin) - Analytics Engineer, Thủ khoa UFM GPA 3.7, Quản trị hạ tầng CNTT CAND 24/7. Chuyên sâu về Modern Data Stack: dbt, Snowflake, dlt, SQL Server CDC.">
   
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-  <link rel="stylesheet" href="landing/landing.css?v=50">
+  <link rel="stylesheet" href="landing/landing.css?v=54">
 </head>
 <body>
+
+  <!-- Top Scroll Reading Progress Bar -->
+  <div id="scrollProgressBar" class="scroll-progress-bar"></div>
 
   <!-- 1. Editorial Navigation Bar (Kristin Wong Style Minimalist Brand) -->
   <header class="site-nav">
@@ -21,35 +24,50 @@
         </div>
       </a>
 
-      <nav>
+      <!-- Desktop Links & Slide-Down Mobile Drawer -->
+      <nav class="nav-menu-wrapper" id="navMenuWrapper">
         <ul class="nav-links">
-          <li><a href="#about" class="nav-link" data-i18n="nav_about">About</a></li>
-          <li><a href="#pipeline" class="nav-link" data-i18n="nav_pipeline">Pipeline</a></li>
-          <li><a href="#experience" class="nav-link" data-i18n="nav_experience">Experience</a></li>
-          <li><a href="#works" class="nav-link" data-i18n="nav_works">Projects</a></li>
-          <li><a href="#milestones" class="nav-link" data-i18n="nav_milestones">Milestones</a></li>
-          <li><a href="#certs" class="nav-link" data-i18n="nav_certs">Credentials</a></li>
-          <li><a href="#essays" class="nav-link" data-i18n="nav_essays">Writing</a></li>
-          <li><a href="blog/index.html" class="nav-link" style="color: var(--emerald); font-weight: 600;" data-i18n="nav_blog">Blog ✍️</a></li>
-          <li>
-            <a href="assets/cv/TranDuc_AnalyticsEngineer_CV.pdf" download="TranDuc_AnalyticsEngineer_CV.pdf" class="nav-link nav-cta" data-i18n="nav_cv">CV (PDF) ↓</a>
-          </li>
-          <li>
-            <button id="langToggleBtn" class="nav-lang-toggle" onclick="toggleLanguage()" aria-label="Toggle Language" title="English / Tiếng Việt">
-              <span class="lang-code en active">EN</span>
-              <span class="lang-slash">/</span>
-              <span class="lang-code vi">VI</span>
-            </button>
+          <li><a href="#about" class="nav-link" data-i18n="nav_about" onclick="closeMobileMenu()">About</a></li>
+          <li><a href="#pipeline" class="nav-link" data-i18n="nav_pipeline" onclick="closeMobileMenu()">Pipeline</a></li>
+          <li><a href="#experience" class="nav-link" data-i18n="nav_experience" onclick="closeMobileMenu()">Experience</a></li>
+          <li><a href="#works" class="nav-link" data-i18n="nav_works" onclick="closeMobileMenu()">Projects</a></li>
+          <li><a href="#milestones" class="nav-link" data-i18n="nav_milestones" onclick="closeMobileMenu()">Milestones</a></li>
+          <li><a href="#certs" class="nav-link" data-i18n="nav_certs" onclick="closeMobileMenu()">Credentials</a></li>
+          <li><a href="#essays" class="nav-link" data-i18n="nav_essays" onclick="closeMobileMenu()">Writing</a></li>
+          <li><a href="blog/index.html" class="nav-link nav-link-blog" style="color: var(--emerald); font-weight: 600;" data-i18n="nav_blog" onclick="closeMobileMenu()">Blog ✍️</a></li>
+          <li class="nav-item-cta">
+            <a href="assets/cv/TranDuc_AnalyticsEngineer_CV.pdf" download="TranDuc_AnalyticsEngineer_CV.pdf" class="nav-link nav-cta" data-i18n="nav_cv" onclick="closeMobileMenu()">CV (PDF) ↓</a>
           </li>
         </ul>
       </nav>
+
+      <!-- Right Action Cluster: Language Switcher + Mobile Hamburger -->
+      <div class="nav-actions-cluster">
+        <button id="langToggleBtn" class="nav-lang-toggle" onclick="toggleLanguage()" aria-label="Toggle Language" title="English / Tiếng Việt">
+          <span class="lang-code en active">EN</span>
+          <span class="lang-slash">/</span>
+          <span class="lang-code vi">VI</span>
+        </button>
+
+        <button class="nav-mobile-toggle" id="navMobileToggle" aria-label="Toggle Navigation Menu" aria-expanded="false" onclick="toggleMobileMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </header>
 
   <main>
     <!-- 2. Hero Section (Minh Pham Light Theme Structure — No Photo, Tech Vector Artwork) -->
     <section class="hero-section" id="about">
-      <div class="container">
+      <!-- 3D Argent Massif Topographic Terrain (White Theme Translation per /design-taste-frontend) -->
+      <div class="hero-3d-landscape" id="hero3dLandscape">
+        <canvas id="argentMassifCanvas"></canvas>
+        <div class="hero-3d-gradient-mask"></div>
+      </div>
+
+      <div class="container hero-container-rel">
         
         <div class="hero-mark-layout">
           
@@ -1527,7 +1545,12 @@
     ✓ Đã sao chép email: trandc3015@gmail.com
   </div>
 
-  <!-- Scripts -->
-  <script src="landing/landing.js?v=50"></script>
+  <!-- Three.js r128 3D Engine (Argent Massif Topographic Terrain) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- GSAP & ScrollTrigger Motion Core -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Main Portfolio Script -->
+  <script src="landing/landing.js?v=54"></script>
 </body>
 </html>
