@@ -7,7 +7,7 @@
   <meta name="description" content="Hồ sơ năng lực kỹ thuật và blog cá nhân của Trần Đức (Dustin) - Analytics Engineer, Thủ khoa UFM GPA 3.7, Quản trị hạ tầng CNTT CAND 24/7. Chuyên sâu về Modern Data Stack: dbt, Snowflake, dlt, SQL Server CDC.">
   
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-  <link rel="stylesheet" href="landing/landing.css?v=54">
+  <link rel="stylesheet" href="landing/landing.css?v=56">
 </head>
 <body>
 
@@ -238,21 +238,7 @@
                   <stop offset="100%" stop-color="#38BDF8"/>
                 </linearGradient>
 
-                <!-- Glowing Packet Filter -->
-                <filter id="packetGlowPurple" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="3" result="blur"/>
-                  <feMerge>
-                    <feMergeNode in="blur"/>
-                    <feMergeNode in="SourceGraphic"/>
-                  </feMerge>
-                </filter>
-                <filter id="packetGlowCyan" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="3" result="blur"/>
-                  <feMerge>
-                    <feMergeNode in="blur"/>
-                    <feMergeNode in="SourceGraphic"/>
-                  </feMerge>
-                </filter>
+
                 <filter id="glowPurpleCard" x="-20%" y="-20%" width="140%" height="140%">
                   <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#A855F7" flood-opacity="0.45"/>
                 </filter>
@@ -284,7 +270,7 @@
 
                 <!-- Single connector into Fivetran -->
                 <path d="M265,315 L295,315" class="pl-edge" id="eltEdgeToFivetran"/>
-                <circle cx="265" cy="315" r="4.5" fill="#A855F7" filter="url(#packetGlowPurple)"/>
+                <circle cx="265" cy="315" r="4.5" fill="#A855F7"/>
 
                 <!-- Edge 6: Fivetran -> S3 Lake -->
                 <path d="M475,315 L535,315" class="pl-edge" id="eltEdge6"/>
@@ -295,53 +281,53 @@
 
                 <!-- Edge 9: Dashed direct shortcut (Fivetran -> Snowflake bypass) -->
                 <path d="M475,235 C620,140 800,140 945,235" class="pl-dashed" id="eltEdge9"/>
-                <circle cx="710" cy="148" r="3.5" fill="#A855F7" filter="url(#packetGlowPurple)"/>
+                <circle cx="710" cy="148" r="3.5" fill="#A855F7"/>
 
                 <!-- Edge 10 & 11: Snowflake -> Consumers -->
                 <path d="M1165,305 C1195,305 1195,248 1225,248" class="pl-edge" id="eltEdge10"/>
                 <path d="M1165,305 C1195,305 1195,368 1225,368" class="pl-edge" id="eltEdge11"/>
-                <circle cx="1165" cy="305" r="4" fill="#F472B6" filter="url(#packetGlowPurple)"/>
+                <circle cx="1165" cy="305" r="4" fill="#F472B6"/>
                 <circle cx="1195" cy="305" r="3.5" fill="#F472B6"/>
 
                 <!-- Animated Packets -->
-                <circle class="pl-packet" r="4" fill="#BF94FF" filter="url(#packetGlowPurple)">
+                <circle class="pl-packet" r="4" fill="#BF94FF">
                   <animateMotion dur="1.3s" repeatCount="indefinite" path="M230,108 C255,108 250,315 265,315"/>
                 </circle>
-                <circle class="pl-packet" r="4" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                <circle class="pl-packet" r="4" fill="#38BDF8">
                   <animateMotion dur="1.3s" begin="0.25s" repeatCount="indefinite" path="M230,203 C255,203 250,315 265,315"/>
                 </circle>
-                <circle class="pl-packet" r="3.8" fill="#BF94FF" filter="url(#packetGlowPurple)">
+                <circle class="pl-packet" r="3.8" fill="#BF94FF">
                   <animateMotion dur="1.3s" begin="0.5s" repeatCount="indefinite" path="M230,298 C250,298 255,315 265,315"/>
                 </circle>
-                <circle class="pl-packet" r="3.8" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                <circle class="pl-packet" r="3.8" fill="#38BDF8">
                   <animateMotion dur="1.3s" begin="0.75s" repeatCount="indefinite" path="M230,393 C250,393 255,315 265,315"/>
                 </circle>
-                <circle class="pl-packet" r="4" fill="#34D399" filter="url(#packetGlowCyan)">
+                <circle class="pl-packet" r="4" fill="#34D399">
                   <animateMotion dur="1.3s" begin="0.3s" repeatCount="indefinite" path="M230,488 C255,488 250,315 265,315"/>
                 </circle>
 
                 <!-- Fivetran -> S3 packet -->
-                <circle class="pl-packet" r="4.5" fill="#34D399" filter="url(#packetGlowCyan)">
+                <circle class="pl-packet" r="4.5" fill="#34D399">
                   <animateMotion dur="1.1s" begin="0.4s" repeatCount="indefinite" path="M475,315 L535,315"/>
                 </circle>
                 <!-- S3 -> COPY INTO packet -->
-                <circle class="pl-packet" r="4.5" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                <circle class="pl-packet" r="4.5" fill="#38BDF8">
                   <animateMotion dur="1.1s" begin="0.8s" repeatCount="indefinite" path="M675,315 L735,315"/>
                 </circle>
                 <!-- COPY INTO -> Snowflake packet -->
-                <circle class="pl-packet" r="4.8" fill="#BF94FF" filter="url(#packetGlowPurple)">
+                <circle class="pl-packet" r="4.8" fill="#BF94FF">
                   <animateMotion dur="1.1s" begin="1.2s" repeatCount="indefinite" path="M885,315 L945,315"/>
                 </circle>
                 <!-- Direct shortcut packet -->
-                <circle class="pl-packet" r="3.8" fill="#A78BFA" filter="url(#packetGlowPurple)">
+                <circle class="pl-packet" r="3.8" fill="#A78BFA">
                   <animateMotion dur="1.8s" begin="0.6s" repeatCount="indefinite" path="M475,235 C620,140 800,140 945,235"/>
                 </circle>
                 <!-- Warehouse -> Omni BI packet -->
-                <circle class="pl-packet" r="4" fill="#F472B6" filter="url(#packetGlowPurple)">
+                <circle class="pl-packet" r="4" fill="#F472B6">
                   <animateMotion dur="1.1s" begin="1.6s" repeatCount="indefinite" path="M1165,305 C1195,305 1195,248 1225,248"/>
                 </circle>
                 <!-- Warehouse -> Client Teams packet -->
-                <circle class="pl-packet" r="4" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                <circle class="pl-packet" r="4" fill="#38BDF8">
                   <animateMotion dur="1.1s" begin="1.8s" repeatCount="indefinite" path="M1165,305 C1195,305 1195,368 1225,368"/>
                 </circle>
 
@@ -525,9 +511,9 @@
 
                   <!-- Dashed progress runner line -->
                   <path d="M260,622 L1250,622" stroke="#38BDF8" stroke-width="2" stroke-dasharray="6 6" fill="none"/>
-                  <circle cx="265" cy="622" r="5" fill="#BF94FF" filter="url(#packetGlowPurple)"/>
+                  <circle cx="265" cy="622" r="5" fill="#BF94FF"/>
                   <polygon points="1250,617 1262,622 1250,627" fill="#38BDF8"/>
-                  <circle class="pl-packet" r="4.5" fill="#BF94FF" filter="url(#packetGlowPurple)">
+                  <circle class="pl-packet" r="4.5" fill="#BF94FF">
                     <animateMotion dur="4s" repeatCount="indefinite" path="M260,622 L1250,622"/>
                   </circle>
                 </g>
@@ -581,57 +567,57 @@
 
                 <!-- ================= Glowing Animated Packets (HIỆU ỨNG CHIẾU CHIẾU) ================= -->
                 <!-- Edge 1 packet -->
-                <circle class="pl-packet" r="4" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                <circle class="pl-packet" r="4" fill="#38BDF8">
                   <animateMotion dur="1.3s" repeatCount="indefinite" path="M230,108 C265,108 260,265 295,265"/>
                 </circle>
                 <!-- Edge 2 packet -->
-                <circle class="pl-packet" r="4" fill="#BF94FF" filter="url(#packetGlowPurple)">
+                <circle class="pl-packet" r="4" fill="#BF94FF">
                   <animateMotion dur="1.3s" begin="0.25s" repeatCount="indefinite" path="M230,203 C265,203 260,295 295,295"/>
                 </circle>
                 <!-- Edge 3 packet -->
-                <circle class="pl-packet" r="3.8" fill="#F59E0B" filter="url(#packetGlowCyan)">
+                <circle class="pl-packet" r="3.8" fill="#F59E0B">
                   <animateMotion dur="1.3s" begin="0.5s" repeatCount="indefinite" path="M230,298 C265,298 260,325 295,325"/>
                 </circle>
                 <!-- Edge 4 packet -->
-                <circle class="pl-packet" r="3.8" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                <circle class="pl-packet" r="3.8" fill="#38BDF8">
                   <animateMotion dur="1.3s" begin="0.75s" repeatCount="indefinite" path="M230,393 C265,393 260,355 295,355"/>
                 </circle>
                 <!-- Edge 5 packet -->
-                <circle class="pl-packet" r="4.2" fill="#34D399" filter="url(#packetGlowCyan)">
+                <circle class="pl-packet" r="4.2" fill="#34D399">
                   <animateMotion dur="1.7s" begin="0.3s" repeatCount="indefinite" path="M230,488 C360,510 430,420 535,385"/>
                 </circle>
 
                 <!-- Extractor -> Transform Engine packet -->
-                <circle class="pl-packet" r="4.5" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                <circle class="pl-packet" r="4.5" fill="#38BDF8">
                   <animateMotion dur="1.1s" begin="0.4s" repeatCount="indefinite" path="M475,315 C505,315 505,315 535,315"/>
                 </circle>
                 <!-- Transform -> Target Data Marts packet -->
-                <circle class="pl-packet" r="4.5" fill="#BF94FF" filter="url(#packetGlowPurple)">
+                <circle class="pl-packet" r="4.5" fill="#BF94FF">
                   <animateMotion dur="1.1s" begin="0.8s" repeatCount="indefinite" path="M675,315 C705,315 705,315 735,315"/>
                 </circle>
                 <!-- Marts -> Serving DWH packet -->
-                <circle class="pl-packet" r="4.8" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                <circle class="pl-packet" r="4.8" fill="#38BDF8">
                   <animateMotion dur="1.1s" begin="1.2s" repeatCount="indefinite" path="M885,315 C915,315 915,315 945,315"/>
                 </circle>
                 <!-- Direct shortcut packet -->
-                <circle class="pl-packet" r="3.8" fill="#F59E0B" filter="url(#packetGlowCyan)">
+                <circle class="pl-packet" r="3.8" fill="#F59E0B">
                   <animateMotion dur="1.8s" begin="0.6s" repeatCount="indefinite" path="M475,245 C640,170 800,170 945,220"/>
                 </circle>
 
                 <!-- DWH -> BOD packet -->
-                <circle class="pl-packet" r="4" fill="#34D399" filter="url(#packetGlowCyan)">
+                <circle class="pl-packet" r="4" fill="#34D399">
                   <animateMotion dur="1.1s" begin="1.6s" repeatCount="indefinite" path="M1165,248 C1195,248 1195,248 1225,248"/>
                 </circle>
                 <!-- DWH -> Finance packet -->
-                <circle class="pl-packet" r="4" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                <circle class="pl-packet" r="4" fill="#38BDF8">
                   <animateMotion dur="1.1s" begin="1.8s" repeatCount="indefinite" path="M1165,368 C1195,368 1195,368 1225,368"/>
                 </circle>
 
                 <!-- SQL Server Agent Orchestration running packets -->
-                <circle class="pl-packet" r="4.5" fill="#FFFFFF" filter="url(#packetGlowCyan)">
+                <circle class="pl-packet" r="4.5" fill="#FFFFFF">
                   <animateMotion dur="3.5s" repeatCount="indefinite" path="M320,620 L1225,620"/>
                 </circle>
-                <circle class="pl-packet" r="3.8" fill="#38BDF8" filter="url(#packetGlowCyan)">
+                <circle class="pl-packet" r="3.8" fill="#38BDF8">
                   <animateMotion dur="3.5s" begin="1.75s" repeatCount="indefinite" path="M320,620 L1225,620"/>
                 </circle>
 
@@ -1550,7 +1536,9 @@
   <!-- GSAP & ScrollTrigger Motion Core -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Lenis 60fps/120fps Smooth Scroll Engine -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
   <!-- Main Portfolio Script -->
-  <script src="landing/landing.js?v=54"></script>
+  <script src="landing/landing.js?v=56"></script>
 </body>
 </html>

@@ -1341,6 +1341,7 @@ function openProjectModal(id) {
 
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
+  if (window.lenisInstance) window.lenisInstance.stop();
 }
 
 function closeProjectModal() {
@@ -1348,6 +1349,7 @@ function closeProjectModal() {
   if (modal) {
     modal.classList.remove('active');
     document.body.style.overflow = '';
+    if (window.lenisInstance) window.lenisInstance.start();
   }
 }
 
@@ -1493,9 +1495,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (targetEl) {
         e.preventDefault();
         if (typeof closeMobileMenu === 'function') closeMobileMenu();
-        const navHeight = 72;
-        const targetPos = targetEl.getBoundingClientRect().top + window.scrollY - navHeight;
-        window.scrollTo({ top: targetPos, behavior: 'smooth' });
+        if (window.lenisInstance) {
+          window.lenisInstance.scrollTo(targetEl, { offset: -72, duration: 1.25 });
+        } else {
+          const navHeight = 72;
+          const targetPos = targetEl.getBoundingClientRect().top + window.scrollY - navHeight;
+          window.scrollTo({ top: targetPos, behavior: 'smooth' });
+        }
       }
     });
   });
@@ -1587,6 +1593,7 @@ function openMobileMenu() {
     toggleBtn.setAttribute('aria-expanded', 'true');
   }
   document.body.style.overflow = 'hidden';
+  if (window.lenisInstance) window.lenisInstance.stop();
 }
 
 function closeMobileMenu() {
@@ -1600,6 +1607,7 @@ function closeMobileMenu() {
     toggleBtn.setAttribute('aria-expanded', 'false');
   }
   document.body.style.overflow = '';
+  if (window.lenisInstance) window.lenisInstance.start();
 }
 
 // --- 9. UFM DEGREE LOOKUP MODAL CONTROLLER ---
@@ -1608,6 +1616,7 @@ function openUfmModal() {
   if (modal) {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
+    if (window.lenisInstance) window.lenisInstance.stop();
   }
 }
 
@@ -1616,6 +1625,7 @@ function closeUfmModal() {
   if (modal) {
     modal.classList.remove('active');
     document.body.style.overflow = '';
+    if (window.lenisInstance) window.lenisInstance.start();
   }
 }
 
@@ -2037,11 +2047,50 @@ if (document.readyState === 'loading') {
 function initScrollMotionEngine() {
   const progressBar = document.getElementById('scrollProgressBar');
   const siteNav = document.querySelector('.site-nav');
+  const hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
 
-  // A. Top Reading Progress Bar & Scrolled Nav State
-  const updateScrollProgress = () => {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  // 0. Initialize Lenis Virtual Momentum Smooth Scroll Engine (High-Refresh 120FPS Direct Response)
+  if (typeof window.Lenis !== 'undefined') {
+    try {
+      window.lenisInstance = new window.Lenis({
+        duration: 0.55, // Snappy, instant 120Hz tracking with zero input latency
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        wheelMultiplier: 1.15,
+        touchMultiplier: 1.0,
+        syncTouch: false, // Don't intercept native 120Hz touch/trackpad gestures
+        infinite: false
+      });
+
+      // Synchronize Lenis with GSAP ScrollTrigger
+      if (hasGsap) {
+        window.lenisInstance.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+          window.lenisInstance.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(500, 33);
+      } else {
+        function lenisStep(time) {
+          window.lenisInstance.raf(time);
+          requestAnimationFrame(lenisStep);
+        }
+        requestAnimationFrame(lenisStep);
+      }
+    } catch (e) {
+      console.warn('Lenis smooth scroll failed to initialize:', e);
+    }
+  }
+
+  // A. Top Reading Progress Bar & Scrolled Nav State (Zero layout thrashing)
+  const updateScrollProgress = (currentScroll, maxScroll) => {
+    let scrollTop = currentScroll;
+    let scrollHeight = maxScroll;
+    if (typeof scrollTop !== 'number') {
+      scrollTop = window.scrollY || document.documentElement.scrollTop;
+      scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    }
     if (progressBar && scrollHeight > 0) {
       const percent = Math.min(Math.max((scrollTop / scrollHeight) * 100, 0), 100);
       progressBar.style.width = `${percent}%`;
@@ -2051,12 +2100,16 @@ function initScrollMotionEngine() {
     }
   };
 
-  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+  if (window.lenisInstance) {
+    window.lenisInstance.on('scroll', ({ scroll, limit }) => {
+      updateScrollProgress(scroll, limit);
+    });
+  } else {
+    window.addEventListener('scroll', () => updateScrollProgress(), { passive: true });
+  }
   updateScrollProgress();
 
-  // B. Check GSAP & ScrollTrigger Availability
-  const hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
-
+  // B. Register GSAP & ScrollTrigger Animations
   if (hasGsap) {
     try {
       gsap.registerPlugin(ScrollTrigger);
@@ -2102,19 +2155,38 @@ function initScrollMotionEngine() {
         }, '-=1.1');
       }
 
-      // 1B. Parallax Micro-Motion (GPT-Taste & Stitch)
+      // 1B. Parallax Micro-Motion (Instant 1:1 Hardware Scrub for 120fps)
       if (document.querySelector('.hero-basic-frame')) {
         gsap.to('.hero-basic-frame', {
           scrollTrigger: {
             trigger: '#about',
             start: 'top top',
             end: 'bottom top',
-            scrub: 2.0
+            scrub: true
           },
-          y: 45,
+          y: 40,
           ease: 'none'
         });
       }
+
+      // 1C. Section Headers Stagger & Letter-Spacing Reveal
+      document.querySelectorAll('.editorial-section, .exec-section').forEach(sec => {
+        const lbl = sec.querySelector('.section-label');
+        const h2 = sec.querySelector('.section-heading');
+        const sub = sec.querySelector('.section-subtext');
+        if (h2) {
+          const sTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: sec,
+              start: 'top 85%'
+            },
+            defaults: { ease: 'power3.out' }
+          });
+          if (lbl) sTl.from(lbl, { x: -20, opacity: 0, duration: 0.95 });
+          sTl.from(h2, { y: 30, opacity: 0, duration: 1.15 }, '-=0.75');
+          if (sub) sTl.from(sub, { y: 20, opacity: 0, duration: 1.0 }, '-=0.85');
+        }
+      });
 
       // 2. Credentials Strip Stagger (Slow & Calm)
       if (document.querySelector('.credentials-strip')) {
@@ -2158,7 +2230,7 @@ function initScrollMotionEngine() {
         });
       }
 
-      // 4. Architecture Pipeline Canvas & DAG (With Gentle Parallax Scrub)
+      // 4. Architecture Pipeline Canvas & DAG (Instant 1:1 Hardware Scrub)
       if (document.querySelector('.variant-dag-container')) {
         gsap.from('.dataflow-header, .variant-dag-container, .data-inspector-panel', {
           scrollTrigger: {
@@ -2177,9 +2249,9 @@ function initScrollMotionEngine() {
             trigger: '#pipeline',
             start: 'top 70%',
             end: 'bottom top',
-            scrub: 2.2
+            scrub: true
           },
-          y: -16,
+          y: -14,
           ease: 'none'
         });
       }
@@ -2300,6 +2372,15 @@ function initScrollMotionEngine() {
         });
       }
 
+      // 11. Kinetic Number Counters
+      initKineticCounters();
+
+      // 12. Interactive 3D Card Spring Tilt
+      init3DCardTilt();
+
+      // 13. Magnetic Button Physics
+      initMagneticButtons();
+
     } catch (err) {
       console.warn('GSAP initialization exception, activating fallback:', err);
       initIntersectionFallback();
@@ -2309,7 +2390,7 @@ function initScrollMotionEngine() {
     initIntersectionFallback();
   }
 
-  // D. Dynamic ScrollSpy for Active Nav Link
+  // D. High-Performance ScrollSpy for Active Nav Link
   initScrollSpy();
 }
 
@@ -2339,40 +2420,142 @@ function initIntersectionFallback() {
   }
 }
 
+// --- 11.2 KINETIC NUMBER COUNTER ENGINE ---
+function initKineticCounters() {
+  const visitorEl = document.getElementById('liveVisitorCount');
+  if (visitorEl && typeof ScrollTrigger !== 'undefined') {
+    ScrollTrigger.create({
+      trigger: '.hero-visitor-pill',
+      start: 'top 95%',
+      once: true,
+      onEnter: () => {
+        let count = { val: 1000 };
+        gsap.to(count, {
+          val: 1280,
+          duration: 2.2,
+          ease: 'power2.out',
+          onUpdate: () => {
+            visitorEl.textContent = `${Math.floor(count.val).toLocaleString('en-US')}+`;
+          }
+        });
+      }
+    });
+  }
+}
+
+// --- 11.3 TACTILE 3D CARD SPRING TILT (ZERO LAYOUT THRASHING) ---
+function init3DCardTilt() {
+  const cards = document.querySelectorAll('.exp-item-card, .work-card, .timeline-card, .cert-card, .hero-basic-frame');
+  cards.forEach(card => {
+    let rect = null;
+    let ticking = false;
+
+    card.addEventListener('mouseenter', () => {
+      rect = card.getBoundingClientRect();
+    });
+
+    card.addEventListener('mousemove', (e) => {
+      if (!rect) rect = card.getBoundingClientRect();
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (!rect) return;
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotX = ((y - centerY) / centerY) * -3.8;
+          const rotY = ((x - centerX) / centerX) * 3.8;
+          card.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateY(-3px)`;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    card.addEventListener('mouseleave', () => {
+      rect = null;
+      card.style.transform = '';
+    });
+  });
+}
+
+// --- 11.4 MAGNETIC BUTTON CURSOR PHYSICS (HIGH PERFORMANCE QUICKTO) ---
+function initMagneticButtons() {
+  const btns = document.querySelectorAll('.hero-pill-btn, .nav-cta, .hero-social-btn');
+  btns.forEach(btn => {
+    let rect = null;
+    btn.addEventListener('mouseenter', () => {
+      rect = btn.getBoundingClientRect();
+    });
+    btn.addEventListener('mousemove', (e) => {
+      if (!rect) rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      if (typeof gsap !== 'undefined') {
+        gsap.to(btn, { x: x * 0.2, y: y * 0.2, duration: 0.15, ease: 'power1.out', overwrite: 'auto' });
+      }
+    });
+    btn.addEventListener('mouseleave', () => {
+      rect = null;
+      if (typeof gsap !== 'undefined') {
+        gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
+      }
+    });
+  });
+}
+
+// --- 11.5 HIGH-PERFORMANCE SCROLLSPY (ZERO LAYOUT REFLOW) ---
 function initScrollSpy() {
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links .nav-link');
   if (!sections.length || !navLinks.length) return;
 
-  const onScrollSpy = () => {
-    const scrollPos = (window.scrollY || document.documentElement.scrollTop) + 120;
-    let currentId = '';
-
-    sections.forEach(sec => {
-      const top = sec.offsetTop;
-      const height = sec.offsetHeight;
-      if (scrollPos >= top && scrollPos < top + height) {
-        currentId = sec.getAttribute('id');
+  const setActiveNavLink = (id) => {
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === `#${id}`) {
+        link.classList.add('active');
+      } else if (href && href.startsWith('#')) {
+        link.classList.remove('active');
       }
     });
-
-    if (currentId) {
-      navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === `#${currentId}`) {
-          link.classList.add('active');
-        } else if (href && href.startsWith('#')) {
-          link.classList.remove('active');
-        }
-      });
-    }
   };
 
-  window.addEventListener('scroll', onScrollSpy, { passive: true });
+  if (typeof ScrollTrigger !== 'undefined') {
+    sections.forEach(sec => {
+      const id = sec.getAttribute('id');
+      ScrollTrigger.create({
+        trigger: sec,
+        start: 'top 35%',
+        end: 'bottom 35%',
+        onEnter: () => setActiveNavLink(id),
+        onEnterBack: () => setActiveNavLink(id)
+      });
+    });
+  } else {
+    // Throttled Fallback
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollPos = (window.scrollY || document.documentElement.scrollTop) + 120;
+          sections.forEach(sec => {
+            const top = sec.offsetTop;
+            const height = sec.offsetHeight;
+            if (scrollPos >= top && scrollPos < top + height) {
+              setActiveNavLink(sec.getAttribute('id'));
+            }
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
 }
 
 // ==========================================================================
-// --- 12. 3D ARGENT MASSIF TOPOGRAPHIC TERRAIN (THREE.JS - WHITE THEME) ---
+// --- 12. 3D ARGENT MASSIF TOPOGRAPHIC TERRAIN (THREE.JS - 120FPS OPTIMIZED) ---
 // ==========================================================================
 function initArgentMassifScene() {
   const canvas = document.getElementById('argentMassifCanvas');
@@ -2381,7 +2564,6 @@ function initArgentMassifScene() {
 
   // Scene & Atmosphere
   const scene = new THREE.Scene();
-  // Delicate editorial fog that melts terrain edges into the warm paper background
   const fogColor = 0xFBFBFA;
   scene.fog = new THREE.FogExp2(fogColor, 0.016);
 
@@ -2392,14 +2574,15 @@ function initArgentMassifScene() {
   camera.position.set(0, 36, 82);
   camera.lookAt(0, 4, 0);
 
-  // High performance WebGL renderer with alpha transparency
+  // High performance WebGL renderer (120fps optimized fill rate)
   let renderer;
   try {
     renderer = new THREE.WebGLRenderer({
       canvas: canvas,
       alpha: true,
-      antialias: true,
-      powerPreference: 'high-performance'
+      antialias: false,
+      powerPreference: 'high-performance',
+      precision: 'mediump'
     });
   } catch (e) {
     console.warn('WebGL initialization failed, 3D landscape unavailable:', e);
@@ -2407,13 +2590,13 @@ function initArgentMassifScene() {
   }
 
   renderer.setSize(width, height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(1); // 1:1 hardware pixels for zero GPU fill-rate throttling
 
-  // Geometry: Topographic Height-field Plane (Argent Massif Grid)
+  // Geometry: Topographic Height-field Plane (Argent Massif Grid — Optimized 48x32 for locked 120fps)
   const planeWidth = 160;
   const planeHeight = 110;
-  const segX = 76;
-  const segY = 52;
+  const segX = 48;
+  const segY = 32;
   const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight, segX, segY);
   geometry.rotateX(-Math.PI / 2.38);
 
@@ -2460,26 +2643,24 @@ function initArgentMassifScene() {
   };
   window.addEventListener('resize', onResize);
 
-  // IntersectionObserver: Pause rendering loop when Hero scrolls out of view
-  let isVisible = true;
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      isVisible = entries[0].isIntersecting;
-    }, { threshold: 0.05 });
-    observer.observe(container);
-  }
-
   // Animation Loop: Calm, gradual undulating wave ("từ từ thôi" pacing)
   const clock = new THREE.Clock();
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let frameCount = 0;
+  let isVisible = true;
+  let rafId = null;
 
   function renderLoop() {
-    requestAnimationFrame(renderLoop);
-    if (!isVisible) return;
+    if (!isVisible) {
+      rafId = null;
+      return;
+    }
 
     const time = clock.getElapsedTime() * 0.42; // Slow, majestic wave progression
+    frameCount++;
 
-    if (!prefersReduced) {
+    // Calculate vertex wave displacement every 2 frames to conserve GPU/CPU bandwidth
+    if (!prefersReduced && frameCount % 2 === 0) {
       const positions = geometry.attributes.position.array;
       for (let i = 0; i < count; i++) {
         const x = basePositions[i * 3];
@@ -2508,9 +2689,36 @@ function initArgentMassifScene() {
     mesh.rotation.x = -Math.PI / 2.38 + targetY * 0.18;
 
     renderer.render(scene, camera);
+    rafId = requestAnimationFrame(renderLoop);
   }
 
-  renderLoop();
+  function startLoop() {
+    if (!rafId && isVisible) {
+      rafId = requestAnimationFrame(renderLoop);
+    }
+  }
+
+  function stopLoop() {
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
+
+  // IntersectionObserver: Complete pause of 3D loop when Hero scrolls out of view
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      isVisible = entries[0].isIntersecting;
+      if (isVisible) {
+        startLoop();
+      } else {
+        stopLoop();
+      }
+    }, { threshold: 0.02 });
+    observer.observe(container);
+  }
+
+  startLoop();
 }
 
 

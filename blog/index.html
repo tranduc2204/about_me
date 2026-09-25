@@ -7,7 +7,7 @@
   <meta name="description" content="Tuyển tập các bài tự sự, góc nhìn chuyên môn và bài học thực chiến từ giảng đường đại học UFM, triển khai ERP tại THACO/Lộc Phúc, kỷ luật hạ tầng CAND đến định vị Analytics Engineer toàn năng.">
   
   <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-  <link rel="stylesheet" href="../landing/landing.css?v=54">
+  <link rel="stylesheet" href="../landing/landing.css?v=56">
 </head>
 <body class="article-page-body">
 
@@ -249,6 +249,24 @@
         closeMobileMenu();
       }
     });
+  </script>
+
+  <!-- Lenis 60fps/120fps Smooth Scroll Engine -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script>
+    if (typeof Lenis !== 'undefined') {
+      const lenis = new Lenis({
+        duration: 1.15,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        wheelMultiplier: 0.95
+      });
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    }
   </script>
 </body>
 </html>

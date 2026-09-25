@@ -4065,7 +4065,30 @@ body {
 }
 
 /* ==========================================================================
-   GSAP & SCROLL MOTION SYSTEM (GPT-TASTE SPEC)
+   LENIS INERTIAL 60FPS/120FPS SMOOTH SCROLL ENGINE
+   ========================================================================== */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   GSAP & SCROLL MOTION SYSTEM (GPT-TASTE & STITCH DESIGN TASTE SPEC)
    ========================================================================== */
 .scroll-progress-bar {
   position: fixed;
@@ -4073,11 +4096,11 @@ body {
   left: 0;
   height: 3px;
   width: 0%;
-  background: linear-gradient(90deg, #7C3AED 0%, #10B981 100%);
+  background: linear-gradient(90deg, #7C3AED 0%, #38BDF8 50%, #10B981 100%);
   z-index: 9999;
   pointer-events: none;
-  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 0 10px rgba(124, 58, 237, 0.35);
+  transition: width 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 14px rgba(124, 58, 237, 0.45);
 }
 
 .site-nav.scrolled {
@@ -4090,39 +4113,103 @@ section[id] {
   scroll-margin-top: calc(var(--nav-height) + 20px);
 }
 
-/* Luxurious Slow-Motion GPU Transitions & Hover Physics */
+/* 120FPS Rendering Pipeline Optimization */
+.editorial-section,
+.exec-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 750px;
+}
+
+.hero-3d-landscape {
+  contain: strict;
+}
+
+.pipeline-svg-dag {
+  contain: layout paint;
+  transform: translateZ(0);
+}
+
+/* Hardware-Accelerated 3D Card Physics & Spring Tilt (Zero CSS-GSAP conflict) */
+.tilt-card-3d,
 .exp-item-card,
 .work-card,
 .timeline-card,
 .cert-card,
 .writing-card,
 .hero-basic-frame {
-  will-change: transform, box-shadow, border-color;
-  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.65s cubic-bezier(0.16, 1, 0.3, 1), 
-              border-color 0.45s ease;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.3s ease;
 }
 
 .exp-item-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 18px 38px -6px rgba(0, 0, 0, 0.09);
   border-color: rgba(124, 58, 237, 0.4);
 }
 
 .timeline-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 14px 30px -4px rgba(0, 0, 0, 0.07);
   border-color: var(--emerald-border);
 }
 
-.hero-social-btn {
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), 
+/* Card Shimmer Sweep Light Sheen */
+.card-shimmer-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-shimmer-sweep::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 58%
+  );
+  transform: translateX(-100%);
+  pointer-events: none;
+  transition: transform 1.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-shimmer-sweep:hover::after {
+  transform: translateX(100%);
+}
+
+/* Magnetic Buttons & Tactile Cursor Interaction */
+.magnetic-btn,
+.hero-social-btn,
+.hero-pill-btn,
+.nav-cta {
+  will-change: transform;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
               background-color 0.3s ease, 
-              border-color 0.3s ease;
+              border-color 0.3s ease,
+              box-shadow 0.35s ease;
 }
 
 .hero-social-btn:hover {
   transform: translateY(-3px) scale(1.08);
+}
+
+/* Milestones Active Sonar Radar Ping */
+.timeline-item.active .timeline-dot,
+.timeline-item:hover .timeline-dot {
+  border-color: #10B981;
+  background: #10B981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25);
+  animation: milestoneRadarPulse 2.8s infinite cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes milestoneRadarPulse {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+  65% { box-shadow: 0 0 0 12px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
 /* Slow, cinematic image scale on hover */
@@ -4134,7 +4221,14 @@ section[id] {
 
 .work-card:hover .work-card-img img,
 .cert-card:hover .cert-card-img-wrap img {
-  transform: scale(1.035);
+  transform: scale(1.04);
+}
+
+/* Kinetic Number Highlight */
+.kinetic-number {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
 }
 
 /* Calm & Gradual Fallback Reveal Styles */
@@ -4158,9 +4252,11 @@ section[id] {
   .work-card,
   .timeline-card,
   .cert-card,
-  .writing-card {
+  .writing-card,
+  .timeline-item.active .timeline-dot {
     transition: none !important;
     transform: none !important;
+    animation: none !important;
     opacity: 1 !important;
   }
 }
